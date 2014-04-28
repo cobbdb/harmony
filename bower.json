@@ -1,0 +1,22 @@
+{
+  "name": "harmony",
+  "authors": [
+    "dcobb <dan.cobb@coxinc.com>"
+  ],
+  "description": "Simple DFP API Support",
+  "main": "dist/harmony.min.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "gruntfile.js",
+    "*.egg-info",
+    "tests",
+    "*.*"
+  ],
+  "devDependencies": {
+    "jquery": "1.x"
+  }
+}
