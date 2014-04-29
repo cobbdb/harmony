@@ -55,32 +55,9 @@ module.exports = function (grunt) {
                 //vendor: resolve('jquery')
             }
         },
-        exec: {
-            clone: {
-                cmd: 'git clone ssh://vcs.ddtc.cmgdigital.com/git-repos/adgeletti.git -b cmg-pages docs-clone'
-            },
-            clear: {
-                cmd: 'rm -rf docs-clone/*'
-            },
-            docker: {
-                cmd: 'node_modules/.bin/docker -i src -o docs-clone'
-            },
-            add: {
-                cmd: 'git --git-dir=docs-clone/.git --work-tree=docs-clone add -A'
-            },
-            commit: {
-                cmd: "git --git-dir=docs-clone/.git --work-tree=docs-clone commit -m 'docs-bld'"
-            },
-            push: {
-                cmd: 'git --git-dir=docs-clone/.git --work-tree=docs-clone push -f origin cmg-pages'
-            },
-            clean: {
-                cmd: 'rm -rf docs-clone'
-            }
-        },
         'docker-clone': {
             build: {
-                inpath: 'src/v2/*.js',
+                dir: 'src/v2',
                 branch: 'cmg-pages'
             }
         }
@@ -91,7 +68,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-docker-clone');
-    grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('default', [
         'jshint',
@@ -101,16 +77,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'default',
-        'docs'
-    ]);
-
-    grunt.registerTask('docs', [
-        'exec:clone',
-        'exec:clear',
-        'exec:docker',
-        'exec:add',
-        'exec:commit',
-        'exec:push',
-        'exec:clean'
+        'docker-clone:build'
     ]);
 };

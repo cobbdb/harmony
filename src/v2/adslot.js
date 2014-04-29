@@ -35,6 +35,10 @@ function AdSlot(pubads, opts) {
         slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
+    // Set some identifying data on the slot.
+    slot.div_id = opts.id;
+    slot.breakpoint = opts.breakpoint;
+
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.
     for (i in targeting) {
