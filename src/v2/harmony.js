@@ -1,9 +1,8 @@
 /**
  * # Harmony
- * ***DFP JavaScript API Helper***
- * This method will self destruct after calling. There should only ever
+ * ### ***DFP JavaScript API Helper***
+ * This constructor will self destruct after calling. There should only ever
  * be one instance of Harmony in existance at any time.
- * @api public
  * @param {Object} opts
  * @param {Object} opts.targeting Key/value targeting pairs.
  * @param {Array} opts.slots List of ad slot information.
@@ -52,7 +51,7 @@ window.Harmony = function (opts) {
     // Create the new harmony instance.
     var instance = {
         // ## harmony.log
-        // @see log.js
+        // @see log.js local place
         // Debug log tool intended for developers only.
         log: log,
         // ## harmony.slot.&lt;name&gt;

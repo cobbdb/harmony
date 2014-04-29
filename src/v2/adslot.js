@@ -1,7 +1,6 @@
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
- * @api private
  * @param {Object} opts Options object.
  * @param {String} opts.name Slot name, ex) RP01
  * @param {String} opts.id Slot's div id, ex) ad-div-RP01
@@ -54,7 +53,14 @@ function AdSlot(pubads, opts) {
         log('Attached provided callback.');
     }
 
-    // Create the on() method for attaching callbacks.
+    /**
+     * ## slot.on
+     * Attaches a callback to a DFP event. Currently, only the
+     * slotRenderEnded event is offered by the DFP API.
+     * @param {String} event Name of the event to bind to.
+     * @param {Function} cb Callback after the event has fired.
+     * @see Docs https://support.google.com/dfp_premium/answer/1650154#pub_addeventlistener
+     */
     slot.on = function (event, cb) {
         cbQueue[event] = cb;
     };
