@@ -1,6 +1,3 @@
-var AdSlot = require('./AdSlot');
-var log = require('./log');
-
 /**
  * # Harmony
  * ***DFP JavaScript API Helper***
@@ -58,10 +55,10 @@ window.Harmony = function (opts) {
         // @see log.js
         // Debug log tool intended for developers only.
         log: log,
-        // ## harmony.slot.<name>
+        // ## harmony.slot.&lt;name&gt;
         // Access a specific ad slot in the page.
         slot: slots,
-        // ## harmony.breakpoint.<name>
+        // ## harmony.breakpoint.&lt;name&gt;
         // Access the set of ads at a specific breakpoint.
         breakpoint: breakpoints,
         /**

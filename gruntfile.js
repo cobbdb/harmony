@@ -34,12 +34,28 @@ module.exports = function (grunt) {
         },
         uglify: {
             build: {
-                'dist/harmony.min.js': [
-                    'src/v2/*.js',
-                    'src/v1/*.js'
-                ],
+                files: {
+                    'dist/harmony.min.js': [
+                        'src/v2/*.js',
+                        'src/v1/*.js'
+                    ]
+                },
                 options: {
                     enclose: {}
+                }
+            },
+            debug: {
+                files: {
+                    'dist/harmony.min.js': [
+                        'src/v2/*.js',
+                        'src/v1/*.js'
+                    ]
+                },
+                options: {
+                    enclose: {},
+                    compress: false,
+                    mangle: false,
+                    beautify: true
                 }
             }
         },
@@ -57,7 +73,7 @@ module.exports = function (grunt) {
         },
         'docker-clone': {
             build: {
-                dir: 'src/v2',
+                dir: 'src',
                 branch: 'cmg-pages'
             }
         }
@@ -71,12 +87,12 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [
         'jshint',
-        'uglify',
+        'uglify:build',
         'jasmine'
     ]);
 
     grunt.registerTask('build', [
         'default',
-        'docker-clone:build'
+        'docker-clone'
     ]);
 };
