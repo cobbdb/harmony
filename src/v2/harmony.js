@@ -7,23 +7,26 @@
  * @param {Object} opts.targeting Key/value targeting pairs.
  * @param {Array} opts.slots List of ad slot information.
  * @param {Object} opts.slots.i Slot options object.
- * @param {String} slot.name Slot name, ex) RP01
- * @param {String} slot.id Slot's div id, ex) ad-div-RP01
- * @param {Array} slot.sizes One or many 2D arrays, ex) [300, 250]
- * @param {String} slot.adunit Full ad unit code.
- * @param {Object} [slot.targeting] Slot-specific targeting.
- * @param {Array} [slot.mapping] Size mapping.
- * @param {Boolean} [slot.companion] True if companion ad.
- * @param {String} [slot.breakpoint] Display point, ex) 0px-infinity
- * @param {Boolean} [slot.interstitial] True if out-of-page ad.
- * @param {Function} [slot.callback] Called on dfp's slotRenderEnded.
+ * @param {String} opts.slots.i.name Slot name, ex) RP01
+ * @param {String} opts.slots.i.id Slot's div id, ex) ad-div-RP01
+ * @param {Array} opts.slots.i.sizes One or many 2D arrays, ex) [300, 250]
+ * @param {String} opts.slots.i.adunit Full ad unit code.
+ * @param {Object} [opts.slots.i.targeting] Slot-specific targeting.
+ * @param {Array} [opts.slots.i.mapping] Size mapping.
+ * @param {Boolean} [opts.slots.i.companion] True if companion ad.
+ * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
+ * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
+ * @param {Function} [opts.slots.i.callback] Called on dfp's slotRenderEnded.
  * @return {Object} Harmony instance.
  */
 window.Harmony = function (opts) {
     var slots = {};
     var breakpoints = {};
 
-    // ### Initial system startup.
+    /**
+     * ### Initial system startup.
+     * @see v2/adslot.js
+     */
     googletag.cmd.push(function () {
         // Generate all the ad slots.
         var i, slot, setup;
@@ -50,9 +53,11 @@ window.Harmony = function (opts) {
 
     // Create the new harmony instance.
     var instance = {
-        // ## harmony.log
-        // @see log.js local place
-        // Debug log tool intended for developers only.
+        /**
+         * ## harmony.log
+         * Debug log tool intended for developers only.
+         * @see v2/log.js
+         */
         log: log,
         // ## harmony.slot.&lt;name&gt;
         // Access a specific ad slot in the page.
@@ -74,6 +79,7 @@ window.Harmony = function (opts) {
          * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
+         * @see v2/adslot.js
          */
         defineSlot: function (opts) {
             var pubads = googletag.pubads();

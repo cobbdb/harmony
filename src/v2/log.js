@@ -13,6 +13,7 @@ try {
 }
 
 /**
+ * ## log
  * Utility for system logging.
  * @param {String} [msg] Log entry.
  */
