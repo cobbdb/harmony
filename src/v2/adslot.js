@@ -15,7 +15,7 @@
  */
 function AdSlot(pubads, opts) {
     log('Creating new ad slot.');
-    var slot, i, targeting;
+    var slot, i;
     // Create the callback queue for this slot.
     var cbQueue = {
         slotRenderEnded: []
@@ -85,4 +85,4 @@ function AdSlot(pubads, opts) {
     // Add the publisher service and return the new ad slot.
     slot.addService(pubads);
     return slot;
-};
+}

@@ -41,21 +41,12 @@ module.exports = function (grunt) {
                     ]
                 },
                 options: {
-                    enclose: {}
-                }
-            },
-            debug: {
-                files: {
-                    'dist/harmony.min.js': [
-                        'src/v2/*.js',
-                        'src/v1/*.js'
-                    ]
-                },
-                options: {
                     enclose: {},
-                    compress: false,
-                    mangle: false,
-                    beautify: true
+                    mangle: {
+                        except: [
+                            'googletag'
+                        ]
+                    }
                 }
             }
         },
@@ -68,7 +59,8 @@ module.exports = function (grunt) {
             },
             options: {
                 specs: 'tests/*.spec.js',
-                //vendor: resolve('jquery')
+                helpers: 'tests/helpers.js',
+                vendor: resolve('jquery')
             }
         },
         'docker-clone': {
@@ -88,7 +80,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'uglify:build',
-        'jasmine'
+        'jasmine:dist'
     ]);
 
     grunt.registerTask('build', [
