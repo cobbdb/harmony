@@ -22,6 +22,9 @@
 window.Harmony = function (opts) {
     var slots = {};
     var breakpoints = {};
+    googletag = googletag || {
+        cmd: []
+    };
 
     /**
      * ### Initial system startup.
