@@ -52,7 +52,10 @@ module.exports = function (grunt) {
         },
         jasmine: {
             dist: {
-                src: 'dist/*.js'
+                src: 'dist/*.js',
+                options: {
+                    specs: 'tests/harmony.spec.js'
+                }
             },
             dev: {
                 src: 'src/v2/*.js'
@@ -80,7 +83,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'uglify:build',
-        'jasmine:dist'
+        'jasmine'
     ]);
 
     grunt.registerTask('build', [
