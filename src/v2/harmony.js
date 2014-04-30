@@ -82,11 +82,13 @@ window.Harmony = function (opts) {
          * @see v2/adslot.js
          */
         defineSlot: function (opts) {
-            var pubads = googletag.pubads();
-            var slot = AdSlot(pubads, opts);
-            slots[opts.name] = slot;
-            breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
-            breakpoints[opts.breakpoint].push(slot);
+            googletag.cmd.push(function () {
+                var pubads = googletag.pubads();
+                var slot = AdSlot(pubads, opts);
+                slots[opts.name] = slot;
+                breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
+                breakpoints[opts.breakpoint].push(slot);
+            });
         },
         /**
          * ## harmony.show

@@ -62,7 +62,9 @@ function AdSlot(pubads, opts) {
      * @see Official-Docs https://support.google.com/dfp_premium/answer/1650154#pub_addeventlistener
      */
     slot.on = function (event, cb) {
-        cbQueue[event] = cb;
+        cbQueue[event] = cbQueue[event] || [];
+        cbQueue[event].push(cb);
+        log('Attached new callback for ' + event);
     };
 
     // Attach a listener for the slotRenderEnded event.
@@ -70,7 +72,7 @@ function AdSlot(pubads, opts) {
         var i, len;
         if (event.slot === slot) {
             log('slotRenderEnded for ' + opts.name);
-            len = slot.cmd.slotRenderEnded.length;
+            len = cbQueue.slotRenderEnded.length;
             for (i = 0; i < len; i += 1) {
                 cbQueue.slotRenderEnded[i](event);
             }

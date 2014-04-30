@@ -57,12 +57,12 @@ module.exports = function (grunt) {
                     specs: 'tests/harmony.spec.js'
                 }
             },
-            dev: {
+            src: {
                 src: 'src/v2/*.js'
             },
             options: {
-                specs: 'tests/*.spec.js',
-                helpers: 'tests/helpers.js',
+                specs: 'tests/**/*.spec.js',
+                helpers: 'tests/**/*.helper.js',
                 vendor: resolve('jquery')
             }
         },
