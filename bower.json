@@ -11,7 +11,9 @@
     "node_modules",
     "bower_components",
     "*.egg-info",
-    "tests"
+    "tests",
+    "*.json",
+    "*.js"
   ],
   "devDependencies": {
     "jquery": "1.x"
