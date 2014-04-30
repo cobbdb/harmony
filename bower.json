@@ -13,7 +13,7 @@
     "*.egg-info",
     "tests",
     "*.json",
-    "*.js"
+    "gruntfile.js"
   ],
   "devDependencies": {
     "jquery": "1.x"
