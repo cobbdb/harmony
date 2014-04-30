@@ -102,14 +102,16 @@ window.Harmony = function (opts) {
              * Show all ads at a breakpoint.
              */
             breakpoint: function (bp) {
-                var i, len, id;
-                len = breakpoints[bp].length;
-                log('Showing ' + len + ' ads at breakpoint ' + bp);
-                for (i = 0; i < len; i += 1) {
-                    id = breakpoints[bp][i].div_id;
-                    googletag.display(id);
-                    document.getElementById(id).style.display = 'block';
-                }
+                googletag.cmd.push(function () {
+                    var i, len, id;
+                    len = breakpoints[bp].length;
+                    log('Showing ' + len + ' ads at breakpoint ' + bp);
+                    for (i = 0; i < len; i += 1) {
+                        id = breakpoints[bp][i].div_id;
+                        googletag.display(id);
+                        document.getElementById(id).style.display = 'block';
+                    }
+                });
             },
             /**
              * ### harmony.show.slot
@@ -117,10 +119,12 @@ window.Harmony = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
-                log('Showing ad at slot ' + name);
-                var id = slots[name].div_id;
-                googletag.display(id);
-                document.getElementById(id).style.display = 'block';
+                googletag.cmd.push(function () {
+                    log('Showing ad at slot ' + name);
+                    var id = slots[name].div_id;
+                    googletag.display(id);
+                    document.getElementById(id).style.display = 'block';
+                });
             }
         },
         /**
