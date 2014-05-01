@@ -1,4 +1,4 @@
-describe('log tool', function () {
+describe('v2/log.js', function () {
     var output = '';
     beforeEach(function () {
         spyOn(console, 'log').and.callFake(function (msg) {

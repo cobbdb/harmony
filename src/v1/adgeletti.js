@@ -126,6 +126,7 @@ window.Adgeletti = {
                         pos.ad = slot;
 
                         // Display the ad
+                        //googletag.enableServices();
                         googletag.display(pos.div_id);
                     };
                     return inner;

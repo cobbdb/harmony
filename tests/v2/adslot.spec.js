@@ -1,4 +1,4 @@
-describe('adslot', function () {
+describe('v2/adslot.js', function () {
     var opts, pubads;
     beforeEach(function () {
         // Reset the model.

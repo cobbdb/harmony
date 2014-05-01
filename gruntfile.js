@@ -83,7 +83,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'uglify:build',
-        'jasmine'
+        'jasmine:src'
     ]);
 
     grunt.registerTask('build', [

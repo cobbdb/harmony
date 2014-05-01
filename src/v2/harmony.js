@@ -22,9 +22,6 @@
 window.Harmony = function (opts) {
     var slots = {};
     var breakpoints = {};
-    googletag = googletag || {
-        cmd: []
-    };
 
     /**
      * ### Initial system startup.
@@ -107,14 +104,15 @@ window.Harmony = function (opts) {
             breakpoint: function (bp) {
                 googletag.cmd.push(function () {
                     var i, len, id;
+                    log('Showing ads at breakpoint ' + bp);
                     len = breakpoints[bp].length;
-                    log('Showing ' + len + ' ads at breakpoint ' + bp);
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].div_id;
                         googletag.display(id);
                         document.getElementById(id).style.display = 'block';
                     }
                 });
+                Adgeletti.display(bp);
             },
             /**
              * ### harmony.show.slot
@@ -142,12 +140,13 @@ window.Harmony = function (opts) {
              */
             breakpoint: function (bp) {
                 var i, len, id;
+                log('Hiding ads at breakpoint ' + bp);
                 len = breakpoints[bp].length;
-                log('Hiding ' + len + ' ads at breakpoint ' + bp);
                 for (i = 0; i < len; i += 1) {
                     id = breakpoints[bp][i].div_id;
                     document.getElementById(id).style.display = 'none';
                 }
+                Adgeletti.hide(bp);
             },
             /**
              * ### harmony.hide.slot
