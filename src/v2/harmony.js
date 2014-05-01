@@ -36,9 +36,13 @@ window.Harmony = function (opts) {
             setup = conf[i];
             slot = AdSlot(pubads, setup);
             slots[setup.name] = slot;
-            // Default to breakpoint undefined if not set.
-            breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
-            breakpoints[setup.breakpoint].push(slot);
+            try {
+                breakpoints[setup.breakpoint].push(slot);
+            } catch (err) {
+                breakpoints[setup.breakpoint] = [
+                    slot
+                ];
+            }
         }
 
         // Assign the system targeting.
@@ -86,8 +90,13 @@ window.Harmony = function (opts) {
                 var pubads = googletag.pubads();
                 var slot = AdSlot(pubads, opts);
                 slots[opts.name] = slot;
-                breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
-                breakpoints[opts.breakpoint].push(slot);
+                try {
+                    breakpoints[opts.breakpoint].push(slot);
+                } catch (err) {
+                    breakpoints[opts.breakpoint] = [
+                        slot
+                    ];
+                }
             });
         },
         /**
@@ -105,7 +114,12 @@ window.Harmony = function (opts) {
                 googletag.cmd.push(function () {
                     var i, len, id;
                     log('Showing ads at breakpoint ' + bp);
-                    len = breakpoints[bp].length;
+                    try {
+                        len = breakpoints[bp].length;
+                    } catch (err) {
+                        // Breakpoint wasn't found, so noop.
+                        return;
+                    }
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].div_id;
                         googletag.display(id);
@@ -141,7 +155,12 @@ window.Harmony = function (opts) {
             breakpoint: function (bp) {
                 var i, len, id;
                 log('Hiding ads at breakpoint ' + bp);
-                len = breakpoints[bp].length;
+                try {
+                    len = breakpoints[bp].length;
+                } catch (err) {
+                    // Breakpoint wasn't found, so noop.
+                    return;
+                }
                 for (i = 0; i < len; i += 1) {
                     id = breakpoints[bp][i].div_id;
                     document.getElementById(id).style.display = 'none';
