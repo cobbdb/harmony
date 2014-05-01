@@ -134,7 +134,8 @@ window.Adgeletti = {
 
                 // Tell Google to display the ad
                 console.log('Displaying ad ' + pos.ad_unit_code + ' for breakpoint "' + breakpoint + '"');
-                googletag.cmd.push(get_inner(pos, adg));
+                var inner = get_inner(pos, adg);
+                inner();
             }
         }
     },
@@ -173,8 +174,6 @@ window.Adgeletti = {
         }
 
         // Refresh the list of ads
-        googletag.cmd.push(function () {
-            googletag.pubads().refresh(ads)
-        })
+        googletag.pubads().refresh(ads);
     }
 };

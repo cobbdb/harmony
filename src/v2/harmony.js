@@ -27,33 +27,31 @@ window.Harmony = function (opts) {
      * ### Initial system startup.
      * @see v2/adslot.js
      */
-    googletag.cmd.push(function () {
-        // Generate all the ad slots.
-        var i, slot, setup;
-        var conf = opts.slots;
-        var pubads = googletag.pubads();
-        for (i = 0; i < conf; i += 1) {
-            setup = conf[i];
-            slot = AdSlot(pubads, setup);
-            slots[setup.name] = slot;
-            try {
-                breakpoints[setup.breakpoint].push(slot);
-            } catch (err) {
-                breakpoints[setup.breakpoint] = [
-                    slot
-                ];
-            }
+    // Generate all the ad slots.
+    var i, slot, setup;
+    var conf = opts.slots;
+    var pubads = googletag.pubads();
+    for (i = 0; i < conf; i += 1) {
+        setup = conf[i];
+        slot = AdSlot(pubads, setup);
+        slots[setup.name] = slot;
+        try {
+            breakpoints[setup.breakpoint].push(slot);
+        } catch (err) {
+            breakpoints[setup.breakpoint] = [
+                slot
+            ];
         }
+    }
 
-        // Assign the system targeting.
-        log('Applying pubads targeting.');
-        conf = opts.targeting;
-        for (i in conf) {
-            setup = conf[i];
-            log('- ' + i + ' = ' + setup);
-            pubads.setTargeting(i, setup);
-        }
-    });
+    // Assign the system targeting.
+    log('Applying pubads targeting.');
+    conf = opts.targeting;
+    for (i in conf) {
+        setup = conf[i];
+        log('- ' + i + ' = ' + setup);
+        pubads.setTargeting(i, setup);
+    }
 
     // Create the new harmony instance.
     var instance = {
@@ -86,18 +84,16 @@ window.Harmony = function (opts) {
          * @see v2/adslot.js
          */
         defineSlot: function (opts) {
-            googletag.cmd.push(function () {
-                var pubads = googletag.pubads();
-                var slot = AdSlot(pubads, opts);
-                slots[opts.name] = slot;
-                try {
-                    breakpoints[opts.breakpoint].push(slot);
-                } catch (err) {
-                    breakpoints[opts.breakpoint] = [
-                        slot
-                    ];
-                }
-            });
+            var pubads = googletag.pubads();
+            var slot = AdSlot(pubads, opts);
+            slots[opts.name] = slot;
+            try {
+                breakpoints[opts.breakpoint].push(slot);
+            } catch (err) {
+                breakpoints[opts.breakpoint] = [
+                    slot
+                ];
+            }
         },
         /**
          * ## harmony.show
@@ -112,21 +108,19 @@ window.Harmony = function (opts) {
              */
             breakpoint: function (bp) {
                 Adgeletti.display(bp);
-                googletag.cmd.push(function () {
-                    var i, len, id;
-                    log('Showing ads at breakpoint ' + bp);
-                    try {
-                        len = breakpoints[bp].length;
-                    } catch (err) {
-                        // Breakpoint wasn't found, so noop.
-                        return;
-                    }
-                    for (i = 0; i < len; i += 1) {
-                        id = breakpoints[bp][i].div_id;
-                        googletag.display(id);
-                        document.getElementById(id).style.display = 'block';
-                    }
-                });
+                var i, len, id;
+                log('Showing ads at breakpoint ' + bp);
+                try {
+                    len = breakpoints[bp].length;
+                } catch (err) {
+                    // Breakpoint wasn't found, so noop.
+                    return;
+                }
+                for (i = 0; i < len; i += 1) {
+                    id = breakpoints[bp][i].div_id;
+                    googletag.display(id);
+                    document.getElementById(id).style.display = 'block';
+                }
             },
             /**
              * ### harmony.show.slot
@@ -134,12 +128,10 @@ window.Harmony = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
-                googletag.cmd.push(function () {
-                    log('Showing ad at slot ' + name);
-                    var id = slots[name].div_id;
-                    googletag.display(id);
-                    document.getElementById(id).style.display = 'block';
-                });
+                log('Showing ad at slot ' + name);
+                var id = slots[name].div_id;
+                googletag.display(id);
+                document.getElementById(id).style.display = 'block';
             }
         },
         /**
