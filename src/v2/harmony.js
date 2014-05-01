@@ -111,6 +111,7 @@ window.Harmony = function (opts) {
              * Show all ads at a breakpoint.
              */
             breakpoint: function (bp) {
+                Adgeletti.display(bp);
                 googletag.cmd.push(function () {
                     var i, len, id;
                     log('Showing ads at breakpoint ' + bp);
@@ -126,7 +127,6 @@ window.Harmony = function (opts) {
                         document.getElementById(id).style.display = 'block';
                     }
                 });
-                Adgeletti.display(bp);
             },
             /**
              * ### harmony.show.slot
@@ -154,6 +154,7 @@ window.Harmony = function (opts) {
              */
             breakpoint: function (bp) {
                 var i, len, id;
+                Adgeletti.hide(bp);
                 log('Hiding ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
@@ -165,7 +166,6 @@ window.Harmony = function (opts) {
                     id = breakpoints[bp][i].div_id;
                     document.getElementById(id).style.display = 'none';
                 }
-                Adgeletti.hide(bp);
             },
             /**
              * ### harmony.hide.slot
