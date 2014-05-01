@@ -20,6 +20,8 @@ function AdSlot(pubads, opts) {
     var cbQueue = {
         slotRenderEnded: []
     };
+    // Capture timestamp for performance metrics.
+    var tsCreate = new Date();
 
     // Set default values.
     var mapping = opts.mapping || [];
@@ -50,8 +52,13 @@ function AdSlot(pubads, opts) {
     // Load any provided callback into queue.
     if (typeof opts.callback === 'function') {
         cbQueue.slotRenderEnded.push(opts.callback);
-        log('Attached provided callback.');
+        log('Attached provided callback for ' + opts.name);
     }
+    // Load performance logging into queue.
+    cbQueue.slotRenderEnded.push(function () {
+        var now = new Date();
+        log('Total load time: [' + opts.name + '] ' + (now - tsCreate) + 'ms');
+    });
 
     /**
      * ## harmony.&lt;slot&gt;.on

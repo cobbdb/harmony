@@ -36,7 +36,7 @@ var log = (function () {
         }
     };
     /**
-     * harmony.log.flush
+     * ## harmony.log.flush
      * Clears the log and return entire record.
      * @return {String}
      */
