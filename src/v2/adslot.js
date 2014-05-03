@@ -14,7 +14,7 @@
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
 function AdSlot(pubads, opts) {
-    log('Creating new ad slot.');
+    log('event', 'Creating new ad slot.');
     var slot, i;
     // Create the callback queue for this slot.
     var cbQueue = {
@@ -22,6 +22,10 @@ function AdSlot(pubads, opts) {
     };
     // Capture timestamp for performance metrics.
     var tsCreate = new Date();
+    log('metric', {
+        event: 'Slot defined',
+        slot: opts.name
+    });
 
     // Set default values.
     var mapping = opts.mapping || [];
@@ -52,13 +56,8 @@ function AdSlot(pubads, opts) {
     // Load any provided callback into queue.
     if (typeof opts.callback === 'function') {
         cbQueue.slotRenderEnded.push(opts.callback);
-        log('Attached provided callback for ' + opts.name);
+        log('event', 'Attached provided callback for ' + opts.name);
     }
-    // Load performance logging into queue.
-    cbQueue.slotRenderEnded.push(function () {
-        var now = new Date();
-        log('Total load time: [' + opts.name + '] ' + (now - tsCreate) + 'ms');
-    });
 
     /**
      * ## harmony.&lt;slot&gt;.on
@@ -71,14 +70,22 @@ function AdSlot(pubads, opts) {
     slot.on = function (event, cb) {
         cbQueue[event] = cbQueue[event] || [];
         cbQueue[event].push(cb);
-        log('Attached new callback for ' + event);
+        log('event', 'Attached new callback for ' + event);
     };
 
     // Attach a listener for the slotRenderEnded event.
     pubads.addEventListener('slotRenderEnded', function (event) {
-        var i, len;
+        var i, len, now;
         if (event.slot === slot) {
-            log('slotRenderEnded for ' + opts.name);
+            log('event', 'slotRenderEnded for ' + opts.name);
+            // Log the total load time of this slot.
+            now = new Date();
+            log('metric', {
+                event: 'Total load time',
+                slot: opts.name,
+                value: now - tsCreate
+            });
+            // Perform any attached callbacks.
             len = cbQueue.slotRenderEnded.length;
             for (i = 0; i < len; i += 1) {
                 cbQueue.slotRenderEnded[i](event);
