@@ -64,7 +64,7 @@ module.exports = function (grunt) {
             options: {
                 specs: 'tests/**/*.spec.js',
                 helpers: 'tests/**/*.helper.js',
-                vendor: resolve('jquery')
+                vendor: resolve('lumberjack')
             }
         },
         'docker-clone': {

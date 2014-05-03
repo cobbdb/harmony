@@ -1,8 +1,7 @@
 describe('v2/adslot.js', function () {
     var opts, pubads;
-    spyOn(window, 'Lumberjack').and.returnValue(
-        jasmine.createSpy('logSpy');
-    });
+    // This needs to be fixed --> how does AdSlot get a log?
+    window.log = jasmine.createSpy('logSpy');
     beforeEach(function () {
         // Reset the model.
         opts = {

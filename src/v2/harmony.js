@@ -1,8 +1,9 @@
 /**
  * # Harmony
  * ### ***DFP JavaScript API Helper***
+ * @return {Object} Instance of Harmony.
  */
-window.harmony = (function () {
+window.Harmony = function () {
     var slots = {};
     var breakpoints = {};
     var log = window.Lumberjack();
@@ -15,23 +16,23 @@ window.harmony = (function () {
         /**
          * harmony.load
          * Load a block of configuration.
-         * @param {Object} conf
-         * @param {Object} conf.targeting Key/value targeting pairs.
-         * @param {Array} conf.slots List of ad slot information.
-         * @param {Object} conf.slots.i Slot options object.
-         * @param {String} conf.slots.i.name Slot name, ex) RP01
-         * @param {String} conf.slots.i.id Slot's div id, ex) ad-div-RP01
-         * @param {Array} conf.slots.i.sizes One or many 2D arrays, ex) [300, 250]
-         * @param {String} conf.slots.i.adunit Full ad unit code.
-         * @param {Object} [conf.slots.i.targeting] Slot-specific targeting.
-         * @param {Array} [conf.slots.i.mapping] Size mapping.
-         * @param {Boolean} [conf.slots.i.companion] True if companion ad.
-         * @param {String} [conf.slots.i.breakpoint] Display point, ex) 0px-infinity
-         * @param {Boolean} [conf.slots.i.interstitial] True if out-of-page ad.
-         * @param {Function} [conf.slots.i.callback] Called on dfp's slotRenderEnded.
+         * @param {Object} opts
+         * @param {Object} opts.targeting Key/value targeting pairs.
+         * @param {Array} opts.slots List of ad slot information.
+         * @param {Object} opts.slots.i Slot options object.
+         * @param {String} opts.slots.i.name Slot name, ex) RP01
+         * @param {String} opts.slots.i.id Slot's div id, ex) ad-div-RP01
+         * @param {Array} opts.slots.i.sizes One or many 2D arrays, ex) [300, 250]
+         * @param {String} opts.slots.i.adunit Full ad unit code.
+         * @param {Object} [opts.slots.i.targeting] Slot-specific targeting.
+         * @param {Array} [opts.slots.i.mapping] Size mapping.
+         * @param {Boolean} [opts.slots.i.companion] True if companion ad.
+         * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
+         * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
+         * @param {Function} [opts.slots.i.callback] Called on dfp's slotRenderEnded.
          * @see v2/adslot.js
          */
-        load: function (conf) {
+        load: function (opts) {
             // Generate all the ad slots.
             log('event', 'Generating ad slots.');
             var i, slot, setup;
@@ -58,11 +59,8 @@ window.harmony = (function () {
                 event: 'Harmony config loaded'
             });
         },
-        /**
-         * ## harmony.log
-         * Debug log tool intended for developers only.
-         * @see v2/log.js
-         */
+        // ## harmony.log
+        // Instance of Lumberjack populated with Harmony's data.
         log: log,
         // ## harmony.slot.&lt;name&gt;
         // Access a specific ad slot in the page.
@@ -111,7 +109,6 @@ window.harmony = (function () {
                 try {
                     len = breakpoints[bp].length;
                 } catch (err) {
-                    // Breakpoint wasn't found, so noop.
                     log('error', 'Failed to show breakpoint ' + bp);
                     throw Error('Failed to show breakpoint ' + bp);
                 }
@@ -150,7 +147,6 @@ window.harmony = (function () {
                 try {
                     len = breakpoints[bp].length;
                 } catch (err) {
-                    // Breakpoint wasn't found, so noop.
                     log('error', 'Failed to hide breakpoint ' + bp);
                     throw Error('Failed to hide breakpoint ' + bp);
                 }
@@ -171,4 +167,4 @@ window.harmony = (function () {
             }
         }
     };
-}());
+};

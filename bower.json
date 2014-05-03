@@ -15,9 +15,7 @@
     "*.json",
     "gruntfile.js"
   ],
-  "devDependencies": {
-    "jquery": "1.x"
-  },
+  "devDependencies": {},
   "dependencies": {
     "lumberjack": "~1.0.0"
   }
