@@ -15,7 +15,7 @@ module.exports = function (grunt) {
             },
             default: {
                 src: [
-                    'src/v2/*.js',
+                    'src/*.js',
                     'gruntfile.js',
                     'tests/*.spec.js'
                 ]
@@ -37,15 +37,18 @@ module.exports = function (grunt) {
                 files: {
                     'dist/harmony.min.js': [
                         resolve('lumberjack'),
-                        'src/v2/*.js',
-                        'src/v1/*.js'
+                        'src/log.js',
+                        'src/adslot.js',
+                        'src/harmony.js',
+                        'src/v1/adgeletti.js'
                     ]
                 },
                 options: {
                     enclose: {},
                     mangle: {
                         except: [
-                            'googletag'
+                            'googletag',
+                            'Lumberjack'
                         ]
                     }
                 }
@@ -59,12 +62,20 @@ module.exports = function (grunt) {
                 }
             },
             src: {
-                src: 'src/v2/*.js'
+                src: [
+                    'src/log.js',
+                    'src/adslot.js',
+                    'src/harmony.js'
+                ],
+                options: {
+                    specs: 'tests/*.spec.js'
+                }
             },
             options: {
-                specs: 'tests/**/*.spec.js',
-                helpers: 'tests/**/*.helper.js',
-                vendor: resolve('lumberjack')
+                helpers: 'tests/helpers/*.helper.js',
+                vendor: resolve('lumberjack'),
+                display: 'short',
+                summary: true
             }
         },
         'docker-clone': {
@@ -84,7 +95,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'uglify:build',
-        'jasmine:src'
+        'jasmine:dist'
     ]);
 
     grunt.registerTask('build', [

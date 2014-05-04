@@ -17,6 +17,6 @@
   ],
   "devDependencies": {},
   "dependencies": {
-    "lumberjack": "~1.0.0"
+    "lumberjack": "1.0.x"
   }
 }

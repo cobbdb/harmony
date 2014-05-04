@@ -6,7 +6,6 @@
 window.Harmony = function () {
     var slots = {};
     var breakpoints = {};
-    var log = window.Lumberjack();
 
     log('metric', {
         event: 'Harmony defined'
@@ -37,8 +36,9 @@ window.Harmony = function () {
             log('event', 'Generating ad slots.');
             var i, slot, setup;
             var conf = opts.slots;
+            var len = conf.length;
             var pubads = googletag.pubads();
-            for (i = 0; i < conf; i += 1) {
+            for (i = 0; i < len; i += 1) {
                 setup = conf[i];
                 slot = AdSlot(pubads, setup);
                 slots[setup.name] = slot;
@@ -51,7 +51,7 @@ window.Harmony = function () {
             conf = opts.targeting;
             for (i in conf) {
                 setup = conf[i];
-                log('- ' + i + ' = ' + setup);
+                log('event', '- ' + i + ' = ' + setup);
                 pubads.setTargeting(i, setup);
             }
 
@@ -104,18 +104,21 @@ window.Harmony = function () {
              */
             breakpoint: function (bp) {
                 Adgeletti.display(bp);
-                var i, len, id;
+                var i, len, id, elem;
                 log('event', 'Showing ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
+                    for (i = 0; i < len; i += 1) {
+                        id = breakpoints[bp][i].divId;
+                        googletag.display(id);
+                        elem = document.getElementById(id);
+                        if (elem) {
+                            elem.style.display = 'block';
+                        }
+                    }
                 } catch (err) {
                     log('error', 'Failed to show breakpoint ' + bp);
-                    throw Error('Failed to show breakpoint ' + bp);
-                }
-                for (i = 0; i < len; i += 1) {
-                    id = breakpoints[bp][i].div_id;
-                    googletag.display(id);
-                    document.getElementById(id).style.display = 'block';
+                    throw err;
                 }
             },
             /**
@@ -125,7 +128,7 @@ window.Harmony = function () {
              */
             slot: function (name) {
                 log('event', 'Showing ad at slot ' + name);
-                var id = slots[name].div_id;
+                var id = slots[name].divId;
                 googletag.display(id);
                 document.getElementById(id).style.display = 'block';
             }
@@ -141,18 +144,21 @@ window.Harmony = function () {
              * Hides all the ads at a breakpoint.
              */
             breakpoint: function (bp) {
-                var i, len, id;
+                var i, len, id, elem;
                 Adgeletti.hide(bp);
                 log('event', 'Hiding ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
+                    for (i = 0; i < len; i += 1) {
+                        id = breakpoints[bp][i].divId;
+                        elem = document.getElementById(id);
+                        if (elem) {
+                            elem.style.display = 'none';
+                        }
+                    }
                 } catch (err) {
                     log('error', 'Failed to hide breakpoint ' + bp);
-                    throw Error('Failed to hide breakpoint ' + bp);
-                }
-                for (i = 0; i < len; i += 1) {
-                    id = breakpoints[bp][i].div_id;
-                    document.getElementById(id).style.display = 'none';
+                    throw err;
                 }
             },
             /**
@@ -162,7 +168,7 @@ window.Harmony = function () {
              */
             slot: function (name) {
                 log('event', 'Hiding ad at slot ' + name);
-                var id = slots[name].div_id;
+                var id = slots[name].divId;
                 document.getElementById(id).style.display = 'none';
             }
         }

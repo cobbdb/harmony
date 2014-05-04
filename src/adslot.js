@@ -41,7 +41,7 @@ function AdSlot(pubads, opts) {
     }
 
     // Set some identifying data on the slot.
-    slot.div_id = opts.id;
+    slot.divId = opts.id;
     slot.breakpoint = opts.breakpoint;
 
     // Set slot-specific targeting. No need to introspect

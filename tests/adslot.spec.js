@@ -1,42 +1,8 @@
 describe('v2/adslot.js', function () {
-    var opts, pubads;
-    // This needs to be fixed --> how does AdSlot get a log?
-    window.log = jasmine.createSpy('logSpy');
+    var opts;
     beforeEach(function () {
-        // Reset the model.
-        opts = {
-            name: '',
-            id: '',
-            sizes: [],
-            adunit: '',
-            targeting: {},
-            mapping: [],
-            companion: false,
-            breakpoint: '',
-            interstitial: false,
-            callback: function () {}
-        };
-        // Mock the pubads service.
-        pubadsSpy = jasmine.createSpyObj('pubads', [
-            'addEventListener'
-        ]);
-        // Mock the googletag object.
-        googletag = jasmine.createSpyObj('googletag', [
-            'defineOutOfPageSlot',
-            'defineSlot',
-            'companionAds'
-        ]);
-        // Mock the slot constructors.
-        googletag.defineOutOfPageSlot.and.returnValue(jasmine.createSpyObj('outOfPageSlotSpy', [
-            'setTargeting',
-            'defineSizeMapping',
-            'addService'
-        ]));
-        googletag.defineSlot.and.returnValue(jasmine.createSpyObj('slotSpy', [
-            'setTargeting',
-            'defineSizeMapping',
-            'addService'
-        ]));
+        // Reset options model.
+        opts = Options();
     });
 
     describe('ad slot type', function () {
@@ -79,7 +45,7 @@ describe('v2/adslot.js', function () {
         opts.id = 'testid';
         opts.breakpoint = 'testpoint';
         var slot = AdSlot(pubadsSpy, opts);
-        expect(slot.div_id).toEqual('testid');
+        expect(slot.divId).toEqual('testid');
         expect(slot.breakpoint).toEqual('testpoint');
     });
 
