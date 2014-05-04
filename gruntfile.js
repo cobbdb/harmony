@@ -36,7 +36,6 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     'dist/harmony.min.js': [
-                        resolve('lumberjack'),
                         'src/log.js',
                         'src/adslot.js',
                         'src/harmony.js',
