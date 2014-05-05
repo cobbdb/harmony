@@ -7,9 +7,7 @@ window.Harmony = function () {
     var slots = {};
     var breakpoints = {};
 
-    log('metric', {
-        event: 'Harmony defined'
-    });
+    log('event', 'Harmony defined');
 
     return {
         /**
@@ -55,9 +53,7 @@ window.Harmony = function () {
                 pubads.setTargeting(i, setup);
             }
 
-            log('metric', {
-                event: 'Harmony config loaded'
-            });
+            log('event', 'Harmony config loaded.');
         },
         // ## harmony.log
         // Instance of Lumberjack populated with Harmony's data.

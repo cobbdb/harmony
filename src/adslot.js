@@ -22,10 +22,7 @@ function AdSlot(pubads, opts) {
     };
     // Capture timestamp for performance metrics.
     var tsCreate = new Date();
-    log('metric', {
-        event: 'Slot defined',
-        slot: opts.name
-    });
+    log('event', 'Slot ' + opts.name + ' defined.');
 
     // Set default values.
     var mapping = opts.mapping || [];

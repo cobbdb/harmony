@@ -3,6 +3,8 @@
 // Set up a simple console noop for clients without a console
 window.console = window.console || {log: function(m){}};
 
+// Timestamp for load metrics.
+var tsCreate = new Date();
 
 // Set up the `Adgeletti` object and its methods
 window.Adgeletti = {
@@ -31,6 +33,7 @@ window.Adgeletti = {
 
     // Sets up an ad position by adding it to `data.positions`
     position: function(options){
+        log('event', 'Slot ' + options.slot + ' defined.');
         // Required in the provided options are the following keys: "breakpoint",
         // "ad_unit_code", "sizes", and "div_id"
         var positions = this.data.positions[options.breakpoint] = this.data.positions[options.breakpoint] || [];
@@ -97,6 +100,18 @@ window.Adgeletti = {
                     var inner = function(){
                         // Create the ad slot
                         var slot = googletag.defineSlot(pos.ad_unit_code, pos.sizes, pos.div_id);
+
+                        googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+                            if (event.slot === slot) {
+                                log('event', 'slotRenderEnded for ' + pos.slot);
+                                var now = new Date();
+                                log('metric', {
+                                    event: 'Total load time',
+                                    slot: pos.slot,
+                                    value: now - tsCreate
+                                });
+                            }
+                        });
 
                         // Handle companion ads
                         if(pos.is_companion){
@@ -177,3 +192,4 @@ window.Adgeletti = {
         googletag.pubads().refresh(ads);
     }
 };
+log('event', 'Adgeletti defined.');
