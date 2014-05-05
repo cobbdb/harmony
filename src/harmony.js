@@ -11,7 +11,7 @@ window.Harmony = function () {
 
     return {
         /**
-         * harmony.load
+         * ## harmony.load
          * Load a block of configuration.
          * @param {Object} opts
          * @param {Object} opts.targeting Key/value targeting pairs.
