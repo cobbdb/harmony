@@ -37,8 +37,17 @@ function AdSlot(pubads, opts) {
         slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
-    // Set some identifying data on the slot.
+    /**
+     * ## harmony.slot.&lt;slot&gt;.divId
+     * Slot's containing div id.
+     * @type {String}
+     */
     slot.divId = opts.id;
+    /**
+     * ## harmony.slot.&lt;slot&gt;.breakpoint
+     * This slot's breakpoint.
+     * @type {String}
+     */
     slot.breakpoint = opts.breakpoint;
 
     // Set slot-specific targeting. No need to introspect
