@@ -38,13 +38,13 @@ function AdSlot(pubads, opts) {
     }
 
     /**
-     * ## harmony.slot.&lt;slot&gt;.divId
+     * ## harmony.slot.&lt;name&gt;.divId
      * Slot's containing div id.
      * @type {String}
      */
     slot.divId = opts.id;
     /**
-     * ## harmony.slot.&lt;slot&gt;.breakpoint
+     * ## harmony.slot.&lt;name&gt;.breakpoint
      * This slot's breakpoint.
      * @type {String}
      */
@@ -66,7 +66,7 @@ function AdSlot(pubads, opts) {
     }
 
     /**
-     * ## harmony.&lt;slot&gt;.on
+     * ## harmony.slot.&lt;name&gt;.on
      * Attaches a callback to a DFP event. Currently, only the
      * slotRenderEnded event is offered by the DFP API.
      * @param {String} event Name of the event to bind to.
