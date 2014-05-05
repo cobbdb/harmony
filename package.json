@@ -22,6 +22,8 @@
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-docker-clone": "^1.0.6",
-    "grunt-template-jasmine-istanbul": "^0.3.0"
+    "grunt-template-jasmine-istanbul": "^0.3.0",
+    "grunt-exec": "~0.4.5",
+    "docker": "~0.2.10"
   }
 }
