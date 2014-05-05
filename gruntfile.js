@@ -74,7 +74,14 @@ module.exports = function (grunt) {
                 helpers: 'tests/helpers/*.helper.js',
                 vendor: resolve('lumberjack'),
                 display: 'short',
-                summary: true
+                summary: true,
+                template: require('grunt-template-jasmine-istanbul'),
+                templateOptions: {
+                    coverage: 'bin/coverage/coverage.json',
+                    report: {
+                        type: 'text-summary'
+                    }
+                }
             }
         },
         'docker-clone': {
