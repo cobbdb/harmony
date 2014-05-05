@@ -8,6 +8,7 @@ var tsCreate = new Date();
 
 // Set up the `Adgeletti` object and its methods
 window.Adgeletti = {
+    log: log,
     // Data about the ads in a page
     data: {
         // A dictionary of ad positions, keyed by their respective breakpoints
