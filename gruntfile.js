@@ -101,6 +101,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'uglify:build',
+        'jasmine:src',
         'jasmine:dist'
     ]);
 

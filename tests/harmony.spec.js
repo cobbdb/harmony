@@ -1,4 +1,4 @@
-describe('v2/harmony.js', function () {
+describe('harmony.js', function () {
     var harmony, conf;
     describe('construction', function () {
         it('throws no errors', function () {
@@ -74,10 +74,10 @@ describe('v2/harmony.js', function () {
             });
             describe('harmony.show', function () {
                 describe('breakpoint()', function () {
-                    it('throws error when breakpoint does not exist', function () {
+                    it('throws no errors when breakpoint does not exist', function () {
                         expect(function () {
                             harmony.show.breakpoint('badpnt');
-                        }).toThrowError();
+                        }).not.toThrowError();
                     });
                     it('calls display on slots', function () {
                         harmony.show.breakpoint('TSTPNT00');
@@ -105,10 +105,10 @@ describe('v2/harmony.js', function () {
             });
             describe('harmony.hide', function () {
                 describe('breakpoint()', function () {
-                    it('throws error when breakpoint does not exist', function () {
+                    it('throws no errors when breakpoint does not exist', function () {
                         expect(function () {
                             harmony.hide.breakpoint('badpnt');
-                        }).toThrowError();
+                        }).not.toThrowError();
                     });
                     it('sets display:none on slots', function () {
                         harmony.hide.breakpoint('TSTPNT00');

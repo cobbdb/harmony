@@ -113,8 +113,10 @@ window.Harmony = function () {
                         }
                     }
                 } catch (err) {
-                    log('error', 'Failed to show breakpoint ' + bp);
-                    throw err;
+                    log('error', {
+                        msg: 'Failed to show breakpoint ' + bp,
+                        err: err
+                    });
                 }
             },
             /**
@@ -153,8 +155,10 @@ window.Harmony = function () {
                         }
                     }
                 } catch (err) {
-                    log('error', 'Failed to hide breakpoint ' + bp);
-                    throw err;
+                    log('error', {
+                        msg: 'Failed to hide breakpoint ' + bp,
+                        err: err
+                    });
                 }
             },
             /**
