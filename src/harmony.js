@@ -1,10 +1,11 @@
 /**
  * # Harmony
  * ### ***DFP JavaScript API Helper***
- * @param {Boolean} [jitLoad] False to disable Just-In-Time loading.
+ * @param {Boolean} [jitLoad] True if using Just-In-Time loading.
  * @return {Object} Instance of Harmony.
  */
-window.Harmony = function () {
+window.Harmony = function (jitLoad) {
+    jitLoad = jitLoad || false;
     var slots = {};
     var breakpoints = {};
 
@@ -107,6 +108,9 @@ window.Harmony = function () {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].divId;
+                        if (!jitLoad) {
+                            googletag.display(id);
+                        }
                         elem = document.getElementById(id);
                         if (elem) {
                             elem.style.display = 'block';
@@ -127,6 +131,9 @@ window.Harmony = function () {
             slot: function (name) {
                 log('event', 'Showing ad at slot ' + name);
                 var id = slots[name].divId;
+                if (!jitLoad) {
+                    googletag.display(id);
+                }
                 document.getElementById(id).style.display = 'block';
             }
         },
