@@ -1,11 +1,13 @@
 /**
  * # Harmony
  * ### ***DFP JavaScript API Helper***
- * @param {Boolean} [jitLoad] True if using Just-In-Time loading.
+ * @param {Object} [opts] System level options.
+ * @param {Boolean} [opts.jitLoad] True if using Just-In-Time loading.
  * @return {Object} Instance of Harmony.
  */
-window.Harmony = function (jitLoad) {
-    jitLoad = jitLoad || false;
+window.Harmony = function (opts) {
+    opts = opts || {};
+    var jitLoad = opts.jitLoad || false;
     var slots = {};
     var breakpoints = {};
 
