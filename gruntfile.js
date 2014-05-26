@@ -92,11 +92,11 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-docker-clone');
+    // Load all grunt NPM tasks.
+    require('matchdep').filterDev([
+        'grunt-*',
+        '!grunt-template-*'
+    ]).forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', [
         'jshint',
