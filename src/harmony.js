@@ -104,18 +104,20 @@ window.Harmony = function (opts) {
              */
             breakpoint: function (bp) {
                 Adgeletti.display(bp);
+                // Do nothing when jitLoading.
+                if (jitLoad) {
+                    return;
+                }
                 var i, len, id, elem;
                 log('event', 'Showing ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].divId;
+                        googletag.display(id);
                         elem = document.getElementById(id);
-                        if (!jitLoad) {
-                            googletag.display(id);
-                            if (elem) {
-                                elem.style.display = 'block';
-                            }
+                        if (elem) {
+                            elem.style.display = 'block';
                         }
                     }
                 } catch (err) {
@@ -131,9 +133,9 @@ window.Harmony = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
-                log('event', 'Showing ad at slot ' + name);
-                var id = slots[name].divId;
                 if (!jitLoad) {
+                    log('event', 'Showing ad at slot ' + name);
+                    var id = slots[name].divId;
                     googletag.display(id);
                     document.getElementById(id).style.display = 'block';
                 }
@@ -152,13 +154,16 @@ window.Harmony = function (opts) {
             breakpoint: function (bp) {
                 var i, len, id, elem;
                 Adgeletti.hide(bp);
+                if (jitLoad) {
+                    return;
+                }
                 log('event', 'Hiding ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].divId;
                         elem = document.getElementById(id);
-                        if (elem && !jitLoad) {
+                        if (elem) {
                             elem.style.display = 'none';
                         }
                     }
@@ -175,9 +180,9 @@ window.Harmony = function (opts) {
              * Hides a single ad slot.
              */
             slot: function (name) {
-                log('event', 'Hiding ad at slot ' + name);
-                var id = slots[name].divId;
                 if (!jitLoad) {
+                    log('event', 'Hiding ad at slot ' + name);
+                    var id = slots[name].divId;
                     document.getElementById(id).style.display = 'none';
                 }
             }
