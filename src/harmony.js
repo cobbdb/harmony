@@ -110,12 +110,12 @@ window.Harmony = function (opts) {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].divId;
+                        elem = document.getElementById(id);
                         if (!jitLoad) {
                             googletag.display(id);
-                        }
-                        elem = document.getElementById(id);
-                        if (elem) {
-                            elem.style.display = 'block';
+                            if (elem) {
+                                elem.style.display = 'block';
+                            }
                         }
                     }
                 } catch (err) {
@@ -135,8 +135,8 @@ window.Harmony = function (opts) {
                 var id = slots[name].divId;
                 if (!jitLoad) {
                     googletag.display(id);
+                    document.getElementById(id).style.display = 'block';
                 }
-                document.getElementById(id).style.display = 'block';
             }
         },
         /**
@@ -158,7 +158,7 @@ window.Harmony = function (opts) {
                     for (i = 0; i < len; i += 1) {
                         id = breakpoints[bp][i].divId;
                         elem = document.getElementById(id);
-                        if (elem) {
+                        if (elem && !jitLoad) {
                             elem.style.display = 'none';
                         }
                     }
@@ -177,7 +177,9 @@ window.Harmony = function (opts) {
             slot: function (name) {
                 log('event', 'Hiding ad at slot ' + name);
                 var id = slots[name].divId;
-                document.getElementById(id).style.display = 'none';
+                if (!jitLoad) {
+                    document.getElementById(id).style.display = 'none';
+                }
             }
         }
     };
