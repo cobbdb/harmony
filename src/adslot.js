@@ -49,6 +49,14 @@ function AdSlot(pubads, opts) {
      * @type {String}
      */
     slot.breakpoint = opts.breakpoint;
+    /**
+     * ## harmony.slot.&lt;name&gt;.sizes
+     * This slot's possible sizes. Note, this is
+     * not the current size of the ad slot.
+     * @type {Array}
+     */
+    slot.sizes = opts.sizes;
+
 
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.
