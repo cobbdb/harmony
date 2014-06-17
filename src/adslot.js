@@ -56,7 +56,11 @@ function AdSlot(pubads, opts) {
      * @type {Array}
      */
     slot.sizes = opts.sizes;
-
+    /**
+     * ## harmony.slot.&lt;name&gt;.adunit
+     * Ad unit code of this ad slot.
+     */
+    slot.adunit = opts.adunit;
 
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.

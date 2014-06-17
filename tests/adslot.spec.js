@@ -44,9 +44,13 @@ describe('v2/adslot.js', function () {
     it('exposes layout info', function () {
         opts.id = 'testid';
         opts.breakpoint = 'testpoint';
+        opts.sizes = [9, 4];
+        opts.adunit = 'testunit';
         var slot = AdSlot(pubadsSpy, opts);
         expect(slot.divId).toEqual('testid');
         expect(slot.breakpoint).toEqual('testpoint');
+        expect(slot.sizes).toEqual([9, 4]);
+        expect(slot.adunit).toEqual('testunit');
     });
 
     describe('size mapping', function () {
