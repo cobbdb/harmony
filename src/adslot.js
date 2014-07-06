@@ -83,7 +83,7 @@ function AdSlot(pubads, opts) {
      * slotRenderEnded event is offered by the DFP API.
      * @param {String} event Name of the event to bind to.
      * @param {Function} cb Callback after the event has fired.
-     * @see Official-Docs https://support.google.com/dfp_premium/answer/1650154#pub_addeventlistener
+     * @see Official-Docs https://developers.google.com/doubleclick-gpt/reference?rd=1#googletag.events.SlotRenderEndedEvent
      */
     slot.on = function (event, cb) {
         cbQueue[event] = cbQueue[event] || [];
