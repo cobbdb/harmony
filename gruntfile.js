@@ -87,7 +87,7 @@ module.exports = function (grunt) {
         'docker-clone': {
             build: {
                 dir: 'src',
-                branch: 'cmg-pages'
+                branch: 'gh-pages'
             }
         }
     });

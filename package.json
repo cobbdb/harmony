@@ -1,6 +1,6 @@
 {
   "name": "harmony",
-  "description": "Simple DFP API Support",
+  "description": "Doubleclick JS API Helper",
   "scripts": {
     "test": "grunt test"
   },

@@ -3,9 +3,8 @@
   "authors": [
     "dcobb <dan.cobb@coxinc.com>"
   ],
-  "description": "Simple DFP API Support",
+  "description": "Doubleclick JS API Helper",
   "main": "dist/harmony.min.js",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,6 +14,7 @@
     "*.json",
     "gruntfile.js"
   ],
+  "license": "MIT",
   "devDependencies": {},
   "dependencies": {
     "lumberjack": "1.0.x"
