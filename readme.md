@@ -20,7 +20,7 @@ dynamic page content around ad performance.
 There is also build-in ad logging and metrics provided via the
 [Lumberjack](https://github.com/cobbdb/lumberjack) library.
 
-[Full docs are available here](https://github.com/cobbdb/harmony), but
+[Full docs are available here](https://cobbdb.github.io/harmony), but
 let's go over some of the best parts
 of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
