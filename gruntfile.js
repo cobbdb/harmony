@@ -104,7 +104,6 @@ module.exports = function (grunt) {
         'jasmine:src',
         'jasmine:dist'
     ]);
-
     grunt.registerTask('build', [
         'default',
         'docker-clone'

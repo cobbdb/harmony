@@ -2,15 +2,14 @@
   "name": "harmony",
   "description": "Doubleclick JS API Helper",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
     "url": "ssh://vcs.ddtc.cmgdigital.com/git-repos/harmony.git"
   },
-  "private": true,
   "contributors": [
-    "dcobb <dan.cobb@coxinc.com>"
+    "Dan Cobb <cobbdb@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {},

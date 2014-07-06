@@ -1,68 +1,68 @@
 [![Harmony](http://i.imgur.com/DP1OvVj.png)](https://cobbdb.github.io/harmony)
 
-[![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](https://travis-ci.org/cobbdb/harmony.svg)](https://travis-ci.org/cobbdb/harmony) [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
 
 Doubleclick JS API Helper.
 
     $ bower install harmony
 
 -------------
-#### Creating a new Lumberjack
-Create one master instance if you'd like, or many instances for each system.
+Harmony is a tool to make the DFP API a bit more simple to use. There are
+methods to help you quickly create new ad slots, adjust targeting on the fly,
+and attach side-effects.
 
-    var log = Lumberjack();
+The original purpose behind the creation of Harmony was to provide a
+lightning-fast JS API that could injest a block of JSON ad configuration
+to set up ads for a page. Beyond that, however, there are many utility
+methods that simplify DFP ad code and give you powerful tools to build
+dynamic page content around ad performance.
 
-#### Log some information
-Each log entry is tied to a channel and is created on the fly. This data
-can be an Object, String, Number, or Boolean.
+There is also build-in ad logging and metrics provided via the
+[Lumberjack](https://github.com/cobbdb/lumberjack) library.
 
-    log('signin', 'User has finished signing in.');
+Full docs are available here, but let's go over some of the best parts
+of Harmony. If you don't see support for something you are trying to do,
+chances are it's in there somewhere! Just give the docs a quick scan.
 
-#### Attach some callbacks
-You can attach side-effects to your log channels for analytics tools.
-The data object is whatever data gets logged when the event trips.
-You can even attach multiple callbacks to the same channel.
+#### Quick setup.
+Create your Harmony instance and use it however you want.
 
-    log.on('contentload', function (data) {
-        analytics.report(data);
+    mylibs.harmony = Harmony();
+
+#### Load ad config en bulk.
+Have your backend generate ad config based on admin settings and
+keep the components completely agnostic.
+
+    var myconf = {% load_ad_conf %};
+    mylibs.harmony.load(myconf);
+
+#### Attach some callbacks.
+Easily attach behaviors based on the ad call, rather than side-effects
+such as container visibility or size. Harmony lets you code deliberately!
+
+    mylibs.harmony.slot.MY01.on('slotRenderEnded', function (event) {
+        if (!event.isEmpty) {
+            makeRoomForAd();
+        }
     });
 
-#### Trigger events
-Define your behavior once and trigger it multiple times.
+#### Access your ad data immediately.
+Harmony exposes individual slot configuration for pain-free access.
 
-    log('contentload', {
-        how: 'scroll',
-        speed: 851
-    });
+    var possibleSizes = mylibs.harmony.slot.MY01.sizes;
+    var slotId = mylibs.harmony.slot.MY01.divId;
+    var slotAdunit = mylibs.harmony.slot.MY01.adunit;
 
-#### Debug a subsystem
-Get the logging information you care about with timestamps of when it happened.
-Every log entry has a timestamp so you can tell when events happened.
+#### Debug the subsystem.
+Logging lets you see what happened and when, so you can focus less
+on debugging and more on coding.
 
-    log.readback('gallery');
-    log.readback('gallery', true); // Pretty-print
+    mylibs.harmony.log.readback('events', true);
 
-#### View all events in order
-The master record contains all log entries in order.
+#### Get slot performance metrics.
+See exactly how long your system takes from setup to ad render.
 
-    log.readback.master();
-    log.readback.master(true); // Pretty-print
-
-#### Remove side-effects
-You can disable all existing callbacks for a single channel.
-
-    log.off('scroll');
-
-#### Analyzing entries
-All log entries take the form:
-```js
-{
-    time: // timestamp when entry was logged
-    data: // the logged data
-    channel: // channel of entry
-    id: // id of entry in master record
-}
-```
+    mylibs.harmony.log.readback('metric', true);
 
 ---------
 * See: http://cobbdb.github.io/harmony/
