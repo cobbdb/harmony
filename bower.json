@@ -1,10 +1,19 @@
 {
   "name": "harmony",
   "authors": [
-    "dcobb <dan.cobb@coxinc.com>"
+    "Dan Cobb <cobbdb@gmail.com> (http://www.github.com/cobbdb)"
   ],
   "description": "Doubleclick JS API Helper",
   "main": "dist/harmony.min.js",
+  "keywords": [
+    "doubleclick",
+    "ads",
+    "dfp",
+    "revenue",
+    "adslot",
+    "adunit",
+    "advertising"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -12,11 +21,15 @@
     "*.egg-info",
     "tests",
     "*.json",
-    "gruntfile.js"
+    "gruntfile.js",
+    "test"
   ],
   "license": "MIT",
-  "devDependencies": {},
   "dependencies": {
     "lumberjack": "1.0.x"
-  }
+  },
+  "homepage": "https://github.com/cobbdb/harmony",
+  "moduleType": [
+    "globals"
+  ]
 }
