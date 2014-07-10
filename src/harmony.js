@@ -103,12 +103,11 @@ window.Harmony = function (opts) {
              * Show all ads at a breakpoint.
              */
             breakpoint: function (bp) {
-                Adgeletti.display(bp);
+                var i, len, id, elem;
                 // Do nothing when jitLoading.
                 if (jitLoad) {
                     return;
                 }
-                var i, len, id, elem;
                 log('event', 'Showing ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
@@ -133,9 +132,10 @@ window.Harmony = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
+                var id;
                 if (!jitLoad) {
                     log('event', 'Showing ad at slot ' + name);
-                    var id = slots[name].divId;
+                    id = slots[name].divId;
                     googletag.display(id);
                     document.getElementById(id).style.display = 'block';
                 }
@@ -153,7 +153,6 @@ window.Harmony = function (opts) {
              */
             breakpoint: function (bp) {
                 var i, len, id, elem;
-                Adgeletti.hide(bp);
                 if (jitLoad) {
                     return;
                 }
@@ -180,9 +179,10 @@ window.Harmony = function (opts) {
              * Hides a single ad slot.
              */
             slot: function (name) {
+                var id;
                 if (!jitLoad) {
                     log('event', 'Hiding ad at slot ' + name);
-                    var id = slots[name].divId;
+                    id = slots[name].divId;
                     document.getElementById(id).style.display = 'none';
                 }
             }

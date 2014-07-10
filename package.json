@@ -2,15 +2,27 @@
   "name": "harmony",
   "description": "Doubleclick JS API Helper",
   "scripts": {
-    "test": "grunt"
+    "postinstall": "bower install",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://vcs.ddtc.cmgdigital.com/git-repos/harmony.git"
+    "url": "https://github.com/cobbdb/harmony.git"
   },
-  "contributors": [
-    "Dan Cobb <cobbdb@gmail.com>"
+  "keywords": [
+    "doubleclick",
+    "ads",
+    "dfp",
+    "revenue",
+    "adslot",
+    "adunit",
+    "advertising"
   ],
+  "homepage": "https://github.com/cobbdb/harmony",
+  "bugs": {
+    "url": "https://github.com/cobbdb/harmony/issues"
+  },
+  "author": "Dan Cobb <cobbdb@gmail.com> (http://www.github.com/cobbdb)",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
@@ -20,10 +32,15 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-docker-clone": "^1.0.6",
     "grunt-template-jasmine-istanbul": "^0.3.0",
     "grunt-exec": "~0.4.5",
     "docker": "~0.2.10",
     "matchdep": "~0.3.0"
+  },
+  "private": true,
+  "main": "dist/harmony.min.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
   }
 }
