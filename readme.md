@@ -41,7 +41,7 @@ keep the components completely agnostic.
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
 
-    mylibs.harmony.slot.MY01.on('slotRenderEnded', function (event) {
+    mylibs.harmony.getSlot('MY01').on('slotRenderEnded', function (event) {
         if (!event.isEmpty) {
             makeRoomForAd();
         }
