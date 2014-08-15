@@ -5,7 +5,10 @@ module.exports = function (grunt) {
             dist: {
                 src: 'dist/*.js',
                 options: {
-                    specs: 'tests/harmony.spec.js'
+                    specs: [
+                        'tests/harmony.spec.js',
+                        'tests/log.spec.js'
+                    ]
                 }
             },
             src: {
