@@ -10,7 +10,6 @@ module.exports = function (grunt) {
             },
             src: {
                 src: [
-                    'src/log.js',
                     'src/adslot.js',
                     'src/harmony.js'
                 ],
@@ -21,8 +20,8 @@ module.exports = function (grunt) {
             options: {
                 helpers: 'tests/helpers/*.helper.js',
                 vendor: resolve('lumberjack'),
-                display: 'short',
-                summary: true,
+                display: 'full',
+                summary: false,
                 template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {
                     coverage: 'bin/coverage/coverage.json',

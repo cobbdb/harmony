@@ -3,8 +3,10 @@
  * ### ***DFP JavaScript API Helper***
  * @param {Object} [opts] System level options.
  * @param {Boolean} [opts.jitLoad] True if using Just-In-Time loading.
+ * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
  * @return {Object} Instance of Harmony.
  */
+var log;
 window.Harmony = function (opts) {
     opts = opts || {};
     var jitLoad = opts.jitLoad || false;
@@ -12,6 +14,7 @@ window.Harmony = function (opts) {
     var breakpoints = {};
     var noop = function () {};
 
+    log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');
 
     return {
