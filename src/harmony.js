@@ -10,8 +10,9 @@ window.Harmony = function (opts) {
     var jitLoad = opts.jitLoad || false;
     var slots = {};
     var breakpoints = {};
+    var noop = function () {};
 
-    log('event', 'Harmony defined');
+    log('init', 'Harmony defined');
 
     return {
         /**
@@ -35,7 +36,7 @@ window.Harmony = function (opts) {
          */
         load: function (opts) {
             // Generate all the ad slots.
-            log('event', 'Generating ad slots.');
+            log('load', 'Generating ad slots.');
             var i, slot, setup;
             var conf = opts.slots;
             var len = conf.length;
@@ -49,15 +50,15 @@ window.Harmony = function (opts) {
             }
 
             // Assign the system targeting.
-            log('event', 'Applying pubads targeting.');
+            log('load', 'Applying pubads targeting.');
             conf = opts.targeting;
             for (i in conf) {
                 setup = conf[i];
-                log('event', '- ' + i + ' = ' + setup);
+                log('load', '- ' + i + ' = ' + setup);
                 pubads.setTargeting(i, setup);
             }
 
-            log('event', 'Harmony config loaded.');
+            log('load', 'Harmony config loaded.');
         },
         // ## harmony.log
         // Instance of Lumberjack populated with Harmony's data.
@@ -92,6 +93,21 @@ window.Harmony = function (opts) {
             breakpoints[opts.breakpoint].push(slot);
         },
         /**
+         * ## harmony.getSlot
+         * Safely fetch an existing ad slot or a mock slot if slot was not found.
+         * @param {String} name Name of the ad slot.
+         * @return {Object} The ad slot or a mock ad slot.
+         */
+        getSlot: function (name) {
+            if (name in slots) {
+                return slots[name];
+            }
+            return {
+                on: noop,
+                setTargeting: noop
+            };
+        },
+        /**
          * ## harmony.show
          * Showing an ad means setting style display:block and
          * calling ```googletag.display()```.
@@ -108,7 +124,7 @@ window.Harmony = function (opts) {
                 if (jitLoad) {
                     return;
                 }
-                log('event', 'Showing ads at breakpoint ' + bp);
+                log('show', 'Showing ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
@@ -134,7 +150,7 @@ window.Harmony = function (opts) {
             slot: function (name) {
                 var id;
                 if (!jitLoad) {
-                    log('event', 'Showing ad at slot ' + name);
+                    log('show', 'Showing ad at slot ' + name);
                     id = slots[name].divId;
                     googletag.display(id);
                     document.getElementById(id).style.display = 'block';
@@ -156,7 +172,7 @@ window.Harmony = function (opts) {
                 if (jitLoad) {
                     return;
                 }
-                log('event', 'Hiding ads at breakpoint ' + bp);
+                log('hide', 'Hiding ads at breakpoint ' + bp);
                 try {
                     len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
@@ -181,7 +197,7 @@ window.Harmony = function (opts) {
             slot: function (name) {
                 var id;
                 if (!jitLoad) {
-                    log('event', 'Hiding ad at slot ' + name);
+                    log('hide', 'Hiding ad at slot ' + name);
                     id = slots[name].divId;
                     document.getElementById(id).style.display = 'none';
                 }

@@ -14,7 +14,6 @@
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
 function AdSlot(pubads, opts) {
-    log('event', 'Creating new ad slot.');
     var slot, i;
     // Create the callback queue for this slot.
     var cbQueue = {
@@ -22,7 +21,7 @@ function AdSlot(pubads, opts) {
     };
     // Capture timestamp for performance metrics.
     var tsCreate = new Date();
-    log('event', 'Slot ' + opts.name + ' defined.');
+    log('init', 'Slot ' + opts.name + ' defined.');
 
     // Set default values.
     var mapping = opts.mapping || [];
@@ -74,7 +73,7 @@ function AdSlot(pubads, opts) {
     // Load any provided callback into queue.
     if (typeof opts.callback === 'function') {
         cbQueue.slotRenderEnded.push(opts.callback);
-        log('event', 'Attached provided callback for ' + opts.name);
+        log('init', 'Attached provided callback for ' + opts.name);
     }
 
     /**
@@ -88,7 +87,7 @@ function AdSlot(pubads, opts) {
     slot.on = function (event, cb) {
         cbQueue[event] = cbQueue[event] || [];
         cbQueue[event].push(cb);
-        log('event', 'Attached new callback for ' + event);
+        log('init', 'Attached new callback for ' + event);
     };
 
     // Attach a listener for the slotRenderEnded event.

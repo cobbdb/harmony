@@ -8,9 +8,9 @@ module.exports = function (grunt) {
     grunt.loadTasks('tasks');
 
     grunt.registerTask('default', 'Build without docs.', [
+        'jasmine:src',
         'jshint',
         'uglify:build',
-        'jasmine:src',
         'jasmine:dist'
     ]);
     grunt.registerTask('test', 'Run unit tests.', [
