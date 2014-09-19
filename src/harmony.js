@@ -9,17 +9,31 @@
 var log;
 window.Harmony = function (opts) {
     opts = opts || {};
-    var jitLoad = opts.jitLoad || false;
-    var slots = {};
-    var breakpoints = {};
-    var noop = function () {};
+    var jitLoad = opts.jitLoad || false,
+        /**
+         * ## harmony.slot(name)
+         * Safely fetch an existing ad slot or a mock slot if slot was not found.
+         * @param {String} name Name of the ad slot.
+         * @return {Object} The ad slot or a mock ad slot.
+         */
+        slots = function (name) {
+            if (name in slots) {
+                return slots[name];
+            }
+            return {
+                on: noop,
+                setTargeting: noop
+            };
+        },
+        breakpoints = {},
+        noop = function () {};
 
     log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');
 
     return {
         /**
-         * ## harmony.load
+         * ## harmony.load(opts)
          * Load a block of configuration.
          * @param {Object} opts
          * @param {Object} opts.targeting Key/value targeting pairs.
@@ -67,7 +81,7 @@ window.Harmony = function (opts) {
         // Instance of Lumberjack populated with Harmony's data.
         log: log,
         // ## harmony.slot.&lt;name&gt;
-        // Access a specific ad slot in the page.
+        // Directly access a specific ad slot in the page.
         slot: slots,
         // ## harmony.breakpoint.&lt;name&gt;
         // Access the set of ads at a specific breakpoint.
@@ -94,21 +108,6 @@ window.Harmony = function (opts) {
             slots[opts.name] = slot;
             breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
             breakpoints[opts.breakpoint].push(slot);
-        },
-        /**
-         * ## harmony.getSlot
-         * Safely fetch an existing ad slot or a mock slot if slot was not found.
-         * @param {String} name Name of the ad slot.
-         * @return {Object} The ad slot or a mock ad slot.
-         */
-        getSlot: function (name) {
-            if (name in slots) {
-                return slots[name];
-            }
-            return {
-                on: noop,
-                setTargeting: noop
-            };
         },
         /**
          * ## harmony.show

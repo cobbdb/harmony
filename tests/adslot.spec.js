@@ -1,11 +1,11 @@
-describe('v2/adslot.js', function () {
+describe('Ad Slot', function () {
     var opts;
     beforeEach(function () {
         // Reset options model.
         opts = Options();
     });
 
-    describe('ad slot type', function () {
+    describe('type', function () {
         it('can be standard', function () {
             opts.adunit = 'test/ad/unit';
             opts.id = 'test-id';

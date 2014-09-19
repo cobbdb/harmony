@@ -59,7 +59,7 @@ describe('harmony.js', function () {
                 expect(harmony.breakpoint.BKP00[0].divId).toEqual('DVID00');
             });
         });
-        describe('harmony.getSlot()', function () {
+        describe('harmony.slot()', function () {
             beforeEach(function () {
                 conf.slots[0].name = 'TST00';
                 conf.slots[0].id = 'DVID00';
@@ -73,11 +73,11 @@ describe('harmony.js', function () {
                 harmony.load(conf);
             });
             it('fetches an existing ad slot', function () {
-                var slot = harmony.getSlot('TST01');
+                var slot = harmony.slot('TST01');
                 expect(slot.divId).toEqual('DVID01');
             });
             it('fetches a mock slot by default', function () {
-                var slot = harmony.getSlot('BAD01');
+                var slot = harmony.slot('BAD01');
                 expect(slot).toBeDefined();
                 expect(slot.divId).toBeUndefined();
             });
