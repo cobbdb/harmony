@@ -31,31 +31,23 @@ describe('harmony setup', function () {
     describe('harmony.defineSlot()', function () {
         var opts,
             optionSet = function () {
-                return opts = Options({
+                return Options({
                     name: 'TST00',
                     breakpoint: 'BKP00',
                     id: 'DVID00'
                 });
             };
-        beforeEach(optionSet);
+        beforeEach(function () {
+            opts = optionSet();
+        });
         it('creates an ad slot', function () {
             harmony.defineSlot(opts);
             expect(harmony.slot.TST00).toBeDefined();
-            expect(harmony.breakpoint.BKP00).toBeDefined();
-            expect(harmony.breakpoint.BKP00[0]).toBeDefined();
             expect(harmony.breakpoint.BKP00[0].divId).toEqual('DVID00');
         });
         it('handles duplicate slot names', function () {
             newDiv({
-                id: 'DVI00-1',
-                breakpoint: 'BKP00'
-            });
-            newDiv({
-                id: 'DVI00-2',
-                breakpoint: 'BKP00'
-            });
-            newDiv({
-                id: 'DVI00-3',
+                id: 'DVID00-1',
                 breakpoint: 'BKP00'
             });
             harmony.defineSlot(optionSet());
