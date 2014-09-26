@@ -43,6 +43,12 @@ function AdSlot(pubads, opts) {
      */
     slot.divId = opts.id;
     /**
+     * ## harmony.slot.&lt;name&gt;.name
+     * Slot's name.
+     * @type {String}
+     */
+    slot.name = opts.name;
+    /**
      * ## harmony.slot.&lt;name&gt;.breakpoint
      * This slot's breakpoint.
      * @type {String}

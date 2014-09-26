@@ -25,8 +25,30 @@ window.Harmony = function (opts) {
                 setTargeting: noop
             };
         },
-        breakpoints = {},
-        noop = function () {};
+        /**
+         * ## harmony.breakpoint(name)
+         * Safely fetch an existing breakpoint.
+         * @param {String} name Name of the ad slot.
+         * @return {Object} The breakpoint array or empty if breakpoint
+         * was not found.
+         */
+        breakpoints = function (name) {
+            if (name in breakpoints) {
+                return breakpoints[name];
+            }
+            return [];
+        },
+        noop = function () {},
+        // Ensures a slot's name and id are unique in the page.
+        scrubSlot = function (slot) {
+            // Only do work if there are multiple instances.
+            if (slot.name in slots) {
+                window.Harmony.slotCount += 1;
+                slot.id += '-' + window.Harmony.slotCount;
+                slot.name += '-' + window.Harmony.slotCount;
+            }
+            return slot;
+        };
 
     log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');
@@ -54,12 +76,12 @@ window.Harmony = function (opts) {
         load: function (opts) {
             // Generate all the ad slots.
             log('load', 'Generating ad slots.');
-            var i, slot, setup;
-            var conf = opts.slots;
-            var len = conf.length;
-            var pubads = googletag.pubads();
+            var i, slot, setup,
+                conf = opts.slots,
+                len = conf.length,
+                pubads = googletag.pubads();
             for (i = 0; i < len; i += 1) {
-                setup = conf[i];
+                setup = scrubSlot(conf[i]);
                 slot = AdSlot(pubads, setup);
                 slots[setup.name] = slot;
                 breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
@@ -84,7 +106,7 @@ window.Harmony = function (opts) {
         // Directly access a specific ad slot in the page.
         slot: slots,
         // ## harmony.breakpoint.&lt;name&gt;
-        // Access the set of ads at a specific breakpoint.
+        // Directly access the set of ads at a specific breakpoint.
         breakpoint: breakpoints,
         /**
          * ## harmony.defineSlot
@@ -103,8 +125,11 @@ window.Harmony = function (opts) {
          * @see v2/adslot.js
          */
         defineSlot: function (opts) {
-            var pubads = googletag.pubads();
-            var slot = AdSlot(pubads, opts);
+            var pubads = googletag.pubads(),
+                slot = AdSlot(
+                    pubads,
+                    scrubSlot(opts)
+                );
             slots[opts.name] = slot;
             breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
             breakpoints[opts.breakpoint].push(slot);
@@ -207,3 +232,6 @@ window.Harmony = function (opts) {
         }
     };
 };
+
+// Counter for creating unique ad slots.
+window.Harmony.slotCount = window.Harmony.slotCount || 0;

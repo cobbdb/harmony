@@ -46,11 +46,13 @@ describe('Ad Slot', function () {
         opts.breakpoint = 'testpoint';
         opts.sizes = [9, 4];
         opts.adunit = 'testunit';
+        opts.name = 'testname';
         var slot = AdSlot(pubadsSpy, opts);
         expect(slot.divId).toEqual('testid');
         expect(slot.breakpoint).toEqual('testpoint');
         expect(slot.sizes).toEqual([9, 4]);
         expect(slot.adunit).toEqual('testunit');
+        expect(slot.name).toEqual('testname');
     });
 
     describe('size mapping', function () {
