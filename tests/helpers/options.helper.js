@@ -1,9 +1,9 @@
 /**
  * Generic adslot construction options.
  */
-Options = function () {
+Options = function (opts) {
     // Reset the model.
-    return {
+    return $.extend({
         name: '',
         id: '',
         sizes: [],
@@ -14,5 +14,5 @@ Options = function () {
         breakpoint: '',
         interstitial: false,
         callback: function () {}
-    };
+    }, opts);
 };

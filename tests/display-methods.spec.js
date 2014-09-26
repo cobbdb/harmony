@@ -1,15 +1,6 @@
 describe('display method', function () {
     beforeEach(function () {
         setupHarmony();
-        conf.slots[0].name = 'TST00';
-        conf.slots[0].id = 'DVID00';
-        conf.slots[0].breakpoint = 'TSTPNT00';
-        conf.slots[1].name = 'TST01';
-        conf.slots[1].id = 'DVID01';
-        conf.slots[1].breakpoint = 'TSTPNT01';
-        conf.slots[2].name = 'TST02';
-        conf.slots[2].id = 'DVID02';
-        conf.slots[2].breakpoint = 'TSTPNT00';
         harmony.load(conf);
     });
     describe('harmony.show', function () {
@@ -25,9 +16,8 @@ describe('display method', function () {
             });
             it('sets display:block on slots', function () {
                 harmony.show.breakpoint('TSTPNT01');
-                expect(elemSpies.length).toEqual(1);
-                expect(elemSpies[0].id).toEqual('DVID01');
-                expect(elemSpies[0].style.display).toEqual('block');
+                var el = $('#DVID01')[0];
+                expect(el.style.display).toEqual('block');
             });
         });
         describe('slot()', function () {
@@ -37,9 +27,8 @@ describe('display method', function () {
             });
             it('sets display:block on a slot', function () {
                 harmony.show.slot('TST02');
-                expect(elemSpies.length).toEqual(1);
-                expect(elemSpies[0].id).toEqual('DVID02');
-                expect(elemSpies[0].style.display).toEqual('block');
+                var el = $('#DVID02')[0];
+                expect(el.style.display).toEqual('block');
             });
         });
     });
@@ -52,19 +41,22 @@ describe('display method', function () {
             });
             it('sets display:none on slots', function () {
                 harmony.hide.breakpoint('TSTPNT00');
-                expect(elemSpies.length).toEqual(2);
-                expect(elemSpies[0].id).toEqual('DVID00');
-                expect(elemSpies[0].style.display).toEqual('none');
-                expect(elemSpies[1].id).toEqual('DVID02');
-                expect(elemSpies[1].style.display).toEqual('none');
+                var set = $('.TSTPNT00');
+                expect(set.length).toEqual(2);
+                expect(set[0].style.display).toEqual('none');
+                expect(set[1].style.display).toEqual('none');
+                set = $('.TSTPNT01');
+                expect(set.length).toEqual(1);
+                expect(set[0].style.display).not.toEqual('none');
             });
         });
         describe('slot()', function () {
             it('sets display:none on a slot', function () {
                 harmony.hide.slot('TST01');
-                expect(elemSpies.length).toEqual(1);
-                expect(elemSpies[0].id).toEqual('DVID01');
-                expect(elemSpies[0].style.display).toEqual('none');
+                var el = $('#DVID01')[0];
+                expect(el.style.display).toEqual('none');
+                el = $('#DVID00')[0];
+                expect(el.style.display).not.toEqual('none');
             });
         });
     });

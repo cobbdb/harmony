@@ -1,17 +1,6 @@
 describe('harmony setup', function () {
     beforeEach(setupHarmony);
     describe('harmony.load()', function () {
-        beforeEach(function () {
-            conf.slots[0].name = 'TST00';
-            conf.slots[0].id = 'DVID00';
-            conf.slots[0].breakpoint = 'TSTPNT00';
-            conf.slots[1].name = 'TST01';
-            conf.slots[1].id = 'DVID01';
-            conf.slots[1].breakpoint = 'TSTPNT01';
-            conf.slots[2].name = 'TST02';
-            conf.slots[2].id = 'DVID02';
-            conf.slots[2].breakpoint = 'TSTPNT00';
-        });
         it('creates ad slots', function () {
             harmony.load(conf);
             expect(harmony.slot.TST01).toBeDefined();
@@ -24,6 +13,13 @@ describe('harmony setup', function () {
             expect('TST00-1' in harmony.slot).toBe(true);
             expect(harmony.slot['TST00-1'].divId).toEqual('DVID02-1');
         });
+        it('adjusts element ids for duplicates', function () {
+            conf.slots[2].name = 'TST00';
+            harmony.load(conf);
+            var el = document.getElementById(harmony.slot['TST00-1'].divId);
+            expect(el).toBeDefined();
+            expect(el.id).toEqual('DVID02-1');
+        });
         it('sets system targeting', function () {
             conf.targeting.TST = 'target';
             conf.targeting.TST2 = 'abc123';
@@ -33,13 +29,15 @@ describe('harmony setup', function () {
         });
     });
     describe('harmony.defineSlot()', function () {
-        var opts;
-        beforeEach(function () {
-            opts = Options();
-            opts.name = 'TST00';
-            opts.breakpoint = 'BKP00';
-            opts.id = 'DVID00';
-        });
+        var opts,
+            optionSet = function () {
+                return opts = Options({
+                    name: 'TST00',
+                    breakpoint: 'BKP00',
+                    id: 'DVID00'
+                });
+            };
+        beforeEach(optionSet);
         it('creates an ad slot', function () {
             harmony.defineSlot(opts);
             expect(harmony.slot.TST00).toBeDefined();
@@ -48,13 +46,26 @@ describe('harmony setup', function () {
             expect(harmony.breakpoint.BKP00[0].divId).toEqual('DVID00');
         });
         it('handles duplicate slot names', function () {
-            harmony.defineSlot(opts);
-            harmony.defineSlot(opts);
-            harmony.defineSlot(opts);
-            expect('TST00' in harmony.slot).toBe(true);
-            expect(harmony.slot.TST00.divId).toEqual('DVID00');
-            expect('TST00-2' in harmony.slot).toBe(true);
-            expect(harmony.slot['TST00-2'].divId).toEqual('DVID00-2');
+            newDiv({
+                id: 'DVI00-1',
+                breakpoint: 'BKP00'
+            });
+            newDiv({
+                id: 'DVI00-2',
+                breakpoint: 'BKP00'
+            });
+            newDiv({
+                id: 'DVI00-3',
+                breakpoint: 'BKP00'
+            });
+            harmony.defineSlot(optionSet());
+            harmony.defineSlot(optionSet());
+            harmony.defineSlot(optionSet());
+            harmony.defineSlot(optionSet());
+            expect(harmony.slot('TST00').divId).toEqual('DVID00');
+            expect(harmony.slot('TST00-1').divId).toEqual('DVID00-1');
+            expect(harmony.slot('TST00-2').divId).toEqual('DVID00-2');
+            expect(harmony.slot('TST00-3').divId).toEqual('DVID00-3');
         });
     });
 });

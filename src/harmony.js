@@ -41,11 +41,27 @@ window.Harmony = function (opts) {
         noop = function () {},
         // Ensures a slot's name and id are unique in the page.
         scrubSlot = function (slot) {
-            // Only do work if there are multiple instances.
-            if (slot.name in slots) {
-                window.Harmony.slotCount += 1;
-                slot.id += '-' + window.Harmony.slotCount;
-                slot.name += '-' + window.Harmony.slotCount;
+            var suffix,
+                el = document.getElementById(slot.id);
+            if (!el) {
+                console.error('PARENT NOT FOUND ' + slot.id);
+                // Bail out if slot is not in the dom.
+                log('error', {
+                    id: slot.id,
+                    msg: 'Element was not found in the DOM'
+                });
+            } else {
+                // Only do work if there are multiple instances.
+                if (slot.name in slots) {
+                    window.Harmony.slotCount += 1;
+                    suffix = '-' + window.Harmony.slotCount;
+                    slot.id += suffix;
+                    slot.name += suffix;
+                    el.id += suffix;
+                    console.error('DUPLICATE FOUND ' + slot.id);
+                } else {
+                    console.log('Match found ' + slot.id);
+                }
             }
             return slot;
         };

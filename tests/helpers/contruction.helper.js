@@ -3,10 +3,33 @@ function setupHarmony() {
     harmony = Harmony();
     conf = {
         slots: [
-            Options(),
-            Options(),
-            Options()
+            Options({
+                name: 'TST00',
+                id: 'DVID00',
+                breakpoint: 'TSTPNT00'
+            }),
+            Options({
+                name: 'TST01',
+                id: 'DVID01',
+                breakpoint: 'TSTPNT01'
+            }),
+            Options({
+                name: 'TST02',
+                id: 'DVID02',
+                breakpoint: 'TSTPNT00'
+            })
         ],
         targeting: {}
     };
+    conf.slots.forEach(newDiv);
 }
+function newDiv(opts) {
+    $('<div>', {
+        id: opts.id,
+        'class': 'testdiv ' + opts.breakpoint
+    }).appendTo('body');
+}
+afterEach(function () {
+    $('.testdiv').remove();
+    window.Harmony.slotCount = 0;
+});

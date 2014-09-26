@@ -1,15 +1,6 @@
 describe('accessor', function () {
     beforeEach(function () {
         setupHarmony();
-        conf.slots[0].name = 'TST00';
-        conf.slots[0].id = 'DVID00';
-        conf.slots[0].breakpoint = 'TSTPNT00';
-        conf.slots[1].name = 'TST01';
-        conf.slots[1].id = 'DVID01';
-        conf.slots[1].breakpoint = 'TSTPNT01';
-        conf.slots[2].name = 'TST02';
-        conf.slots[2].id = 'DVID02';
-        conf.slots[2].breakpoint = 'TSTPNT00';
         harmony.load(conf);
     });
     describe('harmony.slot()', function () {
