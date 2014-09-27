@@ -12,8 +12,7 @@ module.exports = function (grunt) {
             },
             src: {
                 src: [
-                    'src/adslot.js',
-                    'src/harmony.js'
+                    'src/*.js'
                 ],
                 options: {
                     specs: 'tests/**/*.spec.js'
