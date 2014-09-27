@@ -31,5 +31,8 @@
   "homepage": "https://github.com/cobbdb/harmony",
   "moduleType": [
     "globals"
-  ]
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.1"
+  }
 }

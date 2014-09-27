@@ -6,49 +6,41 @@
  * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
  * @return {Object} Instance of Harmony.
  */
-var log;
+var log, slots, breakpoints, jitLoad;
+
 window.Harmony = function (opts) {
     opts = opts || {};
-    var jitLoad = opts.jitLoad || false,
-        /**
-         * ## harmony.slot(name)
-         * Safely fetch an existing ad slot or a mock slot if slot was not found.
-         * @param {String} name Name of the ad slot.
-         * @return {Object} The ad slot or a mock ad slot.
-         */
-        slots = function (name) {
-            if (name in slots) {
-                return slots[name];
-            }
-            return {
-                on: noop,
-                setTargeting: noop
-            };
-        },
-        /**
-         * ## harmony.breakpoint(name)
-         * Safely fetch an existing breakpoint.
-         * @param {String} name Name of the ad slot.
-         * @return {Object} The breakpoint array or empty if breakpoint
-         * was not found.
-         */
-        breakpoints = function (name) {
-            if (name in breakpoints) {
-                return breakpoints[name];
-            }
-            return [];
-        },
-        noop = function () {},
-        // Ensures a slot's name and id are unique in the page.
-        scrubSlot = function (slot) {
-            // Only do work if there are multiple instances.
-            if (slot.name in slots) {
-                window.Harmony.slotCount += 1;
-                slot.id += '-' + window.Harmony.slotCount;
-                slot.name += '-' + window.Harmony.slotCount;
-            }
-            return slot;
+    jitLoad = opts.jitLoad || false;
+    /**
+     * ## harmony.slot(name)
+     * Safely fetch an existing ad slot or a mock slot if slot was not found.
+     * @param {String} name Name of the ad slot.
+     * @return {Object} The ad slot or a mock ad slot.
+     */
+    slots = function (name) {
+        if (name in slots) {
+            return slots[name];
+        }
+        return {
+            on: util.noop,
+            setTargeting: util.noop
         };
+    };
+    /**
+     * ## harmony.breakpoint(name)
+     * Safely fetch an existing breakpoint.
+     * @param {String} name Name of the ad slot.
+     * @return {Object} The breakpoint array or empty if breakpoint
+     * was not found.
+     */
+    breakpoints = function (name) {
+        if (name in breakpoints) {
+            return breakpoints[name];
+        }
+        return [];
+    };
+    // Counter for ensuring unique ad slots.
+    util.slotCount = 0;
 
     log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');
@@ -71,7 +63,7 @@ window.Harmony = function (opts) {
          * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
          * @param {Function} [opts.slots.i.callback] Called on dfp's slotRenderEnded.
-         * @see v2/adslot.js
+         * @see adslot.js
          */
         load: function (opts) {
             // Generate all the ad slots.
@@ -81,7 +73,7 @@ window.Harmony = function (opts) {
                 len = conf.length,
                 pubads = googletag.pubads();
             for (i = 0; i < len; i += 1) {
-                setup = scrubSlot(conf[i]);
+                setup = util.scrubSlot(conf[i]);
                 slot = AdSlot(pubads, setup);
                 slots[setup.name] = slot;
                 breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
@@ -128,7 +120,7 @@ window.Harmony = function (opts) {
             var pubads = googletag.pubads(),
                 slot = AdSlot(
                     pubads,
-                    scrubSlot(opts)
+                    util.scrubSlot(opts)
                 );
             slots[opts.name] = slot;
             breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
@@ -232,6 +224,3 @@ window.Harmony = function (opts) {
         }
     };
 };
-
-// Counter for creating unique ad slots.
-window.Harmony.slotCount = window.Harmony.slotCount || 0;

@@ -4,3 +4,4 @@ docs-clone
 _SpecRunner.html
 .grunt
 bin
+*.log

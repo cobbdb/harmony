@@ -4,8 +4,7 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     'dist/harmony.min.js': [
-                        'src/adslot.js',
-                        'src/harmony.js'
+                        'src/*.js'
                     ]
                 },
                 options: {

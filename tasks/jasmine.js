@@ -12,8 +12,7 @@ module.exports = function (grunt) {
             },
             src: {
                 src: [
-                    'src/adslot.js',
-                    'src/harmony.js'
+                    'src/*.js'
                 ],
                 options: {
                     specs: 'tests/**/*.spec.js'
@@ -21,7 +20,10 @@ module.exports = function (grunt) {
             },
             options: {
                 helpers: 'tests/helpers/*.helper.js',
-                vendor: resolve('lumberjack'),
+                vendor: [
+                    resolve('lumberjack'),
+                    resolve('jquery')
+                ],
                 display: 'full',
                 summary: false,
                 template: require('grunt-template-jasmine-istanbul'),
