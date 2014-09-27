@@ -6,7 +6,7 @@
  * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
  * @return {Object} Instance of Harmony.
  */
-var log, slots, breakpoints, slotCount, jitLoad;
+var log, slots, breakpoints, jitLoad;
 
 window.Harmony = function (opts) {
     opts = opts || {};
@@ -40,7 +40,7 @@ window.Harmony = function (opts) {
         return [];
     };
     // Counter for ensuring unique ad slots.
-    slotCount = 0;
+    util.slotCount = 0;
 
     log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');
@@ -63,7 +63,7 @@ window.Harmony = function (opts) {
          * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
          * @param {Function} [opts.slots.i.callback] Called on dfp's slotRenderEnded.
-         * @see v2/adslot.js
+         * @see adslot.js
          */
         load: function (opts) {
             // Generate all the ad slots.

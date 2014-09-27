@@ -2,6 +2,8 @@
  * # Utilities
  */
 var util = {
+    // Counter for ensuring unique ad slots.
+    slotCount: 0,
     /**
      * ## util.noop()
      * Simple no-op.
@@ -22,16 +24,16 @@ var util = {
             if (el && el.innerHTML) {
                 // Ad call has already been made for this element,
                 // so update its id and query again for next div.
-                window.Harmony.slotCount += 1;
-                suffix = '-' + window.Harmony.slotCount;
+                this.slotCount += 1;
+                suffix = '-' + this.slotCount;
                 el.id += suffix;
                 slots[slot.name].divId = el.id;
                 slots[slot.name + suffix] = slots[slot.name];
                 el = document.getElementById(slot.id);
             }
             if (el) {
-                window.Harmony.slotCount += 1;
-                suffix = '-' + window.Harmony.slotCount;
+                this.slotCount += 1;
+                suffix = '-' + this.slotCount;
                 el.id += suffix;
                 slot.id += suffix;
                 slot.name += suffix;

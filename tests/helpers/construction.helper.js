@@ -34,5 +34,4 @@ function newDiv(opts) {
 }
 afterEach(function () {
     $('.testdiv').remove();
-    window.Harmony.slotCount = 0;
 });
