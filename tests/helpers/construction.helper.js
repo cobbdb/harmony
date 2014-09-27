@@ -1,6 +1,9 @@
 var harmony, conf;
 function setupHarmony() {
-    harmony = Harmony();
+    harmony = Harmony({
+        // Provide logging for test debug.
+        forceLog: true
+    });
     conf = {
         slots: [
             Options({

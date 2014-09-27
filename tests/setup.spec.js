@@ -10,7 +10,6 @@ describe('harmony setup', function () {
             conf.slots[2].name = 'TST00';
             harmony.load(conf);
             expect(harmony.slot.TST00.name).toEqual('TST00');
-            expect('TST00-1' in harmony.slot).toBe(true);
             expect(harmony.slot['TST00-1'].divId).toEqual('DVID02-1');
         });
         it('adjusts element ids for duplicates', function () {
@@ -29,35 +28,85 @@ describe('harmony setup', function () {
         });
     });
     describe('harmony.defineSlot()', function () {
-        var opts,
-            optionSet = function () {
+        var newOptions = function () {
                 return Options({
-                    name: 'TST00',
-                    breakpoint: 'BKP00',
-                    id: 'DVID00'
+                    name: 'TST22',
+                    breakpoint: 'BKP22',
+                    id: 'DVID22'
                 });
+            },
+            newSlot = function () {
+                newDiv({
+                    id: 'DVID22',
+                    breakpoint: 'BKP22'
+                });
+                return newOptions();
             };
-        beforeEach(function () {
-            opts = optionSet();
-        });
         it('creates an ad slot', function () {
+            var opts = newSlot();
             harmony.defineSlot(opts);
-            expect(harmony.slot.TST00).toBeDefined();
-            expect(harmony.breakpoint.BKP00[0].divId).toEqual('DVID00');
+            expect(harmony.slot.TST22).toBeDefined();
+            expect(harmony.breakpoint.BKP22[0].divId).toEqual('DVID22');
         });
-        it('handles duplicate slot names', function () {
-            newDiv({
-                id: 'DVID00-1',
-                breakpoint: 'BKP00'
-            });
-            harmony.defineSlot(optionSet());
-            harmony.defineSlot(optionSet());
-            harmony.defineSlot(optionSet());
-            harmony.defineSlot(optionSet());
-            expect(harmony.slot('TST00').divId).toEqual('DVID00');
-            expect(harmony.slot('TST00-1').divId).toEqual('DVID00-1');
-            expect(harmony.slot('TST00-2').divId).toEqual('DVID00-2');
-            expect(harmony.slot('TST00-3').divId).toEqual('DVID00-3');
+        it('handles duplicate slot names for sync pages', function () {
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            expect(harmony.slot('TST22').divId).toEqual('DVID22');
+            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1');
+            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2');
+            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3');
+        });
+        it('handles duplicate slot names for async pages', function () {
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            // Simulate completed ad calls.
+            $('.BKP22').text('test ad content');
+            // Load in a new async ad slot.
+            harmony.defineSlot(newSlot());
+            // Simulate completed ad calls.
+            $('.BKP22').text('test ad content');
+            // Load in some new async ad slots.
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1');
+            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2');
+            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3');
+            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4');
+            expect(harmony.slot('TST22-5').divId).toEqual('DVID22-5');
+            // Smoke test the leftover artifact.
+            expect(harmony.slot('TST22').divId).toEqual('DVID22-2', 'smoke test artifact');
+        });
+        it('returns the original slot conf on dom error', function () {
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            harmony.defineSlot(newSlot());
+            $('.BKP22').text('test ad content');
+            harmony.defineSlot(newOptions());
+            harmony.defineSlot(newOptions());
+            harmony.defineSlot(newOptions());
+            expect(harmony.slot('TST22').divId).toEqual('DVID22', 'group A, TST22');
+            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group A, TST22-1');
+            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group A, TST22-2');
+            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group A, TST22-3');
+            expect(harmony.slot('TST22-4').divId).not.toBeDefined('group A, TST22-4');
+            harmony.defineSlot(newSlot());
+            expect(harmony.slot('TST22').divId).not.toBeDefined('group B, TST22');
+            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group B, TST22-1');
+            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group B, TST22-2');
+            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group B, TST22-3');
+            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4', 'group B, TST22-4');
+            expect(harmony.slot('TST22-5').divId).not.toBeDefined('group B, TST22-5');
+            expect(harmony.slot('TST22-6').divId).not.toBeDefined('group B, TST22-6');
+            harmony.defineSlot(newSlot());
+            expect(harmony.slot('TST22').divId).not.toBeDefined('group C, TST22');
+            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group C, TST22-1');
+            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group C, TST22-2');
+            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group C, TST22-3');
+            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4', 'group C, TST22-4');
+            expect(harmony.slot('TST22-5').divId).toEqual('DVID22-5', 'group C, TST22-5');
+            expect(harmony.slot('TST22-6').divId).not.toBeDefined('group C, TST22-6');
         });
     });
 });

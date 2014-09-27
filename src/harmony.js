@@ -43,25 +43,32 @@ window.Harmony = function (opts) {
         scrubSlot = function (slot) {
             var suffix,
                 el = document.getElementById(slot.id);
-            if (!el) {
-                console.error('PARENT NOT FOUND ' + slot.id);
-                // Bail out if slot is not in the dom.
-                log('error', {
-                    id: slot.id,
-                    msg: 'Element was not found in the DOM'
-                });
-            } else {
-                // Only do work if there are multiple instances.
-                if (slot.name in slots) {
+            // Only do work if there are multiple instances.
+            if (slot.name in slots) {
+                if (el && el.innerHTML) {
+                    // Ad call has already been made for this element,
+                    // so update its id and query again for next div.
                     window.Harmony.slotCount += 1;
                     suffix = '-' + window.Harmony.slotCount;
+                    el.id += suffix;
+                    slots[slot.name].divId = el.id;
+                    slots[slot.name + suffix] = slots[slot.name];
+                    el = document.getElementById(slot.id);
+                }
+                if (el) {
+                    window.Harmony.slotCount += 1;
+                    suffix = '-' + window.Harmony.slotCount;
+                    el.id += suffix;
                     slot.id += suffix;
                     slot.name += suffix;
-                    el.id += suffix;
-                    console.error('DUPLICATE FOUND ' + slot.id);
-                } else {
-                    console.log('Match found ' + slot.id);
                 }
+            }
+            if (!el) {
+                // Log error if slot is not in the dom.
+                log('error', {
+                    id: slot.id,
+                    msg: 'Ad slot container was not found in the DOM.'
+                });
             }
             return slot;
         };
