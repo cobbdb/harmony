@@ -3,7 +3,8 @@ module.exports = function (grunt) {
         'docker-clone': {
             build: {
                 dir: 'src',
-                branch: 'gh-pages'
+                branch: 'gh-pages',
+                index: 'harmony.js.html'
             }
         }
     });
