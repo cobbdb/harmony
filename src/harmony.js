@@ -68,7 +68,7 @@ window.Harmony = function (opts) {
         load: function (opts) {
             // Generate all the ad slots.
             log('load', 'Generating ad slots.');
-            var i, slot, setup,
+            var n, i, slot, setup,
                 conf = opts.slots,
                 len = conf.length,
                 pubads = googletag.pubads();
@@ -82,9 +82,9 @@ window.Harmony = function (opts) {
                 } catch (err) {
                     log('error', {
                         type: 'load() error',
-                        id: setup.id,
-                        name: setup.name,
-                        conf: setup,
+                        id: conf[i].id,
+                        name: conf[i].name,
+                        conf: conf[i],
                         msg: err.message
                     });
                 }
@@ -93,10 +93,10 @@ window.Harmony = function (opts) {
             // Assign the system targeting.
             log('load', 'Applying pubads targeting.');
             conf = opts.targeting;
-            for (i in conf) {
-                setup = conf[i];
-                log('load', '- ' + i + ' = ' + setup);
-                pubads.setTargeting(i, setup);
+            for (n in conf) {
+                setup = conf[n];
+                log('load', '- ' + n + ' = ' + setup);
+                pubads.setTargeting(n, setup);
             }
 
             log('load', 'Harmony config loaded.');

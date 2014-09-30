@@ -124,6 +124,8 @@ describe('harmony setup', function () {
             harmony.defineSlot(opts);
             expect(harmony.slot.TST22).not.toBeDefined();
             expect(harmony.log.readback('error').length).toEqual(1);
+            expect(harmony.log.readback('error')[0].data.name).toEqual('TST22');
+            expect(harmony.log.readback('error')[0].data.conf.id).toEqual('NOTHERE');
         });
     });
 });
