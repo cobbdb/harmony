@@ -73,11 +73,21 @@ window.Harmony = function (opts) {
                 len = conf.length,
                 pubads = googletag.pubads();
             for (i = 0; i < len; i += 1) {
-                setup = util.scrubSlot(conf[i]);
-                slot = AdSlot(pubads, setup);
-                slots[setup.name] = slot;
-                breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
-                breakpoints[setup.breakpoint].push(slot);
+                try {
+                    setup = util.scrubSlot(conf[i]);
+                    slot = AdSlot(pubads, setup);
+                    slots[setup.name] = slot;
+                    breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
+                    breakpoints[setup.breakpoint].push(slot);
+                } catch (err) {
+                    log('error', {
+                        type: 'load() error',
+                        id: setup.id,
+                        name: setup.name,
+                        conf: setup,
+                        msg: err.message
+                    });
+                }
             }
 
             // Assign the system targeting.
@@ -117,14 +127,24 @@ window.Harmony = function (opts) {
          * @see v2/adslot.js
          */
         defineSlot: function (opts) {
-            var pubads = googletag.pubads(),
-                slot = AdSlot(
-                    pubads,
-                    util.scrubSlot(opts)
-                );
-            slots[opts.name] = slot;
-            breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
-            breakpoints[opts.breakpoint].push(slot);
+            try {
+                var pubads = googletag.pubads(),
+                    slot = AdSlot(
+                        pubads,
+                        util.scrubSlot(opts)
+                    );
+                slots[opts.name] = slot;
+                breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
+                breakpoints[opts.breakpoint].push(slot);
+            } catch (err) {
+                log('error', {
+                    type: 'defineSlot() error',
+                    id: opts.id,
+                    name: opts.name,
+                    conf: opts,
+                    msg: err.message
+                });
+            }
         },
         /**
          * ## harmony.show
