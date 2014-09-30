@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         'jasmine:dist'
     ]);
     grunt.registerTask('test', 'Run unit tests.', [
-        'jasmine'
+        'jasmine:src'
     ]);
     grunt.registerTask('build', 'Full build suite including docs.', [
         'default',

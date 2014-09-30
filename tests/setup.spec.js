@@ -18,6 +18,8 @@ describe('harmony setup', function () {
             var el = document.getElementById(harmony.slot['TST00-1'].divId);
             expect(el).toBeDefined();
             expect(el.id).toEqual('DVID02-1');
+            // Smoke test error logs.
+            expect(harmony.log.readback('error').length).toEqual(0);
         });
         it('sets system targeting', function () {
             conf.targeting.TST = 'target';
@@ -25,6 +27,12 @@ describe('harmony setup', function () {
             harmony.load(conf);
             expect(pubadsSpy.setTargeting).toHaveBeenCalledWith('TST', 'target');
             expect(pubadsSpy.setTargeting).toHaveBeenCalledWith('TST2', 'abc123');
+        });
+        it('logs missing dom elements', function () {
+            conf.slots[1].name = 'BAD01';
+            conf.slots[1].id = 'BAD01';
+            harmony.load(conf);
+            expect(harmony.log.readback('error').length).toEqual(1);
         });
     });
     describe('harmony.defineSlot()', function () {
@@ -109,6 +117,13 @@ describe('harmony setup', function () {
             expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4', 'group C, TST22-4');
             expect(harmony.slot('TST22-5').divId).toEqual('DVID22-5', 'group C, TST22-5');
             expect(harmony.slot('TST22-6').divId).not.toBeDefined('group C, TST22-6');
+        });
+        it('logs missing dom elements', function () {
+            var opts = newSlot();
+            opts.id = 'NOTHERE';
+            harmony.defineSlot(opts);
+            expect(harmony.slot.TST22).not.toBeDefined();
+            expect(harmony.log.readback('error').length).toEqual(1);
         });
     });
 });

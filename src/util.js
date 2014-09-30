@@ -41,10 +41,7 @@ var util = {
         }
         if (!el) {
             // Log error if slot is not in the dom.
-            log('error', {
-                id: slot.id,
-                msg: 'Ad slot container was not found in the DOM.'
-            });
+            throw Error('Ad slot container was not found in the DOM.');
         }
         return slot;
     }
