@@ -21,6 +21,12 @@ describe('display method', function () {
             });
         });
         describe('slot()', function () {
+            it('throws no errors when slot does not exist in the dom', function () {
+                $('#DVID01').remove();
+                expect(function () {
+                    harmony.show.slot('TST01');
+                }).not.toThrow();
+            });
             it('calls display on a slot', function () {
                 harmony.show.slot('TST00');
                 expect(googletag.display).toHaveBeenCalled();
@@ -51,6 +57,12 @@ describe('display method', function () {
             });
         });
         describe('slot()', function () {
+            it('throws no errors when slot does not exist in the dom', function () {
+                $('#DVID01').remove();
+                expect(function () {
+                    harmony.hide.slot('TST01');
+                }).not.toThrow();
+            });
             it('sets display:none on a slot', function () {
                 harmony.hide.slot('TST01');
                 var el = $('#DVID01')[0];

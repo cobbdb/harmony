@@ -188,11 +188,19 @@ window.Harmony = function (opts) {
              */
             slot: function (name) {
                 var id;
-                if (!jitLoad) {
-                    log('show', 'Showing ad at slot ' + name);
+                if (jitLoad) {
+                    return;
+                }
+                log('show', 'Showing ad at slot ' + name);
+                try {
                     id = slots[name].divId;
                     googletag.display(id);
                     document.getElementById(id).style.display = 'block';
+                } catch (err) {
+                    log('error', {
+                        msg: 'Failed to show slot ' + name,
+                        err: err
+                    });
                 }
             }
         },
@@ -235,10 +243,18 @@ window.Harmony = function (opts) {
              */
             slot: function (name) {
                 var id;
-                if (!jitLoad) {
-                    log('hide', 'Hiding ad at slot ' + name);
+                if (jitLoad) {
+                    return;
+                }
+                log('hide', 'Hiding ad at slot ' + name);
+                try {
                     id = slots[name].divId;
                     document.getElementById(id).style.display = 'none';
+                } catch (err) {
+                    log('error', {
+                        msg: 'Failed to hide slot ' + name,
+                        err: err
+                    });
                 }
             }
         }
