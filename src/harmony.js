@@ -67,11 +67,14 @@ window.Harmony = function (opts) {
          */
         load: function (opts) {
             // Generate all the ad slots.
-            log('load', 'Generating ad slots.');
-            var n, i, slot, setup,
-                conf = opts.slots,
-                len = conf.length,
+            var n, i, slot, setup, conf, len,
                 pubads = googletag.pubads();
+
+            opts = opts || {};
+            conf = opts.slots || [];
+            len = conf.length;
+
+            log('load', 'Generating ad slots.');
             for (i = 0; i < len; i += 1) {
                 try {
                     setup = util.scrubSlot(conf[i]);

@@ -6,6 +6,16 @@ describe('harmony setup', function () {
             expect(harmony.slot.TST01).toBeDefined();
             expect(harmony.slot.TST01.breakpoint).toEqual('TSTPNT01');
         });
+        it('does not require conf', function () {
+            expect(function () {
+                harmony.load();
+            }).not.toThrow();
+        });
+        it('supports empty conf', function () {
+            expect(function () {
+                harmony.load({});
+            }).not.toThrow();
+        });
         it('handles duplicate slot names', function () {
             conf.slots[2].name = 'TST00';
             harmony.load(conf);
