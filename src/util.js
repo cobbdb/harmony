@@ -1,22 +1,24 @@
+// Counter for ensuring unique ad slots.
+var slotCount = 0;
+
 /**
  * # Utilities
  */
-var util = {
-    // Counter for ensuring unique ad slots.
-    slotCount: 0,
+module.exports = {
     /**
-     * ## util.noop()
+     * ## Util.noop()
      * Simple no-op.
      */
     noop: function () {},
     /**
-     * ## util.scrubSlot()
+     * ## Util.scrubSlot()
      * Ensures a slot's name and id are unique in the page. If a
      * container has content, it is assumed that an ad call has already
      * been made.
      * @param {Object} slot Configuration for a single ad slot.
+     * @param {Object} slots Collection of ad slots by name:slot pairs.
      */
-    scrubSlot: function (slot) {
+    scrubSlot: function (slot, slots) {
         var suffix,
             el = document.getElementById(slot.id);
         // Only do work if there are multiple instances.
@@ -24,23 +26,22 @@ var util = {
             if (el && el.innerHTML) {
                 // Ad call has already been made for this element,
                 // so update its id and query again for next div.
-                this.slotCount += 1;
-                suffix = '-' + this.slotCount;
+                slotCount += 1;
+                suffix = '-' + slotCount;
                 el.id += suffix;
                 slots[slot.name].divId = el.id;
                 slots[slot.name + suffix] = slots[slot.name];
                 el = document.getElementById(slot.id);
             }
             if (el) {
-                this.slotCount += 1;
-                suffix = '-' + this.slotCount;
+                slotCount += 1;
+                suffix = '-' + slotCount;
                 el.id += suffix;
                 slot.id += suffix;
                 slot.name += suffix;
             }
         }
         if (!el) {
-            // Log error if slot is not in the dom.
             throw Error('Ad slot container was not found in the DOM.');
         }
         return slot;

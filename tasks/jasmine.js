@@ -2,20 +2,12 @@ var resolve = require('bower-path');
 module.exports = function (grunt) {
     grunt.config.merge({
         jasmine: {
-            dist: {
-                src: 'dist/*.js',
+            global: {
+                src: 'dist/global/*.js',
                 options: {
                     specs: [
                         'tests/*.spec.js'
                     ]
-                }
-            },
-            src: {
-                src: [
-                    'src/*.js'
-                ],
-                options: {
-                    specs: 'tests/**/*.spec.js'
                 }
             },
             options: {

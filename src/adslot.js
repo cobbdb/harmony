@@ -1,3 +1,5 @@
+var log = require('./log.js');
+
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
@@ -13,7 +15,8 @@
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
-function AdSlot(pubads, opts) {
+//function AdSlot(pubads, opts) {
+module.exports = function (pubads, opts) {
     var slot, i;
     // Create the callback queue for this slot.
     var cbQueue = {
@@ -127,4 +130,4 @@ function AdSlot(pubads, opts) {
     // Add the publisher service and return the new ad slot.
     slot.addService(pubads);
     return slot;
-}
+};

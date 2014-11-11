@@ -39,8 +39,6 @@ window.Harmony = function (opts) {
         }
         return [];
     };
-    // Counter for ensuring unique ad slots.
-    util.slotCount = 0;
 
     log = Lumberjack(opts.forceLog);
     log('init', 'Harmony defined');

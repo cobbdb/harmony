@@ -1,20 +1,30 @@
 module.exports = function (grunt) {
     grunt.config.merge({
         uglify: {
-            build: {
+            global: {
                 files: {
-                    'dist/harmony.min.js': [
-                        'src/*.js'
+                    'dist/global/harmony.min.js': [
+                        'bin/harmony.js'
+                    ]
+                }
+            },
+            module: {
+                files: {
+                    'dist/module/harmony.js': [
+                        'bin/harmony.js',
+                        'src/module.wrap.js'
                     ]
                 },
                 options: {
-                    enclose: {},
-                    mangle: {
-                        except: [
-                            'googletag',
-                            'Lumberjack'
-                        ]
-                    }
+                    enclose: {}
+                }
+            },
+            options: {
+                mangle: {
+                    except: [
+                        'googletag',
+                        'Lumberjack'
+                    ]
                 }
             }
         }
