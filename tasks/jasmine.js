@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     grunt.config.merge({
         jasmine: {
             global: {
-                src: 'dist/global/*.js',
+                src: 'dist/harmony.min.js',
                 options: {
                     specs: [
                         'tests/*.spec.js'

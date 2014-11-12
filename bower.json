@@ -26,11 +26,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "lumberjack": "1.x"
   },
   "homepage": "https://github.com/cobbdb/harmony",
   "moduleType": [
-    "globals"
+    "globals",
+    "node"
   ],
   "devDependencies": {
     "jquery": "~2.1.1"

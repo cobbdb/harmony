@@ -1,9 +1,10 @@
-// Counter for ensuring unique ad slots.
-var slotCount = 0;
-
 /**
  * # Utilities
  */
+
+// Counter for ensuring unique ad slots.
+var slotCount = 0;
+
 module.exports = {
     /**
      * ## Util.noop()

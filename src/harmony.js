@@ -1,16 +1,11 @@
 /**
  * # Harmony
  * ### ***DFP JavaScript API Helper***
- * @param {Object} [opts] System level options.
- * @param {Boolean} [opts.jitLoad] True if using Just-In-Time loading.
- * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
- * @return {Object} Instance of Harmony.
  */
-var log, slots, breakpoints, jitLoad;
 
-window.Harmony = function (opts) {
-    opts = opts || {};
-    jitLoad = opts.jitLoad || false;
+var Util = require('./util.js'),
+    AdSlot = require('./adslot.js'),
+    log = require('./log.js'),
     /**
      * ## harmony.slot(name)
      * Safely fetch an existing ad slot or a mock slot if slot was not found.
@@ -25,7 +20,7 @@ window.Harmony = function (opts) {
             on: util.noop,
             setTargeting: util.noop
         };
-    };
+    },
     /**
      * ## harmony.breakpoint(name)
      * Safely fetch an existing breakpoint.
@@ -40,22 +35,36 @@ window.Harmony = function (opts) {
         return [];
     };
 
-    log = Lumberjack(opts.forceLog);
+/**
+ * ## Harmony()
+ * Create a new instance of Harmony.
+ * @param {Boolean} [opts.jitLoad] True if using Just-In-Time loading.
+ * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
+ * @return {Object} Instance of Harmony.
+ */
+module.exports = function (opts) {
+    var jitLoad;
+
+    opts = opts || {};
+    jitLoad = opts.jitLoad || false;
+
+    if (opts.forceLog) {    
+        log.enable();
+    }
     log('init', 'Harmony defined');
 
     return {
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
-         * @param {Object} opts
-         * @param {Object} opts.targeting Key/value targeting pairs.
+         * @param {Object} opts.targeting System-level targeting.
          * @param {Array} opts.slots List of ad slot information.
          * @param {Object} opts.slots.i Slot options object.
          * @param {String} opts.slots.i.name Slot name, ex) RP01
          * @param {String} opts.slots.i.id Slot's div id, ex) ad-div-RP01
          * @param {Array} opts.slots.i.sizes One or many 2D arrays, ex) [300, 250]
          * @param {String} opts.slots.i.adunit Full ad unit code.
-         * @param {Object} [opts.slots.i.targeting] Slot-specific targeting.
+         * @param {Object} [opts.slots.i.targeting] Slot-level targeting.
          * @param {Array} [opts.slots.i.mapping] Size mapping.
          * @param {Boolean} [opts.slots.i.companion] True if companion ad.
          * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
@@ -114,7 +123,6 @@ window.Harmony = function (opts) {
         /**
          * ## harmony.defineSlot
          * Create a new adSlot in the page.
-         * @param {Object} opts Options object.
          * @param {String} opts.name Slot name, ex) RP01
          * @param {String} opts.id Slot's div id, ex) ad-div-RP01
          * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]

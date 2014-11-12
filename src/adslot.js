@@ -3,7 +3,6 @@ var log = require('./log.js');
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
- * @param {Object} opts Options object.
  * @param {String} opts.name Slot name, ex) RP01
  * @param {String} opts.id Slot's div id, ex) ad-div-RP01
  * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]
@@ -17,23 +16,23 @@ var log = require('./log.js');
  */
 //function AdSlot(pubads, opts) {
 module.exports = function (pubads, opts) {
-    var slot, i;
-    // Create the callback queue for this slot.
-    var cbQueue = {
-        slotRenderEnded: []
-    };
-    // Capture timestamp for performance metrics.
-    var tsCreate = new Date();
+    var slot, i,
+        // Create the callback queue for this slot.
+        cbQueue = {
+            slotRenderEnded: []
+        },
+        // Capture timestamp for performance metrics.
+        tsCreate = new Date(),
+        // Set default values.
+        mapping = opts.mapping || [],
+        companion = opts.companion || false,
+        interstitial = opts.interstitial || false,
+        targeting = opts.targeting || {};
+
     log('init', {
         msg: 'Creating new ad slot.',
         conf: opts
     });
-
-    // Set default values.
-    var mapping = opts.mapping || [];
-    var companion = opts.companion || false;
-    var interstitial = opts.interstitial || false;
-    var targeting = opts.targeting || {};
 
     // Define which type of slot this is.
     if (opts.interstitial) {
