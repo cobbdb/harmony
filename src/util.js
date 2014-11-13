@@ -2,8 +2,9 @@
  * # Utilities
  */
 
-// Counter for ensuring unique ad slots.
-var slotCount = 0;
+var slots = require('./slotset.js'),
+    // Counter for ensuring unique ad slots.
+    slotCount = 0;
 
 module.exports = {
     /**
@@ -12,39 +13,41 @@ module.exports = {
      */
     noop: function () {},
     /**
-     * ## Util.scrubSlot()
+     * ## Util.scrubSlot(conf)
      * Ensures a slot's name and id are unique in the page. If a
      * container has content, it is assumed that an ad call has already
      * been made.
-     * @param {Object} slot Configuration for a single ad slot.
-     * @param {Object} slots Collection of ad slots by name:slot pairs.
+     * @param {Object} conf Configuration for a single ad slot.
+     * @return {Object} Clean slot configuration.
      */
-    scrubSlot: function (slot, slots) {
-        var suffix,
-            el = document.getElementById(slot.id);
+    scrubSlot: function (conf) {
+        var suffix, slot,
+            el = document.getElementById(conf.id);
+
         // Only do work if there are multiple instances.
-        if (slot.name in slots) {
+        if (slots.has(conf.name)) {
             if (el && el.innerHTML) {
                 // Ad call has already been made for this element,
                 // so update its id and query again for next div.
                 slotCount += 1;
                 suffix = '-' + slotCount;
                 el.id += suffix;
-                slots[slot.name].divId = el.id;
-                slots[slot.name + suffix] = slots[slot.name];
-                el = document.getElementById(slot.id);
+                slot = slots.get(conf.name);
+                slot.divId = el.id;
+                slots.add(conf.name + suffix, slot);
+                el = document.getElementById(conf.id);
             }
             if (el) {
                 slotCount += 1;
                 suffix = '-' + slotCount;
                 el.id += suffix;
-                slot.id += suffix;
-                slot.name += suffix;
+                conf.id += suffix;
+                conf.name += suffix;
             }
         }
         if (!el) {
             throw Error('Ad slot container was not found in the DOM.');
         }
-        return slot;
+        return conf;
     }
 };
