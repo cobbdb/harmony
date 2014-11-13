@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = function (grunt) {
     grunt.config.merge({
         browserify: {
@@ -12,16 +14,11 @@ module.exports = function (grunt) {
                 }
             },
             tests: {
-                files: {
-                    'bin/tests/harmony.js': 'src/harmony.js',
-                    'bin/tests/adslot.js': 'src/adslot.js',
-                    'bin/tests/log.js': 'src/log.js'
-                },
-                options: {
-                    browserifyOptions: {
-                        standalone: 'Test'
-                    }
-                }
+                // Build map of built spec files.
+                files: fs.readdirSync('../tests').reduce(function (prev, cur) {
+                    prev['bin/tests/' + cur] = 'tests/' + cur;
+                    return prev;
+                }, {});
             }
         }
     });

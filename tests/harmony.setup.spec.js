@@ -1,10 +1,22 @@
+var Harmony = require('../src/harmony.js'),
+    Help = require('./helpers/construction.helper.js'),
+    DFP = require('./helpers/dfp.helper.js'),
+    Options = require('./helpers/slot-options.helper.js');
+
 describe('harmony setup', function () {
-    beforeEach(setupHarmony);
+    var harmony, conf;
+    beforeEach(function () {
+        Help.setupDOM();
+        harmony = Harmony({
+            forceLog: true
+        });
+        conf = Help.getConf();
+    });
     describe('harmony.load()', function () {
         it('creates ad slots', function () {
             harmony.load(conf);
-            expect(harmony.slot.TST01).toBeDefined();
-            expect(harmony.slot.TST01.breakpoint).toEqual('TSTPNT01');
+            expect(harmony.slot('TST01')).toBeDefined();
+            expect(harmony.slot('TST01').breakpoint).toEqual('TSTPNT01');
         });
         it('does not require conf', function () {
             expect(function () {
@@ -19,13 +31,13 @@ describe('harmony setup', function () {
         it('handles duplicate slot names', function () {
             conf.slots[2].name = 'TST00';
             harmony.load(conf);
-            expect(harmony.slot.TST00.name).toEqual('TST00');
-            expect(harmony.slot['TST00-1'].divId).toEqual('DVID02-1');
+            expect(harmony.slot('TST00').name).toEqual('TST00');
+            expect(harmony.slot('TST00-1').divId).toEqual('DVID02-1');
         });
         it('adjusts element ids for duplicates', function () {
             conf.slots[2].name = 'TST00';
             harmony.load(conf);
-            var el = document.getElementById(harmony.slot['TST00-1'].divId);
+            var el = document.getElementById(harmony.slot('TST00-1').divId);
             expect(el).toBeDefined();
             expect(el.id).toEqual('DVID02-1');
             // Smoke test error logs.
@@ -35,8 +47,8 @@ describe('harmony setup', function () {
             conf.targeting.TST = 'target';
             conf.targeting.TST2 = 'abc123';
             harmony.load(conf);
-            expect(pubadsSpy.setTargeting).toHaveBeenCalledWith('TST', 'target');
-            expect(pubadsSpy.setTargeting).toHaveBeenCalledWith('TST2', 'abc123');
+            expect(DFP.spies.pubads.setTargeting).toHaveBeenCalledWith('TST', 'target');
+            expect(DFP.spies.pubads.setTargeting).toHaveBeenCalledWith('TST2', 'abc123');
         });
         it('logs missing dom elements', function () {
             conf.slots[1].name = 'BAD01';
@@ -54,7 +66,7 @@ describe('harmony setup', function () {
                 });
             },
             newSlot = function () {
-                newDiv({
+                Help.createDiv({
                     id: 'DVID22',
                     breakpoint: 'BKP22'
                 });
@@ -63,8 +75,8 @@ describe('harmony setup', function () {
         it('creates an ad slot', function () {
             var opts = newSlot();
             harmony.defineSlot(opts);
-            expect(harmony.slot.TST22).toBeDefined();
-            expect(harmony.breakpoint.BKP22[0].divId).toEqual('DVID22');
+            expect(harmony.slot('TST22')).toBeDefined();
+            expect(harmony.breakpoint('BKP22')[0].divId).toEqual('DVID22');
         });
         it('handles duplicate slot names for sync pages', function () {
             harmony.defineSlot(newSlot());
@@ -132,7 +144,7 @@ describe('harmony setup', function () {
             var opts = newSlot();
             opts.id = 'NOTHERE';
             harmony.defineSlot(opts);
-            expect(harmony.slot.TST22).not.toBeDefined();
+            expect(harmony.slot('TST22')).not.toBeDefined();
             expect(harmony.log.readback('error').length).toEqual(1);
             expect(harmony.log.readback('error')[0].data.name).toEqual('TST22');
             expect(harmony.log.readback('error')[0].data.conf.id).toEqual('NOTHERE');

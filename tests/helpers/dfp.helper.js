@@ -1,9 +1,18 @@
 /**
  * Mock the DFP API and construction options.
  */
+
 var pubadsSpy;
+
+module.exports = {
+    spies: {
+        pubads: pubadsSpy
+    }
+};
+
+// Setup DFP spies before each spec.
 beforeEach(function () {
-    googletag = jasmine.createSpyObj('googletag', [
+    global.googletag = jasmine.createSpyObj('googletag', [
         'defineOutOfPageSlot',
         'defineSlot',
         'companionAds',

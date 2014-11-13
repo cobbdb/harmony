@@ -1,9 +1,9 @@
 {
-  "name": "harmony",
+  "name": "harmonyjs",
+  "version": "1.4.0",
   "description": "Doubleclick JS API Helper",
   "main": "src/harmony.js",
   "scripts": {
-    "postinstall": "bower install",
     "test": "grunt test"
   },
   "repository": {
@@ -37,8 +37,7 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-docker-clone": "^1.0.10",
     "grunt-template-jasmine-istanbul": "^0.3.0",
+    "jquery": "^2.1.1",
     "matchdep": "~0.3.0"
-  },
-  "private": true,
-  "main": "dist/harmony.min.js"
+  }
 }

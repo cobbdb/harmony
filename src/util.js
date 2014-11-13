@@ -13,41 +13,43 @@ module.exports = {
      */
     noop: function () {},
     /**
-     * ## Util.scrubSlot(conf)
+     * ## Util.scrubConf(conf)
      * Ensures a slot's name and id are unique in the page. If a
      * container has content, it is assumed that an ad call has already
      * been made.
      * @param {Object} conf Configuration for a single ad slot.
      * @return {Object} Clean slot configuration.
      */
-    scrubSlot: function (conf) {
-        var suffix, slot,
-            el = document.getElementById(conf.id);
+    scrubConf: function (conf) {
+        var suffix, el,
+            temp = {
+                el: {}
+            };
 
         // Only do work if there are multiple instances.
         if (slots.has(conf.name)) {
-            if (el && el.innerHTML) {
-                // Ad call has already been made for this element,
-                // so update its id and query again for next div.
-                slotCount += 1;
-                suffix = '-' + slotCount;
-                el.id += suffix;
-                slot = slots.get(conf.name);
-                slot.divId = el.id;
-                slots.add(conf.name + suffix, slot);
+            do {
                 el = document.getElementById(conf.id);
-            }
-            if (el) {
-                slotCount += 1;
-                suffix = '-' + slotCount;
-                el.id += suffix;
-                conf.id += suffix;
-                conf.name += suffix;
-            }
-        }
-        if (!el) {
+                if (el) {
+                    if (el.innerHTML) {
+                        // Slot has already been processed,
+                        // so move it aside and query again.
+                        temp.el = el;
+                        temp.id = el.id;
+                        el.id = 'h-temp';
+                    } else {
+                        slotCount += 1;
+                        suffix = '-h' + slotCount;
+                        el.id += suffix;
+                        // Restore any existing slot.
+                        temp.el.id = temp.id;
+                        conf.id = el.id;
+                        conf.name += suffix;
+                        return conf;
+                    }
+                }
+            } while (el);
             throw Error('Ad slot container was not found in the DOM.');
         }
-        return conf;
     }
 };

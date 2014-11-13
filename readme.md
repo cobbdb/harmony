@@ -5,6 +5,7 @@
 Doubleclick JS API Helper.
 
     $ bower install harmony
+    $ npm install harmonyjs
 
 -------------
 Harmony is a tool to make the DFP API a bit more simple to use. There are
@@ -27,43 +28,87 @@ chances are it's in there somewhere! Just give the docs a quick scan.
 
 #### Quick setup.
 Create your Harmony instance and use it however you want.
-
-    mylibs.harmony = Harmony();
+```javascript
+mylibs.harmony = Harmony();
+```
 
 #### Load ad config en bulk.
 Have your backend generate ad config based on admin settings and
 keep the components completely agnostic.
-
-    var myconf = {% load_ad_conf %};
-    mylibs.harmony.load(myconf);
+```javascript
+var myconf = {% load_ad_conf %};
+mylibs.harmony.load(myconf);
+```
 
 #### Attach some callbacks.
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
-
-    mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {
-        if (!event.isEmpty) {
-            makeRoomForAd();
-        }
-    });
+```javascript
+mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {
+    if (!event.isEmpty) {
+        makeRoomForAd();
+    }
+});
+```
 
 #### Access your ad data immediately.
 Harmony exposes individual slot configuration for pain-free access.
-
-    var possibleSizes = mylibs.harmony.slot.MY01.sizes;
-    var slotId = mylibs.harmony.slot.MY01.divId;
-    var slotAdunit = mylibs.harmony.slot.MY01.adunit;
+```javascript
+var slot = mylibs.harmony.slot('MY01'),
+    possibleSizes = slot.sizes,
+    slotId = slot.divId,
+    slotAdunit = slot.adunit;
+```
 
 #### Debug the subsystem.
 Logging lets you see what happened and when, so you can focus less
 on debugging and more on coding.
-
-    mylibs.harmony.log.readback('events', true);
+```javascript
+mylibs.harmony.log.readback('events', true);
+```
 
 #### Get slot performance metrics.
 See exactly how long your system takes from setup to ad render.
+```javascript
+mylibs.harmony.log.readback('metric', true);
+```
 
-    mylibs.harmony.log.readback('metric', true);
+## Example Setup
+Here is an example of a page setup using Harmony and jQuery.
+```html
+<head>
+    <script>
+    var libs = {
+        harmony: Harmony()
+    };
+    $(function () {
+        libs.harmony.load({
+            slots: [{
+                name: 'ad01',
+                id: 'ad01',
+                adunit: '123/test/unit',
+                sizes: [
+                    [300, 250],
+                    [728, 90]
+                ],
+                targeting: {
+                    'custom': 'slot targeting'
+                },
+                breakpoints: 'testads'
+            }],
+            targeting: {
+                'custom': 'system targeting'
+            }
+        });
+        googletag.enableServices();
+        libs.harmony.show.breakpoint('testads');
+    });
+    </script>
+</head>
+<body>
+    <div id="ad01"></div>
+</body>
+```
 
 ---------
 * See: http://cobbdb.github.io/harmony/

@@ -5,15 +5,15 @@ module.exports = function (grunt) {
             global: {
                 src: 'dist/harmony.min.js',
                 options: {
-                    specs: [
-                        'tests/*.spec.js'
-                    ]
+                    specs: 'tests/global/harmony.spec.js'
                 }
+            },
+            modules: {
+                src: 'bin/tests/*.spec.js'
             },
             options: {
                 helpers: 'tests/helpers/*.helper.js',
                 vendor: [
-                    resolve('lumberjack'),
                     resolve('jquery')
                 ],
                 display: 'full',

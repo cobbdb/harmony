@@ -25,14 +25,10 @@
     "test"
   ],
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "homepage": "https://github.com/cobbdb/harmony",
   "moduleType": [
     "globals",
     "node"
-  ],
-  "devDependencies": {
-    "jquery": "~2.1.1"
-  }
+  ]
 }

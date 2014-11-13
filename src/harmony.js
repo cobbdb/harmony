@@ -56,7 +56,7 @@ module.exports = function (opts) {
                 try {
                     slot = AdSlot(
                         pubads,
-                        Util.scrubSlot(conf)
+                        Util.scrubConf(conf)
                     );
                     slots.add(slot);
                     breakpoints.add(slot.breakpoint, slot);
@@ -125,7 +125,7 @@ module.exports = function (opts) {
             try {
                 slot = AdSlot(
                     global.googletag.pubads(),
-                    Util.scrubSlot(opts)
+                    Util.scrubConf(opts)
                 );
                 slots.add(slot);
                 breakpoints.add(opts.breakpoint, slot);
