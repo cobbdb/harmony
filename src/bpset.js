@@ -25,5 +25,12 @@ module.exports = {
         breakpoints[name] = breakpoints[name] || [];
         breakpoints[name].push(slot);
         return breakpoints[name];
+    },
+    /**
+     * ## set.clear()
+     * Reset the collection.
+     */
+    clear: function () {
+        breakpoints = {};
     }
 };

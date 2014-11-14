@@ -7,10 +7,11 @@ afterEach(function () {
 });
 
 module.exports = {
-    createDiv: function (opts) {
+    createDiv: function (opts, content) {
         $('<div>', {
             id: opts.id,
-            'class': 'testdiv ' + opts.breakpoint
+            'class': 'testdiv ' + opts.breakpoint,
+            text: content || ''
         }).appendTo('body');
     },
     getConf: function () {

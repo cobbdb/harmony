@@ -1,5 +1,5 @@
 var Harmony = require('../src/harmony.js'),
-    Help = require('./helper/construction.helper.js');
+    Help = require('./helpers/construction.helper.js');
 
 describe('accessor', function () {
     var harmony;

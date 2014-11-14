@@ -12,10 +12,6 @@ module.exports = function (grunt) {
                 src: 'bin/tests/*.spec.js'
             },
             options: {
-                helpers: 'tests/helpers/*.helper.js',
-                vendor: [
-                    resolve('jquery')
-                ],
                 display: 'full',
                 summary: false,
                 template: require('grunt-template-jasmine-istanbul'),

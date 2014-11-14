@@ -1,4 +1,14 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    BpSet = require('../../src/bpset.js'),
+    SlotSet = require('../../src/slotset.js');
+
+/**
+ * Reset the collections of slots and breakpoints.
+ */
+afterEach(function () {
+    BpSet.clear();
+    SlotSet.clear();
+});
 
 /**
  * Generic adslot construction options.

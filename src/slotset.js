@@ -35,5 +35,12 @@ module.exports = {
      */
     has: function (name) {
         return name in slots;
+    },
+    /**
+     * ## set.clear()
+     * Reset the collection.
+     */
+    clear: function () {
+        slots = {};
     }
 };

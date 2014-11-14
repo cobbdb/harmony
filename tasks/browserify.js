@@ -15,10 +15,10 @@ module.exports = function (grunt) {
             },
             tests: {
                 // Build map of built spec files.
-                files: fs.readdirSync('../tests').reduce(function (prev, cur) {
+                files: fs.readdirSync('tests').reduce(function (prev, cur) {
                     prev['bin/tests/' + cur] = 'tests/' + cur;
                     return prev;
-                }, {});
+                }, {})
             }
         }
     });
