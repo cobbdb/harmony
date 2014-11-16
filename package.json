@@ -29,7 +29,6 @@
     "lumberjackjs": "^1.1.3"
   },
   "devDependencies": {
-    "bower-path": "^1.0.1",
     "curb": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.2.0",
