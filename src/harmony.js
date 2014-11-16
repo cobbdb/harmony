@@ -149,7 +149,7 @@ module.exports = function (opts) {
              * Show all ads at a breakpoint.
              */
             breakpoint: function (name) {
-                var i, slot
+                var i, slot,
                     set = breakpoints.get(name),
                     len = set.length;
                 log('show', 'Showing ads at breakpoint ' + name);

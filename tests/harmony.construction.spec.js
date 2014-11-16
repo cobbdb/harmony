@@ -1,4 +1,4 @@
-var Harmony = require('../src/harmony.js')
+var Harmony = require('../src/harmony.js');
 
 describe('construction', function () {
     it('throws no errors', function () {

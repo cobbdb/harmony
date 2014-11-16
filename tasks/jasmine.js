@@ -1,4 +1,6 @@
-var resolve = require('bower-path');
+var resolve = require('bower-path'),
+    $ = require('curb');
+
 module.exports = function (grunt) {
     grunt.config.merge({
         jasmine: {
@@ -9,18 +11,13 @@ module.exports = function (grunt) {
                 }
             },
             modules: {
-                src: 'bin/tests/*.spec.js'
+                src: $('bin/tests/%s.spec.js',
+                    grunt.option('spec') || '*'
+                )
             },
             options: {
                 display: 'full',
-                summary: false,
-                template: require('grunt-template-jasmine-istanbul'),
-                templateOptions: {
-                    coverage: 'bin/coverage/coverage.json',
-                    report: {
-                        type: 'text-summary'
-                    }
-                }
+                summary: false
             }
         }
     });

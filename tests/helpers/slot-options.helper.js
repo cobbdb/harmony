@@ -3,14 +3,6 @@ var $ = require('jquery'),
     SlotSet = require('../../src/slotset.js');
 
 /**
- * Reset the collections of slots and breakpoints.
- */
-afterEach(function () {
-    BpSet.clear();
-    SlotSet.clear();
-});
-
-/**
  * Generic adslot construction options.
  */
 module.exports = function (opts) {

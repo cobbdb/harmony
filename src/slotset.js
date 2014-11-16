@@ -15,7 +15,8 @@ module.exports = {
     get: function (name) {
         return slots[name] || {
             on: Util.noop,
-            setTargeting: Util.noop
+            setTargeting: Util.noop,
+            mock: true
         };
     },
     /**

@@ -16,13 +16,28 @@ describe('BreakpointSet', function () {
             expect(set).toEqual([]);
         });
         it('returns previously added data', function () {
-            BpSet.add({
-                name: 'testname',
+            BpSet.add('testname', {
+                val: 'testval1'
+            });
+            BpSet.add('testname', {
+                val: 'testval2'
+            });
+            var set = BpSet.get('testname');
+            expect(set.length).toEqual(2);
+            expect(set[0].val).toEqual('testval1');
+            expect(set[1].val).toEqual('testval2');
+        });
+    });
+    describe('clear', function () {
+        it('removes all existing data', function () {
+            BpSet.add('testname', {
                 val: 'testval'
             });
             var set = BpSet.get('testname');
             expect(set.length).toEqual(1);
-            expect(set[0].val).toEqual('testval');
+            BpSet.clear();
+            set = BpSet.get('testname');
+            expect(set.length).toEqual(0);
         });
     });
 });

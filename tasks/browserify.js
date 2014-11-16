@@ -1,6 +1,17 @@
 var fs = require('fs');
 
 module.exports = function (grunt) {
+    var specSet,
+        name = grunt.option('spec');
+
+    if (name) {
+        specSet = [
+            name + '.spec.js'
+        ];
+    } else {
+        specSet = fs.readdirSync('tests');
+    }
+
     grunt.config.merge({
         browserify: {
             global: {
@@ -14,9 +25,11 @@ module.exports = function (grunt) {
                 }
             },
             tests: {
-                // Build map of built spec files.
-                files: fs.readdirSync('tests').reduce(function (prev, cur) {
-                    prev['bin/tests/' + cur] = 'tests/' + cur;
+                files: specSet.reduce(function (prev, cur) {
+                    prev['bin/tests/' + cur] = [
+                        'tests/' + cur,
+                        'tests/helpers/*.setup.js'
+                    ];
                     return prev;
                 }, {})
             }

@@ -1,6 +1,5 @@
 var Harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
-    DFP = require('./helpers/dfp.helper.js'),
     Options = require('./helpers/slot-options.helper.js');
 
 describe('harmony setup', function () {
@@ -47,8 +46,8 @@ describe('harmony setup', function () {
             conf.targeting.TST = 'target';
             conf.targeting.TST2 = 'abc123';
             harmony.load(conf);
-            expect(DFP.spies.pubads.setTargeting).toHaveBeenCalledWith('TST', 'target');
-            expect(DFP.spies.pubads.setTargeting).toHaveBeenCalledWith('TST2', 'abc123');
+            expect(googletag.pubads().setTargeting).toHaveBeenCalledWith('TST', 'target');
+            expect(googletag.pubads().setTargeting).toHaveBeenCalledWith('TST2', 'abc123');
         });
         it('logs missing dom elements', function () {
             conf.slots[1].name = 'BAD01';

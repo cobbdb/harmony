@@ -32,9 +32,23 @@ describe('SlotSet', function () {
                 name: 'testname2',
                 val: 'testval2'
             });
-            expect(SlotSet.has('testname')).toBe(true);
-            expect(SlotSet.has('testname2')).toBe(true);
-            expect(SlotSet.has('testname3')).toBe(false);
+            expect(SlotSet.has('testname')).toBe(false, 'first');
+            expect(SlotSet.has('testname2')).toBe(true, 'second');
+            expect(SlotSet.has('testname3')).toBe(false, 'third');
+        });
+    });
+    describe('clear', function () {
+        it('removes all previous data', function () {
+            SlotSet.add({
+                name: 'testname',
+                val: 'testval'
+            });
+            var slot = SlotSet.get('testname');
+            expect(slot.val).toEqual('testval');
+            SlotSet.clear();
+            slot = SlotSet.get('testname');
+            expect(slot.val).toBeUndefined();
+            expect(slot.mock).toEqual(true);
         });
     });
 });

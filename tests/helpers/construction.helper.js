@@ -2,10 +2,6 @@ var Options = require('./slot-options.helper.js'),
     Harmony = require('../../src/harmony.js'),
     $ = require('jquery');
 
-afterEach(function () {
-    $('.testdiv').remove();
-});
-
 module.exports = {
     createDiv: function (opts, content) {
         $('<div>', {
@@ -37,6 +33,6 @@ module.exports = {
         };
     },
     setupDOM: function () {
-        this.getConf.slots.forEach(this.createDiv);
+        this.getConf().slots.map(this.createDiv);
     }
 };

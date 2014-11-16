@@ -15,8 +15,8 @@ module.exports = function (grunt) {
         'jasmine:global'
     ]);
     grunt.registerTask('test', 'Run tests.', [
-        'browserify',
-        'jasmine'
+        'browserify:tests',
+        'jasmine:modules'
     ]);
     grunt.registerTask('docs', 'Build and deploy autodocs.', [
         'docker-clone'
