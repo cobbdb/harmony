@@ -5,11 +5,10 @@ var Harmony = require('../src/harmony.js'),
 describe('harmony setup', function () {
     var harmony, conf;
     beforeEach(function () {
-        Help.setupDOM();
+        conf = Help.setupDOM();
         harmony = Harmony({
             forceLog: true
         });
-        conf = Help.getConf();
     });
     describe('harmony.load()', function () {
         it('creates ad slots', function () {

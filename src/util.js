@@ -2,9 +2,7 @@
  * # Utilities
  */
 
-var slots = require('./slotset.js'),
-    // Counter for ensuring unique ad slots.
-    slotCount = 0;
+var slots = require('./slotset.js');
 
 module.exports = {
     /**
@@ -12,6 +10,11 @@ module.exports = {
      * Simple no-op.
      */
     noop: function () {},
+    /**
+     * ## Util.slotCount
+     * Counter for ensuring unique ad slots.
+     */
+    slotCount: 0,
     /**
      * ## Util.scrubConf(conf)
      * Ensures a slot's name and id are unique in the page. If a
@@ -38,8 +41,8 @@ module.exports = {
                         temp.id = el.id;
                         el.id = 'h-temp';
                     } else {
-                        slotCount += 1;
-                        suffix = '-h' + slotCount;
+                        this.slotCount += 1;
+                        suffix = '-h' + this.slotCount;
                         el.id += suffix;
                         // Restore any existing slot.
                         temp.el.id = temp.id;

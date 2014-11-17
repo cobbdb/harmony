@@ -20,6 +20,7 @@ describe('Util', function () {
                 id: 'testid',
                 breakpoint: 'testpnt'
             });
+            slots.add(conf);
         });
 
         it('throws when missing DOM element', function () {
@@ -36,7 +37,6 @@ describe('Util', function () {
         describe('with empty duplicate', function () {
             it('throws when missing DOM element', function () {
                 expect(function () {
-                    Help.createDiv(conf);
                     slots.add(conf);
                     Util.scrubConf(conf);
                 }).toThrow();
@@ -50,13 +50,20 @@ describe('Util', function () {
                 expect(out.id).toEqual('testid-h1');
             });
             it('increments id per duplicate', function () {
-                var i, out = [];
+                var i,
+                    out = [],
+                    confs = [];
                 for (i = 0; i < 4; i += 1) {
-                    Help.createDiv(conf);
+                    confs[i] = Conf({
+                        name: 'testname',
+                        id: 'testid',
+                        breakpoint: 'testpnt'
+                    });
+                    Help.createDiv(confs[i]);
                 }
                 for (i = 0; i < 4; i += 1) {
-                    out[i] = Util.scrubConf(conf);
-                    slots.add(outs[i]);
+                    out[i] = Util.scrubConf(confs[i]);
+                    slots.add(out[i]);
                 }
                 expect(out[0].name).toEqual('testname');
                 expect(out[1].name).toEqual('testname-h1');
@@ -90,11 +97,18 @@ describe('Util', function () {
                 expect(original).toEqual('testcontent');
             });
             it('increments id per duplicate', function () {
-                var i, out = [];
+                var i,
+                    out = [],
+                    confs = [];
                 for (i = 0; i < 4; i += 1) {
-                    Help.createDiv(conf);
-                    out[i] = Util.scrubConf(conf);
-                    slots.add(outs[i]);
+                    confs[i] = Conf({
+                        name: 'testname',
+                        id: 'testid',
+                        breakpoint: 'testpnt'
+                    });
+                    Help.createDiv(confs[i]);
+                    out[i] = Util.scrubConf(confs[i]);
+                    slots.add(out[i]);
                     $('#' + out[i].id).text('testcontent');
                 }
                 expect(out[0].name).toEqual('testname');

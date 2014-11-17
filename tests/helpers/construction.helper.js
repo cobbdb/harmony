@@ -33,6 +33,8 @@ module.exports = {
         };
     },
     setupDOM: function () {
-        this.getConf().slots.map(this.createDiv);
+        var conf = this.getConf();
+        conf.slots.map(this.createDiv);
+        return conf;
     }
 };
