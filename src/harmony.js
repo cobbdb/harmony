@@ -81,14 +81,18 @@ module.exports = function (opts) {
 
             log('load', 'Harmony config loaded.');
         },
-        // ## harmony.log
-        // Instance of Lumberjack populated with Harmony's data.
+        /**
+         * ## harmony.log
+         * Instance of Lumberjack populated with Harmony's data.
+         * @see log.js
+         */
         log: log,
         /**
          * ## harmony.slot(name)
          * Safely fetch an existing ad slot or a mock slot if slot was not found.
          * @param {String} name Name of the ad slot.
          * @return {Object} The ad slot or a mock ad slot.
+         * @see slotset.js
          */
         slot: slots.get,
         /**
@@ -96,6 +100,7 @@ module.exports = function (opts) {
          * Check if a slot has already been loaded into Harmony.
          * @param {String} name Name of the ad slot.
          * @return {Boolean} True if the slot has already been loaded.
+         * @see slotset.js
          */
         hasSlot: slots.has,
         /**
@@ -103,6 +108,7 @@ module.exports = function (opts) {
          * Safely fetch an existing ad slot or a mock slot if slot was not found.
          * @param {String} name Name of the ad slot.
          * @return {Object} The ad slot or a mock ad slot.
+         * @see bpset.js
          */
         breakpoint: breakpoints.get,
         /**
@@ -118,7 +124,7 @@ module.exports = function (opts) {
          * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
-         * @see v2/adslot.js
+         * @see adslot.js
          */
         defineSlot: function (opts) {
             var slot;
