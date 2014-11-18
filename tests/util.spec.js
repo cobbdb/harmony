@@ -50,7 +50,7 @@ describe('Util', function () {
                 expect(out.id).toEqual('testid-h1');
             });
             it('increments id per duplicate', function () {
-                var i, temp,
+                var i,
                     out = [],
                     confs = [];
 
@@ -116,6 +116,8 @@ describe('Util', function () {
                 var i,
                     out = [],
                     confs = [];
+
+                slots.clear();
                 for (i = 0; i < 4; i += 1) {
                     confs[i] = Conf({
                         name: 'testname',
@@ -127,6 +129,7 @@ describe('Util', function () {
                     slots.add(out[i]);
                     $('#' + out[i].id).text('testcontent');
                 }
+
                 expect(out[0].name).toEqual('testname');
                 expect(out[1].name).toEqual('testname-h1');
                 expect(out[2].name).toEqual('testname-h2');
