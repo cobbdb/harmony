@@ -54,5 +54,6 @@ module.exports = {
             } while (el);
             throw Error('Ad slot container was not found in the DOM.');
         }
+        return conf;
     }
 };

@@ -32,9 +32,10 @@ describe('SlotSet', function () {
                 name: 'testname2',
                 val: 'testval2'
             });
-            expect(SlotSet.has('testname')).toBe(false, 'first');
-            expect(SlotSet.has('testname2')).toBe(true, 'second');
-            expect(SlotSet.has('testname3')).toBe(false, 'third');
+            expect(SlotSet.has('testname')).toBe(false, 'testname');
+            expect(SlotSet.has('testname1')).toBe(false, 'testname1');
+            expect(SlotSet.has('testname2')).toBe(true, 'testname2');
+            expect(SlotSet.has('testname3')).toBe(false, 'testname3');
         });
     });
     describe('clear', function () {

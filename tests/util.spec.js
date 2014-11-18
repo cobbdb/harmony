@@ -50,9 +50,11 @@ describe('Util', function () {
                 expect(out.id).toEqual('testid-h1');
             });
             it('increments id per duplicate', function () {
-                var i,
+                var i, temp,
                     out = [],
                     confs = [];
+
+                slots.clear();
                 for (i = 0; i < 4; i += 1) {
                     confs[i] = Conf({
                         name: 'testname',
@@ -81,12 +83,26 @@ describe('Util', function () {
                 }).toThrow();
             });
             it('alters id and name of conf', function () {
-                Help.createDiv(conf, 'testcontent');
-                slots.add(conf);
-                Help.createDiv(conf);
-                var out = Util.scrubConf(conf);
-                expect(out.name).toEqual('testname-h1');
-                expect(out.id).toEqual('testid-h1');
+                var first = Conf({
+                        name: 'testname',
+                        id: 'testid',
+                        breakpoint: 'testpnt'
+                    }),
+                    second = Conf({
+                        name: 'testname',
+                        id: 'testid',
+                        breakpoint: 'testpnt'
+                    });
+                slots.add(first);
+                Help.createDiv(first, 'testcontent');
+                slots.add(second);
+                Help.createDiv(second);
+                Util.scrubConf(second);
+
+                expect(first.name).toEqual('testname');
+                expect(first.id).toEqual('testid');
+                expect(second.name).toEqual('testname-h1');
+                expect(second.id).toEqual('testid-h1');
             });
             it('does not alter the original slot', function () {
                 Help.createDiv(conf, 'testcontent');

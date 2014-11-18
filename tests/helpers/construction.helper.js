@@ -7,7 +7,7 @@ module.exports = {
         $('<div>', {
             id: opts.id,
             'class': 'testdiv ' + opts.breakpoint,
-            text: content || ''
+            text: content
         }).appendTo('body');
     },
     getConf: function () {
