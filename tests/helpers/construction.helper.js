@@ -1,4 +1,4 @@
-var Options = require('./slot-options.helper.js'),
+var Conf = require('./slot-options.helper.js'),
     Harmony = require('../../src/harmony.js'),
     $ = require('jquery');
 
@@ -13,17 +13,17 @@ module.exports = {
     getConf: function () {
         return {
             slots: [
-                Options({
+                Conf({
                     name: 'TST00',
                     id: 'DVID00',
                     breakpoint: 'TSTPNT00'
                 }),
-                Options({
+                Conf({
                     name: 'TST01',
                     id: 'DVID01',
                     breakpoint: 'TSTPNT01'
                 }),
-                Options({
+                Conf({
                     name: 'TST02',
                     id: 'DVID02',
                     breakpoint: 'TSTPNT00'
@@ -33,8 +33,11 @@ module.exports = {
         };
     },
     setupDOM: function () {
-        var conf = this.getConf();
-        conf.slots.map(this.createDiv);
+        var conf = this.getConf(),
+            makeDiv = this.createDiv;
+        conf.slots.forEach(function (slot) {
+            makeDiv(slot);
+        });
         return conf;
     }
 };
