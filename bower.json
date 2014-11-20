@@ -25,7 +25,9 @@
     "test"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "lumberjack": "^1.1.x"
+  },
   "homepage": "https://github.com/cobbdb/harmony",
   "moduleType": [
     "globals",
