@@ -1,9 +1,15 @@
+var Harmony = require('../src/harmony.js'),
+    Help = require('./helpers/construction.helper.js'),
+    $ = require('jquery');
+
 describe('display method', function () {
+    var harmony;
     beforeEach(function () {
-        setupHarmony();
-        harmony.load(conf);
+        Help.setupDOM();
+        harmony = Harmony();
+        harmony.load(Help.getConf());
     });
-    describe('harmony.show', function () {
+    describe('show', function () {
         describe('breakpoint()', function () {
             it('throws no errors when breakpoint does not exist', function () {
                 expect(function () {
@@ -21,7 +27,7 @@ describe('display method', function () {
             });
         });
         describe('slot()', function () {
-            it('throws no errors when slot does not exist in the dom', function () {
+            it('throws no errors when slot is missing from the dom', function () {
                 $('#DVID01').remove();
                 expect(function () {
                     harmony.show.slot('TST01');
@@ -38,7 +44,7 @@ describe('display method', function () {
             });
         });
     });
-    describe('harmony.hide', function () {
+    describe('hide', function () {
         describe('breakpoint()', function () {
             it('throws no errors when breakpoint does not exist', function () {
                 expect(function () {
@@ -57,7 +63,7 @@ describe('display method', function () {
             });
         });
         describe('slot()', function () {
-            it('throws no errors when slot does not exist in the dom', function () {
+            it('throws no errors when slot is missing from the dom', function () {
                 $('#DVID01').remove();
                 expect(function () {
                     harmony.hide.slot('TST01');

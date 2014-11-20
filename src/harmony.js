@@ -1,63 +1,39 @@
 /**
  * # Harmony
  * ### ***DFP JavaScript API Helper***
- * @param {Object} [opts] System level options.
- * @param {Boolean} [opts.jitLoad] True if using Just-In-Time loading.
+ */
+
+var Util = require('./util.js'),
+    AdSlot = require('./adslot.js'),
+    log = require('./log.js'),
+    slots = require('./slotset.js'),
+    breakpoints = require('./bpset.js');
+
+/**
+ * ## Harmony()
+ * Create a new instance of Harmony.
  * @param {Boolean} [opts.forceLog] True to force Lumberjack logging enabled.
  * @return {Object} Instance of Harmony.
  */
-var log, slots, breakpoints, jitLoad;
-
-window.Harmony = function (opts) {
+module.exports = function (opts) {
     opts = opts || {};
-    jitLoad = opts.jitLoad || false;
-    /**
-     * ## harmony.slot(name)
-     * Safely fetch an existing ad slot or a mock slot if slot was not found.
-     * @param {String} name Name of the ad slot.
-     * @return {Object} The ad slot or a mock ad slot.
-     */
-    slots = function (name) {
-        if (name in slots) {
-            return slots[name];
-        }
-        return {
-            on: util.noop,
-            setTargeting: util.noop
-        };
-    };
-    /**
-     * ## harmony.breakpoint(name)
-     * Safely fetch an existing breakpoint.
-     * @param {String} name Name of the ad slot.
-     * @return {Object} The breakpoint array or empty if breakpoint
-     * was not found.
-     */
-    breakpoints = function (name) {
-        if (name in breakpoints) {
-            return breakpoints[name];
-        }
-        return [];
-    };
-    // Counter for ensuring unique ad slots.
-    util.slotCount = 0;
-
-    log = Lumberjack(opts.forceLog);
-    log('init', 'Harmony defined');
+    if (opts.forceLog) {    
+        log.enable();
+    }
+    log('init', 'Harmony defined.');
 
     return {
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
-         * @param {Object} opts
-         * @param {Object} opts.targeting Key/value targeting pairs.
+         * @param {Object} opts.targeting System-level targeting.
          * @param {Array} opts.slots List of ad slot information.
          * @param {Object} opts.slots.i Slot options object.
          * @param {String} opts.slots.i.name Slot name, ex) RP01
          * @param {String} opts.slots.i.id Slot's div id, ex) ad-div-RP01
          * @param {Array} opts.slots.i.sizes One or many 2D arrays, ex) [300, 250]
          * @param {String} opts.slots.i.adunit Full ad unit code.
-         * @param {Object} [opts.slots.i.targeting] Slot-specific targeting.
+         * @param {Object} [opts.slots.i.targeting] Slot-level targeting.
          * @param {Array} [opts.slots.i.mapping] Size mapping.
          * @param {Boolean} [opts.slots.i.companion] True if companion ad.
          * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
@@ -66,57 +42,78 @@ window.Harmony = function (opts) {
          * @see adslot.js
          */
         load: function (opts) {
-            // Generate all the ad slots.
-            var n, i, slot, setup, conf, len,
-                pubads = googletag.pubads();
+            var pubads = global.googletag.pubads();
 
             opts = opts || {};
-            conf = opts.slots || [];
-            len = conf.length;
+            opts.slots = opts.slots || [];
 
+            // Generate the ad slots.
+            var i, slot, conf,
+                len = opts.slots.length;
             log('load', 'Generating ad slots.');
             for (i = 0; i < len; i += 1) {
+                conf = opts.slots[i];
                 try {
-                    setup = util.scrubSlot(conf[i]);
-                    slot = AdSlot(pubads, setup);
-                    slots[setup.name] = slot;
-                    breakpoints[setup.breakpoint] = breakpoints[setup.breakpoint] || [];
-                    breakpoints[setup.breakpoint].push(slot);
+                    slot = AdSlot(
+                        pubads,
+                        Util.scrubConf(conf)
+                    );
+                    slots.add(slot);
+                    breakpoints.add(slot.breakpoint, slot);
                 } catch (err) {
                     log('error', {
                         type: 'load() error',
-                        id: conf[i].id,
-                        name: conf[i].name,
-                        conf: conf[i],
-                        msg: err.message
+                        conf: conf,
+                        err: err
                     });
                 }
             }
 
             // Assign the system targeting.
+            var key, value,
+                targeting = opts.targeting || {};
             log('load', 'Applying pubads targeting.');
-            conf = opts.targeting;
-            for (n in conf) {
-                setup = conf[n];
-                log('load', '- ' + n + ' = ' + setup);
-                pubads.setTargeting(n, setup);
+            for (key in targeting) {
+                value = targeting[key];
+                log('load', '- ' + key + ' = ' + value);
+                pubads.setTargeting(key, value);
             }
 
             log('load', 'Harmony config loaded.');
         },
-        // ## harmony.log
-        // Instance of Lumberjack populated with Harmony's data.
+        /**
+         * ## harmony.log
+         * Instance of Lumberjack populated with Harmony's data.
+         * @see log.js
+         */
         log: log,
-        // ## harmony.slot.&lt;name&gt;
-        // Directly access a specific ad slot in the page.
-        slot: slots,
-        // ## harmony.breakpoint.&lt;name&gt;
-        // Directly access the set of ads at a specific breakpoint.
-        breakpoint: breakpoints,
+        /**
+         * ## harmony.slot(name)
+         * Safely fetch an existing ad slot or a mock slot if slot was not found.
+         * @param {String} name Name of the ad slot.
+         * @return {Object} The ad slot or a mock ad slot.
+         * @see slotset.js
+         */
+        slot: slots.get,
+        /**
+         * ## harmony.hasSlot(name)
+         * Check if a slot has already been loaded into Harmony.
+         * @param {String} name Name of the ad slot.
+         * @return {Boolean} True if the slot has already been loaded.
+         * @see slotset.js
+         */
+        hasSlot: slots.has,
+        /**
+         * ## harmony.breakpoint(name)
+         * Safely fetch an existing ad slot or a mock slot if slot was not found.
+         * @param {String} name Name of the ad slot.
+         * @return {Object} The ad slot or a mock ad slot.
+         * @see bpset.js
+         */
+        breakpoint: breakpoints.get,
         /**
          * ## harmony.defineSlot
          * Create a new adSlot in the page.
-         * @param {Object} opts Options object.
          * @param {String} opts.name Slot name, ex) RP01
          * @param {String} opts.id Slot's div id, ex) ad-div-RP01
          * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]
@@ -127,25 +124,22 @@ window.Harmony = function (opts) {
          * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
-         * @see v2/adslot.js
+         * @see adslot.js
          */
         defineSlot: function (opts) {
+            var slot;
             try {
-                var pubads = googletag.pubads(),
-                    slot = AdSlot(
-                        pubads,
-                        util.scrubSlot(opts)
-                    );
-                slots[opts.name] = slot;
-                breakpoints[opts.breakpoint] = breakpoints[opts.breakpoint] || [];
-                breakpoints[opts.breakpoint].push(slot);
+                slot = AdSlot(
+                    global.googletag.pubads(),
+                    Util.scrubConf(opts)
+                );
+                slots.add(slot);
+                breakpoints.add(opts.breakpoint, slot);
             } catch (err) {
                 log('error', {
                     type: 'defineSlot() error',
-                    id: opts.id,
-                    name: opts.name,
                     conf: opts,
-                    msg: err.message
+                    err: err
                 });
             }
         },
@@ -160,26 +154,20 @@ window.Harmony = function (opts) {
              * @param {String} bp
              * Show all ads at a breakpoint.
              */
-            breakpoint: function (bp) {
-                var i, len, id, elem;
-                // Do nothing when jitLoading.
-                if (jitLoad) {
-                    return;
-                }
-                log('show', 'Showing ads at breakpoint ' + bp);
+            breakpoint: function (name) {
+                var i, slot,
+                    set = breakpoints.get(name),
+                    len = set.length;
+                log('show', 'Showing ads at breakpoint ' + name);
                 try {
-                    len = breakpoints[bp].length;
                     for (i = 0; i < len; i += 1) {
-                        id = breakpoints[bp][i].divId;
-                        googletag.display(id);
-                        elem = document.getElementById(id);
-                        if (elem) {
-                            elem.style.display = 'block';
-                        }
+                        slot = set[i];
+                        global.googletag.display(slot.divId);
+                        slot.div.style.display = 'block';
                     }
                 } catch (err) {
                     log('error', {
-                        msg: 'Failed to show breakpoint ' + bp,
+                        msg: 'Failed to show breakpoint ' + name,
                         err: err
                     });
                 }
@@ -190,15 +178,12 @@ window.Harmony = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
-                var id;
-                if (jitLoad) {
-                    return;
-                }
+                var slot;
                 log('show', 'Showing ad at slot ' + name);
                 try {
-                    id = slots[name].divId;
-                    googletag.display(id);
-                    document.getElementById(id).style.display = 'block';
+                    slot = slots.get(name);
+                    global.googletag.display(slot.divId);
+                    slot.div.style.display = 'block';
                 } catch (err) {
                     log('error', {
                         msg: 'Failed to show slot ' + name,
@@ -213,52 +198,27 @@ window.Harmony = function (opts) {
          */
         hide: {
             /**
-             * ### harmony.hide.breakpoint
-             * @param {String} bp
+             * ### harmony.hide.breakpoint(name)
+             * @param {String} name
              * Hides all the ads at a breakpoint.
              */
-            breakpoint: function (bp) {
-                var i, len, id, elem;
-                if (jitLoad) {
-                    return;
-                }
-                log('hide', 'Hiding ads at breakpoint ' + bp);
-                try {
-                    len = breakpoints[bp].length;
-                    for (i = 0; i < len; i += 1) {
-                        id = breakpoints[bp][i].divId;
-                        elem = document.getElementById(id);
-                        if (elem) {
-                            elem.style.display = 'none';
-                        }
-                    }
-                } catch (err) {
-                    log('error', {
-                        msg: 'Failed to hide breakpoint ' + bp,
-                        err: err
-                    });
+            breakpoint: function (name) {
+                var i,
+                    set = breakpoints.get(name),
+                    len = set.length;
+                log('hide', 'Hiding ads at breakpoint ' + name);
+                for (i = 0; i < len; i += 1) {
+                    set[i].div.style.display = 'none';
                 }
             },
             /**
-             * ### harmony.hide.slot
+             * ### harmony.hide.slot(name)
              * @param {String} name
              * Hides a single ad slot.
              */
             slot: function (name) {
-                var id;
-                if (jitLoad) {
-                    return;
-                }
                 log('hide', 'Hiding ad at slot ' + name);
-                try {
-                    id = slots[name].divId;
-                    document.getElementById(id).style.display = 'none';
-                } catch (err) {
-                    log('error', {
-                        msg: 'Failed to hide slot ' + name,
-                        err: err
-                    });
-                }
+                slots.get(name).div.style.display = 'none';
             }
         }
     };

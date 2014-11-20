@@ -1,7 +1,12 @@
+var Harmony = require('../src/harmony.js'),
+    Help = require('./helpers/construction.helper.js');
+
 describe('accessor', function () {
+    var harmony;
     beforeEach(function () {
-        setupHarmony();
-        harmony.load(conf);
+        Help.setupDOM();
+        harmony = Harmony();
+        harmony.load(Help.getConf());
     });
     describe('harmony.slot()', function () {
         it('fetches an existing ad slot', function () {

@@ -3,18 +3,15 @@ module.exports = function (grunt) {
         uglify: {
             build: {
                 files: {
-                    'dist/harmony.min.js': [
-                        'src/*.js'
+                    'dist/harmony.min.js': 'bin/harmony.js'
+                }
+            },
+            options: {
+                mangle: {
+                    except: [
+                        'googletag',
+                        'Lumberjack'
                     ]
-                },
-                options: {
-                    enclose: {},
-                    mangle: {
-                        except: [
-                            'googletag',
-                            'Lumberjack'
-                        ]
-                    }
                 }
             }
         }

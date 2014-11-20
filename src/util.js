@@ -1,48 +1,59 @@
 /**
  * # Utilities
  */
-var util = {
-    // Counter for ensuring unique ad slots.
-    slotCount: 0,
+
+var slots = require('./slotset.js');
+
+module.exports = {
     /**
-     * ## util.noop()
+     * ## Util.noop()
      * Simple no-op.
      */
     noop: function () {},
     /**
-     * ## util.scrubSlot()
+     * ## Util.slotCount
+     * Counter for ensuring unique ad slots.
+     */
+    slotCount: 0,
+    /**
+     * ## Util.scrubConf(conf)
      * Ensures a slot's name and id are unique in the page. If a
      * container has content, it is assumed that an ad call has already
      * been made.
-     * @param {Object} slot Configuration for a single ad slot.
+     * @param {Object} conf Configuration for a single ad slot.
+     * @return {Object} Clean slot configuration.
      */
-    scrubSlot: function (slot) {
-        var suffix,
-            el = document.getElementById(slot.id);
+    scrubConf: function (conf) {
+        var suffix, el,
+            temp = {
+                el: {}
+            };
+
         // Only do work if there are multiple instances.
-        if (slot.name in slots) {
-            if (el && el.innerHTML) {
-                // Ad call has already been made for this element,
-                // so update its id and query again for next div.
-                this.slotCount += 1;
-                suffix = '-' + this.slotCount;
-                el.id += suffix;
-                slots[slot.name].divId = el.id;
-                slots[slot.name + suffix] = slots[slot.name];
-                el = document.getElementById(slot.id);
-            }
-            if (el) {
-                this.slotCount += 1;
-                suffix = '-' + this.slotCount;
-                el.id += suffix;
-                slot.id += suffix;
-                slot.name += suffix;
-            }
-        }
-        if (!el) {
-            // Log error if slot is not in the dom.
+        if (slots.has(conf.name)) {
+            do {
+                el = document.getElementById(conf.id);
+                if (el) {
+                    if (el.innerHTML) {
+                        // Slot has already been processed,
+                        // so move it aside and query again.
+                        temp.el = el;
+                        temp.id = el.id;
+                        el.id = 'h-temp';
+                    } else {
+                        this.slotCount += 1;
+                        suffix = '-h' + this.slotCount;
+                        el.id += suffix;
+                        // Restore any existing slot.
+                        temp.el.id = temp.id;
+                        conf.id = el.id;
+                        conf.name += suffix;
+                        return conf;
+                    }
+                }
+            } while (el);
             throw Error('Ad slot container was not found in the DOM.');
         }
-        return slot;
+        return conf;
     }
 };

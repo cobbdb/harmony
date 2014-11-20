@@ -1,38 +1,22 @@
-var resolve = require('bower-path');
+var $ = require('curb');
+
 module.exports = function (grunt) {
     grunt.config.merge({
         jasmine: {
-            dist: {
-                src: 'dist/*.js',
+            global: {
+                src: 'dist/harmony.min.js',
                 options: {
-                    specs: [
-                        'tests/*.spec.js'
-                    ]
+                    specs: 'tests/global/*.spec.js'
                 }
             },
-            src: {
-                src: [
-                    'src/*.js'
-                ],
-                options: {
-                    specs: 'tests/**/*.spec.js'
-                }
+            modules: {
+                src: $('bin/tests/%s.spec.js',
+                    grunt.option('spec') || '*'
+                )
             },
             options: {
-                helpers: 'tests/helpers/*.helper.js',
-                vendor: [
-                    resolve('lumberjack'),
-                    resolve('jquery')
-                ],
                 display: 'full',
-                summary: false,
-                template: require('grunt-template-jasmine-istanbul'),
-                templateOptions: {
-                    coverage: 'bin/coverage/coverage.json',
-                    report: {
-                        type: 'text-summary'
-                    }
-                }
+                summary: false
             }
         }
     });

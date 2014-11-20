@@ -7,17 +7,18 @@ module.exports = function (grunt) {
     // Load harmony task confs.
     grunt.loadTasks('tasks');
 
-    grunt.registerTask('default', 'Build without docs.', [
-        'jasmine:src',
+    grunt.registerTask('default', 'Full build suite.', [
+        'browserify',
+        'jasmine:modules',
         'jshint',
         'uglify:build',
-        'jasmine:dist'
+        'jasmine:global'
     ]);
-    grunt.registerTask('test', 'Run unit tests.', [
-        'jasmine:src'
+    grunt.registerTask('test', 'Run tests.', [
+        'browserify:tests',
+        'jasmine:modules'
     ]);
-    grunt.registerTask('build', 'Full build suite including docs.', [
-        'default',
+    grunt.registerTask('docs', 'Build and deploy autodocs.', [
         'docker-clone'
     ]);
 };

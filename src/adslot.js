@@ -1,7 +1,8 @@
+var log = require('./log.js');
+
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
- * @param {Object} opts Options object.
  * @param {String} opts.name Slot name, ex) RP01
  * @param {String} opts.id Slot's div id, ex) ad-div-RP01
  * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]
@@ -13,59 +14,71 @@
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
-function AdSlot(pubads, opts) {
-    var slot, i;
-    // Create the callback queue for this slot.
-    var cbQueue = {
-        slotRenderEnded: []
-    };
-    // Capture timestamp for performance metrics.
-    var tsCreate = new Date();
+//function AdSlot(pubads, opts) {
+module.exports = function (pubads, opts) {
+    var slot, i, elem,
+        // Create the callback queue for this slot.
+        cbQueue = {
+            slotRenderEnded: []
+        },
+        // Capture timestamp for performance metrics.
+        tsCreate = new Date().getTime(),
+        // Set default values.
+        mapping = opts.mapping || [],
+        companion = opts.companion || false,
+        interstitial = opts.interstitial || false,
+        targeting = opts.targeting || {};
+
     log('init', {
         msg: 'Creating new ad slot.',
         conf: opts
     });
 
-    // Set default values.
-    var mapping = opts.mapping || [];
-    var companion = opts.companion || false;
-    var interstitial = opts.interstitial || false;
-    var targeting = opts.targeting || {};
-
     // Define which type of slot this is.
     if (opts.interstitial) {
-        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+        slot = global.googletag.defineOutOfPageSlot(opts.adunit, opts.id);
     } else {
-        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+        slot = global.googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
     /**
-     * ## harmony.slot.&lt;name&gt;.divId
+     * ## harmony.slot(&lt;name&gt;).divId
      * Slot's containing div id.
      * @type {String}
      */
     slot.divId = opts.id;
     /**
-     * ## harmony.slot.&lt;name&gt;.name
+     * ## harmony.slot(&lt;name&gt;).div
+     * Slot's containing DOM element.
+     * @type {Element}
+     */
+    elem = global.document.getElementById(opts.id);
+    if (elem) {
+        slot.div = elem;
+    } else {
+        throw Error('Ad slot container was not found in the DOM.');
+    }
+    /**
+     * ## harmony.slot(&lt;name&gt;).name
      * Slot's name.
      * @type {String}
      */
     slot.name = opts.name;
     /**
-     * ## harmony.slot.&lt;name&gt;.breakpoint
+     * ## harmony.slot(&lt;name&gt;).breakpoint
      * This slot's breakpoint.
      * @type {String}
      */
     slot.breakpoint = opts.breakpoint;
     /**
-     * ## harmony.slot.&lt;name&gt;.sizes
+     * ## harmony.slot(&lt;name&gt;).sizes
      * This slot's possible sizes. Note, this is
      * not the current size of the ad slot.
      * @type {Array}
      */
     slot.sizes = opts.sizes;
     /**
-     * ## harmony.slot.&lt;name&gt;.adunit
+     * ## harmony.slot(&lt;name&gt;).adunit
      * Ad unit code of this ad slot.
      */
     slot.adunit = opts.adunit;
@@ -105,7 +118,7 @@ function AdSlot(pubads, opts) {
         if (event.slot === slot) {
             log('event', 'slotRenderEnded for ' + opts.name);
             // Log the total load time of this slot.
-            now = new Date();
+            now = new Date().getTime();
             log('metric', {
                 event: 'Total load time',
                 slot: opts.name,
@@ -121,10 +134,10 @@ function AdSlot(pubads, opts) {
 
     // Assign companion ad service if requested.
     if (companion) {
-        slot.addService(googletag.companionAds());
+        slot.addService(global.googletag.companionAds());
     }
 
     // Add the publisher service and return the new ad slot.
     slot.addService(pubads);
     return slot;
-}
+};
