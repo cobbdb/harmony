@@ -14,7 +14,6 @@ var log = require('./log.js');
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
-//function AdSlot(pubads, opts) {
 module.exports = function (pubads, opts) {
     var slot, i, elem,
         // Create the callback queue for this slot.
@@ -42,13 +41,13 @@ module.exports = function (pubads, opts) {
     }
 
     /**
-     * ## harmony.slot(&lt;name&gt;).divId
+     * ## harmony.slot(name).divId
      * Slot's containing div id.
      * @type {String}
      */
     slot.divId = opts.id;
     /**
-     * ## harmony.slot(&lt;name&gt;).div
+     * ## harmony.slot(name).div
      * Slot's containing DOM element.
      * @type {Element}
      */
@@ -59,26 +58,26 @@ module.exports = function (pubads, opts) {
         throw Error('Ad slot container was not found in the DOM.');
     }
     /**
-     * ## harmony.slot(&lt;name&gt;).name
+     * ## harmony.slot(name).name
      * Slot's name.
      * @type {String}
      */
     slot.name = opts.name;
     /**
-     * ## harmony.slot(&lt;name&gt;).breakpoint
+     * ## harmony.slot(name).breakpoint
      * This slot's breakpoint.
      * @type {String}
      */
     slot.breakpoint = opts.breakpoint;
     /**
-     * ## harmony.slot(&lt;name&gt;).sizes
+     * ## harmony.slot(name).sizes
      * This slot's possible sizes. Note, this is
      * not the current size of the ad slot.
      * @type {Array}
      */
     slot.sizes = opts.sizes;
     /**
-     * ## harmony.slot(&lt;name&gt;).adunit
+     * ## harmony.slot(name).adunit
      * Ad unit code of this ad slot.
      */
     slot.adunit = opts.adunit;
@@ -99,7 +98,7 @@ module.exports = function (pubads, opts) {
     }
 
     /**
-     * ## harmony.slot.&lt;name&gt;.on
+     * ## harmony.slot(name).on
      * Attaches a callback to a DFP event. Currently, only the
      * slotRenderEnded event is offered by the DFP API.
      * @param {String} event Name of the event to bind to.

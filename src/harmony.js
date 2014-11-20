@@ -112,7 +112,7 @@ module.exports = function (opts) {
          */
         breakpoint: breakpoints.get,
         /**
-         * ## harmony.defineSlot
+         * ## harmony.defineSlot(opts)
          * Create a new adSlot in the page.
          * @param {String} opts.name Slot name, ex) RP01
          * @param {String} opts.id Slot's div id, ex) ad-div-RP01
@@ -150,8 +150,8 @@ module.exports = function (opts) {
          */
         show: {
             /**
-             * ### harmony.show.breakpoint
-             * @param {String} bp
+             * ### harmony.show.breakpoint(name)
+             * @param {String} name
              * Show all ads at a breakpoint.
              */
             breakpoint: function (name) {
@@ -173,7 +173,7 @@ module.exports = function (opts) {
                 }
             },
             /**
-             * ### harmony.show.slot
+             * ### harmony.show.slot(name)
              * @param {String} name
              * Show a single ad slot.
              */
