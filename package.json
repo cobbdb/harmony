@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Doubleclick JS API Helper",
   "main": "src/harmony.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "author": "Dan Cobb <cobbdb@gmail.com> (http://www.github.com/cobbdb)",
   "license": "MIT",
   "dependencies": {
-    "lumberjackjs": "^1.1.3"
+    "lumberjackjs": "^1.1.5"
   },
   "devDependencies": {
     "curb": "^1.0.0",

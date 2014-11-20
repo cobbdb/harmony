@@ -6,12 +6,15 @@ var Harmony = require('../src/harmony.js'),
 describe('harmony setup', function () {
     var harmony, conf;
     beforeEach(function () {
-        conf = Help.setupDOM();
         harmony = Harmony({
             forceLog: true
         });
+        harmony.log.clear();
     });
     describe('harmony.load()', function () {
+        beforeEach(function () {
+            conf = Help.setupDOM();
+        });
         it('creates ad slots', function () {
             harmony.load(conf);
             expect(harmony.slot('TST00').divId).toEqual('DVID00');
@@ -64,7 +67,7 @@ describe('harmony setup', function () {
         });
     });
     describe('harmony.defineSlot()', function () {
-        var newOptions = function () {
+        var newConf = function () {
                 return Options({
                     name: 'TST22',
                     breakpoint: 'BKP22',
@@ -72,16 +75,14 @@ describe('harmony setup', function () {
                 });
             },
             newSlot = function () {
-                Help.createDiv({
-                    id: 'DVID22',
-                    breakpoint: 'BKP22'
-                });
-                return newOptions();
+                var conf = newConf();
+                Help.createDiv(conf);
+                return conf;
             };
         it('creates an ad slot', function () {
             var opts = newSlot();
             harmony.defineSlot(opts);
-            expect(harmony.slot('TST22')).toBeDefined();
+            expect(harmony.slot('TST22').breakpoint).toEqual('BKP22');
             expect(harmony.breakpoint('BKP22')[0].divId).toEqual('DVID22');
         });
         it('handles duplicate slot names for sync pages', function () {
@@ -90,9 +91,9 @@ describe('harmony setup', function () {
             harmony.defineSlot(newSlot());
             harmony.defineSlot(newSlot());
             expect(harmony.slot('TST22').divId).toEqual('DVID22');
-            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1');
-            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2');
-            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3');
+            expect(harmony.slot('TST22-h1').divId).toEqual('DVID22-h1');
+            expect(harmony.slot('TST22-h2').divId).toEqual('DVID22-h2');
+            expect(harmony.slot('TST22-h3').divId).toEqual('DVID22-h3');
         });
         it('handles duplicate slot names for async pages', function () {
             harmony.defineSlot(newSlot());
@@ -106,54 +107,21 @@ describe('harmony setup', function () {
             // Load in some new async ad slots.
             harmony.defineSlot(newSlot());
             harmony.defineSlot(newSlot());
-            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1');
-            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2');
-            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3');
-            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4');
-            expect(harmony.slot('TST22-5').divId).toEqual('DVID22-5');
-            // Smoke test the leftover artifact.
-            expect(harmony.slot('TST22').divId).toBeDefined('smoke test TST22');
-        });
-        it('returns the original slot conf on dom error', function () {
-            harmony.defineSlot(newSlot());
-            harmony.defineSlot(newSlot());
-            harmony.defineSlot(newSlot());
-            $('.BKP22').text('test ad content');
-            harmony.defineSlot(newOptions());
-            harmony.defineSlot(newOptions());
-            harmony.defineSlot(newOptions());
-            // Expect error messages for failed DOM queries.
-            expect(harmony.log.readback('error').length).toEqual(3);
-            expect(harmony.slot('TST22').divId).toBeDefined('group A, TST22');
-            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group A, TST22-1');
-            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group A, TST22-2');
-            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group A, TST22-3');
-            expect(harmony.slot('TST22-4').divId).not.toBeDefined('group A, TST22-4');
-            harmony.defineSlot(newSlot());
-            expect(harmony.slot('TST22').divId).toBeDefined('group B, TST22');
-            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group B, TST22-1');
-            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group B, TST22-2');
-            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group B, TST22-3');
-            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4', 'group B, TST22-4');
-            expect(harmony.slot('TST22-5').divId).not.toBeDefined('group B, TST22-5');
-            expect(harmony.slot('TST22-6').divId).not.toBeDefined('group B, TST22-6');
-            harmony.defineSlot(newSlot());
-            expect(harmony.slot('TST22').divId).toBeDefined('group C, TST22');
-            expect(harmony.slot('TST22-1').divId).toEqual('DVID22-1', 'group C, TST22-1');
-            expect(harmony.slot('TST22-2').divId).toEqual('DVID22-2', 'group C, TST22-2');
-            expect(harmony.slot('TST22-3').divId).toEqual('DVID22-3', 'group C, TST22-3');
-            expect(harmony.slot('TST22-4').divId).toEqual('DVID22-4', 'group C, TST22-4');
-            expect(harmony.slot('TST22-5').divId).toEqual('DVID22-5', 'group C, TST22-5');
-            expect(harmony.slot('TST22-6').divId).not.toBeDefined('group C, TST22-6');
+            expect(harmony.slot('TST22').divId).toEqual('DVID22');
+            expect(harmony.slot('TST22-h1').divId).toEqual('DVID22-h1');
+            expect(harmony.slot('TST22-h2').divId).toEqual('DVID22-h2');
+            expect(harmony.slot('TST22-h3').divId).toEqual('DVID22-h3');
+            expect(harmony.slot('TST22-h4').divId).toEqual('DVID22-h4');
         });
         it('logs missing dom elements', function () {
             var opts = newSlot();
             opts.id = 'NOTHERE';
             harmony.defineSlot(opts);
-            expect(harmony.slot('TST22')).not.toBeDefined();
-            expect(harmony.log.readback('error').length).toEqual(1);
-            expect(harmony.log.readback('error')[0].data.name).toEqual('TST22');
-            expect(harmony.log.readback('error')[0].data.conf.id).toEqual('NOTHERE');
+            expect(harmony.slot('TST22').name).toBeUndefined();
+            var errors = harmony.log.readback('error');
+            expect(errors.length).toEqual(1);
+            expect(errors[0].data.conf.name).toEqual('TST22');
+            expect(errors[0].data.conf.id).toEqual('NOTHERE');
         });
     });
 });

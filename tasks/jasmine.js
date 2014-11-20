@@ -1,5 +1,4 @@
-var resolve = require('bower-path'),
-    $ = require('curb');
+var $ = require('curb');
 
 module.exports = function (grunt) {
     grunt.config.merge({
@@ -7,7 +6,7 @@ module.exports = function (grunt) {
             global: {
                 src: 'dist/harmony.min.js',
                 options: {
-                    specs: 'tests/global/harmony.spec.js'
+                    specs: 'tests/global/*.spec.js'
                 }
             },
             modules: {
