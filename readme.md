@@ -8,9 +8,25 @@ Doubleclick JS API Helper.
     $ npm install harmonyjs
 
 -------------
-Harmony is a tool to make the DFP API a bit more simple to use. There are
-methods to help you quickly create new ad slots, adjust targeting on the fly,
-and attach side-effects.
+##### [Link to full autodocs](https://cobbdb.github.io/harmony)
+
+Harmony is provided as both a CommonJS module via `npm install harmonyjs`
+and as a JS global variable via `bower install harmony`.
+
+Some great sites that use Harmony:
+* www.ajc.com
+* www.statesman.com
+* www.palmbeachpost.com
+* www.wsbtv.com
+* www.wedr.com
+* www.kirotv.com
+* www.austin360.com
+* .. and over a hundred more sites!
+
+-------------
+Harmony is a DFP supplement meant for large-scale enterprise advertising systems.
+There are methods to help you quickly create new ad slots, adjust targeting on
+the fly, and attach side-effects.
 
 The original purpose behind the creation of Harmony was to provide a
 lightning-fast JS API that could injest a block of JSON ad configuration

@@ -15,7 +15,7 @@ var log = require('./log.js');
  * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
  */
 module.exports = function (pubads, opts) {
-    var slot, i, elem,
+    var slot, i,
         // Create the callback queue for this slot.
         cbQueue = {
             slotRenderEnded: []
@@ -33,6 +33,11 @@ module.exports = function (pubads, opts) {
         conf: opts
     });
 
+    // Smoke test that the slot's element id is valid in the DOM.
+    if (!global.document.getElementById(opts.id)) {
+        throw Error('Ad slot container was not found in the DOM.');
+    }
+
     // Define which type of slot this is.
     if (opts.interstitial) {
         slot = global.googletag.defineOutOfPageSlot(opts.adunit, opts.id);
@@ -46,17 +51,6 @@ module.exports = function (pubads, opts) {
      * @type {String}
      */
     slot.divId = opts.id;
-    /**
-     * ## harmony.slot(name).div
-     * Slot's containing DOM element.
-     * @type {Element}
-     */
-    elem = global.document.getElementById(opts.id);
-    if (elem) {
-        slot.div = elem;
-    } else {
-        throw Error('Ad slot container was not found in the DOM.');
-    }
     /**
      * ## harmony.slot(name).name
      * Slot's name.

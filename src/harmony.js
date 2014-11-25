@@ -62,7 +62,7 @@ module.exports = function (opts) {
                     breakpoints.add(slot.breakpoint, slot);
                 } catch (err) {
                     log('error', {
-                        type: 'load() error',
+                        msg: 'Slot failed to load during call to load().',
                         conf: conf,
                         err: err
                     });
@@ -137,7 +137,7 @@ module.exports = function (opts) {
                 breakpoints.add(opts.breakpoint, slot);
             } catch (err) {
                 log('error', {
-                    type: 'defineSlot() error',
+                    msg: 'Slot failed to load during call to defineSlot()',
                     conf: opts,
                     err: err
                 });
@@ -155,19 +155,33 @@ module.exports = function (opts) {
              * Show all ads at a breakpoint.
              */
             breakpoint: function (name) {
-                var i, slot,
+                var i, slot, el,
                     set = breakpoints.get(name),
                     len = set.length;
-                log('show', 'Showing ads at breakpoint ' + name);
+                log('show', {
+                    msg: 'Showing ads at breakpoint',
+                    breakpoint: name
+                });
                 try {
                     for (i = 0; i < len; i += 1) {
                         slot = set[i];
                         global.googletag.display(slot.divId);
-                        slot.div.style.display = 'block';
+                        el = document.getElementById(slot.divId);
+                        if (el) {
+                            el.style.display = 'block';
+                        } else {
+                            log('error', {
+                                msg: 'Failed to show slot for breakpoint',
+                                breakpoint: name,
+                                reason: 'Slot was missing from the DOM',
+                                slot: slot
+                            });
+                        }
                     }
                 } catch (err) {
                     log('error', {
-                        msg: 'Failed to show breakpoint ' + name,
+                        msg: 'Failed to show breakpoint',
+                        breakpoint: name,
                         err: err
                     });
                 }
@@ -178,15 +192,20 @@ module.exports = function (opts) {
              * Show a single ad slot.
              */
             slot: function (name) {
-                var slot;
-                log('show', 'Showing ad at slot ' + name);
+                var slot, el;
+                log('show', {
+                    msg: 'Showing slot',
+                    name: name
+                });
                 try {
                     slot = slots.get(name);
                     global.googletag.display(slot.divId);
-                    slot.div.style.display = 'block';
+                    el = document.getElementById(slot.divId);
+                    el.style.display = 'block';
                 } catch (err) {
                     log('error', {
-                        msg: 'Failed to show slot ' + name,
+                        msg: 'Failed to show slot',
+                        name: name,
                         err: err
                     });
                 }
@@ -203,12 +222,22 @@ module.exports = function (opts) {
              * Hides all the ads at a breakpoint.
              */
             breakpoint: function (name) {
-                var i,
+                var i, el,
                     set = breakpoints.get(name),
                     len = set.length;
                 log('hide', 'Hiding ads at breakpoint ' + name);
                 for (i = 0; i < len; i += 1) {
-                    set[i].div.style.display = 'none';
+                    el = document.getElementById(set[i].divId);
+                    if (el) {
+                        el.style.display = 'none';
+                    } else {
+                        log('error', {
+                            msg: 'Failed to hide slot for breakpoint',
+                            breakpoint: name,
+                            reason: 'Slot was missing from the DOM',
+                            id: set[i].divId
+                        });
+                    }
                 }
             },
             /**
@@ -217,8 +246,22 @@ module.exports = function (opts) {
              * Hides a single ad slot.
              */
             slot: function (name) {
-                log('hide', 'Hiding ad at slot ' + name);
-                slots.get(name).div.style.display = 'none';
+                var el,
+                    slot = slots.get(name);
+                log('hide', {
+                    msg: 'Hiding slot',
+                    name: name
+                });
+                try {
+                    el = document.getElementById(slot.divId);
+                    el.style.display = 'none';
+                } catch (err) {
+                    log('error', {
+                        msg: 'Failed to hide slot',
+                        name: name,
+                        err: err
+                    });
+                }
             }
         }
     };

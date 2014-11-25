@@ -1,5 +1,6 @@
 var Harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
+    Conf = require('./helpers/slot-options.helper.js'),
     $ = require('jquery');
 
 describe('display method', function () {
@@ -55,11 +56,34 @@ describe('display method', function () {
                 harmony.hide.breakpoint('TSTPNT00');
                 var set = $('.TSTPNT00');
                 expect(set.length).toEqual(2);
-                expect(set[0].style.display).toEqual('none');
-                expect(set[1].style.display).toEqual('none');
+                expect(set[0].style.display).toEqual('none', 'set[0], TSTPNT00');
+                expect(set[1].style.display).toEqual('none', 'set[1], TSTPNT00');
                 set = $('.TSTPNT01');
                 expect(set.length).toEqual(1);
-                expect(set[0].style.display).not.toEqual('none');
+                expect(set[0].style.display).not.toEqual('none', 'set[0], TSTPNT01');
+            });
+            it('works with duplicates', function () {
+                // Smoke test that mappings look right.
+                expect(harmony.slot('TST01').divId).toEqual('DVID01', 'divId, precheck');
+
+                // Create a duplicate TST01.
+                var conf = Conf({
+                    name: 'TST01',
+                    id: 'DVID01',
+                    breakpoint: 'TSTPNT01'
+                });
+                Help.createDiv(conf);
+                harmony.defineSlot(conf);
+                // Ensure the new mappings are correct.
+                expect(harmony.slot('TST01').divId).toEqual('DVID01');
+                expect(harmony.slot('TST01-h1').divId).toEqual('DVID01-h1');
+
+                // Hide the breakpoint and ensure all divs are hidden.
+                harmony.hide.breakpoint('TSTPNT01');
+                var set = $('.TSTPNT01');
+                expect(set.length).toEqual(2);
+                expect(set[0].style.display).toEqual('none', 'set[0]');
+                expect(set[1].style.display).toEqual('none', 'set[1]');
             });
         });
         describe('slot()', function () {

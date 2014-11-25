@@ -38,7 +38,6 @@ describe('harmony setup', function () {
             expect(harmony.slot('TST00').name).toEqual('TST00');
             expect(harmony.slot('TST00').divId).toEqual('DVID00');
             expect(harmony.slot('TST00-h1').divId).toEqual('DVID00-h1');
-            expect(harmony.slot('TST00-h1').div.id).toEqual('DVID00-h1');
             expect(harmony.slot('TST00-h1').name).toEqual('TST00-h1');
         });
         it('adjusts element ids for duplicates', function () {
@@ -48,7 +47,7 @@ describe('harmony setup', function () {
             var slot = harmony.slot('TST00-h1'),
                 el = document.getElementById(slot.divId);
             expect(el.id).toEqual('DVID00-h1');
-            expect(slot.div.id).toEqual('DVID00-h1');
+            expect(slot.divId).toEqual('DVID00-h1');
             // Smoke test error logs.
             expect(harmony.log.readback('error').length).toEqual(0);
         });
