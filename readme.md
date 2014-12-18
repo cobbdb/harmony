@@ -110,7 +110,7 @@ Here is an example of a page setup using Harmony and jQuery.
                 targeting: {
                     'custom': 'slot targeting'
                 },
-                breakpoints: 'testads'
+                breakpoint: 'testads'
             }],
             targeting: {
                 'custom': 'system targeting'
