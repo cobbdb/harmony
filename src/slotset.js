@@ -15,7 +15,8 @@ module.exports = {
          * ## set.cached.callbacks(name)
          * Fetch any cached callbacks for this slot.
          * @param {String} slotname Name of the ad slot.
-         * @return {Array} Set of callbacks or empty array.
+         * @return {Object} Dictionary of events and
+         * their callbacks as an Array.
          */
         callbacks: function (slotname) {
             return cache.cb[slotname] || {};
