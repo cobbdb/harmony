@@ -1,4 +1,5 @@
 var Harmony = require('../src/harmony.js'),
+    Options = require('./helpers/slot-options.helper.js'),
     Help = require('./helpers/construction.helper.js');
 
 describe('accessor', function () {
@@ -11,12 +12,54 @@ describe('accessor', function () {
     describe('harmony.slot()', function () {
         it('fetches an existing ad slot', function () {
             var slot = harmony.slot('TST01');
+            expect(slot.mock).toBeUndefined();
             expect(slot.divId).toEqual('DVID01');
         });
         it('fetches a mock slot by default', function () {
             var slot = harmony.slot('BAD01');
-            expect(slot).toBeDefined();
+            expect(slot.mock).toBe(true);
             expect(slot.divId).toBeUndefined();
+        });
+        describe('can cache', function () {
+            it('callbacks', function (done) {
+                var slot = harmony.slot('new1');
+                expect(slot.mock).toBe(true);
+                slot.on('evt', function (num) {
+                    expect(num).toEqual(321);
+                    done();
+                });
+                var opts = Options({
+                    id: 'newid',
+                    name: 'new1'
+                });
+                Help.createDiv({
+                    id: 'newid'
+                });
+                harmony.defineSlot(opts);
+                slot = harmony.slot('new1');
+                expect(slot.mock).toBeUndefined();
+                slot.trigger('evt', 321);
+            });
+            it('targeting', function () {
+                var slot = harmony.slot('new1');
+                expect(slot.mock).toBe(true);
+                slot.setTargeting('key1', 'val1');
+                var opts = Options({
+                    id: 'newid',
+                    name: 'new1',
+                    targeting: {
+                        key2: 'val2'
+                    }
+                });
+                Help.createDiv({
+                    id: 'newid'
+                });
+                harmony.defineSlot(opts);
+                slot = harmony.slot('new1');
+                expect(slot.mock).toBeUndefined();
+                expect(slot.setTargeting).toHaveBeenCalledWith('key1', 'val1');
+                expect(slot.setTargeting).toHaveBeenCalledWith('key2', 'val2');
+            });
         });
     });
     describe('harmony.breakpoint()', function () {

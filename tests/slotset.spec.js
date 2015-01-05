@@ -52,4 +52,45 @@ describe('SlotSet', function () {
             expect(slot.mock).toEqual(true);
         });
     });
+    describe('cached', function () {
+        describe('callbacks', function () {
+            it('queues ahead', function (done) {
+                var slot = SlotSet.get('mock');
+                expect(slot.mock).toBe(true);
+                slot.on('evt1', function (num) {
+                    expect(num).toEqual(321);
+                });
+                slot.on('evt1', function (num) {
+                    expect(num).toEqual(123);
+                });
+                slot.on('evt2', function (num) {
+                    expect(num).toEqual(132);
+                    done();
+                });
+                var cbs = SlotSet.cached.callbacks('mock');
+                expect(cbs.evt1.length).toEqual(2);
+                cbs.evt1[0](321);
+                cbs.evt1[1](123);
+                expect(cbs.evt2.length).toEqual(1);
+                cbs.evt2[0](132);
+            });
+        });
+        describe('targeting', function () {
+            it('queues ahead', function () {
+                var slot = SlotSet.get('mock');
+                expect(slot.mock).toBe(true);
+                slot.setTargeting('key1', 'val1');
+                slot.setTargeting('key2', 'val2');
+                var targeting = SlotSet.cached.targeting('mock');
+                expect(targeting.key1).toEqual('val1');
+                expect(targeting.key2).toEqual('val2');
+            });
+            it('returns safely if missing', function () {
+                var slot = SlotSet.get('mock');
+                expect(slot.mock).toBe(true);
+                var targeting = SlotSet.cached.targeting('mock');
+                expect(targeting.key1).not.toBeDefined();
+            });
+        });
+    });
 });

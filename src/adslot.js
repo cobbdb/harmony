@@ -1,4 +1,5 @@
-var log = require('./log.js');
+var log = require('./log.js'),
+    set = require('./slotset.js');
 
 /**
  * # Ad Slot
@@ -16,13 +17,10 @@ var log = require('./log.js');
  */
 module.exports = function (pubads, opts) {
     var slot, i,
-        // Create the callback queue for this slot.
-        cbQueue = {
-            slotRenderEnded: []
-        },
+        // Grab any preloaded callbacks.
+        cbQueue = set.cached.callbacks(opts.name),
         // Capture timestamp for performance metrics.
         tsCreate = new Date().getTime(),
-        // Set default values.
         mapping = opts.mapping || [],
         companion = opts.companion || false,
         interstitial = opts.interstitial || false,
@@ -82,17 +80,24 @@ module.exports = function (pubads, opts) {
         slot.setTargeting(i, targeting[i]);
     }
 
+    // Load in any targeting set before this slow was defined.
+    targeting = set.cached.targeting(opts.name);
+    for (i in targeting) {
+        slot.setTargeting(i, targeting[i]);
+    }
+
     // Assign size mapping for responsive ad slots.
     slot.defineSizeMapping(mapping);
 
     // Load any provided callback into queue.
+    cbQueue.slotRenderEnded = cbQueue.slotRenderEnded || [];
     if (typeof opts.callback === 'function') {
         cbQueue.slotRenderEnded.push(opts.callback);
         log('init', 'Attached provided callback for ' + opts.name);
     }
 
     /**
-     * ## harmony.slot(name).on
+     * ## harmony.slot(name).on(event, cb)
      * Attaches a callback to a DFP event. Currently, only the
      * slotRenderEnded event is offered by the DFP API.
      * @param {String} event Name of the event to bind to.
@@ -103,6 +108,28 @@ module.exports = function (pubads, opts) {
         cbQueue[event] = cbQueue[event] || [];
         cbQueue[event].push(cb);
         log('init', 'Attached new callback for ' + event);
+    };
+
+    /**
+     * ## harmony.slot(name).trigger(event, data)
+     * Manually fire an event.
+     * @param {String} event Name of the event.
+     * @param {Any} [data] Data to pass to each callback.
+     */
+    slot.trigger = function (event, data) {
+        var i, len;
+        if (event in cbQueue) {
+            log('event', 'Triggering ' + event);
+            len = cbQueue[event].length;
+            for (i = 0; i < len; i += 1) {
+                cbQueue[event][i](data);
+            }
+        } else {
+            log('event', {
+                msg: 'Failed to trigger ' + event,
+                reason: 'No callbacks were found.'
+            });
+        }
     };
 
     // Attach a listener for the slotRenderEnded event.
@@ -127,7 +154,9 @@ module.exports = function (pubads, opts) {
 
     // Assign companion ad service if requested.
     if (companion) {
-        slot.addService(global.googletag.companionAds());
+        slot.addService(
+            global.googletag.companionAds()
+        );
     }
 
     // Add the publisher service and return the new ad slot.
