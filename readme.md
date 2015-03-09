@@ -43,9 +43,22 @@ of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
 
 #### Quick setup.
-Create your Harmony instance and use it however you want.
+Create your Harmony instance and use it however you want. There are two
+ways to initialize a Harmony instance:
+
+###### as a global
+```html
+<script src="path/to/harmony.js"></script>
+<script>
+    mylibs.harmony = Harmony();
+</script>
+```
+
+###### as a CommonJS module
 ```javascript
-mylibs.harmony = Harmony();
+// my-ads.js
+var Harmony = require('harmonyjs');
+module.exports = Harmony();
 ```
 
 #### Load ad config en bulk.
