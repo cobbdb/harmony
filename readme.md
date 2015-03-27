@@ -29,12 +29,12 @@ There are methods to help you quickly create new ad slots, adjust targeting on
 the fly, and attach side-effects.
 
 The original purpose behind the creation of Harmony was to provide a
-lightning-fast JS API that could injest a block of JSON ad configuration
+lightning-fast JS API that could ingest a block of JSON ad configuration
 to set up ads for a page. Beyond that, however, there are many utility
 methods that simplify DFP ad code and give you powerful tools to build
 dynamic page content around ad performance.
 
-There is also build-in ad logging and metrics provided via the
+There is also built-in ad logging and metrics provided via the
 [Lumberjack](https://github.com/cobbdb/lumberjack) library.
 
 [Full docs are available here](https://cobbdb.github.io/harmony), but
@@ -106,6 +106,7 @@ mylibs.harmony.log.readback('metric', true);
 Here is an example of a page setup using Harmony and jQuery.
 ```html
 <head>
+    <script src="path/to/harmony.js"></script>
     <script>
     var libs = {
         harmony: Harmony()
@@ -114,7 +115,7 @@ Here is an example of a page setup using Harmony and jQuery.
         libs.harmony.load({
             slots: [{
                 name: 'ad01',
-                id: 'ad01',
+                id: 'ad-div-01',
                 adunit: '123/test/unit',
                 sizes: [
                     [300, 250],
@@ -123,19 +124,19 @@ Here is an example of a page setup using Harmony and jQuery.
                 targeting: {
                     'custom': 'slot targeting'
                 },
-                breakpoint: 'testads'
+                breakpoint: 'myads'
             }],
             targeting: {
                 'custom': 'system targeting'
             }
         });
         googletag.enableServices();
-        libs.harmony.show.breakpoint('testads');
+        libs.harmony.show.breakpoint('myads');
     });
     </script>
 </head>
 <body>
-    <div id="ad01"></div>
+    <div id="ad-div-01"></div>
 </body>
 ```
 
