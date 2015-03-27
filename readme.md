@@ -88,6 +88,12 @@ var slot = mylibs.harmony.slot('MY01'),
     slotId = slot.divId,
     slotAdunit = slot.adunit;
 ```
+You can even directly call DFP slot methods.
+```javascript
+var slot = mylibs.harmony.slot('MY01'),
+    targeting = slot.getTargetingMap();
+slot.setTargeting('some', 'new targeting!');
+```
 
 #### Debug the subsystem.
 Logging lets you see what happened and when, so you can focus less
