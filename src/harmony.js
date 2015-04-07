@@ -7,7 +7,9 @@ var Util = require('./util.js'),
     AdSlot = require('./adslot.js'),
     log = require('./log.js'),
     slots = require('./slotset.js'),
-    breakpoints = require('./bpset.js');
+    breakpoints = require('./bpset.js'),
+    BaseClass = require('baseclassjs'),
+    Eventable = require('./event-handler.js');
 
 /**
  * ## Harmony()
@@ -22,7 +24,7 @@ module.exports = function (opts) {
     }
     log('init', 'Harmony defined.');
 
-    return {
+    return BaseClass({
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
@@ -264,5 +266,12 @@ module.exports = function (opts) {
                 }
             }
         }
-    };
+    }).implement(
+        /**
+         * ### harmony.on/one/off/trigger
+         * Exposes event handling at the system level.
+         * @see event-handler.js
+         */
+        Eventable()
+    );
 };

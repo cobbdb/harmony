@@ -5,7 +5,8 @@
 var Util = require('./util.js'),
     slots = {},
     cache = {
-        cb: {},
+        events: {},
+        singles: {},
         targ: {}
     };
 
@@ -19,7 +20,10 @@ module.exports = {
          * their callbacks as an Array.
          */
         callbacks: function (slotname) {
-            return cache.cb[slotname] || {};
+            return {
+                events: cache.events[slotname] || {},
+                singles: cache.singles[slotname] || {}
+            };
         },
         /**
          * ## set.cached.targeting(name)
@@ -43,9 +47,18 @@ module.exports = {
             // Allow events to queue up before this slot
             // has been defined.
             on: function (evtname, cb) {
-                cache.cb[name] = cache.cb[name] || {};
-                cache.cb[name][evtname] = cache.cb[name][evtname] || [];
-                cache.cb[name][evtname].push(cb);
+                cache.events[name] = cache.events[name] || {};
+                cache.events[name][evtname] = [].concat(
+                    cache.events[name][evtname] || [],
+                    cb
+                );
+            },
+            one: function (evtname, cb) {
+                cache.singles[name] = cache.singles[name] || {};
+                cache.singles[name][evtname] = [].concat(
+                    cache.singles[name][evtname] || [],
+                    cb
+                );
             },
             // Allow targeting to queue up before this
             // slot has been defined.
@@ -54,6 +67,7 @@ module.exports = {
                 cache.targ[name][key] = value;
             },
             trigger: Util.noop,
+            off: Util.noop,
             mock: true
         };
     },
@@ -81,7 +95,8 @@ module.exports = {
      */
     clear: function () {
         slots = {};
-        cache.cb = {};
+        cache.events = {};
+        cache.singles = {};
         cache.targ = {};
     }
 };

@@ -67,12 +67,18 @@ describe('SlotSet', function () {
                     expect(num).toEqual(132);
                     done();
                 });
+                slot.one('evt2', function (num) {
+                    expect(num).toEqual(321);
+                    done();
+                });
                 var cbs = SlotSet.cached.callbacks('mock');
-                expect(cbs.evt1.length).toEqual(2);
-                cbs.evt1[0](321);
-                cbs.evt1[1](123);
-                expect(cbs.evt2.length).toEqual(1);
-                cbs.evt2[0](132);
+                expect(cbs.events.evt1.length).toEqual(2);
+                cbs.events.evt1[0](321);
+                cbs.events.evt1[1](123);
+                expect(cbs.events.evt2.length).toEqual(1);
+                cbs.events.evt2[0](132);
+                expect(cbs.singles.evt2.length).toEqual(1);
+                cbs.singles.evt2[0](321);
             });
         });
         describe('targeting', function () {
