@@ -11,15 +11,6 @@ describe('Events', function () {
         });
     });
     describe('system level', function () {
-        it('can be lazy', function () {
-            var count = 0;
-            harmony.trigger('sysevt');
-            harmony.on('sysevt', function () {
-                count += 1;
-            }, true);
-            harmony.trigger('sysevt');
-            expect(count).toEqual(1);
-        });
         it('can be eager', function () {
             var count = 0;
             harmony.trigger('sysevt');
@@ -28,6 +19,15 @@ describe('Events', function () {
             });
             harmony.trigger('sysevt');
             expect(count).toEqual(2);
+        });
+        it('can be lazy', function () {
+            var count = 0;
+            harmony.trigger('sysevt');
+            harmony.on('sysevt', function () {
+                count += 1;
+            }, true);
+            harmony.trigger('sysevt');
+            expect(count).toEqual(1);
         });
         it('can trigger always or once', function () {
             var count = 0;
@@ -41,6 +41,21 @@ describe('Events', function () {
             });
             harmony.trigger('sysevt');
             expect(count).toEqual(3);
+        });
+        it('can be turned off', function () {
+            var count = 0;
+            harmony.on('sysevt', function () {
+                count += 1;
+            });
+            harmony.one('evt2', function () {
+                count += 1;
+            });
+            harmony.trigger('sysevt');
+            harmony.trigger('evt2');
+            harmony.off('sysevt');
+            harmony.trigger('sysevt');
+            harmony.trigger('evt2');
+            expect(count).toEqual(2);
         });
     });
     describe('slot level', function () {
