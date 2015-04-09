@@ -3,7 +3,7 @@ var BaseClass = require('baseclassjs');
 /**
  * # Eventable
  * BaseClass Interface for generic event handling.
- * Initial events are loaded as a generic object of <name>:<callback>.
+ * Initial events are loaded as a generic object of ```<name>:<callback>```.
  * For example:
  * ```javascript
  * Eventable({

@@ -40,7 +40,8 @@ module.exports = function (opts) {
          * @param {Boolean} [opts.slots.i.companion] True if companion ad.
          * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
-         * @param {Function} [opts.slots.i.callback] Called on dfp's slotRenderEnded.
+         * @param {Object} [opts.on] Dictionary of callbacks.
+         * @param {Object} [opts.one] Dictionary of single-run callbacks.
          * @see adslot.js
          */
         load: function (opts) {
@@ -125,7 +126,8 @@ module.exports = function (opts) {
          * @param {Boolean} [opts.companion] True if companion ad.
          * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
-         * @param {Function} [opts.callback] Called on dfp's slotRenderEnded.
+         * @param {Object} [opts.on] Dictionary of callbacks.
+         * @param {Object} [opts.one] Dictionary of single-run callbacks.
          * @see adslot.js
          */
         defineSlot: function (opts) {
@@ -147,7 +149,7 @@ module.exports = function (opts) {
         },
         /**
          * ## harmony.show
-         * Showing an ad means setting style display:block and
+         * Showing an ad means setting style ```display:block``` and
          * calling ```googletag.display()```.
          */
         show: {
@@ -215,7 +217,7 @@ module.exports = function (opts) {
         },
         /**
          * ## harmony.hide
-         * Hiding an ad means setting style display:none.
+         * Hiding an ad means setting style ```display:none```.
          */
         hide: {
             /**
