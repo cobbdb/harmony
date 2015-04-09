@@ -14,16 +14,28 @@ Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
 
 Some great sites that use Harmony:
-* www.ajc.com
-* www.statesman.com
-* www.palmbeachpost.com
-* www.wsbtv.com
-* www.wedr.com
-* www.kirotv.com
-* www.austin360.com
-* .. and over a hundred more sites!
+* [Atlanta Journal Constitution](http://www.ajc.com)
+* [Austin American-Statesman](www.statesman.com)
+* [Palm Beach Post](www.palmbeachpost.com)
+* [WSB-TV](www.wsbtv.com)
+* [WEDR](www.wedr.com)
+* [KIRO 7](www.kirotv.com)
+* [Austin 360](www.austin360.com)
+* .. and over a hundred more!
 
 -------------
+### Table of Contents
+* [Introduction](#intro)
+* [Setup Guide](#intro-setup)
+** [Loading Data](#loading)
+** [Binding Callbacks](#callbacks)
+** [Using Slot Data](#data)
+** [Eventing](#eventing)
+* [Logging](#logging)
+* [Example Setup](#ex-setup)
+
+-------------
+<a name="intro"/>
 Harmony is a DFP supplement meant for large-scale enterprise advertising systems.
 There are methods to help you quickly create new ad slots, adjust targeting on
 the fly, and attach side-effects.
@@ -42,6 +54,7 @@ let's go over some of the best parts
 of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
 
+<a name="intro-setup"/>
 #### Quick setup.
 Create your Harmony instance and use it however you want. There are two
 ways to initialize a Harmony instance:
@@ -61,6 +74,7 @@ var Harmony = require('harmonyjs');
 module.exports = Harmony();
 ```
 
+<a name="loading"/>
 #### Load ad config en bulk.
 Have your backend generate ad config based on admin settings and
 keep the components completely agnostic.
@@ -69,6 +83,7 @@ var myconf = {% load_ad_conf %};
 mylibs.harmony.load(myconf);
 ```
 
+<a name="callback"/>
 #### Attach some callbacks.
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
@@ -80,6 +95,7 @@ mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {
 });
 ```
 
+<a name="data"/>
 #### Access your ad data immediately.
 Harmony exposes individual slot configuration for pain-free access.
 ```javascript
@@ -95,8 +111,51 @@ var slot = mylibs.harmony.slot('MY01'),
 slot.setTargeting('some', 'new targeting!');
 ```
 
+<a name="eventing"/>
+#### Create and use events.
+Harmony features a robust eventing system that will avoid race conditions
+on even the most complex websites.
+
+###### trigger events just like jQuery
+```javascript
+// System-level events.
+mylibs.harmony.trigger('myevent', somedata);
+// Slot-level events.
+mylibs.harmony.slot('MY01').trigger('anotherevent');
+```
+
+###### bind callbacks to custom events
+```javascript
+mylibs.harmony.on('myevent', function () {});
+mylibs.harmony.one('myevent', function () {});
+mylibs.harmony.slot('MY01').on('myevent', function () {});
+mylibs.harmony.slot('MY01').one('myevent', function () {});
+```
+
+###### slotRenderEnded is provided for you
+DFP's `slotRenderEnded` event is handled automatically for you
+on each slot.
+```javascript
+mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {});
+```
+
+###### bind lazy events
+Callbacks are eager by default, meaning that they will trigger
+on binding if the event has already been triggered. If you do not
+want this behavior you can specify the callback be lazy instead.
+```javascript
+mylibs.harmony.slot('MY01').on('myLazyEvent', function () {}, true);
+mylibs.harmony.one('myLazyEvent', function () {}, true);
+```
+
+###### clear callbacks for any event
+```javascript
+mylibs.harmony.off('myevent');
+```
+
+<a name="logging"/>
 #### Debug the subsystem.
-Logging lets you see what happened and when, so you can focus less
+[Logging](http://cobbdb.github.io/lumberjack) lets you see what happened and when, so you can focus less
 on debugging and more on coding.
 ```javascript
 mylibs.harmony.log.readback('events', true);
@@ -104,15 +163,17 @@ mylibs.harmony.log.readback('events', true);
 
 #### Get slot performance metrics.
 See exactly how long your system takes from setup to ad render.
+Logging provided with [Lumberjack](http://cobbdb.github.io/lumberjack).
 ```javascript
 mylibs.harmony.log.readback('metric', true);
 ```
 
+<a name="ex-setup"/>
 ## Example Setup
 Here is an example of a page setup using Harmony and jQuery.
 ```html
 <head>
-    <script src="path/to/harmony.js"></script>
+    <script src="path/to/site/bundle.js"></script>
     <script>
     var libs = {
         harmony: Harmony()
