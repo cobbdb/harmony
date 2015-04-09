@@ -14,14 +14,18 @@ Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
 
 Some great sites that use Harmony:
-* www.ajc.com
-* www.statesman.com
-* www.palmbeachpost.com
-* www.wsbtv.com
-* www.wedr.com
-* www.kirotv.com
-* www.austin360.com
-* .. and over a hundred more sites!
+* [Atlanta Journal Constitution](http://www.ajc.com)
+* [Austin American-Statesman](www.statesman.com)
+* [Palm Beach Post](www.palmbeachpost.com)
+* [WSB-TV](www.wsbtv.com)
+* [WEDR](www.wedr.com)
+* [KIRO 7](www.kirotv.com)
+* [Austin 360](www.austin360.com)
+* .. and over a hundred more!
+
+-------------
+### Table of Contents
+* [Example Setup](#ex-setup)
 
 -------------
 Harmony is a DFP supplement meant for large-scale enterprise advertising systems.
@@ -96,7 +100,7 @@ slot.setTargeting('some', 'new targeting!');
 ```
 
 #### Debug the subsystem.
-Logging lets you see what happened and when, so you can focus less
+[Logging](http://cobbdb.github.io/lumberjack) lets you see what happened and when, so you can focus less
 on debugging and more on coding.
 ```javascript
 mylibs.harmony.log.readback('events', true);
@@ -104,15 +108,17 @@ mylibs.harmony.log.readback('events', true);
 
 #### Get slot performance metrics.
 See exactly how long your system takes from setup to ad render.
+Logging provided with [Lumberjack](http://cobbdb.github.io/lumberjack).
 ```javascript
 mylibs.harmony.log.readback('metric', true);
 ```
 
+<a name="ex-setup"/>
 ## Example Setup
 Here is an example of a page setup using Harmony and jQuery.
 ```html
 <head>
-    <script src="path/to/harmony.js"></script>
+    <script src="path/to/site/bundle.js"></script>
     <script>
     var libs = {
         harmony: Harmony()
