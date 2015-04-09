@@ -27,10 +27,10 @@ Some great sites that use Harmony:
 ### Table of Contents
 * [Introduction](#intro)
 * [Setup Guide](#intro-setup)
-** [Loading Data](#loading)
-** [Binding Callbacks](#callbacks)
-** [Using Slot Data](#data)
-** [Eventing](#eventing)
+  * [Loading Data](#loading)
+  * [Binding Callbacks](#callbacks)
+  * [Using Slot Data](#data)
+  * [Eventing](#eventing)
 * [Logging](#logging)
 * [Example Setup](#ex-setup)
 
@@ -83,7 +83,7 @@ var myconf = {% load_ad_conf %};
 mylibs.harmony.load(myconf);
 ```
 
-<a name="callback"/>
+<a name="callbacks"/>
 #### Attach some callbacks.
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
