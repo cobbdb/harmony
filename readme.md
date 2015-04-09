@@ -15,12 +15,12 @@ and as a JS global variable via `bower install harmony`.
 
 Some great sites that use Harmony:
 * [Atlanta Journal Constitution](http://www.ajc.com)
-* [Austin American-Statesman](www.statesman.com)
-* [Palm Beach Post](www.palmbeachpost.com)
-* [WSB-TV](www.wsbtv.com)
-* [WEDR](www.wedr.com)
-* [KIRO 7](www.kirotv.com)
-* [Austin 360](www.austin360.com)
+* [Austin American-Statesman](http://www.statesman.com)
+* [Palm Beach Post](http://www.palmbeachpost.com)
+* [WSB-TV](http://www.wsbtv.com)
+* [WEDR](http://www.wedr.com)
+* [KIRO 7](http://www.kirotv.com)
+* [Austin 360](http://www.austin360.com)
 * .. and over a hundred more!
 
 -------------
