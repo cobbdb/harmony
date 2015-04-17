@@ -270,7 +270,7 @@ module.exports = function (opts) {
         }
     }).implement(
         /**
-         * ### harmony.on/one/off/trigger
+         * ## harmony.on/one/off/trigger
          * Exposes event handling at the system level.
          * @see event-handler.js
          */

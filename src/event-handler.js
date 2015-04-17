@@ -46,7 +46,7 @@ module.exports = function (opts) {
 
     return BaseClass.Interface({
         /**
-         * ## harmony.on(name, callback)
+         * ## harmony.on(name, callback, [lazy])
          * Bind a callback to an event. Callback will run each
          * time the event is triggered.
          * @param {String} name Event name.
@@ -62,7 +62,7 @@ module.exports = function (opts) {
             events[name].push(cb);
         },
         /**
-         * ## harmony.one(name, callback)
+         * ## harmony.one(name, callback, [lazy])
          * Bind a callback to an event. Callback will run only
          * once the next time the event is triggered.
          * @param {String} name Event name.
