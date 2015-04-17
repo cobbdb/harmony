@@ -51,7 +51,7 @@ module.exports = function (opts) {
          * time the event is triggered.
          * @param {String} name Event name.
          * @param {Function} cb Event callback.
-         * @param {Boolean} lazy True if this callback should not fire
+         * @param {Boolean} [lazy] True if this callback should not fire
          * immediately if the event has already been triggered.
          */
         on: function (name, cb, lazy) {
@@ -67,7 +67,7 @@ module.exports = function (opts) {
          * once the next time the event is triggered.
          * @param {String} name Event name.
          * @param {Function} cb Event callback.
-         * @param {Boolean} lazy True if this callback should not fire
+         * @param {Boolean} [lazy] True if this callback should not fire
          * immediately if the event has already been triggered.
          */
         one: function (name, cb, lazy) {
