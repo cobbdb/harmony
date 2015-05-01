@@ -174,6 +174,7 @@ Here is an example of a page setup using Harmony and jQuery.
 ```html
 <head>
     <script src="path/to/site/bundle.js"></script>
+    <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
     <script>
     var libs = {
         harmony: Harmony()
