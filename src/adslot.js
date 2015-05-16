@@ -13,6 +13,7 @@ var log = require('./log.js'),
  * @param {Object} [opts.targeting] Slot-specific targeting.
  * @param {Array} [opts.mapping] Size mapping.
  * @param {Boolean} [opts.companion] True if companion ad.
+ * @param {Boolean} [opts.drone] True when duplicates are anticipated.
  * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Object} [opts.on] Dictionary of callbacks.

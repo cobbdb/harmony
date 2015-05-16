@@ -29,8 +29,8 @@ module.exports = {
                 el: {}
             };
 
-        // Only do work if there are multiple instances.
-        if (slots.has(conf.name)) {
+        // Only do work if there are multiple instances or if drone slot.
+        if (conf.drone || slots.has(conf.name)) {
             do {
                 el = document.getElementById(conf.id);
                 if (el) {

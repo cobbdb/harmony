@@ -29,19 +29,7 @@ module.exports = function (opts) {
          * ## harmony.load(opts)
          * Load a block of configuration.
          * @param {Object} [opts.targeting] System-level targeting.
-         * @param {Array} [opts.slots] List of ad slot information.
-         * @param {Object} opts.slots.i Slot options object.
-         * @param {String} opts.slots.i.name Slot name, ex) RP01
-         * @param {String} opts.slots.i.id Slot's div id, ex) ad-div-RP01
-         * @param {Array} opts.slots.i.sizes One or many 2D arrays, ex) [300, 250]
-         * @param {String} opts.slots.i.adunit Full ad unit code.
-         * @param {Object} [opts.slots.i.targeting] Slot-level targeting.
-         * @param {Array} [opts.slots.i.mapping] Size mapping.
-         * @param {Boolean} [opts.slots.i.companion] True if companion ad.
-         * @param {String} [opts.slots.i.breakpoint] Display point, ex) 0px-infinity
-         * @param {Boolean} [opts.slots.i.interstitial] True if out-of-page ad.
-         * @param {Object} [opts.slots.i.on] Dictionary of callbacks.
-         * @param {Object} [opts.slots.i.one] Dictionary of single-run callbacks.
+         * @param {Array of Objects} [opts.slots] Set of ad slot configurations.
          * @see adslot.js
          */
         load: function (opts) {
@@ -124,6 +112,7 @@ module.exports = function (opts) {
          * @param {Object} [opts.targeting] Slot-specific targeting.
          * @param {Array} [opts.mapping] Size mapping.
          * @param {Boolean} [opts.companion] True if companion ad.
+         * @param {Boolean} [opts.drone] True when duplicates are anticipated.
          * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Object} [opts.on] Dictionary of callbacks.
