@@ -144,8 +144,8 @@ module.exports = function (opts) {
         show: {
             /**
              * ### harmony.show.breakpoint(name)
-             * @param {String} name
              * Show all ads at a breakpoint.
+             * @param {String} name
              */
             breakpoint: function (name) {
                 var i, slot, el,
@@ -181,8 +181,8 @@ module.exports = function (opts) {
             },
             /**
              * ### harmony.show.slot(name)
-             * @param {String} name
              * Show a single ad slot.
+             * @param {String} name
              */
             slot: function (name) {
                 var slot, el;
@@ -211,8 +211,8 @@ module.exports = function (opts) {
         hide: {
             /**
              * ### harmony.hide.breakpoint(name)
-             * @param {String} name
              * Hides all the ads at a breakpoint.
+             * @param {String} name
              */
             breakpoint: function (name) {
                 var i, el,
@@ -235,8 +235,8 @@ module.exports = function (opts) {
             },
             /**
              * ### harmony.hide.slot(name)
-             * @param {String} name
              * Hides a single ad slot.
+             * @param {String} name
              */
             slot: function (name) {
                 var el,
