@@ -93,6 +93,7 @@ module.exports = function (pubads, opts) {
     /**
      * ## harmony.slot(name).adunit
      * Ad unit code of this ad slot.
+     * @type {String}
      */
     slot.adunit = opts.adunit;
 
