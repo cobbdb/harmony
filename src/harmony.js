@@ -135,6 +135,7 @@ module.exports = function (opts) {
                     err: err
                 });
             }
+            return slot;
         },
         /**
          * ## harmony.show
