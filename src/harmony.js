@@ -117,6 +117,7 @@ module.exports = function (opts) {
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Object} [opts.on] Dictionary of callbacks.
          * @param {Object} [opts.one] Dictionary of single-run callbacks.
+         * @return {AdSlot}
          * @see adslot.js
          */
         defineSlot: function (opts) {
