@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Doubleclick JS API Helper",
   "main": "src/harmony.js",
   "scripts": {
