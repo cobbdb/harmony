@@ -22,7 +22,7 @@ var log = require('./log.js'),
 module.exports = function (pubads, opts) {
     var slot, name, cbCache,
         // Capture timestamp for performance metrics.
-        tsCreate = Date.now(),
+        tsCreate = global.Date.now(),
         mapping = opts.mapping || [],
         companion = opts.companion || false,
         interstitial = opts.interstitial || false,
@@ -30,7 +30,7 @@ module.exports = function (pubads, opts) {
 
     // Smoke test that the slot's element id is valid in the DOM.
     if (!global.document.getElementById(opts.id)) {
-        throw Error('Ad slot container was not found in the DOM.');
+        throw global.Error('Ad slot container was not found in the DOM.');
     }
 
     // Define which type of slot this is.
@@ -120,12 +120,13 @@ module.exports = function (pubads, opts) {
 
     // Attach a listener for the slotRenderEnded event.
     pubads.addEventListener('slotRenderEnded', function (event) {
+        var tsStart = slot.tsCalled || tsCreate;
         if (event.slot === slot) {
             // Log the total load time of this slot.
             log('metric', {
                 event: 'Total load time',
                 slot: opts.name,
-                value: Date.now() - tsCreate
+                value: global.Date.now() - tsStart
             });
             slot.trigger('slotRenderEnded', event);
         }

@@ -160,6 +160,7 @@ module.exports = function (opts) {
                 try {
                     for (i = 0; i < len; i += 1) {
                         slot = set[i];
+                        slot.tsCalled = global.Date.now();
                         global.googletag.display(slot.divId);
                         el = document.getElementById(slot.divId);
                         if (el) {
@@ -194,6 +195,7 @@ module.exports = function (opts) {
                 });
                 try {
                     slot = slots.get(name);
+                    slot.tsCalled = global.Date.now();
                     global.googletag.display(slot.divId);
                     el = document.getElementById(slot.divId);
                     el.style.display = 'block';
