@@ -120,14 +120,17 @@ module.exports = function (pubads, opts) {
 
     // Attach a listener for the slotRenderEnded event.
     pubads.addEventListener('slotRenderEnded', function (event) {
-        var tsStart = slot.tsCalled || tsCreate;
+        var now;
         if (event.slot === slot) {
-            // Log the total load time of this slot.
+            now = global.Date.now();
             log('metric', {
-                event: 'Total load time',
+                event: 'DFP Call Complete',
                 slot: opts.name,
-                value: global.Date.now() - tsStart
+                timeSinceCalled: now - slot.tsCalled, // Can be NaN.
+                timeSinceCreated: now - tsCreate
             });
+
+            // Trigger any attached behaviors.
             slot.trigger('slotRenderEnded', event);
         }
     });
