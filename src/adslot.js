@@ -59,7 +59,7 @@ module.exports = function (pubads, opts) {
         );
     }
     // Add the Eventable interface.
-    BaseClass(slot).implement(
+    BaseClass(slot).extend(
         Eventable(
             cbCache
         )

@@ -261,7 +261,7 @@ module.exports = function (opts) {
                 }
             }
         }
-    }).implement(
+    }).extend(
         /**
          * ## harmony.on/one/off/trigger
          * Exposes event handling at the system level.

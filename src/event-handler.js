@@ -1,8 +1,6 @@
-var BaseClass = require('baseclassjs');
-
 /**
  * # Eventable
- * BaseClass Interface for generic event handling.
+ * Class for generic event handling.
  * Initial events are loaded as a generic object of ```<name>:<callback>```.
  * For example:
  * ```javascript
@@ -44,7 +42,7 @@ module.exports = function (opts) {
         );
     }
 
-    return BaseClass.Interface({
+    return {
         /**
          * ## harmony.on(name, callback, [lazy])
          * Bind a callback to an event. Callback will run each
@@ -112,5 +110,5 @@ module.exports = function (opts) {
                 data: data
             };
         }
-    });
+    };
 };

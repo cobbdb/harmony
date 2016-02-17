@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Doubleclick JS API Helper",
   "main": "src/harmony.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "author": "Dan Cobb <cobbdb@gmail.com> (http://www.github.com/cobbdb)",
   "license": "MIT",
   "dependencies": {
-    "baseclassjs": "2.3.0",
+    "baseclassjs": "4.0.1",
     "lumberjackjs": "1.2.0"
   },
   "devDependencies": {
@@ -36,7 +36,6 @@
     "grunt-contrib-jasmine": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^0.11.1",
-    "grunt-docker-clone": "^1.0.10",
     "jquery": "^2.2.0",
     "matchdep": "^1.0.1"
   }
