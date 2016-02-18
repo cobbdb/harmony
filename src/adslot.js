@@ -6,6 +6,8 @@ var log = require('./log.js'),
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
+ * @type {BaseClass}
+ * @extends {EventHandler}
  * @param {String} opts.name Slot name, ex) RP01
  * @param {String} opts.id Slot's div id, ex) ad-div-RP01
  * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]
@@ -18,6 +20,7 @@ var log = require('./log.js'),
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Object} [opts.on] Dictionary of callbacks.
  * @param {Object} [opts.one] Dictionary of single-run callbacks.
+ * @return {AdSlot}
  */
 module.exports = function (pubads, opts) {
     var slot, name, cbCache,

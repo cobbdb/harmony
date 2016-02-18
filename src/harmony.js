@@ -9,7 +9,8 @@ var Util = require('./util.js'),
     slots = require('./slotset.js'),
     groups = require('./group-set.js'),
     BaseClass = require('baseclassjs'),
-    Eventable = require('./event-handler.js');
+    Eventable = require('./event-handler.js'),
+    watcher = require('./breakpoint-watcher.js');
 
 /**
  * ## Harmony()
@@ -26,10 +27,27 @@ module.exports = function (opts) {
 
     return BaseClass({
         /**
+         * ## harmony.on('breakpoint/update', callback)
+         * ```javascript
+         * harmony.on('breakpoint/update', function (bp) {});
+         * harmony.one('breakpoint/update', function (bp) {});
+         * harmony.off('breakpoint/update', function (bp) {});
+         * ```
+         * @param {Function} callback Called on new breakpoint.
+         * @see event-handler.js
+         */
+        _create: function () {
+            var that = this;
+            watcher.on('update', function (bp) {
+                that.trigger('breakpoint/update', bp);
+            });
+        },
+        /**
          * ## harmony.load(opts)
          * Load a block of configuration.
          * @param {Object} [opts.targeting] System-level targeting.
          * @param {Array of Objects} [opts.slots] Set of ad slot configurations.
+         * @param {Number|Array of Numbers} [opts.breakpoints] Set of breakpoints.
          * @see adslot.js
          */
         load: function (opts) {
@@ -70,8 +88,18 @@ module.exports = function (opts) {
                 pubads.setTargeting(key, value);
             }
 
+            // Assign the breakpoints.
+            watcher.add(opts.breakpoints);
+
             log('load', 'Harmony config loaded.');
         },
+        /**
+         * ## harmony.addBreakpoints(set)
+         * Add breakpoint values in pixels.
+         * @param {Number|Array of Numbers} [set] Breakpoints in pixels.
+         * @see breakpoint-watcher.js
+         */
+        addBreakpoints: watcher.add,
         /**
          * ## harmony.log
          * Instance of Lumberjack populated with Harmony's data.

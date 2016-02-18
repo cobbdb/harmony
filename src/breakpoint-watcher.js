@@ -1,0 +1,83 @@
+var BaseClass = require('baseclassjs'),
+    Eventable = require('./event-handler.js'),
+    screen = require('./screen.js'),
+    running = false,
+    ready = true,
+    breakpoints = [],
+    last;
+
+/**
+ * # Breakpoint Watcher
+ * @type {BaseClass}
+ * @extends {EventHandler}
+ */
+module.exports = BaseClass({
+    /**
+     * ## watcher.current()
+     * @return {Number} Current breakpoint.
+     */
+    current: function () {
+        var i,
+            len = breakpoints.length,
+            width = screen.width(),
+            point = breakpoints[len - 1];
+        for (i = 0; i < len; i += 1) {
+            if (width <= breakpoints[i]) {
+                point = breakpoints[i];
+                break;
+            }
+        }
+        return point;
+    },
+    /**
+     * ## watcher.add(set)
+     * @param {Number|Array of Numbers} [set]
+     */
+    add: function (set) {
+        breakpoints = breakpoints.concat(set || []);
+        // Sort ascending.
+        breakpoints.sort();
+        module.exports.run();
+    },
+    /**
+     * ## watcher.getAll()
+     * @return {Array of Numbers}
+     */
+    getAll: function () {
+        return breakpoints;
+    },
+    /**
+     * ## watcher.run([throttle])
+     * @param {Number} [throttle]
+     */
+    run: function (throttle) {
+        var current;
+
+        // Do not run unless breakpoints are available.
+        if (!running && breakpoints.length) {
+            running = true;
+            ready = true;
+            global.setEventListener('resize', function () {
+                if (ready) {
+                    ready = false;
+
+                    current = module.exports.current();
+                    if (current !== last) {
+                        last = current;
+                        module.exports.trigger('update', current);
+                    }
+
+                    global.setTimeout(function () {
+                        ready = true;
+                    }, throttle || 250);
+                }
+            });
+        }
+    }
+}).extend(
+    /**
+     * ## watcher.on/one/off/trigger
+     * @see event-handler.js
+     */
+    Eventable()
+);
