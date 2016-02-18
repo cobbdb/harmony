@@ -58,20 +58,17 @@ describe('Breakpoint Watcher', function () {
         });
         it('triggers on bp update', function (done) {
             var tested = false;
-            global.innerWidth = 90;
             watcher.one('update', function (bp) {
+                console.log(global.innerWidth);
                 expect(bp).toEqual(1);
-                tested = true;
+                watcher.one('update', function (bp) {
+                    console.log(global.innerWidth);
+                    expect(bp).toEqual(100);
+                    done();
+                }, true);
+                global.innerWidth = 402;
             }, true);
-            watcher.run();
-            expect(tested).toBe(true, 'Smoke test');
-
-            global.innerWidth = 102;
-            watcher.one('update', function (bp) {
-                expect(bp).toEqual(100);
-                done();
-            }, true);
-            watcher.run();
+            //global.innerWidth = 90;
         });
     });
 });
