@@ -8,11 +8,11 @@ describe('Ad Slot', function () {
         // Reset options model.
         opts = Options({
             id: 'test-id',
-            breakpoint: 'test-pnt'
+            group: 'test-grp'
         });
         Help.createDiv({
             id: 'test-id',
-            breakpoint: 'test-pnt'
+            group: 'test-grp'
         });
     });
 
@@ -63,7 +63,7 @@ describe('Ad Slot', function () {
         opts.name = 'testname';
         var slot = AdSlot(googletag.pubads(), opts);
         expect(slot.divId).toEqual('test-id');
-        expect(slot.breakpoint).toEqual('test-pnt');
+        expect(slot.group).toEqual('test-grp');
         expect(slot.sizes).toEqual([9, 4]);
         expect(slot.adunit).toEqual('testunit');
         expect(slot.name).toEqual('testname');

@@ -14,7 +14,7 @@ var log = require('./log.js'),
  * @param {Array} [opts.mapping] Size mapping.
  * @param {Boolean} [opts.companion] True if companion ad.
  * @param {Boolean} [opts.drone] True when duplicates are anticipated.
- * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
+ * @param {String} [opts.group] Slot group name.
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Object} [opts.on] Dictionary of callbacks.
  * @param {Object} [opts.one] Dictionary of single-run callbacks.
@@ -58,11 +58,14 @@ module.exports = function (pubads, opts) {
             opts.one[name]
         );
     }
-    // Add the Eventable interface.
+
+    /**
+     * ## harmony.slot(name).on/one/off/trigger
+     * Exposes event handling at the slot level.
+     * @see event-handler.js
+     */
     BaseClass(slot).extend(
-        Eventable(
-            cbCache
-        )
+        Eventable(cbCache)
     );
 
     /**
@@ -78,11 +81,11 @@ module.exports = function (pubads, opts) {
      */
     slot.name = opts.name;
     /**
-     * ## harmony.slot(name).breakpoint
-     * This slot's breakpoint.
+     * ## harmony.slot(name).group
+     * This slot's group.
      * @type {String}
      */
-    slot.breakpoint = opts.breakpoint;
+    slot.group = opts.group;
     /**
      * ## harmony.slot(name).sizes
      * This slot's possible sizes. Note, this is

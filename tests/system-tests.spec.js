@@ -11,7 +11,7 @@ describe('System test', function () {
             newConf = function () {
                 return Options({
                     name: 'TST22',
-                    breakpoint: 'BKP22',
+                    group: 'GRP22',
                     id: 'DVID22'
                 });
             },
@@ -25,7 +25,7 @@ describe('System test', function () {
         harmony.defineSlot(newSlot());
         harmony.defineSlot(newSlot());
         // Simulate an ad call.
-        $('.BKP22').text('test ad content');
+        $('.GRP22').text('test ad content');
         // Create three slots missing dom elements.
         harmony.defineSlot(newConf());
         harmony.defineSlot(newConf());
@@ -61,7 +61,7 @@ describe('System test', function () {
             newConf = function () {
                 return Options({
                     name: 'TST22',
-                    breakpoint: 'BKP22',
+                    group: 'GRP22',
                     id: 'DVID22',
                     drone: true
                 });
@@ -76,7 +76,7 @@ describe('System test', function () {
         harmony.defineSlot(newSlot());
         harmony.defineSlot(newSlot());
         // Simulate an ad call.
-        $('.BKP22').text('test ad content');
+        $('.GRP22').text('test ad content');
         // Create three slots missing dom elements.
         harmony.defineSlot(newConf());
         harmony.defineSlot(newConf());

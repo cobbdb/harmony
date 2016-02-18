@@ -41,16 +41,16 @@ describe('accessor', function () {
             expect(slot.setTargeting).toHaveBeenCalledWith('key2', 'val2');
         });
     });
-    describe('harmony.breakpoint()', function () {
-        it('fetches an existing breakpoint', function () {
-            var bp = harmony.breakpoint('TSTPNT00');
-            expect(bp.length).toEqual(2);
-            expect(bp[1].divId).toEqual('DVID02');
+    describe('harmony.group()', function () {
+        it('fetches an existing group', function () {
+            var group = harmony.group('TSTGRP00');
+            expect(group.length).toEqual(2);
+            expect(group[1].divId).toEqual('DVID02');
         });
         it('fetches an empty array by default', function () {
-            var bp = harmony.breakpoint('BAD02');
-            expect(bp.length).toEqual(0);
-            expect(bp).toEqual([]);
+            var group = harmony.group('BAD02');
+            expect(group.length).toEqual(0);
+            expect(group).toEqual([]);
         });
     });
 });

@@ -11,18 +11,18 @@ describe('display method', function () {
         harmony.load(Help.getConf());
     });
     describe('show', function () {
-        describe('breakpoint()', function () {
-            it('throws no errors when breakpoint does not exist', function () {
+        describe('group()', function () {
+            it('throws no errors when group does not exist', function () {
                 expect(function () {
-                    harmony.show.breakpoint('badpnt');
+                    harmony.show.group('badgrp');
                 }).not.toThrowError();
             });
             it('calls display on slots', function () {
-                harmony.show.breakpoint('TSTPNT00');
+                harmony.show.group('TSTGRP00');
                 expect(googletag.display.calls.count()).toEqual(2);
             });
             it('sets display:block on slots', function () {
-                harmony.show.breakpoint('TSTPNT01');
+                harmony.show.group('TSTGRP01');
                 var el = $('#DVID01')[0];
                 expect(el.style.display).toEqual('block');
             });
@@ -46,21 +46,21 @@ describe('display method', function () {
         });
     });
     describe('hide', function () {
-        describe('breakpoint()', function () {
-            it('throws no errors when breakpoint does not exist', function () {
+        describe('group()', function () {
+            it('throws no errors when group does not exist', function () {
                 expect(function () {
-                    harmony.hide.breakpoint('badpnt');
+                    harmony.hide.group('badgrp');
                 }).not.toThrowError();
             });
             it('sets display:none on slots', function () {
-                harmony.hide.breakpoint('TSTPNT00');
-                var set = $('.TSTPNT00');
+                harmony.hide.group('TSTGRP00');
+                var set = $('.TSTGRP00');
                 expect(set.length).toEqual(2);
-                expect(set[0].style.display).toEqual('none', 'set[0], TSTPNT00');
-                expect(set[1].style.display).toEqual('none', 'set[1], TSTPNT00');
-                set = $('.TSTPNT01');
+                expect(set[0].style.display).toEqual('none', 'set[0], TSTGRP00');
+                expect(set[1].style.display).toEqual('none', 'set[1], TSTGRP00');
+                set = $('.TSTGRP01');
                 expect(set.length).toEqual(1);
-                expect(set[0].style.display).not.toEqual('none', 'set[0], TSTPNT01');
+                expect(set[0].style.display).not.toEqual('none', 'set[0], TSTGRP01');
             });
             it('works with duplicates', function () {
                 // Smoke test that mappings look right.
@@ -70,7 +70,7 @@ describe('display method', function () {
                 var conf = Conf({
                     name: 'TST01',
                     id: 'DVID01',
-                    breakpoint: 'TSTPNT01'
+                    group: 'TSTGRP01'
                 });
                 Help.createDiv(conf);
                 harmony.defineSlot(conf);
@@ -78,9 +78,9 @@ describe('display method', function () {
                 expect(harmony.slot('TST01').divId).toEqual('DVID01');
                 expect(harmony.slot('TST01-h1').divId).toEqual('DVID01-h1');
 
-                // Hide the breakpoint and ensure all divs are hidden.
-                harmony.hide.breakpoint('TSTPNT01');
-                var set = $('.TSTPNT01');
+                // Hide the group and ensure all divs are hidden.
+                harmony.hide.group('TSTGRP01');
+                var set = $('.TSTGRP01');
                 expect(set.length).toEqual(2);
                 expect(set[0].style.display).toEqual('none', 'set[0]');
                 expect(set[1].style.display).toEqual('none', 'set[1]');

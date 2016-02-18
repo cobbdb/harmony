@@ -1,11 +1,11 @@
-var BpSet = require('../../src/bpset.js'),
+var GroupSet = require('../../src/group-set.js'),
     SlotSet = require('../../src/slotset.js'),
     $ = require('jquery'),
     Util = require('../../src/util.js');
 
 afterEach(function () {
     $('.testdiv').remove();
-    BpSet.clear();
+    GroupSet.clear();
     SlotSet.clear();
     Util.slotCount = 0;
 });

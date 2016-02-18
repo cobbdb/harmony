@@ -1,6 +1,4 @@
-var $ = require('jquery'),
-    BpSet = require('../../src/bpset.js'),
-    SlotSet = require('../../src/slotset.js');
+var $ = require('jquery');
 
 /**
  * Generic adslot construction options.
@@ -15,7 +13,7 @@ module.exports = function (opts) {
         targeting: {},
         mapping: [],
         companion: false,
-        breakpoint: '',
+        group: '',
         interstitial: false,
         callback: function () {}
     }, opts);
