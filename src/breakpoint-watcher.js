@@ -22,7 +22,7 @@ module.exports = BaseClass({
             width = screen.width(),
             point = breakpoints[len - 1];
         for (i = 0; i < len; i += 1) {
-            if (width <= breakpoints[i]) {
+            if (width >= breakpoints[i]) {
                 point = breakpoints[i];
                 break;
             }
@@ -35,8 +35,10 @@ module.exports = BaseClass({
      */
     add: function (set) {
         breakpoints = breakpoints.concat(set || []);
-        // Sort ascending.
-        breakpoints.sort();
+        // Sort descending.
+        breakpoints.sort(function (a, b) {
+            return b - a;
+        });
         module.exports.run();
     },
     /**
@@ -47,25 +49,33 @@ module.exports = BaseClass({
         return breakpoints;
     },
     /**
+     * ## watcher.clear()
+     * Clears all breakpoints from the system.
+     */
+    clear: function () {
+        breakpoints = [];
+    },
+    /**
      * ## watcher.run([throttle])
      * @param {Number} [throttle]
      */
     run: function (throttle) {
-        var current;
+        function checkUpdate() {
+            var current = module.exports.current();
+            if (current !== last) {
+                last = current;
+                module.exports.trigger('update', current);
+            }
+        }
 
         // Do not run unless breakpoints are available.
         if (!running && breakpoints.length) {
             running = true;
             ready = true;
-            global.setEventListener('resize', function () {
+            global.addEventListener('resize', function () {
                 if (ready) {
                     ready = false;
-
-                    current = module.exports.current();
-                    if (current !== last) {
-                        last = current;
-                        module.exports.trigger('update', current);
-                    }
+                    checkUpdate();
 
                     global.setTimeout(function () {
                         ready = true;
@@ -73,6 +83,7 @@ module.exports = BaseClass({
                 }
             });
         }
+        checkUpdate();
     }
 }).extend(
     /**
