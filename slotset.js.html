@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slotset.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\slotset.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#slotset">SlotSet</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.cached.callbacks(name)">set.cached.callbacks(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.cached.targeting(name)">set.cached.targeting(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.get(name)">set.get(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.add(slot)">set.add(slot)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.has(name)">set.has(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.clear()">set.clear()</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="slotset">
+  <h1>
+    <a href="#slotset" name="slotset" class="pilcrow">&#182;</a>
+    SlotSet
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./util.js&#39;</span><span class="p">),</span>
+    <span class="nx">slots</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="nx">cache</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">events</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="nx">singles</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="nx">targ</span><span class="o">:</span> <span class="p">{}</span>
+    <span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">cached</span><span class="o">:</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.cached.callbacks(name)">
+  <h2>
+    <a href="#set.cached.callbacks(name)" name="set.cached.callbacks(name)" class="pilcrow">&#182;</a>
+    set.cached.callbacks(name)
+  </h2>
+</div>
+
+
+<p>Fetch any cached callbacks for this slot.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">slotname</span>
+      <span class="dox_type">String</span>
+      <span>Name of the ad slot.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of events and
+their callbacks as an Array.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">callbacks</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">slotname</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">events</span><span class="o">:</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">slotname</span><span class="p">]</span> <span class="o">||</span> <span class="p">{},</span>
+                <span class="nx">singles</span><span class="o">:</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">slotname</span><span class="p">]</span> <span class="o">||</span> <span class="p">{}</span>
+            <span class="p">};</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.cached.targeting(name)">
+  <h2>
+    <a href="#set.cached.targeting(name)" name="set.cached.targeting(name)" class="pilcrow">&#182;</a>
+    set.cached.targeting(name)
+  </h2>
+</div>
+
+
+<p>Fetch any cached targeting for this slot.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Name of the ad slot.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of targeting or
+empty object.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">targeting</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">targ</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.get(name)">
+  <h2>
+    <a href="#set.get(name)" name="set.get(name)" class="pilcrow">&#182;</a>
+    set.get(name)
+  </h2>
+</div>
+
+
+<p>Safely fetch an existing ad slot or a mock slot if slot was not found.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Name of the ad slot.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>The ad slot or a mock ad slot.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">slots</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Allow events to queue up before this slot
+has been defined.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">on</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">evtname</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">][</span><span class="nx">evtname</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+                    <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">][</span><span class="nx">evtname</span><span class="p">]</span> <span class="o">||</span> <span class="p">[],</span>
+                    <span class="nx">cb</span>
+                <span class="p">);</span>
+            <span class="p">},</span>
+            <span class="nx">one</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">evtname</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">][</span><span class="nx">evtname</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+                    <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">][</span><span class="nx">evtname</span><span class="p">]</span> <span class="o">||</span> <span class="p">[],</span>
+                    <span class="nx">cb</span>
+                <span class="p">);</span>
+            <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Allow targeting to queue up before this
+slot has been defined.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">setTargeting</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">targ</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">targ</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">targ</span><span class="p">[</span><span class="nx">name</span><span class="p">][</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+            <span class="p">},</span>
+            <span class="nx">trigger</span><span class="o">:</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+            <span class="nx">off</span><span class="o">:</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+            <span class="nx">mock</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.add(slot)">
+  <h2>
+    <a href="#set.add(slot)" name="set.add(slot)" class="pilcrow">&#182;</a>
+    set.add(slot)
+  </h2>
+</div>
+
+
+<p>Add a new slot to the set.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">slot</span>
+      <span class="dox_type">Slot</span>
+      <span>Ad slot to add to the set.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Array</span>
+      <span>Collection of 0 or more ad slots.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">slot</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slots</span><span class="p">[</span><span class="nx">slot</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">slot</span><span class="p">;</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.has(name)">
+  <h2>
+    <a href="#set.has(name)" name="set.has(name)" class="pilcrow">&#182;</a>
+    set.has(name)
+  </h2>
+</div>
+
+
+<p>Check if the set contains a slot name.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Ad slot name.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Boolean</span>
+      <span>True if the set contains this name.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">has</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">slots</span><span class="p">;</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.clear()">
+  <h2>
+    <a href="#set.clear()" name="set.clear()" class="pilcrow">&#182;</a>
+    set.clear()
+  </h2>
+</div>
+
+
+<p>Reset the collection.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">slots</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="nx">singles</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="nx">targ</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

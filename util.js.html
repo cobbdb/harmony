@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>util.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\util.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#utilities">Utilities</a>
+      </div>
+      <div class="heading h2">
+        <a href="#util.noop()">Util.noop()</a>
+      </div>
+      <div class="heading h2">
+        <a href="#util.slotcount">Util.slotCount</a>
+      </div>
+      <div class="heading h2">
+        <a href="#util.scrubconf(conf)">Util.scrubConf(conf)</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="utilities">
+  <h1>
+    <a href="#utilities" name="utilities" class="pilcrow">&#182;</a>
+    Utilities
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">slots</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slotset.js&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.noop()">
+  <h2>
+    <a href="#util.noop()" name="util.noop()" class="pilcrow">&#182;</a>
+    Util.noop()
+  </h2>
+</div>
+
+
+<p>Simple no-op.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">noop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.slotcount">
+  <h2>
+    <a href="#util.slotcount" name="util.slotcount" class="pilcrow">&#182;</a>
+    Util.slotCount
+  </h2>
+</div>
+
+
+<p>Counter for ensuring unique ad slots.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slotCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="util.scrubconf(conf)">
+  <h2>
+    <a href="#util.scrubconf(conf)" name="util.scrubconf(conf)" class="pilcrow">&#182;</a>
+    Util.scrubConf(conf)
+  </h2>
+</div>
+
+
+<p>Ensures a slot's name and id are unique in the page. If a
+container has content, it is assumed that an ad call has already
+been made.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">conf</span>
+      <span class="dox_type">Object</span>
+      <span>Configuration for a single ad slot.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>Clean slot configuration.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">scrubConf</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">conf</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">suffix</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
+            <span class="nx">temp</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">el</span><span class="o">:</span> <span class="p">{}</span>
+            <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Only do work if there are multiple instances or if drone slot.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">drone</span> <span class="o">||</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">do</span> <span class="p">{</span>
+                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Slot has already been processed,
+so move it aside and query again.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                        <span class="nx">temp</span><span class="p">.</span><span class="nx">el</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
+                        <span class="nx">temp</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+                        <span class="nx">el</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;h-temp&#39;</span><span class="p">;</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">slotCount</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+                        <span class="nx">suffix</span> <span class="o">=</span> <span class="s1">&#39;-h&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">slotCount</span><span class="p">;</span>
+                        <span class="nx">el</span><span class="p">.</span><span class="nx">id</span> <span class="o">+=</span> <span class="nx">suffix</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Restore any existing slot.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                        <span class="nx">temp</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+                        <span class="nx">conf</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+                        <span class="nx">conf</span><span class="p">.</span><span class="nx">name</span> <span class="o">+=</span> <span class="nx">suffix</span><span class="p">;</span>
+                        <span class="k">return</span> <span class="nx">conf</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+            <span class="k">throw</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Ad slot container was not found in the DOM.&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">conf</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
