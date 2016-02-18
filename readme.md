@@ -175,12 +175,12 @@ Here is an example of a page setup using Harmony and jQuery.
 <head>
     <script src="path/to/site/bundle.js"></script>
     <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
+</head>
+<body>
+    <div id="ad-div-01"></div>
     <script>
-    var libs = {
-        harmony: Harmony()
-    };
-    $(function () {
-        libs.harmony.load({
+        var harmony = Harmony();
+        harmony.load({
             slots: [{
                 name: 'ad01',
                 id: 'ad-div-01',
@@ -191,20 +191,15 @@ Here is an example of a page setup using Harmony and jQuery.
                 ],
                 targeting: {
                     'custom': 'slot targeting'
-                },
-                breakpoint: 'myads'
+                }
             }],
             targeting: {
                 'custom': 'system targeting'
             }
         });
         googletag.enableServices();
-        libs.harmony.show.breakpoint('myads');
-    });
+        harmony.show.slot('ad01');
     </script>
-</head>
-<body>
-    <div id="ad-div-01"></div>
 </body>
 ```
 
