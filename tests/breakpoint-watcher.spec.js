@@ -49,26 +49,25 @@ describe('Breakpoint Watcher', function () {
             watcher.clear();
         });
         it('triggers on first run', function (done) {
-            global.innerWidth = 200;
             watcher.on('update', function (bp) {
                 expect(bp).toEqual(200);
                 done();
             }, true);
+            global.innerWidth = 200;
             watcher.run();
         });
         it('triggers on bp update', function (done) {
-            var tested = false;
+            global.innerWidth = 90;
             watcher.one('update', function (bp) {
-                console.log(global.innerWidth);
                 expect(bp).toEqual(1);
-                watcher.one('update', function (bp) {
-                    console.log(global.innerWidth);
-                    expect(bp).toEqual(100);
+                global.innerWidth = 802;
+                watcher.on('update', function (bp) {
+                    expect(bp).toEqual(500);
                     done();
                 }, true);
-                global.innerWidth = 402;
+                watcher.run();
             }, true);
-            //global.innerWidth = 90;
+            watcher.run();
         });
     });
 });
