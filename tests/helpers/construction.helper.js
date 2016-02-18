@@ -6,7 +6,7 @@ module.exports = {
     createDiv: function (opts, content) {
         $('<div>', {
             id: opts.id,
-            'class': 'testdiv ' + opts.breakpoint,
+            'class': 'testdiv ' + opts.group,
             text: content
         }).appendTo('body');
     },
@@ -16,17 +16,17 @@ module.exports = {
                 Conf({
                     name: 'TST00',
                     id: 'DVID00',
-                    breakpoint: 'TSTPNT00'
+                    group: 'TSTGRP00'
                 }),
                 Conf({
                     name: 'TST01',
                     id: 'DVID01',
-                    breakpoint: 'TSTPNT01'
+                    group: 'TSTGRP01'
                 }),
                 Conf({
                     name: 'TST02',
                     id: 'DVID02',
-                    breakpoint: 'TSTPNT00'
+                    group: 'TSTGRP00'
                 })
             ],
             targeting: {}

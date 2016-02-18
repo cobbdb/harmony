@@ -7,7 +7,7 @@ var Util = require('./util.js'),
     AdSlot = require('./adslot.js'),
     log = require('./log.js'),
     slots = require('./slotset.js'),
-    breakpoints = require('./bpset.js'),
+    groups = require('./group-set.js'),
     BaseClass = require('baseclassjs'),
     Eventable = require('./event-handler.js');
 
@@ -50,7 +50,7 @@ module.exports = function (opts) {
                         Util.scrubConf(conf)
                     );
                     slots.add(slot);
-                    breakpoints.add(slot.breakpoint, slot);
+                    groups.add(slot.group, slot);
                 } catch (err) {
                     log('error', {
                         msg: 'Slot failed to load during call to load().',
@@ -95,13 +95,13 @@ module.exports = function (opts) {
          */
         hasSlot: slots.has,
         /**
-         * ## harmony.breakpoint(name)
-         * Safely fetch an existing ad slot or a mock slot if slot was not found.
-         * @param {String} name Name of the ad slot.
-         * @return {Object} The ad slot or a mock ad slot.
-         * @see bpset.js
+         * ## harmony.group(name)
+         * Fetch a slot group by name.
+         * @param {String} name Name of the slot group.
+         * @return {Array} Collection of 0 or more ad slots.
+         * @see group-set.js
          */
-        breakpoint: breakpoints.get,
+        group: groups.get,
         /**
          * ## harmony.defineSlot(opts)
          * Create a new adSlot in the page.
@@ -113,7 +113,7 @@ module.exports = function (opts) {
          * @param {Array} [opts.mapping] Size mapping.
          * @param {Boolean} [opts.companion] True if companion ad.
          * @param {Boolean} [opts.drone] True when duplicates are anticipated.
-         * @param {String} [opts.breakpoint] Display point, ex) 0px-infinity
+         * @param {String} [opts.group] Slot group name.
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
          * @param {Object} [opts.on] Dictionary of callbacks.
          * @param {Object} [opts.one] Dictionary of single-run callbacks.
@@ -128,7 +128,7 @@ module.exports = function (opts) {
                     Util.scrubConf(opts)
                 );
                 slots.add(slot);
-                breakpoints.add(opts.breakpoint, slot);
+                groups.add(opts.group, slot);
             } catch (err) {
                 log('error', {
                     msg: 'Slot failed to load during call to defineSlot()',
@@ -145,17 +145,17 @@ module.exports = function (opts) {
          */
         show: {
             /**
-             * ### harmony.show.breakpoint(name)
-             * Show all ads at a breakpoint.
+             * ### harmony.show.group(name)
+             * Show all ads in a slot group.
              * @param {String} name
              */
-            breakpoint: function (name) {
+            group: function (name) {
                 var i, slot, el,
-                    set = breakpoints.get(name),
+                    set = groups.get(name),
                     len = set.length;
                 log('show', {
-                    msg: 'Showing ads at breakpoint',
-                    breakpoint: name
+                    msg: 'Showing ads in group',
+                    group: name
                 });
                 try {
                     for (i = 0; i < len; i += 1) {
@@ -167,8 +167,8 @@ module.exports = function (opts) {
                             el.style.display = 'block';
                         } else {
                             log('error', {
-                                msg: 'Failed to show slot for breakpoint',
-                                breakpoint: name,
+                                msg: 'Failed to show slot for group',
+                                group: name,
                                 reason: 'Slot was missing from the DOM',
                                 slot: slot
                             });
@@ -176,8 +176,8 @@ module.exports = function (opts) {
                     }
                 } catch (err) {
                     log('error', {
-                        msg: 'Failed to show breakpoint',
-                        breakpoint: name,
+                        msg: 'Failed to show group',
+                        group: name,
                         err: err
                     });
                 }
@@ -214,23 +214,23 @@ module.exports = function (opts) {
          */
         hide: {
             /**
-             * ### harmony.hide.breakpoint(name)
-             * Hides all the ads at a breakpoint.
+             * ### harmony.hide.group(name)
+             * Hides all the ads in a slot group.
              * @param {String} name
              */
-            breakpoint: function (name) {
+            group: function (name) {
                 var i, el,
-                    set = breakpoints.get(name),
+                    set = groups.get(name),
                     len = set.length;
-                log('hide', 'Hiding ads at breakpoint ' + name);
+                log('hide', 'Hiding ads in group ' + name);
                 for (i = 0; i < len; i += 1) {
                     el = document.getElementById(set[i].divId);
                     if (el) {
                         el.style.display = 'none';
                     } else {
                         log('error', {
-                            msg: 'Failed to hide slot for breakpoint',
-                            breakpoint: name,
+                            msg: 'Failed to hide slot in group',
+                            group: name,
                             reason: 'Slot was missing from the DOM',
                             id: set[i].divId
                         });

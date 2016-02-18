@@ -21,6 +21,7 @@
  * the event is triggered.
  * @param {Object} [opts.singles] Event callbacks to fire only once
  * the next time the event is triggered.
+ * @return {Object} Can be used by BaseClass.extend().
  */
 module.exports = function (opts) {
     var events = {},

@@ -18,7 +18,7 @@ describe('harmony setup', function () {
         it('creates ad slots', function () {
             harmony.load(conf);
             expect(harmony.slot('TST00').divId).toEqual('DVID00');
-            expect(harmony.slot('TST01').breakpoint).toEqual('TSTPNT01');
+            expect(harmony.slot('TST01').group).toEqual('TSTGRP01');
             expect(harmony.slot('TST02').name).toEqual('TST02');
         });
         it('does not require conf', function () {
@@ -69,7 +69,7 @@ describe('harmony setup', function () {
         var newConf = function () {
                 return Options({
                     name: 'TST22',
-                    breakpoint: 'BKP22',
+                    group: 'GRP22',
                     id: 'DVID22'
                 });
             },
@@ -81,8 +81,8 @@ describe('harmony setup', function () {
         it('creates an ad slot', function () {
             var opts = newSlot();
             harmony.defineSlot(opts);
-            expect(harmony.slot('TST22').breakpoint).toEqual('BKP22');
-            expect(harmony.breakpoint('BKP22')[0].divId).toEqual('DVID22');
+            expect(harmony.slot('TST22').group).toEqual('GRP22');
+            expect(harmony.group('GRP22')[0].divId).toEqual('DVID22');
         });
         it('handles duplicate slot names for sync pages', function () {
             harmony.defineSlot(newSlot());

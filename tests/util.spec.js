@@ -18,7 +18,7 @@ describe('Util', function () {
             conf = Conf({
                 name: 'testname',
                 id: 'testid',
-                breakpoint: 'testpnt'
+                group: 'testgrp'
             });
             slots.add(conf);
         });
@@ -59,7 +59,7 @@ describe('Util', function () {
                     confs[i] = Conf({
                         name: 'testname',
                         id: 'testid',
-                        breakpoint: 'testpnt'
+                        group: 'testgrp'
                     });
                     Help.createDiv(confs[i]);
                 }
@@ -86,12 +86,12 @@ describe('Util', function () {
                 var first = Conf({
                         name: 'testname',
                         id: 'testid',
-                        breakpoint: 'testpnt'
+                        group: 'testgrp'
                     }),
                     second = Conf({
                         name: 'testname',
                         id: 'testid',
-                        breakpoint: 'testpnt'
+                        group: 'testgrp'
                     });
                 slots.add(first);
                 Help.createDiv(first, 'testcontent');
@@ -122,7 +122,7 @@ describe('Util', function () {
                     confs[i] = Conf({
                         name: 'testname',
                         id: 'testid',
-                        breakpoint: 'testpnt'
+                        group: 'testgrp'
                     });
                     Help.createDiv(confs[i]);
                     out[i] = Util.scrubConf(confs[i]);
