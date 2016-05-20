@@ -19,7 +19,7 @@
     <div id="tree"></div>
     <div id="headings">
       <div class="heading h1">
-        <a href="#slotset">SlotSet</a>
+        <a href="#slot-set">Slot-Set</a>
       </div>
       <div class="heading h2">
         <a href="#set.cached.callbacks(name)">set.cached.callbacks(name)</a>
@@ -32,6 +32,9 @@
       </div>
       <div class="heading h2">
         <a href="#set.add(slot)">set.add(slot)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.getall()">set.getAll()</a>
       </div>
       <div class="heading h2">
         <a href="#set.has(name)">set.has(name)</a>
@@ -48,10 +51,10 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="slotset">
+<div class="pilwrap" id="slot-set">
   <h1>
-    <a href="#slotset" name="slotset" class="pilcrow">&#182;</a>
-    SlotSet
+    <a href="#slot-set" name="slot-set" class="pilcrow">&#182;</a>
+    Slot-Set
   </h1>
 </div>
 
@@ -279,6 +282,37 @@ slot has been defined.</p>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">slot</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">slots</span><span class="p">[</span><span class="nx">slot</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">slot</span><span class="p">;</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.getall()">
+  <h2>
+    <a href="#set.getall()" name="set.getall()" class="pilcrow">&#182;</a>
+    set.getAll()
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>Map of all slots in the system.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">getAll</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">slots</span><span class="p">;</span>
     <span class="p">},</span>
 
 </pre></div>

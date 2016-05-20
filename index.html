@@ -31,6 +31,12 @@
         <a href="#harmony.on('breakpoint%2Fupdate'%2C%20callback)">harmony.on('breakpoint/update', callback)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.on('slotrenderended'%2C%20callback)">harmony.on('slotRenderEnded', callback)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.version">harmony.version</a>
+      </div>
+      <div class="heading h2">
         <a href="#harmony.load(opts)">harmony.load(opts)</a>
       </div>
       <div class="heading h2">
@@ -46,22 +52,40 @@
         <a href="#harmony.hasslot(name)">harmony.hasSlot(name)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.getbreakpoints">harmony.getBreakpoints</a>
+      </div>
+      <div class="heading h2">
         <a href="#harmony.group(name)">harmony.group(name)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.defineslot(opts)">harmony.defineSlot(opts)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.enable">harmony.enable</a>
+      </div>
+      <div class="heading h3">
         <a href="#harmony.enable.slot(name)">harmony.enable.slot(name)</a>
       </div>
-      <div class="heading h2">
+      <div class="heading h3">
         <a href="#harmony.enable.group(name)">harmony.enable.group(name)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.disable">harmony.disable</a>
+      </div>
+      <div class="heading h3">
         <a href="#harmony.disable.slot(name)">harmony.disable.slot(name)</a>
       </div>
-      <div class="heading h2">
+      <div class="heading h3">
         <a href="#harmony.disable.group(name)">harmony.disable.group(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.refresh()">harmony.refresh()</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.refresh.slot(name)">harmony.refresh.slot(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.refresh.group(name)">harmony.refresh.group(name)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.show">harmony.show</a>
@@ -167,6 +191,8 @@
     <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony defined.&#39;</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">BaseClass</span><span class="p">({</span>
+        <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
 </pre></div>
         </td>
@@ -208,12 +234,78 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
             <span class="nx">watcher</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">bp</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;breakpoint/update&#39;</span><span class="p">,</span> <span class="nx">bp</span><span class="p">);</span>
             <span class="p">});</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.on('slotrenderended'%2C%20callback)">
+  <h2>
+    <a href="#harmony.on('slotrenderended'%2C%20callback)" name="harmony.on('slotrenderended'%2C%20callback)" class="pilcrow">&#182;</a>
+    harmony.on('slotRenderEnded', callback)
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">callback</span>
+      <span class="dox_type">Function</span>
+      <span>Called each time any ad call completes.</span>
+    </div>
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">event-handler.js
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;It appears &quot;googletag&quot; is not defined!&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
         <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.version">
+  <h2>
+    <a href="#harmony.version" name="harmony.version" class="pilcrow">&#182;</a>
+    harmony.version
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">String
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.2.0&#39;</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -273,7 +365,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
 </div>
 <p>Generate the ad slots.</p>
         </td>
@@ -306,7 +398,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
 <p>Assign the system targeting.</p>
         </td>
@@ -327,7 +419,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
 </div>
 <p>Assign the breakpoints.</p>
         </td>
@@ -487,6 +579,38 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">hasSlot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">has</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.getbreakpoints">
+  <h2>
+    <a href="#harmony.getbreakpoints" name="harmony.getbreakpoints" class="pilcrow">&#182;</a>
+    harmony.getBreakpoints
+  </h2>
+</div>
+
+
+<p>Fetch the list of breakpoints already loaded into the system.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">ArrayOfNumber
+</span>
+      <span>{ArrayOfNumber}</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -654,22 +778,33 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.enable.slot(name)">
+<div class="pilwrap" id="harmony.enable">
   <h2>
+    <a href="#harmony.enable" name="harmony.enable" class="pilcrow">&#182;</a>
+    harmony.enable
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.enable.slot(name)">
+  <h3>
     <a href="#harmony.enable.slot(name)" name="harmony.enable.slot(name)" class="pilcrow">&#182;</a>
     harmony.enable.slot(name)
-  </h2>
+  </h3>
 </div>
 
 
 
 <div class="pilwrap" id="harmony.enable.group(name)">
-  <h2>
+  <h3>
     <a href="#harmony.enable.group(name)" name="harmony.enable.group(name)" class="pilcrow">&#182;</a>
     harmony.enable.group(name)
-  </h2>
+  </h3>
 </div>
 
+
+<p>Marks slots as eligible to make ad calls.</p>
   </div>
   <div class="body">
   </div>
@@ -691,22 +826,33 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.disable.slot(name)">
+<div class="pilwrap" id="harmony.disable">
   <h2>
+    <a href="#harmony.disable" name="harmony.disable" class="pilcrow">&#182;</a>
+    harmony.disable
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.disable.slot(name)">
+  <h3>
     <a href="#harmony.disable.slot(name)" name="harmony.disable.slot(name)" class="pilcrow">&#182;</a>
     harmony.disable.slot(name)
-  </h2>
+  </h3>
 </div>
 
 
 
 <div class="pilwrap" id="harmony.disable.group(name)">
-  <h2>
+  <h3>
     <a href="#harmony.disable.group(name)" name="harmony.disable.group(name)" class="pilcrow">&#182;</a>
     harmony.disable.group(name)
-  </h2>
+  </h3>
 </div>
 
+
+<p>Marks slots as ineligible to make ad calls.</p>
   </div>
   <div class="body">
   </div>
@@ -721,6 +867,54 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">disable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/disable.js&#39;</span><span class="p">),</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.refresh()">
+  <h2>
+    <a href="#harmony.refresh()" name="harmony.refresh()" class="pilcrow">&#182;</a>
+    harmony.refresh()
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.refresh.slot(name)">
+  <h2>
+    <a href="#harmony.refresh.slot(name)" name="harmony.refresh.slot(name)" class="pilcrow">&#182;</a>
+    harmony.refresh.slot(name)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.refresh.group(name)">
+  <h2>
+    <a href="#harmony.refresh.group(name)" name="harmony.refresh.group(name)" class="pilcrow">&#182;</a>
+    harmony.refresh.group(name)
+  </h2>
+</div>
+
+
+<p>Refresh a single slot or group of slots.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">actions/refresh.js
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">refresh</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/refresh.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -796,7 +990,7 @@ calling <code>googletag.display()</code>. Will not call
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
 </div>
 <p>Only make ad call if slot is enabled.</p>
         </td>
@@ -872,7 +1066,7 @@ calling <code>googletag.display()</code>. Will not call
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
 </div>
 <p>Only make ad call if slot is enabled.</p>
         </td>
