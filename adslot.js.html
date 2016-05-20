@@ -39,6 +39,9 @@
       <div class="heading h2">
         <a href="#harmony.slot(name).adunit">harmony.slot(name).adunit</a>
       </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).enabled">harmony.slot(name).enabled</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -59,7 +62,7 @@
 
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./log.js&#39;</span><span class="p">),</span>
-    <span class="nx">set</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slotset.js&#39;</span><span class="p">),</span>
+    <span class="nx">set</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slot-set.js&#39;</span><span class="p">),</span>
     <span class="nx">BaseClass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;baseclassjs&#39;</span><span class="p">),</span>
     <span class="nx">Eventable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./event-handler.js&#39;</span><span class="p">);</span>
 
@@ -141,6 +144,11 @@
       <span class="dox_tag_name">[opts.interstitial]</span>
       <span class="dox_type">Boolean</span>
       <span>True if out-of-page ad.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.enabled]</span>
+      <span class="dox_type">Boolean</span>
+      <span>False if ineligible to make ad calls.</span>
     </div>
     <div class="dox_tag_detail">
       <span class="dox_tag_name">[opts.on]</span>
@@ -432,6 +440,34 @@ not the current size of the ad slot.</p>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="nx">slot</span><span class="p">.</span><span class="nx">adunit</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">adunit</span><span class="p">;</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).enabled">
+  <h2>
+    <a href="#harmony.slot(name).enabled" name="harmony.slot(name).enabled" class="pilcrow">&#182;</a>
+    harmony.slot(name).enabled
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Boolean
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">===</span> <span class="kc">false</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+
 
 </pre></div>
         </td>
@@ -439,7 +475,7 @@ not the current size of the ad slot.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
 </div>
 <p>Set slot-specific targeting. No need to introspect
 because unused targeting is ignored by dfp.</p>
@@ -456,7 +492,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
 </div>
 <p>Load in any targeting set before this slow was defined.</p>
         </td>
@@ -473,7 +509,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
 </div>
 <p>Assign size mapping for responsive ad slots.</p>
         </td>
@@ -487,7 +523,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
 </div>
 <p>Load any provided callback into queue.
 <code>opts.callback</code> is legacy.</p>
@@ -504,7 +540,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
 </div>
 <p>Attach a listener for the slotRenderEnded event.</p>
         </td>
@@ -527,7 +563,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
 </div>
 <p>Trigger any attached behaviors.</p>
         </td>
@@ -543,7 +579,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
 </div>
 <p>Assign companion ad service if requested.</p>
         </td>
@@ -561,7 +597,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
 </div>
 <p>Add the publisher service and return the new slot.</p>
         </td>

@@ -52,6 +52,18 @@
         <a href="#harmony.defineslot(opts)">harmony.defineSlot(opts)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.enable.slot(name)">harmony.enable.slot(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.enable.group(name)">harmony.enable.group(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.disable.slot(name)">harmony.disable.slot(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.disable.group(name)">harmony.disable.group(name)</a>
+      </div>
+      <div class="heading h2">
         <a href="#harmony.show">harmony.show</a>
       </div>
       <div class="heading h3">
@@ -105,7 +117,7 @@
         <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./util.js&#39;</span><span class="p">),</span>
     <span class="nx">AdSlot</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./adslot.js&#39;</span><span class="p">),</span>
     <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./log.js&#39;</span><span class="p">),</span>
-    <span class="nx">slots</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slotset.js&#39;</span><span class="p">),</span>
+    <span class="nx">slots</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slot-set.js&#39;</span><span class="p">),</span>
     <span class="nx">groups</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./group-set.js&#39;</span><span class="p">),</span>
     <span class="nx">BaseClass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;baseclassjs&#39;</span><span class="p">),</span>
     <span class="nx">Eventable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./event-handler.js&#39;</span><span class="p">),</span>
@@ -425,7 +437,7 @@
     </div>
     <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_type">slotset.js
+      <span class="dox_type">slot-set.js
 </span>
     </div>
   </div>
@@ -467,7 +479,7 @@
     </div>
     <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_type">slotset.js
+      <span class="dox_type">slot-set.js
 </span>
     </div>
   </div>
@@ -589,6 +601,11 @@
       <span>True if out-of-page ad.</span>
     </div>
     <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.enabled]</span>
+      <span class="dox_type">Boolean</span>
+      <span>False if ineligible to make ad calls.</span>
+    </div>
+    <div class="dox_tag_detail">
       <span class="dox_tag_name">[opts.on]</span>
       <span class="dox_type">Object</span>
       <span>Dictionary of callbacks.</span>
@@ -637,6 +654,80 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
+<div class="pilwrap" id="harmony.enable.slot(name)">
+  <h2>
+    <a href="#harmony.enable.slot(name)" name="harmony.enable.slot(name)" class="pilcrow">&#182;</a>
+    harmony.enable.slot(name)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.enable.group(name)">
+  <h2>
+    <a href="#harmony.enable.group(name)" name="harmony.enable.group(name)" class="pilcrow">&#182;</a>
+    harmony.enable.group(name)
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">actions/enable.js
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">enable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/enable.js&#39;</span><span class="p">),</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.disable.slot(name)">
+  <h2>
+    <a href="#harmony.disable.slot(name)" name="harmony.disable.slot(name)" class="pilcrow">&#182;</a>
+    harmony.disable.slot(name)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.disable.group(name)">
+  <h2>
+    <a href="#harmony.disable.group(name)" name="harmony.disable.group(name)" class="pilcrow">&#182;</a>
+    harmony.disable.group(name)
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">actions/disable.js
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">disable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/disable.js&#39;</span><span class="p">),</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="harmony.show">
   <h2>
     <a href="#harmony.show" name="harmony.show" class="pilcrow">&#182;</a>
@@ -645,8 +736,9 @@
 </div>
 
 
-<p>Showing an ad means setting style <code>display:block</code> and
-calling <code>googletag.display()</code>.</p>
+<p>Showing a slot means setting style <code>display:block</code> and
+calling <code>googletag.display()</code>. Will not call
+<code>googletag.display()</code> on disabled slots.</p>
   </div>
   <div class="body">
   </div>
@@ -696,7 +788,23 @@ calling <code>googletag.display()</code>.</p>
                     <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
                         <span class="nx">slot</span> <span class="o">=</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
                         <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-                        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Only make ad call if slot is enabled.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+                        <span class="p">}</span>
+
                         <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                         <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
                             <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
@@ -756,7 +864,23 @@ calling <code>googletag.display()</code>.</p>
                 <span class="k">try</span> <span class="p">{</span>
                     <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
                     <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-                    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>Only make ad call if slot is enabled.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+                    <span class="p">}</span>
+
                     <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                     <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
                 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
