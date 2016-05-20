@@ -1,5 +1,5 @@
 /**
- * # SlotSet
+ * # Slot-Set
  */
 
 var Util = require('./util.js'),
@@ -79,6 +79,13 @@ module.exports = {
      */
     add: function (slot) {
         slots[slot.name] = slot;
+    },
+    /**
+     * ## set.getAll()
+     * @return {Object} Map of all slots in the system.
+     */
+    getAll: function () {
+        return slots;
     },
     /**
      * ## set.has(name)

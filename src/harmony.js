@@ -26,22 +26,39 @@ module.exports = function (opts) {
     log('init', 'Harmony defined.');
 
     return BaseClass({
-        /**
-         * ## harmony.on('breakpoint/update', callback)
-         * ```javascript
-         * harmony.on('breakpoint/update', function (bp) {});
-         * harmony.one('breakpoint/update', function (bp) {});
-         * harmony.off('breakpoint/update', function (bp) {});
-         * ```
-         * @param {Function} callback Called on new breakpoint.
-         * @see event-handler.js
-         */
         _create: function () {
             var that = this;
+            /**
+             * ## harmony.on('breakpoint/update', callback)
+             * ```javascript
+             * harmony.on('breakpoint/update', function (bp) {});
+             * harmony.one('breakpoint/update', function (bp) {});
+             * harmony.off('breakpoint/update', function (bp) {});
+             * ```
+             * @param {Function} callback Called on new breakpoint.
+             * @see event-handler.js
+             */
             watcher.on('update', function (bp) {
                 that.trigger('breakpoint/update', bp);
             });
+            /**
+             * ## harmony.on('slotRenderEnded', callback)
+             * @param {Function} callback Called each time any ad call completes.
+             * @see event-handler.js
+             */
+            try {
+                global.googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+                    that.trigger('slotRenderEnded', event);
+                });
+            } catch (err) {
+                log('error', 'It appears "googletag" is not defined!');
+            }
         },
+        /**
+         * ## harmony.version
+         * @type {String}
+         */
+        version: '3.2.0',
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
@@ -123,6 +140,12 @@ module.exports = function (opts) {
          */
         hasSlot: slots.has,
         /**
+         * ## harmony.getBreakpoints
+         * Fetch the list of breakpoints already loaded into the system.
+         * @return {ArrayOfNumber}
+         */
+        getBreakpoints: watcher.getAll,
+        /**
          * ## harmony.group(name)
          * Fetch a slot group by name.
          * @param {String} name Name of the slot group.
@@ -167,12 +190,35 @@ module.exports = function (opts) {
             }
             return slot;
         },
+        /**
+         * ## harmony.enable
+         * ### harmony.enable.slot(name)
+         * ### harmony.enable.group(name)
+         * Marks slots as eligible to make ad calls.
+         * @see actions/enable.js
+         */
         enable: require('./actions/enable.js'),
+        /**
+         * ## harmony.disable
+         * ### harmony.disable.slot(name)
+         * ### harmony.disable.group(name)
+         * Marks slots as ineligible to make ad calls.
+         * @see actions/disable.js
+         */
         disable: require('./actions/disable.js'),
         /**
+         * ## harmony.refresh()
+         * ## harmony.refresh.slot(name)
+         * ## harmony.refresh.group(name)
+         * Refresh a single slot or group of slots.
+         * @see actions/refresh.js
+         */
+        refresh: require('./actions/refresh.js'),
+        /**
          * ## harmony.show
-         * Showing an ad means setting style ```display:block``` and
-         * calling ```googletag.display()```.
+         * Showing a slot means setting style ```display:block``` and
+         * calling ```googletag.display()```. Will not call
+         * ```googletag.display()``` on disabled slots.
          */
         show: {
             /**

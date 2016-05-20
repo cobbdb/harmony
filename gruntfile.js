@@ -21,4 +21,16 @@ module.exports = function (grunt) {
     grunt.registerTask('docs', 'Build and deploy autodocs.', [
         'docker-clone'
     ]);
+
+    /**
+     * To build docs:
+     * $ git checkout git@github.com:cobbdb/harmony.git docs-clone
+     * $ cd docs-clone
+     * $ git checkout gh-pages
+     * $ rm *
+     * $ cd ..
+     * $ docker -i src/harmony.js -o docs-clone
+     * $ cd docs-clone
+     * $ copy harmony.js.html index.html
+     */
 };

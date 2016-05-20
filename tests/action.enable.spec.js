@@ -1,7 +1,5 @@
 var Harmony = require('../src/harmony.js'),
-    Help = require('./helpers/construction.helper.js'),
-    $ = require('jquery'),
-    enable = require('../src/actions/enable.js');
+    Help = require('./helpers/construction.helper.js');
 
 describe('harmony.enable', function () {
     var harmony;

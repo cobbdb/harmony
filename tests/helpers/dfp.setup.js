@@ -5,7 +5,8 @@ beforeEach(function () {
     // Pubads service.
     var pubadsSpy = jasmine.createSpyObj('pubadsSpy', [
         'setTargeting',
-        'addEventListener'
+        'addEventListener',
+        'refresh'
     ]);
     global.googletag = jasmine.createSpyObj('googletag', [
         'defineOutOfPageSlot',
