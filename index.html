@@ -308,7 +308,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.3.0&#39;</span><span class="p">,</span>
+        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.3.1&#39;</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -1037,6 +1037,7 @@ calling <code>googletag.display()</code>. Will not call
         </td>
         <td class="code highlight"><div class="highlight"><pre>
                         <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
                             <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                         <span class="p">}</span>
 
@@ -1113,6 +1114,7 @@ calling <code>googletag.display()</code>. Will not call
         </td>
         <td class="code highlight"><div class="highlight"><pre>
                     <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
                         <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                     <span class="p">}</span>
 

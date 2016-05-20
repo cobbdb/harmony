@@ -42,6 +42,9 @@
       <div class="heading h2">
         <a href="#harmony.slot(name).enabled">harmony.slot(name).enabled</a>
       </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).active">harmony.slot(name).active</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -468,6 +471,36 @@ not the current size of the ad slot.</p>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">===</span> <span class="kc">false</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).active">
+  <h2>
+    <a href="#harmony.slot(name).active" name="harmony.slot(name).active" class="pilcrow">&#182;</a>
+    harmony.slot(name).active
+  </h2>
+</div>
+
+
+<p>True if this slot has ever had an ad call.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Boolean
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
 
 </pre></div>
         </td>
@@ -475,7 +508,7 @@ not the current size of the ad slot.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
 </div>
 <p>Set slot-specific targeting. No need to introspect
 because unused targeting is ignored by dfp.</p>
@@ -492,7 +525,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
 </div>
 <p>Load in any targeting set before this slow was defined.</p>
         </td>
@@ -509,7 +542,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
 </div>
 <p>Assign size mapping for responsive ad slots.</p>
         </td>
@@ -523,7 +556,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
 </div>
 <p>Load any provided callback into queue.
 <code>opts.callback</code> is legacy.</p>
@@ -540,7 +573,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
 </div>
 <p>Attach a listener for the slotRenderEnded event.</p>
         </td>
@@ -563,7 +596,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
 </div>
 <p>Trigger any attached behaviors.</p>
         </td>
@@ -579,7 +612,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
 </div>
 <p>Assign companion ad service if requested.</p>
         </td>
@@ -597,7 +630,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
 </div>
 <p>Add the publisher service and return the new slot.</p>
         </td>

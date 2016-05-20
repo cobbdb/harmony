@@ -80,16 +80,53 @@ make ad calls for disabled slots.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span>
-        <span class="nx">set</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span>
+        <span class="nx">refreshSet</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="nx">displaySet</span> <span class="o">=</span> <span class="p">[],</span>
         <span class="nx">map</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>
     <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">slot</span> <span class="o">=</span> <span class="nx">map</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">set</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">refreshSet</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">displaySet</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">set</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Refresh the already active slots.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">refreshSet</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Display the dormant slots.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">len</span> <span class="o">=</span> <span class="nx">displaySet</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">displaySet</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 
 
@@ -126,7 +163,12 @@ make ad calls for disabled slots.</p>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">slot</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">slot</span><span class="p">.</span><span class="nx">mock</span> <span class="o">&amp;&amp;</span> <span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">([</span><span class="nx">slot</span><span class="p">]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">([</span><span class="nx">slot</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
@@ -165,14 +207,51 @@ make ad calls for disabled slots.</p>
     <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span>
         <span class="nx">group</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
         <span class="nx">len</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
-        <span class="nx">set</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nx">refreshSet</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="nx">displaySet</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">slot</span> <span class="o">=</span> <span class="nx">group</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">set</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">refreshSet</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">displaySet</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">set</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Refresh the already active slots.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">refreshSet</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Display the dormant slots.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">len</span> <span class="o">=</span> <span class="nx">displaySet</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">displaySet</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
         </td>
