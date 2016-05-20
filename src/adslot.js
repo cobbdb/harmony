@@ -108,6 +108,12 @@ module.exports = function (pubads, opts) {
      * @type {Boolean}
      */
     slot.enabled = opts.enabled === false ? false : true;
+    /**
+     * ## harmony.slot(name).active
+     * True if this slot has ever had an ad call.
+     * @type {Boolean}
+     */
+    slot.active = false;
 
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.

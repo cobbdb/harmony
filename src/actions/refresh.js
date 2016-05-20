@@ -12,16 +12,31 @@ var slots = require('../slot-set.js'),
  * Call ```pubads().refresh()``` on all enabled slots in the page.
  */
 module.exports = function () {
-    var slot, name,
-        set = [],
+    var i, len, slot, name,
+        refreshSet = [],
+        displaySet = [],
         map = slots.getAll();
     for (name in map) {
         slot = map[name];
         if (slot.enabled) {
-            set.push(slot);
+            if (slot.active) {
+                refreshSet.push(slot);
+            } else {
+                displaySet.push(slot);
+            }
         }
     }
-    global.googletag.pubads().refresh(set);
+
+    // Refresh the already active slots.
+    global.googletag.pubads().refresh(refreshSet);
+
+    // Display the dormant slots.
+    len = displaySet.length;
+    for (i = 0; i < len; i += 1) {
+        slot = displaySet[i];
+        slot.active = true;
+        global.googletag.display(slot.divId);
+    }
 };
 
 /**
@@ -32,7 +47,12 @@ module.exports = function () {
 module.exports.slot = function (name) {
     var slot = slots.get(name);
     if (!slot.mock && slot.enabled) {
-        global.googletag.pubads().refresh([slot]);
+        if (slot.active) {
+            global.googletag.pubads().refresh([slot]);
+        } else {
+            slot.active = true;
+            global.googletag.display(slot.divId);
+        }
     }
 };
 
@@ -45,12 +65,27 @@ module.exports.group = function (name) {
     var i, slot,
         group = groups.get(name),
         len = group.length,
-        set = [];
+        refreshSet = [],
+        displaySet = [];
     for (i = 0; i < len; i += 1) {
         slot = group[i];
         if (slot.enabled) {
-            set.push(slot);
+            if (slot.active) {
+                refreshSet.push(slot);
+            } else {
+                displaySet.push(slot);
+            }
         }
     }
-    global.googletag.pubads().refresh(set);
+
+    // Refresh the already active slots.
+    global.googletag.pubads().refresh(refreshSet);
+
+    // Display the dormant slots.
+    len = displaySet.length;
+    for (i = 0; i < len; i += 1) {
+        slot = displaySet[i];
+        slot.active = true;
+        global.googletag.display(slot.divId);
+    }
 };

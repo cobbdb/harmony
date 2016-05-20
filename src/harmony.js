@@ -58,7 +58,7 @@ module.exports = function (opts) {
          * ## harmony.version
          * @type {String}
          */
-        version: '3.3.0',
+        version: '3.3.1',
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
@@ -249,6 +249,7 @@ module.exports = function (opts) {
 
                         // Only make ad call if slot is enabled.
                         if (slot.enabled) {
+                            slot.active = true;
                             global.googletag.display(slot.divId);
                         }
 
@@ -289,6 +290,7 @@ module.exports = function (opts) {
 
                     // Only make ad call if slot is enabled.
                     if (slot.enabled) {
+                        slot.active = true;
                         global.googletag.display(slot.divId);
                     }
 

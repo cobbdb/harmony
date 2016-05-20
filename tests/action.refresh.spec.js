@@ -7,6 +7,9 @@ describe('harmony.refresh', function () {
         Help.setupDOM();
         harmony = Harmony();
         harmony.load(Help.getConf());
+        harmony.slot('TST00').active = true;
+        harmony.slot('TST01').active = true;
+        harmony.slot('TST02').active = true;
     });
     it('refreshes all enabled slots in the system', function () {
         harmony.disable.slot('TST02');

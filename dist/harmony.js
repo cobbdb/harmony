@@ -363,16 +363,31 @@ var slots = require('../slot-set.js'),
  * Call ```pubads().refresh()``` on all enabled slots in the page.
  */
 module.exports = function () {
-    var slot, name,
-        set = [],
+    var i, len, slot, name,
+        refreshSet = [],
+        displaySet = [],
         map = slots.getAll();
     for (name in map) {
         slot = map[name];
         if (slot.enabled) {
-            set.push(slot);
+            if (slot.active) {
+                refreshSet.push(slot);
+            } else {
+                displaySet.push(slot);
+            }
         }
     }
-    global.googletag.pubads().refresh(set);
+
+    // Refresh the already active slots.
+    global.googletag.pubads().refresh(refreshSet);
+
+    // Display the dormant slots.
+    len = displaySet.length;
+    for (i = 0; i < len; i += 1) {
+        slot = displaySet[i];
+        slot.active = true;
+        global.googletag.display(slot.divId);
+    }
 };
 
 /**
@@ -383,7 +398,12 @@ module.exports = function () {
 module.exports.slot = function (name) {
     var slot = slots.get(name);
     if (!slot.mock && slot.enabled) {
-        global.googletag.pubads().refresh([slot]);
+        if (slot.active) {
+            global.googletag.pubads().refresh([slot]);
+        } else {
+            slot.active = true;
+            global.googletag.display(slot.divId);
+        }
     }
 };
 
@@ -396,14 +416,29 @@ module.exports.group = function (name) {
     var i, slot,
         group = groups.get(name),
         len = group.length,
-        set = [];
+        refreshSet = [],
+        displaySet = [];
     for (i = 0; i < len; i += 1) {
         slot = group[i];
         if (slot.enabled) {
-            set.push(slot);
+            if (slot.active) {
+                refreshSet.push(slot);
+            } else {
+                displaySet.push(slot);
+            }
         }
     }
-    global.googletag.pubads().refresh(set);
+
+    // Refresh the already active slots.
+    global.googletag.pubads().refresh(refreshSet);
+
+    // Display the dormant slots.
+    len = displaySet.length;
+    for (i = 0; i < len; i += 1) {
+        slot = displaySet[i];
+        slot.active = true;
+        global.googletag.display(slot.divId);
+    }
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -519,6 +554,12 @@ module.exports = function (pubads, opts) {
      * @type {Boolean}
      */
     slot.enabled = opts.enabled === false ? false : true;
+    /**
+     * ## harmony.slot(name).active
+     * True if this slot has ever had an ad call.
+     * @type {Boolean}
+     */
+    slot.active = false;
 
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.
@@ -886,7 +927,7 @@ module.exports = function (opts) {
          * ## harmony.version
          * @type {String}
          */
-        version: '3.3.0',
+        version: '3.3.1',
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
@@ -1077,6 +1118,7 @@ module.exports = function (opts) {
 
                         // Only make ad call if slot is enabled.
                         if (slot.enabled) {
+                            slot.active = true;
                             global.googletag.display(slot.divId);
                         }
 
@@ -1117,6 +1159,7 @@ module.exports = function (opts) {
 
                     // Only make ad call if slot is enabled.
                     if (slot.enabled) {
+                        slot.active = true;
                         global.googletag.display(slot.divId);
                     }
 
