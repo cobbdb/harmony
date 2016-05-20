@@ -43,6 +43,9 @@
         <a href="#harmony.addbreakpoints(set)">harmony.addBreakpoints(set)</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.getbreakpoints()">harmony.getBreakpoints()</a>
+      </div>
+      <div class="heading h2">
         <a href="#harmony.log">harmony.log</a>
       </div>
       <div class="heading h2">
@@ -50,9 +53,6 @@
       </div>
       <div class="heading h2">
         <a href="#harmony.hasslot(name)">harmony.hasSlot(name)</a>
-      </div>
-      <div class="heading h2">
-        <a href="#harmony.getbreakpoints">harmony.getBreakpoints</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.group(name)">harmony.group(name)</a>
@@ -79,12 +79,12 @@
         <a href="#harmony.disable.group(name)">harmony.disable.group(name)</a>
       </div>
       <div class="heading h2">
-        <a href="#harmony.refresh()">harmony.refresh()</a>
+        <a href="#harmony.refresh">harmony.refresh</a>
       </div>
-      <div class="heading h2">
+      <div class="heading h3">
         <a href="#harmony.refresh.slot(name)">harmony.refresh.slot(name)</a>
       </div>
-      <div class="heading h2">
+      <div class="heading h3">
         <a href="#harmony.refresh.group(name)">harmony.refresh.group(name)</a>
       </div>
       <div class="heading h2">
@@ -472,6 +472,38 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
+<div class="pilwrap" id="harmony.getbreakpoints()">
+  <h2>
+    <a href="#harmony.getbreakpoints()" name="harmony.getbreakpoints()" class="pilcrow">&#182;</a>
+    harmony.getBreakpoints()
+  </h2>
+</div>
+
+
+<p>Fetch the list of breakpoints already loaded into the system.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">ArrayOfNumber
+</span>
+      <span>{ArrayOfNumber}</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="harmony.log">
   <h2>
     <a href="#harmony.log" name="harmony.log" class="pilcrow">&#182;</a>
@@ -579,38 +611,6 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">hasSlot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">has</span><span class="p">,</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="harmony.getbreakpoints">
-  <h2>
-    <a href="#harmony.getbreakpoints" name="harmony.getbreakpoints" class="pilcrow">&#182;</a>
-    harmony.getBreakpoints
-  </h2>
-</div>
-
-
-<p>Fetch the list of breakpoints already loaded into the system.</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span class="dox_type">ArrayOfNumber
-</span>
-      <span>{ArrayOfNumber}</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -874,29 +874,29 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.refresh()">
+<div class="pilwrap" id="harmony.refresh">
   <h2>
-    <a href="#harmony.refresh()" name="harmony.refresh()" class="pilcrow">&#182;</a>
-    harmony.refresh()
+    <a href="#harmony.refresh" name="harmony.refresh" class="pilcrow">&#182;</a>
+    harmony.refresh
   </h2>
 </div>
 
 
 
 <div class="pilwrap" id="harmony.refresh.slot(name)">
-  <h2>
+  <h3>
     <a href="#harmony.refresh.slot(name)" name="harmony.refresh.slot(name)" class="pilcrow">&#182;</a>
     harmony.refresh.slot(name)
-  </h2>
+  </h3>
 </div>
 
 
 
 <div class="pilwrap" id="harmony.refresh.group(name)">
-  <h2>
+  <h3>
     <a href="#harmony.refresh.group(name)" name="harmony.refresh.group(name)" class="pilcrow">&#182;</a>
     harmony.refresh.group(name)
-  </h2>
+  </h3>
 </div>
 
 
