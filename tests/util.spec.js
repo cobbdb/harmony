@@ -1,5 +1,5 @@
 var Util = require('../src/util.js'),
-    slots = require('../src/slotset.js'),
+    slots = require('../src/slot-set.js'),
     Conf = require('./helpers/slot-options.helper.js'),
     Help = require('./helpers/construction.helper.js'),
     $ = require('jquery');

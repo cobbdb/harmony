@@ -1,5 +1,5 @@
 var GroupSet = require('../../src/group-set.js'),
-    SlotSet = require('../../src/slotset.js'),
+    SlotSet = require('../../src/slot-set.js'),
     $ = require('jquery'),
     Util = require('../../src/util.js');
 

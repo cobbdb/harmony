@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Doubleclick JS API Helper",
   "main": "src/harmony.js",
   "scripts": {
@@ -31,12 +31,12 @@
   },
   "devDependencies": {
     "curb": "^1.0.1",
-    "grunt": "^0.4.5",
-    "grunt-browserify": "^4.0.1",
-    "grunt-contrib-jasmine": "^1.0.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-jasmine": "^1.0.3",
     "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-uglify": "^0.11.1",
-    "jquery": "^2.2.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "jquery": "2.x",
     "matchdep": "^1.0.1"
   }
 }

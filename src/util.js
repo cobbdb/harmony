@@ -2,7 +2,7 @@
  * # Utilities
  */
 
-var slots = require('./slotset.js');
+var slots = require('./slot-set.js');
 
 module.exports = {
     /**

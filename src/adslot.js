@@ -1,5 +1,5 @@
 var log = require('./log.js'),
-    set = require('./slotset.js'),
+    set = require('./slot-set.js'),
     BaseClass = require('baseclassjs'),
     Eventable = require('./event-handler.js');
 
@@ -18,6 +18,7 @@ var log = require('./log.js'),
  * @param {Boolean} [opts.drone] True when duplicates are anticipated.
  * @param {String} [opts.group] Slot group name.
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
+ * @param {Boolean} [opts.enabled] False if ineligible to make ad calls.
  * @param {Object} [opts.on] Dictionary of callbacks.
  * @param {Object} [opts.one] Dictionary of single-run callbacks.
  * @return {AdSlot}
@@ -102,6 +103,11 @@ module.exports = function (pubads, opts) {
      * @type {String}
      */
     slot.adunit = opts.adunit;
+    /**
+     * ## harmony.slot(name).enabled
+     * @type {Boolean}
+     */
+    slot.enabled = opts.enabled === false ? false : true;
 
     // Set slot-specific targeting. No need to introspect
     // because unused targeting is ignored by dfp.

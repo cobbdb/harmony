@@ -1,4 +1,4 @@
-var SlotSet = require('../src/slotset.js');
+var SlotSet = require('../src/slot-set.js');
 
 describe('SlotSet', function () {
     describe('add', function () {

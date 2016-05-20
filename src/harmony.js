@@ -6,7 +6,7 @@
 var Util = require('./util.js'),
     AdSlot = require('./adslot.js'),
     log = require('./log.js'),
-    slots = require('./slotset.js'),
+    slots = require('./slot-set.js'),
     groups = require('./group-set.js'),
     BaseClass = require('baseclassjs'),
     Eventable = require('./event-handler.js'),
@@ -111,7 +111,7 @@ module.exports = function (opts) {
          * Safely fetch an existing ad slot or a mock slot if slot was not found.
          * @param {String} name Name of the ad slot.
          * @return {Object} The ad slot or a mock ad slot.
-         * @see slotset.js
+         * @see slot-set.js
          */
         slot: slots.get,
         /**
@@ -119,7 +119,7 @@ module.exports = function (opts) {
          * Check if a slot has already been loaded into Harmony.
          * @param {String} name Name of the ad slot.
          * @return {Boolean} True if the slot has already been loaded.
-         * @see slotset.js
+         * @see slot-set.js
          */
         hasSlot: slots.has,
         /**
@@ -143,6 +143,7 @@ module.exports = function (opts) {
          * @param {Boolean} [opts.drone] True when duplicates are anticipated.
          * @param {String} [opts.group] Slot group name.
          * @param {Boolean} [opts.interstitial] True if out-of-page ad.
+         * @param {Boolean} [opts.enabled] False if ineligible to make ad calls.
          * @param {Object} [opts.on] Dictionary of callbacks.
          * @param {Object} [opts.one] Dictionary of single-run callbacks.
          * @return {AdSlot}
@@ -166,6 +167,8 @@ module.exports = function (opts) {
             }
             return slot;
         },
+        enable: require('./actions/enable.js'),
+        disable: require('./actions/disable.js'),
         /**
          * ## harmony.show
          * Showing an ad means setting style ```display:block``` and
@@ -189,7 +192,12 @@ module.exports = function (opts) {
                     for (i = 0; i < len; i += 1) {
                         slot = set[i];
                         slot.tsCalled = global.Date.now();
-                        global.googletag.display(slot.divId);
+
+                        // Only make ad call if slot is enabled.
+                        if (slot.enabled) {
+                            global.googletag.display(slot.divId);
+                        }
+
                         el = document.getElementById(slot.divId);
                         if (el) {
                             el.style.display = 'block';
@@ -224,7 +232,12 @@ module.exports = function (opts) {
                 try {
                     slot = slots.get(name);
                     slot.tsCalled = global.Date.now();
-                    global.googletag.display(slot.divId);
+
+                    // Only make ad call if slot is enabled.
+                    if (slot.enabled) {
+                        global.googletag.display(slot.divId);
+                    }
+
                     el = document.getElementById(slot.divId);
                     el.style.display = 'block';
                 } catch (err) {

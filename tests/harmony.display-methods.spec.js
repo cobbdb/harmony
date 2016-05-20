@@ -17,9 +17,14 @@ describe('display method', function () {
                     harmony.show.group('badgrp');
                 }).not.toThrowError();
             });
-            it('calls display on slots', function () {
+            it('calls display on enabled slots', function () {
                 harmony.show.group('TSTGRP00');
                 expect(googletag.display.calls.count()).toEqual(2);
+            });
+            it('does not call display on disabled slots', function () {
+                harmony.slot('TST00').enabled = false;
+                harmony.show.group('TSTGRP00');
+                expect(googletag.display.calls.count()).toEqual(1);
             });
             it('sets display:block on slots', function () {
                 harmony.show.group('TSTGRP01');
@@ -34,9 +39,14 @@ describe('display method', function () {
                     harmony.show.slot('TST01');
                 }).not.toThrow();
             });
-            it('calls display on a slot', function () {
+            it('calls display on an enabled slot', function () {
                 harmony.show.slot('TST00');
                 expect(googletag.display).toHaveBeenCalled();
+            });
+            it('does not call display on a disabled slot', function () {
+                harmony.disable.slot('TST00');
+                harmony.show.slot('TST00');
+                expect(googletag.display).not.toHaveBeenCalled();
             });
             it('sets display:block on a slot', function () {
                 harmony.show.slot('TST02');
