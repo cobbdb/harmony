@@ -46,6 +46,9 @@
         <a href="#harmony.getbreakpoints()">harmony.getBreakpoints()</a>
       </div>
       <div class="heading h2">
+        <a href="#harmony.breakpoint()">harmony.breakpoint()</a>
+      </div>
+      <div class="heading h2">
         <a href="#harmony.log">harmony.log</a>
       </div>
       <div class="heading h2">
@@ -305,7 +308,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.2.0&#39;</span><span class="p">,</span>
+        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.3.0&#39;</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -488,15 +491,53 @@
     <div class="dox_tag_title">Returns</div>
     <div class="dox_tag_detail">
       <span class="dox_tag_name"></span>
-      <span class="dox_type">ArrayOfNumber
+      <span class="dox_type">ArrayOfNumber</span>
+    </div>
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">breakpoint-watcher.js
 </span>
-      <span>{ArrayOfNumber}</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.breakpoint()">
+  <h2>
+    <a href="#harmony.breakpoint()" name="harmony.breakpoint()" class="pilcrow">&#182;</a>
+    harmony.breakpoint()
+  </h2>
+</div>
+
+
+<p>Fetch the current breakpoint.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Number</span>
+    </div>
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">breakpoint-watcher.js
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">breakpoint</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -990,7 +1031,7 @@ calling <code>googletag.display()</code>. Will not call
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
 </div>
 <p>Only make ad call if slot is enabled.</p>
         </td>
@@ -1066,7 +1107,7 @@ calling <code>googletag.display()</code>. Will not call
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
+  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
 </div>
 <p>Only make ad call if slot is enabled.</p>
         </td>
