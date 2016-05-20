@@ -58,7 +58,7 @@ module.exports = function (opts) {
          * ## harmony.version
          * @type {String}
          */
-        version: '3.2.0',
+        version: '3.3.0',
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.
@@ -121,8 +121,16 @@ module.exports = function (opts) {
          * ## harmony.getBreakpoints()
          * Fetch the list of breakpoints already loaded into the system.
          * @return {ArrayOfNumber}
+         * @see breakpoint-watcher.js
          */
         getBreakpoints: watcher.getAll,
+        /**
+         * ## harmony.breakpoint()
+         * Fetch the current breakpoint.
+         * @return {Number}
+         * @see breakpoint-watcher.js
+         */
+        breakpoint: watcher.current,
         /**
          * ## harmony.log
          * Instance of Lumberjack populated with Harmony's data.
