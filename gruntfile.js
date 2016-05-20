@@ -29,7 +29,7 @@ module.exports = function (grunt) {
      * $ git checkout gh-pages
      * $ rm *
      * $ cd ..
-     * $ docker -i src/harmony.js -o docs-clone
+     * $ docker -i src -o docs-clone
      * $ cd docs-clone
      * $ copy harmony.js.html index.html
      */

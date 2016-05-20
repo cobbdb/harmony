@@ -946,6 +946,12 @@ module.exports = function (opts) {
          */
         addBreakpoints: watcher.add,
         /**
+         * ## harmony.getBreakpoints()
+         * Fetch the list of breakpoints already loaded into the system.
+         * @return {ArrayOfNumber}
+         */
+        getBreakpoints: watcher.getAll,
+        /**
          * ## harmony.log
          * Instance of Lumberjack populated with Harmony's data.
          * @see log.js
@@ -967,12 +973,6 @@ module.exports = function (opts) {
          * @see slot-set.js
          */
         hasSlot: slots.has,
-        /**
-         * ## harmony.getBreakpoints
-         * Fetch the list of breakpoints already loaded into the system.
-         * @return {ArrayOfNumber}
-         */
-        getBreakpoints: watcher.getAll,
         /**
          * ## harmony.group(name)
          * Fetch a slot group by name.
@@ -1035,9 +1035,9 @@ module.exports = function (opts) {
          */
         disable: require('./actions/disable.js'),
         /**
-         * ## harmony.refresh()
-         * ## harmony.refresh.slot(name)
-         * ## harmony.refresh.group(name)
+         * ## harmony.refresh
+         * ### harmony.refresh.slot(name)
+         * ### harmony.refresh.group(name)
          * Refresh a single slot or group of slots.
          * @see actions/refresh.js
          */
