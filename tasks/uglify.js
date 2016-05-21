@@ -3,7 +3,7 @@ module.exports = function (grunt) {
         uglify: {
             build: {
                 files: {
-                    'dist/harmony.min.js': 'dist/harmony.js'
+                    'dist/harmony.min.js': 'bin/harmony.js'
                 }
             },
             options: {

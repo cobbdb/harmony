@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         browserify: {
             global: {
                 files: {
-                    'dist/harmony.js': 'src/harmony.js'
+                    'bin/harmony.js': 'src/harmony.js'
                 },
                 options: {
                     browserifyOptions: {
