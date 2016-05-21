@@ -58,7 +58,7 @@ module.exports = function (opts) {
          * ## harmony.version
          * @type {String}
          */
-        version: '3.3.1',
+        version: require('../package.json').version,
         /**
          * ## harmony.load(opts)
          * Load a block of configuration.

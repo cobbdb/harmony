@@ -7,6 +7,10 @@ module.exports = function (grunt) {
     // Load harmony task confs.
     grunt.loadTasks('tasks');
 
+    grunt.registerTask('build', 'Build distributable without tests.', [
+        'browserify:global',
+        'uglify:build'
+    ]);
     grunt.registerTask('default', 'Full build suite.', [
         'browserify',
         'jasmine:modules',
