@@ -7,6 +7,8 @@ Doubleclick JS API Helper.
     $ bower install harmony
     $ npm install harmonyjs
 
+[![NPM info](https://nodei.co/npm/harmonyjs.png?stars=true&downloads=true)](https://nodei.co/npm-dl/harmonyjs/)[![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
+
 -------------
 ##### [Link to full autodocs](https://cobbdb.github.io/harmony)
 
@@ -170,7 +172,7 @@ mylibs.harmony.log.readback('metric', true);
 
 <a name="ex-setup"/>
 ## Example Setup
-Here is an example of a page setup using Harmony and jQuery.
+Here is an example of a page setup using Harmony and DFP.
 ```html
 <head>
     <script src="path/to/site/bundle.js"></script>
@@ -180,21 +182,16 @@ Here is an example of a page setup using Harmony and jQuery.
     <div id="ad-div-01"></div>
     <script>
         var harmony = Harmony();
-        harmony.load({
-            slots: [{
-                name: 'ad01',
-                id: 'ad-div-01',
-                adunit: '123/test/unit',
-                sizes: [
-                    [300, 250],
-                    [728, 90]
-                ],
-                targeting: {
-                    'custom': 'slot targeting'
-                }
-            }],
+        harmony.defineSlot({
+            name: 'ad01',
+            id: 'ad-div-01',
+            adunit: '123/test/unit',
+            sizes: [
+                [300, 250],
+                [728, 90]
+            ],
             targeting: {
-                'custom': 'system targeting'
+                'custom': 'slot targeting'
             }
         });
         googletag.enableServices();
