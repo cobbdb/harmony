@@ -1,13 +1,18 @@
 [![Harmony](http://i.imgur.com/DP1OvVj.png)](https://cobbdb.github.io/harmony)
 
-[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=master)](https://travis-ci.org/cobbdb/harmony) [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony) [![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
+[![License](https://img.shields.io/npm/l/postscribe.svg)](http://npmjs.com/package/postscribe)
+[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=master)](https://travis-ci.org/cobbdb/harmony)
+[![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
+[![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
+[![Dependencies](https://img.shields.io/david/dev/cobbdb/harmony.svg)](./package.json)
 
 Doubleclick JS API Helper.
 
     $ bower install harmony
     $ npm install harmonyjs
 
-[![NPM info](https://nodei.co/npm/harmonyjs.png?stars=true&downloads=true)](https://nodei.co/npm-dl/harmonyjs/)[![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
+[![NPM info](https://nodei.co/npm/harmonyjs.png?stars=true&downloads=true)](https://nodei.co/npm-dl/harmonyjs/)
+[![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
 
 -------------
 ##### [Link to full autodocs](https://cobbdb.github.io/harmony)
