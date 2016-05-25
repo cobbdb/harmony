@@ -6,7 +6,7 @@
 [![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
 [![Dependencies](https://img.shields.io/david/dev/cobbdb/harmony.svg)](./package.json)
 
-Doubleclick JS API Helper.
+Simplify your DFP business logic.
 
     $ bower install harmony
     $ npm install harmonyjs
