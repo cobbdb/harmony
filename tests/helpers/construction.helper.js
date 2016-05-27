@@ -1,5 +1,4 @@
 var Conf = require('./slot-options.helper.js'),
-    Harmony = require('../../src/harmony.js'),
     $ = require('jquery');
 
 module.exports = {

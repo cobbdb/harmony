@@ -1,9 +1,8 @@
-var Harmony = require('../src/harmony.js');
+var harmony = require('../src/harmony.js');
 
 describe('harmony.version', function () {
-    var harmony, version;
+    var version;
     beforeEach(function () {
-        harmony = Harmony();
         version = harmony.version;
     });
     it('is exposed as String', function () {

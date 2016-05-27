@@ -63,22 +63,20 @@ chances are it's in there somewhere! Just give the docs a quick scan.
 
 <a name="intro-setup"/>
 #### Quick setup.
-Create your Harmony instance and use it however you want. There are two
-ways to initialize a Harmony instance:
+There are two ways to load Harmony:
 
 ###### as a global
 ```html
 <script src="path/to/harmony.js"></script>
 <script>
-    mylibs.harmony = Harmony();
+    console.log(harmony.version);
 </script>
 ```
 
 ###### as a CommonJS module
 ```javascript
-// my-ads.js
-var Harmony = require('harmonyjs');
-module.exports = Harmony();
+var harmony = require('harmonyjs');
+global.console.log(harmony.version);
 ```
 
 <a name="loading"/>
@@ -87,7 +85,7 @@ Have your backend generate ad config based on admin settings and
 keep the components completely agnostic.
 ```javascript
 var myconf = {% load_ad_conf %};
-mylibs.harmony.load(myconf);
+harmony.load(myconf);
 ```
 
 <a name="callbacks"/>
@@ -95,7 +93,7 @@ mylibs.harmony.load(myconf);
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
 ```javascript
-mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {
+harmony.slot('MY01').on('slotRenderEnded', function (event) {
     if (!event.isEmpty) {
         makeRoomForAd();
     }
@@ -106,14 +104,14 @@ mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {
 #### Access your ad data immediately.
 Harmony exposes individual slot configuration for pain-free access.
 ```javascript
-var slot = mylibs.harmony.slot('MY01'),
+var slot = harmony.slot('MY01'),
     possibleSizes = slot.sizes,
     slotId = slot.divId,
     slotAdunit = slot.adunit;
 ```
 You can even directly call DFP slot methods.
 ```javascript
-var slot = mylibs.harmony.slot('MY01'),
+var slot = harmony.slot('MY01'),
     targeting = slot.getTargetingMap();
 slot.setTargeting('some', 'new targeting!');
 ```
@@ -126,24 +124,24 @@ on even the most complex websites.
 ###### trigger events just like jQuery
 ```javascript
 // System-level events.
-mylibs.harmony.trigger('myevent', somedata);
+harmony.trigger('myevent', somedata);
 // Slot-level events.
-mylibs.harmony.slot('MY01').trigger('anotherevent');
+harmony.slot('MY01').trigger('anotherevent');
 ```
 
 ###### bind callbacks to custom events
 ```javascript
-mylibs.harmony.on('myevent', function () {});
-mylibs.harmony.one('myevent', function () {});
-mylibs.harmony.slot('MY01').on('myevent', function () {});
-mylibs.harmony.slot('MY01').one('myevent', function () {});
+harmony.on('myevent', function () {});
+harmony.one('myevent', function () {});
+harmony.slot('MY01').on('myevent', function () {});
+harmony.slot('MY01').one('myevent', function () {});
 ```
 
 ###### slotRenderEnded is provided for you
 DFP's `slotRenderEnded` event is handled automatically for you
 on each slot.
 ```javascript
-mylibs.harmony.slot('MY01').on('slotRenderEnded', function (event) {});
+harmony.slot('MY01').on('slotRenderEnded', function (event) {});
 ```
 
 ###### bind lazy events
@@ -151,13 +149,13 @@ Callbacks are eager by default, meaning that they will trigger
 on binding if the event has already been triggered. If you do not
 want this behavior you can specify the callback be lazy instead.
 ```javascript
-mylibs.harmony.slot('MY01').on('myLazyEvent', function () {}, true);
-mylibs.harmony.one('myLazyEvent', function () {}, true);
+harmony.slot('MY01').on('myLazyEvent', function () {}, true);
+harmony.one('myLazyEvent', function () {}, true);
 ```
 
 ###### clear callbacks for any event
 ```javascript
-mylibs.harmony.off('myevent');
+harmony.off('myevent');
 ```
 
 <a name="logging"/>
@@ -165,14 +163,14 @@ mylibs.harmony.off('myevent');
 [Logging](http://cobbdb.github.io/lumberjack) lets you see what happened and when, so you can focus less
 on debugging and more on coding.
 ```javascript
-mylibs.harmony.log.readback('events', true);
+harmony.log.readback('events', true);
 ```
 
 #### Get slot performance metrics.
 See exactly how long your system takes from setup to ad render.
 Logging provided with [Lumberjack](http://cobbdb.github.io/lumberjack).
 ```javascript
-mylibs.harmony.log.readback('metric', true);
+harmony.log.readback('metric', true);
 ```
 
 <a name="ex-setup"/>
@@ -180,27 +178,26 @@ mylibs.harmony.log.readback('metric', true);
 Here is an example of a page setup using Harmony and DFP.
 ```html
 <head>
-    <script src="path/to/site/bundle.js"></script>
+    <script src="path/to/harmony.js"></script>
     <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
 </head>
 <body>
-    <div id="ad-div-01"></div>
+    <div id="my-ad-div"></div>
     <script>
-        var harmony = Harmony();
         harmony.defineSlot({
-            name: 'ad01',
-            id: 'ad-div-01',
-            adunit: '123/test/unit',
+            name: 'my-ad',
+            id: 'my-ad-div',
+            adunit: '123/ad/unit',
             sizes: [
                 [300, 250],
                 [728, 90]
             ],
             targeting: {
-                'custom': 'slot targeting'
+                some: 'custom criteria'
             }
         });
         googletag.enableServices();
-        harmony.show.slot('ad01');
+        harmony.show.slot('my-ad');
     </script>
 </body>
 ```

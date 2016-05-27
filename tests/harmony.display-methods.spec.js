@@ -1,13 +1,11 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
     Conf = require('./helpers/slot-options.helper.js'),
     $ = require('jquery');
 
 describe('display method', function () {
-    var harmony;
     beforeEach(function () {
         Help.setupDOM();
-        harmony = Harmony();
         harmony.load(Help.getConf());
     });
     describe('show', function () {

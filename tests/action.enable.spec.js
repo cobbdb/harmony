@@ -1,11 +1,9 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js');
 
 describe('harmony.enable', function () {
-    var harmony;
     beforeEach(function () {
         Help.setupDOM();
-        harmony = Harmony();
         harmony.load(Help.getConf());
         harmony.slot('TST00').enabled = false;
         harmony.slot('TST01').enabled = false;

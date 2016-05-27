@@ -1,14 +1,11 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
     Options = require('./helpers/slot-options.helper.js'),
     $ = require('jquery');
 
 describe('Events', function () {
-    var harmony;
     beforeEach(function () {
-        harmony = Harmony({
-            forceLog: true
-        });
+        harmony.off();
     });
     describe('system level', function () {
         it('can be eager', function () {

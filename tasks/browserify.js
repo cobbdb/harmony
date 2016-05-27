@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                 },
                 options: {
                     browserifyOptions: {
-                        standalone: 'Harmony'
+                        standalone: 'harmony'
                     }
                 }
             },
