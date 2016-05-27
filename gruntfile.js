@@ -23,6 +23,8 @@ module.exports = function (grunt) {
         'jasmine:modules'
     ]);
     grunt.registerTask('docs', 'Build and deploy autodocs.', [
-        'exec:build-docs-win'
+        'template:readme',
+        'exec:build-docs-win-version',
+        'exec:build-docs-win-main'
     ]);
 };

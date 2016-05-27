@@ -1,6 +1,7 @@
 /**
  * # Harmony
  * ### ***Simplify your DFP business logic.***
+ * View this <a href="https://github.com/cobbdb/harmony">project on GitHub</a>.
  */
 
 var log = require('./log.js'),

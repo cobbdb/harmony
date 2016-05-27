@@ -2,6 +2,8 @@
 
 echo.
 echo :::: Purging existing documentation...
+del docs-clone\* /q
+rd docs-clone\actions /s /q
 del docs-clone\%1\* /q
 rd docs-clone\%1\actions /s /q
 

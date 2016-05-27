@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Simplify your DFP business logic.",
   "main": "src/harmony.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-exec": "^0.4.7",
+    "grunt-template": "^0.2.3",
     "jquery": "2.x",
     "matchdep": "^1.0.1"
   }
