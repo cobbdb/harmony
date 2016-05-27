@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>adslot.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\adslot.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#ad%20slot">Ad Slot</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).on%2Fone%2Foff%2Ftrigger">harmony.slot(name).on/one/off/trigger</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).divid">harmony.slot(name).divId</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).name">harmony.slot(name).name</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).group">harmony.slot(name).group</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).sizes">harmony.slot(name).sizes</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).adunit">harmony.slot(name).adunit</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).enabled">harmony.slot(name).enabled</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.slot(name).active">harmony.slot(name).active</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>adslot.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./log.js&#39;</span><span class="p">),</span>
+    <span class="nx">set</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slot-set.js&#39;</span><span class="p">),</span>
+    <span class="nx">BaseClass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;baseclassjs&#39;</span><span class="p">),</span>
+    <span class="nx">Eventable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./event-handler.js&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="ad%20slot">
+  <h1>
+    <a href="#ad%20slot" name="ad%20slot" class="pilcrow">&#182;</a>
+    Ad Slot
+  </h1>
+</div>
+
+
+<p>Constructs a new adSlot in the page.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">BaseClass</span>
+    </div>
+    <div class="dox_tag_title">extends</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">EventHandler</span>
+    </div>
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.name</span>
+      <span class="dox_type">String</span>
+      <span>Slot name, ex) RP01</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.id</span>
+      <span class="dox_type">String</span>
+      <span>Slot's div id, ex) ad-div-RP01</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.sizes</span>
+      <span class="dox_type">Array</span>
+      <span>One or many 2D arrays, ex) [300, 250]</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.adunit</span>
+      <span class="dox_type">String</span>
+      <span>Full ad unit code.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.targeting]</span>
+      <span class="dox_type">Object</span>
+      <span>Slot-specific targeting.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.mapping]</span>
+      <span class="dox_type">Array</span>
+      <span>Size mapping.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.companion]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if companion ad.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.drone]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True when duplicates are anticipated.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.group]</span>
+      <span class="dox_type">String</span>
+      <span>Slot group name.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.interstitial]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if out-of-page ad.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.enabled]</span>
+      <span class="dox_type">Boolean</span>
+      <span>False if ineligible to make ad calls.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.on]</span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of callbacks.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.one]</span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of single-run callbacks.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">AdSlot
+</span>
+      <span>{AdSlot}</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pubads</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">cbCache</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Capture timestamp for performance metrics.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">tsCreate</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+        <span class="nx">mapping</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">mapping</span> <span class="o">||</span> <span class="p">[],</span>
+        <span class="nx">companion</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">companion</span> <span class="o">||</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">interstitial</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">interstitial</span> <span class="o">||</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">targeting</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">targeting</span> <span class="o">||</span> <span class="p">{};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Smoke test that the slot's element id is valid in the DOM.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">global</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Ad slot container was not found in the DOM.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Define which type of slot this is.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">defineOutOfPageSlot</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">adunit</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">defineSlot</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">adunit</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">sizes</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Deep merge all event callbacks.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">cbCache</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">cached</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">opts</span><span class="p">.</span><span class="nx">on</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">on</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">on</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cbCache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cbCache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">cbCache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+            <span class="nx">cbCache</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span>
+            <span class="nx">opts</span><span class="p">.</span><span class="nx">on</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">opts</span><span class="p">.</span><span class="nx">one</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">one</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">one</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cbCache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cbCache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">cbCache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+            <span class="nx">cbCache</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span>
+            <span class="nx">opts</span><span class="p">.</span><span class="nx">one</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).on%2Fone%2Foff%2Ftrigger">
+  <h2>
+    <a href="#harmony.slot(name).on%2Fone%2Foff%2Ftrigger" name="harmony.slot(name).on%2Fone%2Foff%2Ftrigger" class="pilcrow">&#182;</a>
+    harmony.slot(name).on/one/off/trigger
+  </h2>
+</div>
+
+
+<p>Exposes event handling at the slot level.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <a href="https://cobbdb.github.io/harmony/event-handler.js.html
+">event-handler.js</a>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">BaseClass</span><span class="p">(</span><span class="nx">slot</span><span class="p">).</span><span class="nx">extend</span><span class="p">(</span>
+        <span class="nx">Eventable</span><span class="p">(</span><span class="nx">cbCache</span><span class="p">)</span>
+    <span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).divid">
+  <h2>
+    <a href="#harmony.slot(name).divid" name="harmony.slot(name).divid" class="pilcrow">&#182;</a>
+    harmony.slot(name).divId
+  </h2>
+</div>
+
+
+<p>Slot's containing div id.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">String
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).name">
+  <h2>
+    <a href="#harmony.slot(name).name" name="harmony.slot(name).name" class="pilcrow">&#182;</a>
+    harmony.slot(name).name
+  </h2>
+</div>
+
+
+<p>Slot's name.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">String
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).group">
+  <h2>
+    <a href="#harmony.slot(name).group" name="harmony.slot(name).group" class="pilcrow">&#182;</a>
+    harmony.slot(name).group
+  </h2>
+</div>
+
+
+<p>This slot's group.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">String
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">group</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">group</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).sizes">
+  <h2>
+    <a href="#harmony.slot(name).sizes" name="harmony.slot(name).sizes" class="pilcrow">&#182;</a>
+    harmony.slot(name).sizes
+  </h2>
+</div>
+
+
+<p>This slot's possible sizes. Note, this is
+not the current size of the ad slot.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Array
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">sizes</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">sizes</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).adunit">
+  <h2>
+    <a href="#harmony.slot(name).adunit" name="harmony.slot(name).adunit" class="pilcrow">&#182;</a>
+    harmony.slot(name).adunit
+  </h2>
+</div>
+
+
+<p>Ad unit code of this ad slot.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">String
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">adunit</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">adunit</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).enabled">
+  <h2>
+    <a href="#harmony.slot(name).enabled" name="harmony.slot(name).enabled" class="pilcrow">&#182;</a>
+    harmony.slot(name).enabled
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Boolean
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">===</span> <span class="kc">false</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.slot(name).active">
+  <h2>
+    <a href="#harmony.slot(name).active" name="harmony.slot(name).active" class="pilcrow">&#182;</a>
+    harmony.slot(name).active
+  </h2>
+</div>
+
+
+<p>True if this slot has ever had an ad call.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Boolean
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>Set slot-specific targeting. No need to introspect
+because unused targeting is ignored by dfp.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">targeting</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">setTargeting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">targeting</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>Load in any targeting set before this slow was defined.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">targeting</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">cached</span><span class="p">.</span><span class="nx">targeting</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">targeting</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">setTargeting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">targeting</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>Assign size mapping for responsive ad slots.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">defineSizeMapping</span><span class="p">(</span><span class="nx">mapping</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Load any provided callback into queue.
+<code>opts.callback</code> is legacy.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">callback</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">callback</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Attach a listener for the slotRenderEnded event.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">pubads</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">now</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">slot</span> <span class="o">===</span> <span class="nx">slot</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">now</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;metric&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">event</span><span class="o">:</span> <span class="s1">&#39;DFP Call Complete&#39;</span><span class="p">,</span>
+                <span class="nx">slot</span><span class="o">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                <span class="nx">timeSinceCalled</span><span class="o">:</span> <span class="nx">now</span> <span class="o">-</span> <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span><span class="p">,</span> <span class="c1">// Can be NaN.</span>
+                <span class="nx">timeSinceCreated</span><span class="o">:</span> <span class="nx">now</span> <span class="o">-</span> <span class="nx">tsCreate</span>
+            <span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>Trigger any attached behaviors.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">slot</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>Assign companion ad service if requested.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">companion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">slot</span><span class="p">.</span><span class="nx">addService</span><span class="p">(</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">companionAds</span><span class="p">()</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>Add the publisher service and return the new slot.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">slot</span><span class="p">.</span><span class="nx">addService</span><span class="p">(</span><span class="nx">pubads</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">slot</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

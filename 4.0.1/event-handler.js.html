@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>event-handler.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\event-handler.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#eventable">Eventable</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.on(name%2C%20callback%2C%20%5Blazy%5D)">harmony.on(name, callback, [lazy])</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.one(name%2C%20callback%2C%20%5Blazy%5D)">harmony.one(name, callback, [lazy])</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.off(name)">harmony.off(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.trigger(name%2C%20data)">harmony.trigger(name, data)</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="eventable">
+  <h1>
+    <a href="#eventable" name="eventable" class="pilcrow">&#182;</a>
+    Eventable
+  </h1>
+</div>
+
+
+<p>Class for generic event handling.
+Initial events are loaded as a generic object of <code>&lt;name&gt;:&lt;callback&gt;</code>.
+For example:</p>
+
+
+<div class="highlight"><pre><code><span class="nx">Eventable</span><span class="p">({</span>
+    <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">eventName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">otherName</span><span class="o">:</span> <span class="p">[</span>
+            <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+            <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">singles</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">anotherName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.events]</span>
+      <span class="dox_type">Object</span>
+      <span>Event callbacks to fire each time
+the event is triggered.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.singles]</span>
+      <span class="dox_type">Object</span>
+      <span>Event callbacks to fire only once
+the next time the event is triggered.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>Can be used by BaseClass.extend().</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">events</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="nx">singles</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="nx">name</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>Cache of events that have already been triggered once.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">triggerCache</span> <span class="o">=</span> <span class="p">{};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Load in the initial callbacks.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">events</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+            <span class="nx">opts</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">singles</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">(</span>
+            <span class="nx">opts</span><span class="p">.</span><span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.on(name%2C%20callback%2C%20%5Blazy%5D)">
+  <h2>
+    <a href="#harmony.on(name%2C%20callback%2C%20%5Blazy%5D)" name="harmony.on(name%2C%20callback%2C%20%5Blazy%5D)" class="pilcrow">&#182;</a>
+    harmony.on(name, callback, [lazy])
+  </h2>
+</div>
+
+
+<p>Bind a callback to an event. Callback will run each
+time the event is triggered.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Event name.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">cb</span>
+      <span class="dox_type">Function</span>
+      <span>Event callback.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[lazy]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if this callback should not fire
+immediately if the event has already been triggered.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">on</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">,</span> <span class="nx">lazy</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">lazy</span> <span class="o">&amp;&amp;</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">triggerCache</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cb</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">triggerCache</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">data</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+            <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">cb</span><span class="p">);</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.one(name%2C%20callback%2C%20%5Blazy%5D)">
+  <h2>
+    <a href="#harmony.one(name%2C%20callback%2C%20%5Blazy%5D)" name="harmony.one(name%2C%20callback%2C%20%5Blazy%5D)" class="pilcrow">&#182;</a>
+    harmony.one(name, callback, [lazy])
+  </h2>
+</div>
+
+
+<p>Bind a callback to an event. Callback will run only
+once the next time the event is triggered.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Event name.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">cb</span>
+      <span class="dox_type">Function</span>
+      <span>Event callback.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[lazy]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if this callback should not fire
+immediately if the event has already been triggered.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">one</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">,</span> <span class="nx">lazy</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">lazy</span> <span class="o">&amp;&amp;</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">triggerCache</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cb</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">triggerCache</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">data</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">cb</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.off(name)">
+  <h2>
+    <a href="#harmony.off(name)" name="harmony.off(name)" class="pilcrow">&#182;</a>
+    harmony.off(name)
+  </h2>
+</div>
+
+
+<p>Clear all callbacks from an event.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[name]</span>
+      <span class="dox_type">String</span>
+      <span>Event name. Empty to
+clear all callbacks from the system.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">off</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="nx">singles</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="nx">triggerCache</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.trigger(name%2C%20data)">
+  <h2>
+    <a href="#harmony.trigger(name%2C%20data)" name="harmony.trigger(name%2C%20data)" class="pilcrow">&#182;</a>
+    harmony.trigger(name, data)
+  </h2>
+</div>
+
+
+<p>Immediately trigger an event.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Event name.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[data]</span>
+      <span class="dox_type">Any</span>
+      <span>Any data you wish to provide to all
+event callbacks.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">events</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">cb</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">that</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">singles</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">cb</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">that</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+                <span class="p">});</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Cache that this event has fired.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">triggerCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
