@@ -88,7 +88,7 @@ module.exports = BaseClass({
 }).extend(
     /**
      * ## watcher.on/one/off/trigger
-     * @see event-handler.js https://cobbdb.github.io/harmony/event-handler.js
+     * @see <a href="event-handler.js">event-handler.js</a>
      */
     Eventable()
 );

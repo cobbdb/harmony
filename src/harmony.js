@@ -28,7 +28,7 @@ module.exports = BaseClass({
          * harmony.off('breakpoint/update', function (bp) {});
          * ```
          * @param {Function} callback Called on new breakpoint.
-         * @see event-handler.js https://cobbdb.github.io/harmony/event-handler.js
+         * @see <a href="event-handler.js">event-handler.js</a>
          */
         watcher.on('update', function (bp) {
             that.trigger('breakpoint/update', bp);
@@ -36,7 +36,7 @@ module.exports = BaseClass({
         /**
          * ## harmony.on('slotRenderEnded', callback)
          * @param {Function} callback Called each time any ad call completes.
-         * @see event-handler.js https://cobbdb.github.io/harmony/event-handler.js
+         * @see <a href="event-handler.js">event-handler.js</a>
          */
         try {
             global.googletag.pubads().addEventListener('slotRenderEnded', function (event) {
@@ -54,35 +54,35 @@ module.exports = BaseClass({
     /**
      * ## harmony.load(config)
      * Load a block of configuration.
-     * @see actions/load.js https://cobbdb.github.io/harmony/actions/load.js
+     * @see <a href="actions/load.js">actions/load.js</a>
      */
     load: require('./actions/load.js'),
     /**
      * ## harmony.addBreakpoints(set)
      * Add breakpoint values in pixels.
      * @param {Number|Array of Numbers} [set] Breakpoints in pixels.
-     * @see breakpoint-watcher.js https://cobbdb.github.io/harmony/breakpoint-watcher.js
+     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
      */
     addBreakpoints: watcher.add,
     /**
      * ## harmony.getBreakpoints()
      * Fetch the list of breakpoints already loaded into the system.
      * @return {ArrayOfNumber}
-     * @see breakpoint-watcher.js https://cobbdb.github.io/harmony/breakpoint-watcher.js
+     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
      */
     getBreakpoints: watcher.getAll,
     /**
      * ## harmony.breakpoint()
      * Fetch the current breakpoint.
      * @return {Number}
-     * @see breakpoint-watcher.js https://cobbdb.github.io/harmony/breakpoint-watcher.js
+     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
      */
     breakpoint: watcher.current,
     /**
      * ## harmony.log
      * ### harmony.log.enable()
      * Instance of Lumberjack populated with Harmony's data.
-     * @see log.js https://cobbdb.github.io/harmony/log.js.html
+     * @see <a href="log.js">log.js</a>
      */
     log: log,
     /**
@@ -90,7 +90,7 @@ module.exports = BaseClass({
      * Safely fetch an existing ad slot or a mock slot if slot was not found.
      * @param {String} name Name of the ad slot.
      * @return {Object} The ad slot or a mock ad slot.
-     * @see slot-set.js https://cobbdb.github.io/harmony/slot-set.js
+     * @see <a href="slot-set.js">slot-set.js</a>
      */
     slot: slots.get,
     /**
@@ -98,7 +98,7 @@ module.exports = BaseClass({
      * Check if a slot has already been loaded into Harmony.
      * @param {String} name Name of the ad slot.
      * @return {Boolean} True if the slot has already been loaded.
-     * @see slot-set.js https://cobbdb.github.io/harmony/slot-set.js
+     * @see <a href="slot-set.js">slot-set.js</a>
      */
     hasSlot: slots.has,
     /**
@@ -106,13 +106,13 @@ module.exports = BaseClass({
      * Fetch a slot group by name.
      * @param {String} name Name of the slot group.
      * @return {Array} Collection of 0 or more ad slots.
-     * @see group-set.js https://cobbdb.github.io/harmony/group-set.js
+     * @see <a href="group-set.js">group-set.js</a>
      */
     group: groups.get,
     /**
      * ## harmony.defineSlot(config)
      * Create a new adSlot in the page.
-     * @see actions/define-slot.js https://cobbdb.github.io/harmony/actions/define-slot.js
+     * @see <a href="actions/define-slot.js">actions/define-slot.js</a>
      */
     defineSlot: require('./actions/define-slot.js'),
     /**
@@ -120,7 +120,7 @@ module.exports = BaseClass({
      * ### harmony.enable.slot(name)
      * ### harmony.enable.group(name)
      * Marks slots as eligible to make ad calls.
-     * @see actions/enable.js https://cobbdb.github.io/harmony/actions/enable.js
+     * @see <a href="actions/enable.js">actions/enable.js</a>
      */
     enable: require('./actions/enable.js'),
     /**
@@ -128,7 +128,7 @@ module.exports = BaseClass({
      * ### harmony.disable.slot(name)
      * ### harmony.disable.group(name)
      * Marks slots as ineligible to make ad calls.
-     * @see actions/disable.js https://cobbdb.github.io/harmony/actions/disable.js
+     * @see <a href="actions/disable.js">actions/disable.js</a>
      */
     disable: require('./actions/disable.js'),
     /**
@@ -136,7 +136,7 @@ module.exports = BaseClass({
      * ### harmony.refresh.slot(name)
      * ### harmony.refresh.group(name)
      * Refresh a single slot or group of slots.
-     * @see actions/refresh.js https://cobbdb.github.io/harmony/actions/refresh.js
+     * @see <a href="actions/refresh.js">actions/refresh.js</a>
      */
     refresh: require('./actions/refresh.js'),
     /**
@@ -144,7 +144,7 @@ module.exports = BaseClass({
      * ### harmony.show.slot(name)
      * ### harmony.show.group(name)
      * Show a slot or group of slots.
-     * @see actions/show.js https://cobbdb.github.io/harmony/actions/show.js
+     * @see <a href="actions/show.js">actions/show.js</a>
      */
     show: require('./actions/show.js'),
     /**
@@ -152,7 +152,7 @@ module.exports = BaseClass({
      * ### harmony.hide.slot(name)
      * ### harmony.hide.group(name)
      * Hide a slot or group of slots.
-     * @see actions/hide.js https://cobbdb.github.io/harmony/actions/hide.js
+     * @see <a href="actions/hide.js">actions/hide.js</a>
      */
     hide: require('./actions/hide.js')
 }).extend(
@@ -162,7 +162,7 @@ module.exports = BaseClass({
      * ## harmony.off(name)
      * ## harmony.trigger(name)
      * Exposes event handling at the system level.
-     * @see event-handler.js https://cobbdb.github.io/harmony/event-handler.js
+     * @see <a href="event-handler.js">event-handler.js</a>
      */
     Eventable()
 );
