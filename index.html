@@ -37,7 +37,7 @@
         <a href="#harmony.version">harmony.version</a>
       </div>
       <div class="heading h2">
-        <a href="#harmony.load(opts)">harmony.load(opts)</a>
+        <a href="#harmony.load(config)">harmony.load(config)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.addbreakpoints(set)">harmony.addBreakpoints(set)</a>
@@ -61,7 +61,7 @@
         <a href="#harmony.group(name)">harmony.group(name)</a>
       </div>
       <div class="heading h2">
-        <a href="#harmony.defineslot(opts)">harmony.defineSlot(opts)</a>
+        <a href="#harmony.defineslot(config)">harmony.defineSlot(config)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.enable">harmony.enable</a>
@@ -94,19 +94,19 @@
         <a href="#harmony.show">harmony.show</a>
       </div>
       <div class="heading h3">
-        <a href="#harmony.show.group(name)">harmony.show.group(name)</a>
+        <a href="#harmony.show.slot(name)">harmony.show.slot(name)</a>
       </div>
       <div class="heading h3">
-        <a href="#harmony.show.slot(name)">harmony.show.slot(name)</a>
+        <a href="#harmony.show.group(name)">harmony.show.group(name)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.hide">harmony.hide</a>
       </div>
       <div class="heading h3">
-        <a href="#harmony.hide.group(name)">harmony.hide.group(name)</a>
+        <a href="#harmony.hide.slot(name)">harmony.hide.slot(name)</a>
       </div>
       <div class="heading h3">
-        <a href="#harmony.hide.slot(name)">harmony.hide.slot(name)</a>
+        <a href="#harmony.hide.group(name)">harmony.hide.group(name)</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.on(name%2C%20callback)">harmony.on(name, callback)</a>
@@ -150,9 +150,7 @@
   </div>
 </div>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./util.js&#39;</span><span class="p">),</span>
-    <span class="nx">AdSlot</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./adslot.js&#39;</span><span class="p">),</span>
-    <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./log.js&#39;</span><span class="p">),</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./log.js&#39;</span><span class="p">),</span>
     <span class="nx">slots</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./slot-set.js&#39;</span><span class="p">),</span>
     <span class="nx">groups</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./group-set.js&#39;</span><span class="p">),</span>
     <span class="nx">BaseClass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;baseclassjs&#39;</span><span class="p">),</span>
@@ -311,10 +309,10 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.load(opts)">
+<div class="pilwrap" id="harmony.load(config)">
   <h2>
-    <a href="#harmony.load(opts)" name="harmony.load(opts)" class="pilcrow">&#182;</a>
-    harmony.load(opts)
+    <a href="#harmony.load(config)" name="harmony.load(config)" class="pilcrow">&#182;</a>
+    harmony.load(config)
   </h2>
 </div>
 
@@ -324,108 +322,16 @@
   <div class="body">
   </div>
   <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.targeting]</span>
-      <span class="dox_type">Object</span>
-      <span>System-level targeting.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.slots]</span>
-      <span class="dox_type">ArrayofObjects</span>
-      <span>Set of ad slot configurations.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.breakpoints]</span>
-      <span class="dox_type">Number</span>
-      <span class="dox_type">ArrayofNumbers</span>
-      <span>Set of breakpoints.</span>
-    </div>
     <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_type">adslot.js
+      <span class="dox_type">actions/load.js
 </span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">load</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">pubads</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">();</span>
-
-        <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span>
-        <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">||</span> <span class="p">[];</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
-</div>
-<p>Generate the ad slots.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">conf</span><span class="p">,</span>
-            <span class="nx">len</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Generating ad slots.&#39;</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">conf</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
-                    <span class="nx">pubads</span><span class="p">,</span>
-                    <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">conf</span><span class="p">)</span>
-                <span class="p">);</span>
-                <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
-                <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to load().&#39;</span><span class="p">,</span>
-                    <span class="nx">conf</span><span class="o">:</span> <span class="nx">conf</span><span class="p">,</span>
-                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                <span class="p">});</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
-</div>
-<p>Assign the system targeting.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="kd">var</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span>
-            <span class="nx">targeting</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">targeting</span> <span class="o">||</span> <span class="p">{};</span>
-        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Applying pubads targeting.&#39;</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">targeting</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">value</span> <span class="o">=</span> <span class="nx">targeting</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">);</span>
-            <span class="nx">pubads</span><span class="p">.</span><span class="nx">setTargeting</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-        <span class="p">}</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
-</div>
-<p>Assign the breakpoints.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">watcher</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">);</span>
-
-        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony config loaded.&#39;</span><span class="p">);</span>
-    <span class="p">},</span>
+    <span class="nx">load</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/load.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -696,10 +602,10 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.defineslot(opts)">
+<div class="pilwrap" id="harmony.defineslot(config)">
   <h2>
-    <a href="#harmony.defineslot(opts)" name="harmony.defineslot(opts)" class="pilcrow">&#182;</a>
-    harmony.defineSlot(opts)
+    <a href="#harmony.defineslot(config)" name="harmony.defineslot(config)" class="pilcrow">&#182;</a>
+    harmony.defineSlot(config)
   </h2>
 </div>
 
@@ -709,104 +615,16 @@
   <div class="body">
   </div>
   <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">opts.name</span>
-      <span class="dox_type">String</span>
-      <span>Slot name, ex) RP01</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">opts.id</span>
-      <span class="dox_type">String</span>
-      <span>Slot's div id, ex) ad-div-RP01</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">opts.sizes</span>
-      <span class="dox_type">Array</span>
-      <span>One or many 2D arrays, ex) [300, 250]</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">opts.adunit</span>
-      <span class="dox_type">String</span>
-      <span>Full ad unit code.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.targeting]</span>
-      <span class="dox_type">Object</span>
-      <span>Slot-specific targeting.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.mapping]</span>
-      <span class="dox_type">Array</span>
-      <span>Size mapping.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.companion]</span>
-      <span class="dox_type">Boolean</span>
-      <span>True if companion ad.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.drone]</span>
-      <span class="dox_type">Boolean</span>
-      <span>True when duplicates are anticipated.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.group]</span>
-      <span class="dox_type">String</span>
-      <span>Slot group name.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.interstitial]</span>
-      <span class="dox_type">Boolean</span>
-      <span>True if out-of-page ad.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.enabled]</span>
-      <span class="dox_type">Boolean</span>
-      <span>False if ineligible to make ad calls.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.on]</span>
-      <span class="dox_type">Object</span>
-      <span>Dictionary of callbacks.</span>
-    </div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.one]</span>
-      <span class="dox_type">Object</span>
-      <span>Dictionary of single-run callbacks.</span>
-    </div>
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span class="dox_type">AdSlot</span>
-    </div>
     <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_type">adslot.js
+      <span class="dox_type">actions/define-slot.js
 </span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">defineSlot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">slot</span><span class="p">;</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
-                <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">(),</span>
-                <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span>
-            <span class="p">);</span>
-            <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
-            <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to defineSlot()&#39;</span><span class="p">,</span>
-                <span class="nx">conf</span><span class="o">:</span> <span class="nx">opts</span><span class="p">,</span>
-                <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-            <span class="p">});</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">slot</span><span class="p">;</span>
-    <span class="p">},</span>
+    <span class="nx">defineSlot</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/define-slot.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -966,103 +784,7 @@
 </div>
 
 
-<p>Showing a slot means setting style <code>display:block</code> and
-calling <code>googletag.display()</code>. Will not call
-<code>googletag.display()</code> on disabled slots.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">show</span><span class="o">:</span> <span class="p">{</span>
 
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="harmony.show.group(name)">
-  <h3>
-    <a href="#harmony.show.group(name)" name="harmony.show.group(name)" class="pilcrow">&#182;</a>
-    harmony.show.group(name)
-  </h3>
-</div>
-
-
-<p>Show all ads in a slot group.</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">name
-</span>
-      <span class="dox_type">String</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
-                <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
-                <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing ads in group&#39;</span><span class="p">,</span>
-                <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span>
-            <span class="p">});</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">slot</span> <span class="o">=</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-                    <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
-</div>
-<p>Only make ad call if slot is enabled.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="p">}</span>
-
-                    <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
-                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                            <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot for group&#39;</span><span class="p">,</span>
-                            <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                            <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
-                            <span class="nx">slot</span><span class="o">:</span> <span class="nx">slot</span>
-                        <span class="p">});</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show group&#39;</span><span class="p">,</span>
-                    <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                <span class="p">});</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
 <div class="pilwrap" id="harmony.show.slot(name)">
   <h3>
     <a href="#harmony.show.slot(name)" name="harmony.show.slot(name)" class="pilcrow">&#182;</a>
@@ -1071,59 +793,30 @@ calling <code>googletag.display()</code>. Will not call
 </div>
 
 
-<p>Show a single ad slot.</p>
+
+<div class="pilwrap" id="harmony.show.group(name)">
+  <h3>
+    <a href="#harmony.show.group(name)" name="harmony.show.group(name)" class="pilcrow">&#182;</a>
+    harmony.show.group(name)
+  </h3>
+</div>
+
+
+<p>Show a slot or group of slots.</p>
   </div>
   <div class="body">
   </div>
   <div class="details">
-    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">name
+      <span class="dox_type">actions/show.js
 </span>
-      <span class="dox_type">String</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">;</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing slot&#39;</span><span class="p">,</span>
-                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
-            <span class="p">});</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-                <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
-</div>
-<p>Only make ad call if slot is enabled.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                <span class="p">}</span>
-
-                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot&#39;</span><span class="p">,</span>
-                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                <span class="p">});</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
+    <span class="nx">show</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/show.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -1139,70 +832,7 @@ calling <code>googletag.display()</code>. Will not call
 </div>
 
 
-<p>Hiding an ad means setting style <code>display:none</code>.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">hide</span><span class="o">:</span> <span class="p">{</span>
 
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
-<div class="pilwrap" id="harmony.hide.group(name)">
-  <h3>
-    <a href="#harmony.hide.group(name)" name="harmony.hide.group(name)" class="pilcrow">&#182;</a>
-    harmony.hide.group(name)
-  </h3>
-</div>
-
-
-<p>Hides all the ads in a slot group.</p>
-  </div>
-  <div class="body">
-  </div>
-  <div class="details">
-    <div class="dox_tag_title">Params</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name">name
-</span>
-      <span class="dox_type">String</span>
-    </div>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
-                <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
-                <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="s1">&#39;Hiding ads in group &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-            <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span><span class="p">);</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot in group&#39;</span><span class="p">,</span>
-                        <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                        <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
-                        <span class="nx">id</span><span class="o">:</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span>
-                    <span class="p">});</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs"><div class="dox">
-  <div class="summary">
 <div class="pilwrap" id="harmony.hide.slot(name)">
   <h3>
     <a href="#harmony.hide.slot(name)" name="harmony.hide.slot(name)" class="pilcrow">&#182;</a>
@@ -1211,40 +841,30 @@ calling <code>googletag.display()</code>. Will not call
 </div>
 
 
-<p>Hides a single ad slot.</p>
+
+<div class="pilwrap" id="harmony.hide.group(name)">
+  <h3>
+    <a href="#harmony.hide.group(name)" name="harmony.hide.group(name)" class="pilcrow">&#182;</a>
+    harmony.hide.group(name)
+  </h3>
+</div>
+
+
+<p>Hide a slot or group of slots.</p>
   </div>
   <div class="body">
   </div>
   <div class="details">
-    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_title">See</div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">name
+      <span class="dox_type">actions/hide.js
 </span>
-      <span class="dox_type">String</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">el</span><span class="p">,</span>
-                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="p">{</span>
-                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Hiding slot&#39;</span><span class="p">,</span>
-                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
-            <span class="p">});</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot&#39;</span><span class="p">,</span>
-                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                <span class="p">});</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="nx">hide</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/hide.js&#39;</span><span class="p">)</span>
 <span class="p">}).</span><span class="nx">extend</span><span class="p">(</span>
 
 </pre></div>

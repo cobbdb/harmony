@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>define-slot.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "C:\\wamp\\www\\harmony\\\\actions\\define-slot.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#define%20slot%20action">Define Slot Action</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.defineslot(opts)">harmony.defineSlot(opts)</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="define%20slot%20action">
+  <h1>
+    <a href="#define%20slot%20action" name="define%20slot%20action" class="pilcrow">&#182;</a>
+    Define Slot Action
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">AdSlot</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../adslot.js&#39;</span><span class="p">),</span>
+    <span class="nx">Util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../util.js&#39;</span><span class="p">),</span>
+    <span class="nx">slots</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../slot-set.js&#39;</span><span class="p">),</span>
+    <span class="nx">groups</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../group-set.js&#39;</span><span class="p">),</span>
+    <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../log.js&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="harmony.defineslot(opts)">
+  <h2>
+    <a href="#harmony.defineslot(opts)" name="harmony.defineslot(opts)" class="pilcrow">&#182;</a>
+    harmony.defineSlot(opts)
+  </h2>
+</div>
+
+
+<p>Create a new adSlot in the page.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.name</span>
+      <span class="dox_type">String</span>
+      <span>Slot name, ex) RP01</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.id</span>
+      <span class="dox_type">String</span>
+      <span>Slot's div id, ex) ad-div-RP01</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.sizes</span>
+      <span class="dox_type">Array</span>
+      <span>One or many 2D arrays, ex) [300, 250]</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">opts.adunit</span>
+      <span class="dox_type">String</span>
+      <span>Full ad unit code.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.targeting]</span>
+      <span class="dox_type">Object</span>
+      <span>Slot-specific targeting.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.mapping]</span>
+      <span class="dox_type">Array</span>
+      <span>Size mapping.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.companion]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if companion ad.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.drone]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True when duplicates are anticipated.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.group]</span>
+      <span class="dox_type">String</span>
+      <span>Slot group name.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.interstitial]</span>
+      <span class="dox_type">Boolean</span>
+      <span>True if out-of-page ad.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.enabled]</span>
+      <span class="dox_type">Boolean</span>
+      <span>False if ineligible to make ad calls.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.on]</span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of callbacks.</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[opts.one]</span>
+      <span class="dox_type">Object</span>
+      <span>Dictionary of single-run callbacks.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">AdSlot
+</span>
+      <span>{AdSlot}</span>
+    </div>
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">adslot.js
+
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">slot</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">(),</span>
+            <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+        <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to defineSlot()&#39;</span><span class="p">,</span>
+            <span class="nx">conf</span><span class="o">:</span> <span class="nx">opts</span><span class="p">,</span>
+            <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">slot</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
