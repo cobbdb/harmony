@@ -1,14 +1,12 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
     Options = require('./helpers/slot-options.helper.js'),
     $ = require('jquery');
 
 describe('harmony setup', function () {
-    var harmony, conf;
+    var conf;
     beforeEach(function () {
-        harmony = Harmony({
-            forceLog: true
-        });
+        harmony.log.enable();
         harmony.log.clear();
     });
     describe('harmony.load()', function () {

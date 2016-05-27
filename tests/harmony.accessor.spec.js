@@ -1,12 +1,10 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Options = require('./helpers/slot-options.helper.js'),
     Help = require('./helpers/construction.helper.js');
 
 describe('accessor', function () {
-    var harmony;
     beforeEach(function () {
         Help.setupDOM();
-        harmony = Harmony();
         harmony.load(Help.getConf());
     });
     describe('harmony.slot()', function () {

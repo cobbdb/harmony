@@ -1,14 +1,14 @@
-var Harmony = require('../src/harmony.js'),
+var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
     Options = require('./helpers/slot-options.helper.js'),
     $ = require('jquery');
 
 describe('System test', function () {
+    beforeEach(function () {
+        harmony.log.enable();
+    });
     it('dynamic page content', function () {
-        var harmony = Harmony({
-                forceLog: true
-            }),
-            newConf = function () {
+        var newConf = function () {
                 return Options({
                     name: 'TST22',
                     group: 'GRP22',
@@ -55,10 +55,7 @@ describe('System test', function () {
         expect(harmony.slot('TST22-h6').divId).toBeUndefined('group C, TST22-h6');
     });
     it('dynamic page content with drone option', function () {
-        var harmony = Harmony({
-                forceLog: true
-            }),
-            newConf = function () {
+        var newConf = function () {
                 return Options({
                     name: 'TST22',
                     group: 'GRP22',

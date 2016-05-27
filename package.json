@@ -1,7 +1,7 @@
 {
   "name": "harmonyjs",
-  "version": "3.3.2",
-  "description": "Doubleclick JS API Helper",
+  "version": "4.0.0",
+  "description": "Simplify your DFP business logic.",
   "main": "src/harmony.js",
   "scripts": {
     "test": "grunt test"

@@ -80,11 +80,18 @@ module.exports = function (opts) {
         /**
          * ## harmony.off(name)
          * Clear all callbacks from an event.
-         * @param {String} name Event name.
+         * @param {String} [name] Event name. Empty to
+         * clear all callbacks from the system.
          */
         off: function (name) {
-            events[name] = [];
-            singles[name] = [];
+            if (name) {
+                events[name] = [];
+                singles[name] = [];
+            } else {
+                events = {};
+                singles = {};
+                triggerCache = {};
+            }
         },
         /**
          * ## harmony.trigger(name, data)

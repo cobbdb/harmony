@@ -1,16 +1,14 @@
-var Harmony = require('../src/harmony.js');
+var harmony = require('../src/harmony.js');
 
 describe('Logging', function () {
     it('is disabled by default', function () {
-        var harmony = Harmony();
         harmony.log('test', 'abc123');
         var readback = harmony.log.readback.master();
         expect(readback.length).toEqual(0);
     });
     it('can be enabled with option', function () {
-        var readback, harmony = Harmony({
-            forceLog: true
-        });
+        var readback;
+        harmony.log.enable();
         harmony.log('test', 'abc123');
         harmony.log('test', 'abc321');
 
