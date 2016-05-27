@@ -23,18 +23,6 @@ module.exports = function (grunt) {
         'jasmine:modules'
     ]);
     grunt.registerTask('docs', 'Build and deploy autodocs.', [
-        'docker-clone'
+        'exec:build-docs-win'
     ]);
-
-    /**
-     * To build docs:
-     * $ git checkout git@github.com:cobbdb/harmony.git docs-clone
-     * $ cd docs-clone
-     * $ git checkout gh-pages
-     * $ rm *
-     * $ cd ..
-     * $ docker -i src -o docs-clone
-     * $ cd docs-clone
-     * $ copy harmony.js.html index.html
-     */
 };

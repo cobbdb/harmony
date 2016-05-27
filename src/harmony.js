@@ -14,7 +14,8 @@ log('init', 'Harmony defined.');
 
 /**
  * ## harmony
- * @type {Object}
+ * @type {BaseClass}
+ * @see BaseClass http://cobbdb.github.io/baseclass
  */
 module.exports = BaseClass({
     _create: function () {
