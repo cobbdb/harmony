@@ -66,7 +66,7 @@ module.exports = function (pubads, opts) {
     /**
      * ## harmony.slot(name).on/one/off/trigger
      * Exposes event handling at the slot level.
-     * @see event-handler.js
+     * @see event-handler.js https://cobbdb.github.io/harmony/event-handler.js.html
      */
     BaseClass(slot).extend(
         Eventable(cbCache)

@@ -15,7 +15,7 @@ var AdSlot = require('../adslot.js'),
  * @param {Object} [opts.targeting] System-level targeting.
  * @param {Array of Objects} [opts.slots] Set of ad slot configurations.
  * @param {Number|Array of Numbers} [opts.breakpoints] Set of breakpoints.
- * @see adslot.js
+ * @see adslot.js https://cobbdb.github.io/harmony/adslot.js
  */
 module.exports = function (opts) {
     var pubads = global.googletag.pubads();

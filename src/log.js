@@ -1,7 +1,7 @@
 /**
  * # log
  * Expose an instance of Lumberjack.
- * @see https://cobbdb.github.io/lumberjack
+ * @see Lumberjack https://cobbdb.github.io/lumberjack
  */
 
 var Lumberjack = require('lumberjackjs');

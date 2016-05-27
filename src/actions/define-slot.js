@@ -25,7 +25,7 @@ var AdSlot = require('../adslot.js'),
  * @param {Object} [opts.on] Dictionary of callbacks.
  * @param {Object} [opts.one] Dictionary of single-run callbacks.
  * @return {AdSlot}
- * @see adslot.js
+ * @see adslot.js https://cobbdb.github.io/harmony/adslot.js
  */
 module.exports = function (opts) {
     var slot;
