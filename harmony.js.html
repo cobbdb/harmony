@@ -22,10 +22,10 @@
         <a href="#harmony">Harmony</a>
       </div>
       <div class="heading h3">
-        <a href="#dfp%20javascript%20api%20helper">DFP JavaScript API Helper</a>
+        <a href="#simplify%20your%20dfp%20business%20logic.">Simplify your DFP business logic.</a>
       </div>
       <div class="heading h2">
-        <a href="#harmony()">Harmony()</a>
+        <a href="#harmony">harmony</a>
       </div>
       <div class="heading h2">
         <a href="#harmony.on('breakpoint%2Fupdate'%2C%20callback)">harmony.on('breakpoint/update', callback)</a>
@@ -109,7 +109,16 @@
         <a href="#harmony.hide.slot(name)">harmony.hide.slot(name)</a>
       </div>
       <div class="heading h2">
-        <a href="#harmony.on%2Fone%2Foff%2Ftrigger">harmony.on/one/off/trigger</a>
+        <a href="#harmony.on(name%2C%20callback)">harmony.on(name, callback)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.one(name%2C%20callback)">harmony.one(name, callback)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.off(name)">harmony.off(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#harmony.trigger(name)">harmony.trigger(name)</a>
       </div>
     </div>
   </div>
@@ -129,10 +138,10 @@
 
 
 
-<div class="pilwrap" id="dfp%20javascript%20api%20helper">
+<div class="pilwrap" id="simplify%20your%20dfp%20business%20logic.">
   <h3>
-    <a href="#dfp%20javascript%20api%20helper" name="dfp%20javascript%20api%20helper" class="pilcrow">&#182;</a>
-    <strong><em>DFP JavaScript API Helper</em></strong>
+    <a href="#simplify%20your%20dfp%20business%20logic." name="simplify%20your%20dfp%20business%20logic." class="pilcrow">&#182;</a>
+    <strong><em>Simplify your DFP business logic.</em></strong>
   </h3>
 </div>
 
@@ -150,6 +159,8 @@
     <span class="nx">Eventable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./event-handler.js&#39;</span><span class="p">),</span>
     <span class="nx">watcher</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./breakpoint-watcher.js&#39;</span><span class="p">);</span>
 
+<span class="nx">log</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony defined.&#39;</span><span class="p">);</span>
+
 
 </pre></div>
         </td>
@@ -157,45 +168,29 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony()">
+<div class="pilwrap" id="harmony">
   <h2>
-    <a href="#harmony()" name="harmony()" class="pilcrow">&#182;</a>
-    Harmony()
+    <a href="#harmony" name="harmony" class="pilcrow">&#182;</a>
+    harmony
   </h2>
 </div>
 
-
-<p>Create a new instance of Harmony.</p>
   </div>
   <div class="body">
   </div>
   <div class="details">
-    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_title">Type</div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">[opts.forceLog]</span>
-      <span class="dox_type">Boolean</span>
-      <span>True to force Lumberjack logging enabled.</span>
-    </div>
-    <div class="dox_tag_title">Returns</div>
-    <div class="dox_tag_detail">
-      <span class="dox_tag_name"></span>
-      <span class="dox_type">Object</span>
-      <span>Instance of Harmony.</span>
+      <span class="dox_type">Object
+</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">forceLog</span><span class="p">)</span> <span class="p">{</span>    
-        <span class="nx">log</span><span class="p">.</span><span class="nx">enable</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony defined.&#39;</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="nx">BaseClass</span><span class="p">({</span>
-        <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">BaseClass</span><span class="p">({</span>
+    <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
 </pre></div>
         </td>
@@ -237,9 +232,9 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">watcher</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">bp</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;breakpoint/update&#39;</span><span class="p">,</span> <span class="nx">bp</span><span class="p">);</span>
-            <span class="p">});</span>
+        <span class="nx">watcher</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">bp</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;breakpoint/update&#39;</span><span class="p">,</span> <span class="nx">bp</span><span class="p">);</span>
+        <span class="p">});</span>
 
 </pre></div>
         </td>
@@ -273,14 +268,14 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
-                <span class="p">});</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;It appears &quot;googletag&quot; is not defined!&#39;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">().</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">that</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;slotRenderEnded&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;It appears &quot;googletag&quot; is not defined!&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -308,7 +303,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;3.3.1&#39;</span><span class="p">,</span>
+    <span class="nx">version</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../package.json&#39;</span><span class="p">).</span><span class="nx">version</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -355,11 +350,11 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">load</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">pubads</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">();</span>
+    <span class="nx">load</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pubads</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">();</span>
 
-            <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span>
-            <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span> <span class="o">||</span> <span class="p">[];</span>
 
 
 </pre></div>
@@ -373,26 +368,26 @@
 <p>Generate the ad slots.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">conf</span><span class="p">,</span>
-                <span class="nx">len</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Generating ad slots.&#39;</span><span class="p">);</span>
-            <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">conf</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-                <span class="k">try</span> <span class="p">{</span>
-                    <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
-                        <span class="nx">pubads</span><span class="p">,</span>
-                        <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">conf</span><span class="p">)</span>
-                    <span class="p">);</span>
-                    <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
-                    <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
-                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to load().&#39;</span><span class="p">,</span>
-                        <span class="nx">conf</span><span class="o">:</span> <span class="nx">conf</span><span class="p">,</span>
-                        <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                    <span class="p">});</span>
-                <span class="p">}</span>
+        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">conf</span><span class="p">,</span>
+            <span class="nx">len</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Generating ad slots.&#39;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">conf</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">slots</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
+                    <span class="nx">pubads</span><span class="p">,</span>
+                    <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">conf</span><span class="p">)</span>
+                <span class="p">);</span>
+                <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+                <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to load().&#39;</span><span class="p">,</span>
+                    <span class="nx">conf</span><span class="o">:</span> <span class="nx">conf</span><span class="p">,</span>
+                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+                <span class="p">});</span>
             <span class="p">}</span>
+        <span class="p">}</span>
 
 
 </pre></div>
@@ -406,14 +401,14 @@
 <p>Assign the system targeting.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="kd">var</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span>
-                <span class="nx">targeting</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">targeting</span> <span class="o">||</span> <span class="p">{};</span>
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Applying pubads targeting.&#39;</span><span class="p">);</span>
-            <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">targeting</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">value</span> <span class="o">=</span> <span class="nx">targeting</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">);</span>
-                <span class="nx">pubads</span><span class="p">.</span><span class="nx">setTargeting</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-            <span class="p">}</span>
+        <span class="kd">var</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span>
+            <span class="nx">targeting</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">targeting</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Applying pubads targeting.&#39;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">targeting</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">targeting</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">);</span>
+            <span class="nx">pubads</span><span class="p">.</span><span class="nx">setTargeting</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
 
 
 </pre></div>
@@ -427,10 +422,10 @@
 <p>Assign the breakpoints.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">watcher</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">);</span>
+        <span class="nx">watcher</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">);</span>
 
-            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony config loaded.&#39;</span><span class="p">);</span>
-        <span class="p">},</span>
+        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;Harmony config loaded.&#39;</span><span class="p">);</span>
+    <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -467,7 +462,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">addBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">add</span><span class="p">,</span>
+    <span class="nx">addBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">add</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -502,7 +497,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
+    <span class="nx">getBreakpoints</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">getAll</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -537,7 +532,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">breakpoint</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
+    <span class="nx">breakpoint</span><span class="o">:</span> <span class="nx">watcher</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -567,7 +562,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">log</span><span class="o">:</span> <span class="nx">log</span><span class="p">,</span>
+    <span class="nx">log</span><span class="o">:</span> <span class="nx">log</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -609,7 +604,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">slot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">,</span>
+    <span class="nx">slot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -651,7 +646,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">hasSlot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">has</span><span class="p">,</span>
+    <span class="nx">hasSlot</span><span class="o">:</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">has</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -693,7 +688,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">group</span><span class="o">:</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">,</span>
+    <span class="nx">group</span><span class="o">:</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">,</span>
 
 </pre></div>
         </td>
@@ -794,24 +789,24 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">defineSlot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">slot</span><span class="p">;</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
-                    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">(),</span>
-                    <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span>
-                <span class="p">);</span>
-                <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
-                <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to defineSlot()&#39;</span><span class="p">,</span>
-                    <span class="nx">conf</span><span class="o">:</span> <span class="nx">opts</span><span class="p">,</span>
-                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                <span class="p">});</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="nx">slot</span><span class="p">;</span>
-        <span class="p">},</span>
+    <span class="nx">defineSlot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">slot</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">slot</span> <span class="o">=</span> <span class="nx">AdSlot</span><span class="p">(</span>
+                <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">pubads</span><span class="p">(),</span>
+                <span class="nx">Util</span><span class="p">.</span><span class="nx">scrubConf</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span>
+            <span class="p">);</span>
+            <span class="nx">slots</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+            <span class="nx">groups</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">group</span><span class="p">,</span> <span class="nx">slot</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Slot failed to load during call to defineSlot()&#39;</span><span class="p">,</span>
+                <span class="nx">conf</span><span class="o">:</span> <span class="nx">opts</span><span class="p">,</span>
+                <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">slot</span><span class="p">;</span>
+    <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -859,7 +854,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">enable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/enable.js&#39;</span><span class="p">),</span>
+    <span class="nx">enable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/enable.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -907,7 +902,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">disable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/disable.js&#39;</span><span class="p">),</span>
+    <span class="nx">disable</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/disable.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -955,7 +950,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">refresh</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/refresh.js&#39;</span><span class="p">),</span>
+    <span class="nx">refresh</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./actions/refresh.js&#39;</span><span class="p">),</span>
 
 </pre></div>
         </td>
@@ -980,7 +975,7 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">show</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">show</span><span class="o">:</span> <span class="p">{</span>
 
 </pre></div>
         </td>
@@ -1011,18 +1006,18 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
-                    <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
-                    <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing ads in group&#39;</span><span class="p">,</span>
-                    <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span>
-                <span class="p">});</span>
-                <span class="k">try</span> <span class="p">{</span>
-                    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">slot</span> <span class="o">=</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-                        <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
+                <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
+                <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing ads in group&#39;</span><span class="p">,</span>
+                <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span>
+            <span class="p">});</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">slot</span> <span class="o">=</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                    <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
 
 
 </pre></div>
@@ -1036,31 +1031,31 @@ calling <code>googletag.display()</code>. Will not call
 <p>Only make ad call if slot is enabled.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-                        <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                            <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                        <span class="p">}</span>
-
-                        <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
-                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot for group&#39;</span><span class="p">,</span>
-                                <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                                <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
-                                <span class="nx">slot</span><span class="o">:</span> <span class="nx">slot</span>
-                            <span class="p">});</span>
-                        <span class="p">}</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                     <span class="p">}</span>
-                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show group&#39;</span><span class="p">,</span>
-                        <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                        <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                    <span class="p">});</span>
+
+                    <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                            <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot for group&#39;</span><span class="p">,</span>
+                            <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                            <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
+                            <span class="nx">slot</span><span class="o">:</span> <span class="nx">slot</span>
+                        <span class="p">});</span>
+                    <span class="p">}</span>
                 <span class="p">}</span>
-            <span class="p">},</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show group&#39;</span><span class="p">,</span>
+                    <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -1091,15 +1086,15 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">;</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing slot&#39;</span><span class="p">,</span>
-                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
-                <span class="p">});</span>
-                <span class="k">try</span> <span class="p">{</span>
-                    <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-                    <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">el</span><span class="p">;</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Showing slot&#39;</span><span class="p">,</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
+            <span class="p">});</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+                <span class="nx">slot</span><span class="p">.</span><span class="nx">tsCalled</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
 
 
 </pre></div>
@@ -1113,22 +1108,22 @@ calling <code>googletag.display()</code>. Will not call
 <p>Only make ad call if slot is enabled.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                        <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="p">}</span>
-
-                    <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
-                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot&#39;</span><span class="p">,</span>
-                        <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                        <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                    <span class="p">});</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">slot</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                    <span class="nx">global</span><span class="p">.</span><span class="nx">googletag</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
                 <span class="p">}</span>
+
+                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+                <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to show slot&#39;</span><span class="p">,</span>
+                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+                <span class="p">});</span>
             <span class="p">}</span>
-        <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -1151,7 +1146,7 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">hide</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">hide</span><span class="o">:</span> <span class="p">{</span>
 
 </pre></div>
         </td>
@@ -1182,25 +1177,25 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
-                    <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
-                    <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="s1">&#39;Hiding ads in group &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                            <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot in group&#39;</span><span class="p">,</span>
-                            <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                            <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
-                            <span class="nx">id</span><span class="o">:</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span>
-                        <span class="p">});</span>
-                    <span class="p">}</span>
+        <span class="nx">group</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span>
+                <span class="nx">set</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">),</span>
+                <span class="nx">len</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="s1">&#39;Hiding ads in group &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot in group&#39;</span><span class="p">,</span>
+                        <span class="nx">group</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                        <span class="nx">reason</span><span class="o">:</span> <span class="s1">&#39;Slot was missing from the DOM&#39;</span><span class="p">,</span>
+                        <span class="nx">id</span><span class="o">:</span> <span class="nx">set</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">divId</span>
+                    <span class="p">});</span>
                 <span class="p">}</span>
-            <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
 
 </pre></div>
         </td>
@@ -1231,26 +1226,26 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-            <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">el</span><span class="p">,</span>
-                    <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Hiding slot&#39;</span><span class="p">,</span>
-                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
+        <span class="nx">slot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">el</span><span class="p">,</span>
+                <span class="nx">slot</span> <span class="o">=</span> <span class="nx">slots</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Hiding slot&#39;</span><span class="p">,</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span>
+            <span class="p">});</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
+                <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot&#39;</span><span class="p">,</span>
+                    <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
                 <span class="p">});</span>
-                <span class="k">try</span> <span class="p">{</span>
-                    <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">slot</span><span class="p">.</span><span class="nx">divId</span><span class="p">);</span>
-                    <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;Failed to hide slot&#39;</span><span class="p">,</span>
-                        <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                        <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
-                    <span class="p">});</span>
-                <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">}</span>
-    <span class="p">}).</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="nx">extend</span><span class="p">(</span>
 
 </pre></div>
         </td>
@@ -1258,10 +1253,37 @@ calling <code>googletag.display()</code>. Will not call
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="harmony.on%2Fone%2Foff%2Ftrigger">
+<div class="pilwrap" id="harmony.on(name%2C%20callback)">
   <h2>
-    <a href="#harmony.on%2Fone%2Foff%2Ftrigger" name="harmony.on%2Fone%2Foff%2Ftrigger" class="pilcrow">&#182;</a>
-    harmony.on/one/off/trigger
+    <a href="#harmony.on(name%2C%20callback)" name="harmony.on(name%2C%20callback)" class="pilcrow">&#182;</a>
+    harmony.on(name, callback)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.one(name%2C%20callback)">
+  <h2>
+    <a href="#harmony.one(name%2C%20callback)" name="harmony.one(name%2C%20callback)" class="pilcrow">&#182;</a>
+    harmony.one(name, callback)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.off(name)">
+  <h2>
+    <a href="#harmony.off(name)" name="harmony.off(name)" class="pilcrow">&#182;</a>
+    harmony.off(name)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="harmony.trigger(name)">
+  <h2>
+    <a href="#harmony.trigger(name)" name="harmony.trigger(name)" class="pilcrow">&#182;</a>
+    harmony.trigger(name)
   </h2>
 </div>
 
@@ -1280,9 +1302,8 @@ calling <code>googletag.display()</code>. Will not call
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-        <span class="nx">Eventable</span><span class="p">()</span>
-    <span class="p">);</span>
-<span class="p">};</span>
+    <span class="nx">Eventable</span><span class="p">()</span>
+<span class="p">);</span>
 </pre></div>
         </td>
       </tr>

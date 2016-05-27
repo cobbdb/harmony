@@ -260,17 +260,24 @@ immediately if the event has already been triggered.</span>
   <div class="details">
     <div class="dox_tag_title">Params</div>
     <div class="dox_tag_detail">
-      <span class="dox_tag_name">name</span>
+      <span class="dox_tag_name">[name]</span>
       <span class="dox_type">String</span>
-      <span>Event name.</span>
+      <span>Event name. Empty to
+clear all callbacks from the system.</span>
     </div>
   </div>
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">off</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
-            <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="nx">singles</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="nx">singles</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="nx">triggerCache</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="p">}</span>
         <span class="p">},</span>
 
 </pre></div>
