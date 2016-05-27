@@ -3,9 +3,7 @@
  * ### ***Simplify your DFP business logic.***
  */
 
-var Util = require('./util.js'),
-    AdSlot = require('./adslot.js'),
-    log = require('./log.js'),
+var log = require('./log.js'),
     slots = require('./slot-set.js'),
     groups = require('./group-set.js'),
     BaseClass = require('baseclassjs'),
@@ -149,57 +147,12 @@ module.exports = BaseClass({
     show: require('./actions/show.js'),
     /**
      * ## harmony.hide
-     * Hiding an ad means setting style ```display:none```.
+     * ### harmony.hide.slot(name)
+     * ### harmony.hide.group(name)
+     * Hide a slot or group of slots.
+     * @see actions/hide.js
      */
-    hide: {
-        /**
-         * ### harmony.hide.group(name)
-         * Hides all the ads in a slot group.
-         * @param {String} name
-         */
-        group: function (name) {
-            var i, el,
-                set = groups.get(name),
-                len = set.length;
-            log('hide', 'Hiding ads in group ' + name);
-            for (i = 0; i < len; i += 1) {
-                el = document.getElementById(set[i].divId);
-                if (el) {
-                    el.style.display = 'none';
-                } else {
-                    log('error', {
-                        msg: 'Failed to hide slot in group',
-                        group: name,
-                        reason: 'Slot was missing from the DOM',
-                        id: set[i].divId
-                    });
-                }
-            }
-        },
-        /**
-         * ### harmony.hide.slot(name)
-         * Hides a single ad slot.
-         * @param {String} name
-         */
-        slot: function (name) {
-            var el,
-                slot = slots.get(name);
-            log('hide', {
-                msg: 'Hiding slot',
-                name: name
-            });
-            try {
-                el = document.getElementById(slot.divId);
-                el.style.display = 'none';
-            } catch (err) {
-                log('error', {
-                    msg: 'Failed to hide slot',
-                    name: name,
-                    err: err
-                });
-            }
-        }
-    }
+    hide: require('./actions/hide.js')
 }).extend(
     /**
      * ## harmony.on(name, callback)

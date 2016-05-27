@@ -2,8 +2,6 @@
  * # Utilities
  */
 
-var slots = require('./slot-set.js');
-
 module.exports = {
     /**
      * ## Util.noop()
@@ -24,7 +22,8 @@ module.exports = {
      * @return {Object} Clean slot configuration.
      */
     scrubConf: function (conf) {
-        var suffix, el,
+        var slots = require('./slot-set.js'),
+            suffix, el,
             temp = {
                 el: {}
             };
