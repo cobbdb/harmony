@@ -15,7 +15,7 @@ Simplify your DFP business logic.
 [![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
 
 -------------
-##### [Link to full autodocs](https://cobbdb.github.io/harmony/4.0.1)
+##### [Link to full autodocs](https://cobbdb.github.io/harmony/4.0.3)
 
 Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
