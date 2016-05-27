@@ -79,6 +79,7 @@ module.exports = BaseClass({
     breakpoint: watcher.current,
     /**
      * ## harmony.log
+     * ### harmony.log.enable()
      * Instance of Lumberjack populated with Harmony's data.
      * @see log.js
      */
