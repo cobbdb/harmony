@@ -5,12 +5,14 @@
 
 if [%1]==[] (
     echo.
-    echo :::: ^(FATAL^) Missing version type - major, minor, patch.
+    echo :::: ^(FATAL^) Missing version.
+    echo :::: version.bat <version> "<commit msg>"
     goto:eof
 )
 if [%2]==[] (
     echo.
     echo :::: ^(FATAL^) Missing git commit message.
+    echo :::: version.bat <version> "<commit msg>"
     goto:eof
 )
 
