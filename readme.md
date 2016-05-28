@@ -43,7 +43,7 @@ Some great sites that use Harmony:
 * [Example Setup](#ex-setup)
 
 -------------
-<a name="intro"/>
+<a name="intro"></a>
 Harmony is a DFP supplement meant for large-scale enterprise advertising systems.
 There are methods to help you quickly create new ad slots, adjust targeting on
 the fly, and attach side-effects.
@@ -62,7 +62,7 @@ let's go over some of the best parts
 of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
 
-<a name="intro-setup"/>
+<a name="intro-setup"></a>
 #### Quick setup.
 There are two ways to load Harmony:
 
@@ -80,7 +80,7 @@ var harmony = require('harmonyjs');
 global.console.log(harmony.version);
 ```
 
-<a name="loading"/>
+<a name="loading"></a>
 #### Load ad config en bulk.
 Have your backend generate ad config based on admin settings and
 keep the components completely agnostic.
@@ -89,7 +89,7 @@ var myconf = {% load_ad_conf %};
 harmony.load(myconf);
 ```
 
-<a name="callbacks"/>
+<a name="callbacks"></a>
 #### Attach some callbacks.
 Easily attach behaviors based on the ad call, rather than side-effects
 such as container visibility or size. Harmony lets you code deliberately!
@@ -101,7 +101,7 @@ harmony.slot('MY01').on('slotRenderEnded', function (event) {
 });
 ```
 
-<a name="data"/>
+<a name="data"></a>
 #### Access your ad data immediately.
 Harmony exposes individual slot configuration for pain-free access.
 ```javascript
@@ -117,7 +117,7 @@ var slot = harmony.slot('MY01'),
 slot.setTargeting('some', 'new targeting!');
 ```
 
-<a name="eventing"/>
+<a name="eventing"></a>
 #### Create and use events.
 Harmony features a robust eventing system that will avoid race conditions
 on even the most complex websites.
@@ -159,7 +159,7 @@ harmony.one('myLazyEvent', function () {}, true);
 harmony.off('myevent');
 ```
 
-<a name="logging"/>
+<a name="logging"></a>
 #### Debug the subsystem.
 [Logging](http://cobbdb.github.io/lumberjack) lets you see what happened and when, so you can focus less
 on debugging and more on coding.
@@ -174,7 +174,7 @@ Logging provided with [Lumberjack](http://cobbdb.github.io/lumberjack).
 harmony.log.readback('metric', true);
 ```
 
-<a name="ex-setup"/>
+<a name="ex-setup"></a>
 ## Example Setup
 Here is an example of a page setup using Harmony and DFP.
 ```html
