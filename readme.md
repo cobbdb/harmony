@@ -160,6 +160,12 @@ harmony.off('myevent');
 ```
 
 <a name="logging"></a>
+#### Enable logging.
+Logging is off by default for performance, but can be turned on easily.
+```javascript
+harmony.log.enable();
+```
+
 #### Debug the subsystem.
 [Logging](http://cobbdb.github.io/lumberjack) lets you see what happened and when, so you can focus less
 on debugging and more on coding.
