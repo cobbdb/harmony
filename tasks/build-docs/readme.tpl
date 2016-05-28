@@ -96,7 +96,7 @@ such as container visibility or size. Harmony lets you code deliberately!
 ```javascript
 harmony.slot('MY01').on('slotRenderEnded', function (event) {
     if (!event.isEmpty) {
-        makeRoomForAd();
+        // Some business logic here.
     }
 });
 ```
