@@ -1,8 +1,8 @@
 [![Harmony](http://i.imgur.com/DP1OvVj.png)](https://cobbdb.github.io/harmony)
-*v4.0.5*
+*v4.0.8*
 
 [![License](https://img.shields.io/npm/l/postscribe.svg)](http://npmjs.com/package/postscribe)
-[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=4.0.5)](https://travis-ci.org/cobbdb/harmony)
+[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=4.0.8)](https://travis-ci.org/cobbdb/harmony)
 [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
 [![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
 [![Dependencies](https://img.shields.io/david/dev/cobbdb/harmony.svg)](./package.json)
@@ -16,7 +16,7 @@ Simplify your DFP business logic.
 [![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
 
 -------------
-##### [Link to full autodocs](https://cobbdb.github.io/harmony/4.0.5)
+##### [Link to full autodocs](https://cobbdb.github.io/harmony/4.0.8)
 
 Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
@@ -57,7 +57,7 @@ dynamic page content around ad performance.
 There is also built-in ad logging and metrics provided via the
 [Lumberjack](https://github.com/cobbdb/lumberjack) library.
 
-[Full docs are available here](https://cobbdb.github.io/harmony), but
+[Full docs are available here](https://cobbdb.github.io/harmony/4.0.8), but
 let's go over some of the best parts
 of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
