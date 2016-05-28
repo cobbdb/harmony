@@ -8,18 +8,15 @@ module.exports = function (grunt) {
             'build-docs-win-main': {
                 cmd: 'call tasks/build-docs .'
             }
-        },
-        template: {
-            readme: {
-                options: {
-                    data: {
-                        version: version
-                    }
-                },
-                files: {
-                    'readme.md': 'tasks/build-docs/readme.tpl'
-                }
-            }
         }
+    });
+    grunt.registerTask('build-readme', function () {
+        var readme = grunt.file.read('tasks/build-docs/readme.tpl');
+        readme = grunt.template.process(readme, {
+            data: {
+                version: version
+            }
+        });
+        grunt.file.write('readme.md', readme);
     });
 };

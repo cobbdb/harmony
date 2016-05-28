@@ -2,7 +2,7 @@
 *v<%= version %>*
 
 [![License](https://img.shields.io/npm/l/postscribe.svg)](http://npmjs.com/package/postscribe)
-[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=master)](https://travis-ci.org/cobbdb/harmony)
+[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=<%= version %>)](https://travis-ci.org/cobbdb/harmony)
 [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
 [![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
 [![Dependencies](https://img.shields.io/david/dev/cobbdb/harmony.svg)](./package.json)
