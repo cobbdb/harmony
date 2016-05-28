@@ -78,7 +78,7 @@ module.exports = function (opts) {
             }
         },
         /**
-         * ## harmony.off(name)
+         * ## harmony.off([name])
          * Clear all callbacks from an event.
          * @param {String} [name] Event name. Empty to
          * clear all callbacks from the system.
