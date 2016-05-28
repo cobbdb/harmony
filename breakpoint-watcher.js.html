@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>breakpoint-watcher.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\breakpoint-watcher.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#breakpoint%20watcher">Breakpoint Watcher</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.current()">watcher.current()</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.add(set)">watcher.add(set)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.getall()">watcher.getAll()</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.clear()">watcher.clear()</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.run(%5Bthrottle%5D)">watcher.run([throttle])</a>
+      </div>
+      <div class="heading h2">
+        <a href="#watcher.on%2Fone%2Foff%2Ftrigger">watcher.on/one/off/trigger</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>breakpoint-watcher.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">BaseClass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;baseclassjs&#39;</span><span class="p">),</span>
+    <span class="nx">Eventable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./event-handler.js&#39;</span><span class="p">),</span>
+    <span class="nx">screen</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./screen.js&#39;</span><span class="p">),</span>
+    <span class="nx">running</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">ready</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">breakpoints</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nx">last</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="breakpoint%20watcher">
+  <h1>
+    <a href="#breakpoint%20watcher" name="breakpoint%20watcher" class="pilcrow">&#182;</a>
+    Breakpoint Watcher
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">BaseClass</span>
+    </div>
+    <div class="dox_tag_title">extends</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">EventHandler
+</span>
+      <span>{EventHandler}</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">BaseClass</span><span class="p">({</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.current()">
+  <h2>
+    <a href="#watcher.current()" name="watcher.current()" class="pilcrow">&#182;</a>
+    watcher.current()
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Number</span>
+      <span>Current breakpoint.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">current</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span>
+            <span class="nx">len</span> <span class="o">=</span> <span class="nx">breakpoints</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+            <span class="nx">width</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">width</span><span class="p">(),</span>
+            <span class="nx">point</span> <span class="o">=</span> <span class="nx">breakpoints</span><span class="p">[</span><span class="nx">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">width</span> <span class="o">&gt;=</span> <span class="nx">breakpoints</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
+                <span class="nx">point</span> <span class="o">=</span> <span class="nx">breakpoints</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">point</span><span class="p">;</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.add(set)">
+  <h2>
+    <a href="#watcher.add(set)" name="watcher.add(set)" class="pilcrow">&#182;</a>
+    watcher.add(set)
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[set]
+</span>
+      <span class="dox_type">Number</span>
+      <span class="dox_type">ArrayofNumbers</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">set</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">breakpoints</span> <span class="o">=</span> <span class="nx">breakpoints</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">set</span> <span class="o">||</span> <span class="p">[]);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Sort descending.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">breakpoints</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">;</span>
+        <span class="p">});</span>
+        <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.getall()">
+  <h2>
+    <a href="#watcher.getall()" name="watcher.getall()" class="pilcrow">&#182;</a>
+    watcher.getAll()
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">ArrayofNumbers
+</span>
+      <span>{ArrayofNumbers}</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">getAll</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">breakpoints</span><span class="p">;</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.clear()">
+  <h2>
+    <a href="#watcher.clear()" name="watcher.clear()" class="pilcrow">&#182;</a>
+    watcher.clear()
+  </h2>
+</div>
+
+
+<p>Clears all breakpoints from the system.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">breakpoints</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.run(%5Bthrottle%5D)">
+  <h2>
+    <a href="#watcher.run(%5Bthrottle%5D)" name="watcher.run(%5Bthrottle%5D)" class="pilcrow">&#182;</a>
+    watcher.run([throttle])
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">[throttle]
+</span>
+      <span class="dox_type">Number</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">run</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">throttle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">function</span> <span class="nx">checkUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">current</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">current</span> <span class="o">!==</span> <span class="nx">last</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">last</span> <span class="o">=</span> <span class="nx">current</span><span class="p">;</span>
+                <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="nx">current</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Do not run unless breakpoints are available.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">running</span> <span class="o">&amp;&amp;</span> <span class="nx">breakpoints</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">running</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">ready</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">global</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">ready</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">ready</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                    <span class="nx">checkUpdate</span><span class="p">();</span>
+
+                    <span class="nx">global</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <span class="nx">ready</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                    <span class="p">},</span> <span class="nx">throttle</span> <span class="o">||</span> <span class="mi">250</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nx">checkUpdate</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="nx">extend</span><span class="p">(</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="watcher.on%2Fone%2Foff%2Ftrigger">
+  <h2>
+    <a href="#watcher.on%2Fone%2Foff%2Ftrigger" name="watcher.on%2Fone%2Foff%2Ftrigger" class="pilcrow">&#182;</a>
+    watcher.on/one/off/trigger
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">See</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type"><a href="event-handler.js">event-handler.js</a>
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">Eventable</span><span class="p">()</span>
+<span class="p">);</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
