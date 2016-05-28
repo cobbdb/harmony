@@ -82,7 +82,7 @@ global.console.log(harmony.version);
 
 <a name="loading"></a>
 #### Load ad config en bulk.
-Have your backend generate ad config based on admin settings and
+Have your backend generate configurations based on admin settings and
 keep the components completely agnostic.
 ```javascript
 var myconf = {% load_ad_conf %};
