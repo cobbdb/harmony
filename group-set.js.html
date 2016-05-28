@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>group-set.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "C:\\wamp\\www\\harmony\\\\group-set.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#slot-group%20set">Slot-Group Set</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.get(name)">set.get(name)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.add(name%2C%20slot)">set.add(name, slot)</a>
+      </div>
+      <div class="heading h2">
+        <a href="#set.clear()">set.clear()</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="slot-group%20set">
+  <h1>
+    <a href="#slot-group%20set" name="slot-group%20set" class="pilcrow">&#182;</a>
+    Slot-Group Set
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./util.js&#39;</span><span class="p">),</span>
+    <span class="nx">groups</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.get(name)">
+  <h2>
+    <a href="#set.get(name)" name="set.get(name)" class="pilcrow">&#182;</a>
+    set.get(name)
+  </h2>
+</div>
+
+
+<p>Fetch a group by name.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">name</span>
+      <span class="dox_type">String</span>
+      <span>Name of the group.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Array</span>
+      <span>Collection of 0 or more ad slots.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">groups</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.add(name%2C%20slot)">
+  <h2>
+    <a href="#set.add(name%2C%20slot)" name="set.add(name%2C%20slot)" class="pilcrow">&#182;</a>
+    set.add(name, slot)
+  </h2>
+</div>
+
+
+<p>Add a slot to a group.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">slot</span>
+      <span class="dox_type">Slot</span>
+      <span>Ad slot to add to the group.</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Array</span>
+      <span>Collection of 0 or more ad slots.</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">slot</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">groups</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">groups</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">groups</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">slot</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">groups</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+    <span class="p">},</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="set.clear()">
+  <h2>
+    <a href="#set.clear()" name="set.clear()" class="pilcrow">&#182;</a>
+    set.clear()
+  </h2>
+</div>
+
+
+<p>Reset the collection.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">groups</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
