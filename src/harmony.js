@@ -9,7 +9,8 @@ var log = require('./log.js'),
     groups = require('./group-set.js'),
     BaseClass = require('baseclassjs'),
     Eventable = require('./event-handler.js'),
-    watcher = require('./breakpoint-watcher.js');
+    watcher = require('./breakpoint-watcher.js'),
+    googletag = require('./googletag.js');
 
 log('init', 'Harmony defined.');
 
@@ -20,7 +21,6 @@ log('init', 'Harmony defined.');
  */
 module.exports = BaseClass({
     _create: function () {
-        var that = this;
         /**
          * ## harmony.on('breakpoint/update', callback)
          * ```javascript
@@ -34,18 +34,18 @@ module.exports = BaseClass({
         watcher.on('update', function (bp) {
             that.trigger('breakpoint/update', bp);
         });
+
         /**
          * ## harmony.on('slotRenderEnded', callback)
          * @param {Function} callback Called each time any ad call completes.
          * @see <a href="event-handler.js">event-handler.js</a>
          */
-        try {
-            global.googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+        var that = this;
+        googletag.cmd.push(function () {
+            googletag.pubads().addEventListener('slotRenderEnded', function (event) {
                 that.trigger('slotRenderEnded', event);
             });
-        } catch (err) {
-            log('error', 'It appears "googletag" is not defined!');
-        }
+        });
     },
     /**
      * ## harmony.version
