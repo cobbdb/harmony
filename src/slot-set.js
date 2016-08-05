@@ -75,7 +75,7 @@ module.exports = {
      * ## set.add(slot)
      * Add a new slot to the set.
      * @param {Slot} slot Ad slot to add to the set.
-     * @return {Array} Collection of 0 or more ad slots.
+     * @return {Slot[]} Collection of 0 or more ad slots.
      */
     add: function (slot) {
         slots[slot.name] = slot;
