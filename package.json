@@ -37,7 +37,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-exec": "^1.0.0",
-    "jquery": "2.x",
+    "jquery": "3.x",
     "matchdep": "^1.0.1",
     "semver": "^5.3.0"
   }
