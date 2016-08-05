@@ -15,7 +15,7 @@ describe('harmony setup', function () {
         });
         it('creates ad slots', function () {
             harmony.load(conf);
-            expect(harmony.slot('TST00').divId).toEqual('DVID00');
+            expect(harmony.slot('TST00').divId).toEqual('h-ad-1');
             expect(harmony.slot('TST01').group).toEqual('TSTGRP01');
             expect(harmony.slot('TST02').name).toEqual('TST02');
         });
@@ -29,24 +29,34 @@ describe('harmony setup', function () {
                 harmony.load({});
             }).not.toThrow();
         });
-        it('handles duplicate slot names', function () {
+        it('handles duplicate slot names with missing div', function () {
             conf.slots[2].id = 'DVID00';
             conf.slots[2].name = 'TST00';
+            // Do not create the new DVID00 element.
             harmony.load(conf);
             expect(harmony.slot('TST00').name).toEqual('TST00');
-            expect(harmony.slot('TST00').divId).toEqual('DVID00');
-            expect(harmony.slot('TST00-h1').divId).toEqual('DVID00-h1');
-            expect(harmony.slot('TST00-h1').name).toEqual('TST00-h1');
+            expect(harmony.slot('TST00').divId).toEqual('h-ad-1');
+            expect(harmony.slot('TST01').name).toEqual('TST01');
+            expect(harmony.slot('TST01').divId).toEqual('h-ad-2');
+            expect(harmony.slot('TST00-h3').name).toBeUndefined();
+            expect(harmony.slot('TST00-h3').divId).toBeUndefined();
+
+            // Smoke test DOM and error logs.
+            expect($('#h-ad-1, #h-ad-2, #h-ad-3').length).toEqual(2);
+            expect(harmony.log.readback('error').length).toEqual(1);
         });
-        it('adjusts element ids for duplicates', function () {
+        it('handles duplicate slot names with no missing divs', function () {
             conf.slots[2].id = 'DVID00';
             conf.slots[2].name = 'TST00';
+            Help.createDiv(conf.slots[2]);
             harmony.load(conf);
-            var slot = harmony.slot('TST00-h1'),
-                el = document.getElementById(slot.divId);
-            expect(el.id).toEqual('DVID00-h1');
-            expect(slot.divId).toEqual('DVID00-h1');
-            // Smoke test error logs.
+            expect(harmony.slot('TST00').name).toEqual('TST00');
+            expect(harmony.slot('TST00').divId).toEqual('h-ad-1');
+            expect(harmony.slot('TST00-h3').name).toEqual('TST00-h3');
+            expect(harmony.slot('TST00-h3').divId).toEqual('h-ad-3');
+
+            // Smoke test DOM and error logs.
+            expect($('#h-ad-1, #h-ad-2, #h-ad-3').length).toEqual(3);
             expect(harmony.log.readback('error').length).toEqual(0);
         });
         it('sets system targeting', function () {
@@ -68,7 +78,7 @@ describe('harmony setup', function () {
                 return Options({
                     name: 'TST22',
                     group: 'GRP22',
-                    id: 'DVID22'
+                    id: 'DVID22' // becomes h-ad-1.
                 });
             },
             newSlot = function () {
@@ -80,35 +90,17 @@ describe('harmony setup', function () {
             var opts = newSlot();
             harmony.defineSlot(opts);
             expect(harmony.slot('TST22').group).toEqual('GRP22');
-            expect(harmony.group('GRP22')[0].divId).toEqual('DVID22');
+            expect(harmony.group('GRP22')[0].divId).toEqual('h-ad-1');
         });
-        it('handles duplicate slot names for sync pages', function () {
+        it('handles duplicate slots', function () {
             harmony.defineSlot(newSlot());
             harmony.defineSlot(newSlot());
             harmony.defineSlot(newSlot());
             harmony.defineSlot(newSlot());
-            expect(harmony.slot('TST22').divId).toEqual('DVID22');
-            expect(harmony.slot('TST22-h1').divId).toEqual('DVID22-h1');
-            expect(harmony.slot('TST22-h2').divId).toEqual('DVID22-h2');
-            expect(harmony.slot('TST22-h3').divId).toEqual('DVID22-h3');
-        });
-        it('handles duplicate slot names for async pages', function () {
-            harmony.defineSlot(newSlot());
-            harmony.defineSlot(newSlot());
-            // Simulate completed ad calls.
-            $('.BKP22').text('test ad content');
-            // Load in a new async ad slot.
-            harmony.defineSlot(newSlot());
-            // Simulate completed ad calls.
-            $('.BKP22').text('test ad content');
-            // Load in some new async ad slots.
-            harmony.defineSlot(newSlot());
-            harmony.defineSlot(newSlot());
-            expect(harmony.slot('TST22').divId).toEqual('DVID22');
-            expect(harmony.slot('TST22-h1').divId).toEqual('DVID22-h1');
-            expect(harmony.slot('TST22-h2').divId).toEqual('DVID22-h2');
-            expect(harmony.slot('TST22-h3').divId).toEqual('DVID22-h3');
-            expect(harmony.slot('TST22-h4').divId).toEqual('DVID22-h4');
+            expect(harmony.slot('TST22').divId).toEqual('h-ad-1');
+            expect(harmony.slot('TST22-h2').divId).toEqual('h-ad-2');
+            expect(harmony.slot('TST22-h3').divId).toEqual('h-ad-3');
+            expect(harmony.slot('TST22-h4').divId).toEqual('h-ad-4');
         });
         it('logs missing dom elements', function () {
             var opts = newSlot();

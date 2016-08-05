@@ -6,13 +6,24 @@ module.exports = {
     /**
      * ## Util.noop()
      * Simple no-op.
+     * @type {Function}
      */
     noop: function () {},
     /**
      * ## Util.slotCount
      * Counter for ensuring unique ad slots.
+     * @type {Number}
      */
     slotCount: 0,
+    /**
+     * ## Util.nextSlotId()
+     * Generate the next available slot id.
+     * @return {Number}
+     */
+    nextSlotId: function () {
+        this.slotCount += 1;
+        return this.slotCount;
+    },
     /**
      * ## Util.scrubConf(conf)
      * Ensures a slot's name and id are unique in the page. If a
@@ -22,37 +33,17 @@ module.exports = {
      * @return {Object} Clean slot configuration.
      */
     scrubConf: function (conf) {
-        var slots = require('./slot-set.js'),
-            suffix, el,
-            temp = {
-                el: {}
-            };
-
-        // Only do work if there are multiple instances or if drone slot.
-        if (conf.drone || slots.has(conf.name)) {
-            do {
-                el = document.getElementById(conf.id);
-                if (el) {
-                    if (el.innerHTML) {
-                        // Slot has already been processed,
-                        // so move it aside and query again.
-                        temp.el = el;
-                        temp.id = el.id;
-                        el.id = 'h-temp';
-                    } else {
-                        this.slotCount += 1;
-                        suffix = '-h' + this.slotCount;
-                        el.id += suffix;
-                        // Restore any existing slot.
-                        temp.el.id = temp.id;
-                        conf.id = el.id;
-                        conf.name += suffix;
-                        return conf;
-                    }
-                }
-            } while (el);
-            throw Error('Ad slot container was not found in the DOM.');
+        var el = global.document.getElementById(conf.id),
+            slots = require('./slot-set.js'),
+            newId;
+        if (el) {
+            newId = this.nextSlotId();
+            conf.id = el.id = 'h-ad-' + newId;
+            if (slots.has(conf.name)) {
+                conf.name += '-h' + newId;
+            }
+            return conf;
         }
-        return conf;
+        throw Error('Ad slot container was not found in the DOM #' + conf.id);
     }
 };

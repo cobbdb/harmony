@@ -14,17 +14,17 @@ module.exports = {
             slots: [
                 Conf({
                     name: 'TST00',
-                    id: 'DVID00',
+                    id: 'DVID00', // Becomes h-ad-1
                     group: 'TSTGRP00'
                 }),
                 Conf({
                     name: 'TST01',
-                    id: 'DVID01',
+                    id: 'DVID01', // Becomes h-ad-2
                     group: 'TSTGRP01'
                 }),
                 Conf({
                     name: 'TST02',
-                    id: 'DVID02',
+                    id: 'DVID02', // Becomes h-ad-3
                     group: 'TSTGRP00'
                 })
             ],

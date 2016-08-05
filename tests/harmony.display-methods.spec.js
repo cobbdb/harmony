@@ -26,7 +26,7 @@ describe('display method', function () {
             });
             it('sets display:block on slots', function () {
                 harmony.show.group('TSTGRP01');
-                var el = $('#DVID01')[0];
+                var el = $('#h-ad-2')[0];
                 expect(el.style.display).toEqual('block');
             });
         });
@@ -48,7 +48,7 @@ describe('display method', function () {
             });
             it('sets display:block on a slot', function () {
                 harmony.show.slot('TST02');
-                var el = $('#DVID02')[0];
+                var el = $('#h-ad-3')[0];
                 expect(el.style.display).toEqual('block');
             });
         });
@@ -72,19 +72,19 @@ describe('display method', function () {
             });
             it('works with duplicates', function () {
                 // Smoke test that mappings look right.
-                expect(harmony.slot('TST01').divId).toEqual('DVID01', 'divId, precheck');
+                expect(harmony.slot('TST01').divId).toEqual('h-ad-2', 'divId, precheck');
 
                 // Create a duplicate TST01.
                 var conf = Conf({
-                    name: 'TST01',
-                    id: 'DVID01',
+                    name: 'TST01', // becomes TST01-4.
+                    id: 'DVID01', // becomes h-ad-4.
                     group: 'TSTGRP01'
                 });
                 Help.createDiv(conf);
                 harmony.defineSlot(conf);
                 // Ensure the new mappings are correct.
-                expect(harmony.slot('TST01').divId).toEqual('DVID01');
-                expect(harmony.slot('TST01-h1').divId).toEqual('DVID01-h1');
+                expect(harmony.slot('TST01').divId).toEqual('h-ad-2');
+                expect(harmony.slot('TST01-h4').divId).toEqual('h-ad-4');
 
                 // Hide the group and ensure all divs are hidden.
                 harmony.hide.group('TSTGRP01');
@@ -103,9 +103,9 @@ describe('display method', function () {
             });
             it('sets display:none on a slot', function () {
                 harmony.hide.slot('TST01');
-                var el = $('#DVID01')[0];
+                var el = $('#h-ad-2')[0];
                 expect(el.style.display).toEqual('none');
-                el = $('#DVID00')[0];
+                el = $('#h-ad-1')[0];
                 expect(el.style.display).not.toEqual('none');
             });
         });

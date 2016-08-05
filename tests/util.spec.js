@@ -13,128 +13,49 @@ describe('Util', function () {
     });
 
     describe('scrubConf', function () {
-        var conf;
-        beforeEach(function () {
-            conf = Conf({
+        it('throws when missing DOM element', function () {
+            expect(function () {
+                var conf = Conf({
+                    name: 'testname',
+                    id: 'testid',
+                    group: 'testgrp'
+                });
+                Util.scrubConf(conf);
+            }).toThrow();
+        });
+        it('alters only id when no duplicate', function () {
+            var conf = Conf({
                 name: 'testname',
                 id: 'testid',
                 group: 'testgrp'
             });
-            slots.add(conf);
-        });
-
-        it('throws when missing DOM element', function () {
-            expect(function () {
-                Util.scrubConf(conf);
-            }).toThrow();
-        });
-        it('does nothing when no duplicate', function () {
             Help.createDiv(conf);
             var out = Util.scrubConf(conf);
-            expect(out).toEqual(conf);
+            expect(out.name).toEqual('testname');
+            expect(out.id).toEqual('h-ad-1');
         });
+        it('increments id and name per duplicate', function () {
+            var i, conf, out = [];
 
-        describe('with empty duplicate', function () {
-            it('throws when missing DOM element', function () {
-                expect(function () {
-                    slots.add(conf);
-                    Util.scrubConf(conf);
-                }).toThrow();
-            });
-            it('alters id and name of conf', function () {
+            for (i = 0; i < 4; i += 1) {
+                conf = Conf({
+                    name: 'testname',
+                    id: 'testid',
+                    group: 'testgrp'
+                });
                 Help.createDiv(conf);
-                slots.add(conf);
-                Help.createDiv(conf);
-                var out = Util.scrubConf(conf);
-                expect(out.name).toEqual('testname-h1');
-                expect(out.id).toEqual('testid-h1');
-            });
-            it('increments id per duplicate', function () {
-                var i,
-                    out = [],
-                    confs = [];
+                out[i] = Util.scrubConf(conf);
+                slots.add(out[i]);
+            }
 
-                slots.clear();
-                for (i = 0; i < 4; i += 1) {
-                    confs[i] = Conf({
-                        name: 'testname',
-                        id: 'testid',
-                        group: 'testgrp'
-                    });
-                    Help.createDiv(confs[i]);
-                }
-                for (i = 0; i < 4; i += 1) {
-                    out[i] = Util.scrubConf(confs[i]);
-                    slots.add(out[i]);
-                }
-                expect(out[0].name).toEqual('testname');
-                expect(out[1].name).toEqual('testname-h1');
-                expect(out[2].name).toEqual('testname-h2');
-                expect(out[3].name).toEqual('testname-h3');
-            });
-        });
-
-        describe('with filled duplicate', function () {
-            it('throws when missing DOM element', function () {
-                expect(function () {
-                    Help.createDiv(conf, 'testcontent');
-                    slots.add(conf);
-                    Util.scrubConf(conf);
-                }).toThrow();
-            });
-            it('alters id and name of conf', function () {
-                var first = Conf({
-                        name: 'testname',
-                        id: 'testid',
-                        group: 'testgrp'
-                    }),
-                    second = Conf({
-                        name: 'testname',
-                        id: 'testid',
-                        group: 'testgrp'
-                    });
-                slots.add(first);
-                Help.createDiv(first, 'testcontent');
-                slots.add(second);
-                Help.createDiv(second);
-                Util.scrubConf(second);
-
-                expect(first.name).toEqual('testname');
-                expect(first.id).toEqual('testid');
-                expect(second.name).toEqual('testname-h1');
-                expect(second.id).toEqual('testid-h1');
-            });
-            it('does not alter the original slot', function () {
-                Help.createDiv(conf, 'testcontent');
-                slots.add(conf);
-                Help.createDiv(conf);
-                Util.scrubConf(conf);
-                var original = $('#testid').text();
-                expect(original).toEqual('testcontent');
-            });
-            it('increments id per duplicate', function () {
-                var i,
-                    out = [],
-                    confs = [];
-
-                slots.clear();
-                for (i = 0; i < 4; i += 1) {
-                    confs[i] = Conf({
-                        name: 'testname',
-                        id: 'testid',
-                        group: 'testgrp'
-                    });
-                    Help.createDiv(confs[i]);
-                    out[i] = Util.scrubConf(confs[i]);
-                    slots.add(out[i]);
-                    $('#' + out[i].id).text('testcontent');
-                }
-
-                expect(out[0].name).toEqual('testname');
-                expect(out[1].name).toEqual('testname-h1');
-                expect(out[2].name).toEqual('testname-h2');
-                expect(out[3].name).toEqual('testname-h3');
-            });
+            expect(out[0].name).toEqual('testname');
+            expect(out[0].id).toEqual('h-ad-1');
+            expect(out[1].name).toEqual('testname-h2');
+            expect(out[1].id).toEqual('h-ad-2');
+            expect(out[2].name).toEqual('testname-h3');
+            expect(out[2].id).toEqual('h-ad-3');
+            expect(out[3].name).toEqual('testname-h4');
+            expect(out[3].id).toEqual('h-ad-4');
         });
     });
 });

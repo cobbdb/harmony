@@ -18,7 +18,6 @@ var AdSlot = require('../adslot.js'),
  * @param {Object} [opts.targeting] Slot-specific targeting.
  * @param {Array} [opts.mapping] Size mapping.
  * @param {Boolean} [opts.companion] True if companion ad.
- * @param {Boolean} [opts.drone] True when duplicates are anticipated.
  * @param {String} [opts.group] Slot group name.
  * @param {Boolean} [opts.interstitial] True if out-of-page ad.
  * @param {Boolean} [opts.enabled] False if ineligible to make ad calls.
