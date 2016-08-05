@@ -1,6 +1,6 @@
 {
   "name": "harmonyjs",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "Simplify your DFP business logic.",
   "main": "src/harmony.js",
   "scripts": {
