@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>harmony.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\harmony.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#harmony">Harmony</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#simplify-your-dfp-business-logic">Simplify your DFP business logic.</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony-1">harmony</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-breakpointupdate-callback">harmony.on(&#39;breakpoint/update&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-slotrenderended-callback">harmony.on(&#39;slotRenderEnded&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.version">harmony.version</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.load-config">harmony.load(config)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.addbreakpoints-set">harmony.addBreakpoints(set)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.getbreakpoints">harmony.getBreakpoints()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.breakpoint">harmony.breakpoint()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.log">harmony.log</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.log.enable">harmony.log.enable()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name">harmony.slot(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.hasslot-name">harmony.hasSlot(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.group-name">harmony.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.defineslot-config">harmony.defineSlot(config)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.enable">harmony.enable</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.enable.slot-name">harmony.enable.slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.enable.group-name">harmony.enable.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.disable">harmony.disable</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.disable.slot-name">harmony.disable.slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.disable.group-name">harmony.disable.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.refresh">harmony.refresh</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.refresh.slot-name">harmony.refresh.slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.refresh.group-name">harmony.refresh.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.show">harmony.show</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.show.slot-name">harmony.show.slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.show.group-name">harmony.show.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.hide">harmony.hide</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.hide.slot-name">harmony.hide.slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.hide.group-name">harmony.hide.group(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-name-callback">harmony.on(name, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.one-name-callback">harmony.one(name, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.off-name">harmony.off(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.trigger-name">harmony.trigger(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony">
+  <h1>
+    <a href="#harmony" name="harmony" class="pilcrow"></a>
+Harmony
+  </h1>
+</div>
+<div class="pilwrap" id="simplify-your-dfp-business-logic">
+  <h3>
+    <a href="#simplify-your-dfp-business-logic" name="simplify-your-dfp-business-logic" class="pilcrow"></a>
+<strong><em>Simplify your DFP business logic.</em></strong>
+  </h3>
+</div>
+<p>View this <a href="https://github.com/cobbdb/harmony">project on GitHub</a>.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log.js'</span>),
+    slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./slot-set.js'</span>),
+    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./group-set.js'</span>),
+    BaseClass = <span class="hljs-built_in">require</span>(<span class="hljs-string">'baseclassjs'</span>),
+    Eventable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>),
+    watcher = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./breakpoint-watcher.js'</span>),
+    googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./googletag.js'</span>);
+
+log(<span class="hljs-string">'init'</span>, <span class="hljs-string">'Harmony defined.'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony-1">
+  <h2>
+    <a href="#harmony-1" name="harmony-1" class="pilcrow"></a>
+harmony
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">BaseClass</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="http://cobbdb.github.io/baseclass">BaseClass</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = BaseClass({
+    _create: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-breakpointupdate-callback">
+  <h2>
+    <a href="#harmony.on-breakpointupdate-callback" name="harmony.on-breakpointupdate-callback" class="pilcrow"></a>
+harmony.on('breakpoint/update', callback)
+  </h2>
+</div>
+<pre><code class="javascript">harmony.on(<span class="hljs-string">'breakpoint/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{});
+harmony.one(<span class="hljs-string">'breakpoint/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{});
+harmony.off(<span class="hljs-string">'breakpoint/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{});
+</code></pre>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">Function</span>
+<span>Called on new breakpoint.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;event-handler.js&#34;&gt;event-handler.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        watcher.on(<span class="hljs-string">'update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{
+            that.trigger(<span class="hljs-string">'breakpoint/update'</span>, bp);
+        });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-slotrenderended-callback">
+  <h2>
+    <a href="#harmony.on-slotrenderended-callback" name="harmony.on-slotrenderended-callback" class="pilcrow"></a>
+harmony.on('slotRenderEnded', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">Function</span>
+<span>Called each time any ad call completes.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;event-handler.js&#34;&gt;event-handler.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        <span class="hljs-keyword">var</span> that = <span class="hljs-keyword">this</span>;
+        googletag.cmd.push(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            googletag.pubads().addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+                that.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+            });
+        });
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.version">
+  <h2>
+    <a href="#harmony.version" name="harmony.version" class="pilcrow"></a>
+harmony.version
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    version: <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).version,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.load-config">
+  <h2>
+    <a href="#harmony.load-config" name="harmony.load-config" class="pilcrow"></a>
+harmony.load(config)
+  </h2>
+</div>
+<p>Load a block of configuration.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/load.js&#34;&gt;actions/load.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    load: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/load.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.addbreakpoints-set">
+  <h2>
+    <a href="#harmony.addbreakpoints-set" name="harmony.addbreakpoints-set" class="pilcrow"></a>
+harmony.addBreakpoints(set)
+  </h2>
+</div>
+<p>Add breakpoint values in pixels.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[set]</span>
+<span class="dox_type">Number</span>
+<span class="dox_type">Array.&lt;Number&gt;</span>
+<span>Breakpoints in pixels.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;breakpoint-watcher.js&#34;&gt;breakpoint-watcher.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    addBreakpoints: watcher.add,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.getbreakpoints">
+  <h2>
+    <a href="#harmony.getbreakpoints" name="harmony.getbreakpoints" class="pilcrow"></a>
+harmony.getBreakpoints()
+  </h2>
+</div>
+<p>Fetch the list of breakpoints already loaded into the system.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array.&lt;Number&gt;</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;breakpoint-watcher.js&#34;&gt;breakpoint-watcher.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    getBreakpoints: watcher.getAll,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.breakpoint">
+  <h2>
+    <a href="#harmony.breakpoint" name="harmony.breakpoint" class="pilcrow"></a>
+harmony.breakpoint()
+  </h2>
+</div>
+<p>Fetch the current breakpoint.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Number</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;breakpoint-watcher.js&#34;&gt;breakpoint-watcher.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    breakpoint: watcher.current,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.log">
+  <h2>
+    <a href="#harmony.log" name="harmony.log" class="pilcrow"></a>
+harmony.log
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.log.enable">
+  <h3>
+    <a href="#harmony.log.enable" name="harmony.log.enable" class="pilcrow"></a>
+harmony.log.enable()
+  </h3>
+</div>
+<p>Instance of Lumberjack populated with Harmony's data.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;log.js&#34;&gt;log.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    log: log,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name">
+  <h2>
+    <a href="#harmony.slot-name" name="harmony.slot-name" class="pilcrow"></a>
+harmony.slot(name)
+  </h2>
+</div>
+<p>Safely fetch an existing ad slot or a mock slot if slot was not found.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Name of the ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>The ad slot or a mock ad slot.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;slot-set.js&#34;&gt;slot-set.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot: slots.get,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.hasslot-name">
+  <h2>
+    <a href="#harmony.hasslot-name" name="harmony.hasslot-name" class="pilcrow"></a>
+harmony.hasSlot(name)
+  </h2>
+</div>
+<p>Check if a slot has already been loaded into Harmony.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Name of the ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Boolean</span>
+<span>True if the slot has already been loaded.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;slot-set.js&#34;&gt;slot-set.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    hasSlot: slots.has,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.group-name">
+  <h2>
+    <a href="#harmony.group-name" name="harmony.group-name" class="pilcrow"></a>
+harmony.group(name)
+  </h2>
+</div>
+<p>Fetch a slot group by name.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Name of the slot group.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array</span>
+<span>Collection of 0 or more ad slots.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;group-set.js&#34;&gt;group-set.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    group: groups.get,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.defineslot-config">
+  <h2>
+    <a href="#harmony.defineslot-config" name="harmony.defineslot-config" class="pilcrow"></a>
+harmony.defineSlot(config)
+  </h2>
+</div>
+<p>Create a new adSlot in the page.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/define-slot.js&#34;&gt;actions/define-slot.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    defineSlot: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/define-slot.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.enable">
+  <h2>
+    <a href="#harmony.enable" name="harmony.enable" class="pilcrow"></a>
+harmony.enable
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.enable.slot-name">
+  <h3>
+    <a href="#harmony.enable.slot-name" name="harmony.enable.slot-name" class="pilcrow"></a>
+harmony.enable.slot(name)
+  </h3>
+</div>
+<div class="pilwrap" id="harmony.enable.group-name">
+  <h3>
+    <a href="#harmony.enable.group-name" name="harmony.enable.group-name" class="pilcrow"></a>
+harmony.enable.group(name)
+  </h3>
+</div>
+<p>Marks slots as eligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/enable.js&#34;&gt;actions/enable.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    enable: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/enable.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.disable">
+  <h2>
+    <a href="#harmony.disable" name="harmony.disable" class="pilcrow"></a>
+harmony.disable
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.disable.slot-name">
+  <h3>
+    <a href="#harmony.disable.slot-name" name="harmony.disable.slot-name" class="pilcrow"></a>
+harmony.disable.slot(name)
+  </h3>
+</div>
+<div class="pilwrap" id="harmony.disable.group-name">
+  <h3>
+    <a href="#harmony.disable.group-name" name="harmony.disable.group-name" class="pilcrow"></a>
+harmony.disable.group(name)
+  </h3>
+</div>
+<p>Marks slots as ineligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/disable.js&#34;&gt;actions/disable.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    disable: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/disable.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.refresh">
+  <h2>
+    <a href="#harmony.refresh" name="harmony.refresh" class="pilcrow"></a>
+harmony.refresh
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.refresh.slot-name">
+  <h3>
+    <a href="#harmony.refresh.slot-name" name="harmony.refresh.slot-name" class="pilcrow"></a>
+harmony.refresh.slot(name)
+  </h3>
+</div>
+<div class="pilwrap" id="harmony.refresh.group-name">
+  <h3>
+    <a href="#harmony.refresh.group-name" name="harmony.refresh.group-name" class="pilcrow"></a>
+harmony.refresh.group(name)
+  </h3>
+</div>
+<p>Refresh a single slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/refresh.js&#34;&gt;actions/refresh.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    refresh: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/refresh.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.show">
+  <h2>
+    <a href="#harmony.show" name="harmony.show" class="pilcrow"></a>
+harmony.show
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.show.slot-name">
+  <h3>
+    <a href="#harmony.show.slot-name" name="harmony.show.slot-name" class="pilcrow"></a>
+harmony.show.slot(name)
+  </h3>
+</div>
+<div class="pilwrap" id="harmony.show.group-name">
+  <h3>
+    <a href="#harmony.show.group-name" name="harmony.show.group-name" class="pilcrow"></a>
+harmony.show.group(name)
+  </h3>
+</div>
+<p>Show a slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/show.js&#34;&gt;actions/show.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    show: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/show.js'</span>),
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.hide">
+  <h2>
+    <a href="#harmony.hide" name="harmony.hide" class="pilcrow"></a>
+harmony.hide
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.hide.slot-name">
+  <h3>
+    <a href="#harmony.hide.slot-name" name="harmony.hide.slot-name" class="pilcrow"></a>
+harmony.hide.slot(name)
+  </h3>
+</div>
+<div class="pilwrap" id="harmony.hide.group-name">
+  <h3>
+    <a href="#harmony.hide.group-name" name="harmony.hide.group-name" class="pilcrow"></a>
+harmony.hide.group(name)
+  </h3>
+</div>
+<p>Hide a slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;actions/hide.js&#34;&gt;actions/hide.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    hide: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions/hide.js'</span>)
+}).extend(
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-name-callback">
+  <h2>
+    <a href="#harmony.on-name-callback" name="harmony.on-name-callback" class="pilcrow"></a>
+harmony.on(name, callback)
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.one-name-callback">
+  <h2>
+    <a href="#harmony.one-name-callback" name="harmony.one-name-callback" class="pilcrow"></a>
+harmony.one(name, callback)
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.off-name">
+  <h2>
+    <a href="#harmony.off-name" name="harmony.off-name" class="pilcrow"></a>
+harmony.off(name)
+  </h2>
+</div>
+<div class="pilwrap" id="harmony.trigger-name">
+  <h2>
+    <a href="#harmony.trigger-name" name="harmony.trigger-name" class="pilcrow"></a>
+harmony.trigger(name)
+  </h2>
+</div>
+<p>Exposes event handling at the system level.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;event-handler.js&#34;&gt;event-handler.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    Eventable()
+);
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>disable.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\disable.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#disable-action">Disable Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.disable.slot-name">harmony.disable.slot(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.disable.group-name">harmony.disable.group(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="disable-action">
+  <h1>
+    <a href="#disable-action" name="disable-action" class="pilcrow"></a>
+Disable Action
+  </h1>
+</div>
+<p>Disable a single slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../slot-set.js'</span>),
+    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../group-set.js'</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.disable.slot-name">
+  <h2>
+    <a href="#harmony.disable.slot-name" name="harmony.disable.slot-name" class="pilcrow"></a>
+harmony.disable.slot(name)
+  </h2>
+</div>
+<p>Marks this slot as ineligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        slots.get(name).enabled = <span class="hljs-literal">false</span>;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.disable.group-name">
+  <h2>
+    <a href="#harmony.disable.group-name" name="harmony.disable.group-name" class="pilcrow"></a>
+harmony.disable.group(name)
+  </h2>
+</div>
+<p>Marks each slot in this group as ineligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> i,
+            group = groups.get(name),
+            len = group.length;
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+            group[i].enabled = <span class="hljs-literal">false</span>;
+        }
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

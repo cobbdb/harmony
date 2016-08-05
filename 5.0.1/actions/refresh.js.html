@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>refresh.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\refresh.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#refresh-action">Refresh Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.refresh">harmony.refresh()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.refresh.slot-name">harmony.refresh.slot(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.refresh.group-name">harmony.refresh.group(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="refresh-action">
+  <h1>
+    <a href="#refresh-action" name="refresh-action" class="pilcrow"></a>
+Refresh Action
+  </h1>
+</div>
+<p>Refresh a single slot or group of slots. Will not
+make ad calls for disabled slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../slot-set.js'</span>),
+    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../group-set.js'</span>),
+    enableServices = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/enable-services.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.refresh">
+  <h2>
+    <a href="#harmony.refresh" name="harmony.refresh" class="pilcrow"></a>
+harmony.refresh()
+  </h2>
+</div>
+<p>Call <code>pubads().refresh()</code> on all enabled slots in the page.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> i, len, slot, name,
+        refreshSet = [],
+        displaySet = [],
+        map = slots.getAll();
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> map) {
+        slot = map[name];
+        <span class="hljs-keyword">if</span> (slot.enabled) {
+            <span class="hljs-keyword">if</span> (slot.active) {
+                refreshSet.push(slot);
+            } <span class="hljs-keyword">else</span> {
+                displaySet.push(slot);
+            }
+        }
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Refresh the already active slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    enableServices();
+    global.googletag.pubads().refresh(refreshSet);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Display the dormant slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    len = displaySet.length;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+        slot = displaySet[i];
+        slot.active = <span class="hljs-literal">true</span>;
+        global.googletag.display(slot.divId);
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.refresh.slot-name">
+  <h2>
+    <a href="#harmony.refresh.slot-name" name="harmony.refresh.slot-name" class="pilcrow"></a>
+harmony.refresh.slot(name)
+  </h2>
+</div>
+<p>Call <code>pubads().refresh()</code> on a slot if enabled.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports.slot = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+    <span class="hljs-keyword">var</span> slot = slots.get(name);
+    enableServices();
+    <span class="hljs-keyword">if</span> (!slot.mock &amp;&amp; slot.enabled) {
+        <span class="hljs-keyword">if</span> (slot.active) {
+            global.googletag.pubads().refresh([slot]);
+        } <span class="hljs-keyword">else</span> {
+            slot.active = <span class="hljs-literal">true</span>;
+            global.googletag.display(slot.divId);
+        }
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.refresh.group-name">
+  <h2>
+    <a href="#harmony.refresh.group-name" name="harmony.refresh.group-name" class="pilcrow"></a>
+harmony.refresh.group(name)
+  </h2>
+</div>
+<p>Call <code>pubads().refresh()</code> on a group of slots if enabled.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports.group = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+    <span class="hljs-keyword">var</span> i, slot,
+        group = groups.get(name),
+        len = group.length,
+        refreshSet = [],
+        displaySet = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+        slot = group[i];
+        <span class="hljs-keyword">if</span> (slot.enabled) {
+            <span class="hljs-keyword">if</span> (slot.active) {
+                refreshSet.push(slot);
+            } <span class="hljs-keyword">else</span> {
+                displaySet.push(slot);
+            }
+        }
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<p>Refresh the already active slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    enableServices();
+    global.googletag.pubads().refresh(refreshSet);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<p>Display the dormant slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    len = displaySet.length;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+        slot = displaySet[i];
+        slot.active = <span class="hljs-literal">true</span>;
+        global.googletag.display(slot.divId);
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

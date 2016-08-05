@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>adslot.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\adslot.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#ad-slot">Ad Slot</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.ononeofftrigger">harmony.slot(name).on/one/off/trigger</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.divid">harmony.slot(name).divId</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.name">harmony.slot(name).name</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.group">harmony.slot(name).group</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.sizes">harmony.slot(name).sizes</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.adunit">harmony.slot(name).adunit</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.enabled">harmony.slot(name).enabled</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.slot-name.active">harmony.slot(name).active</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>adslot.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log.js'</span>),
+    set = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./slot-set.js'</span>),
+    BaseClass = <span class="hljs-built_in">require</span>(<span class="hljs-string">'baseclassjs'</span>),
+    Eventable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="ad-slot">
+  <h1>
+    <a href="#ad-slot" name="ad-slot" class="pilcrow"></a>
+Ad Slot
+  </h1>
+</div>
+<p>Constructs a new adSlot in the page.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">BaseClass</span>
+</div>
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.name</span>
+<span class="dox_type">String</span>
+<span>Slot name, ex) RP01
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.id</span>
+<span class="dox_type">String</span>
+<span>Slot's div id, ex) ad-div-RP01
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.sizes</span>
+<span class="dox_type">Array</span>
+<span>One or many 2D arrays, ex) [300, 250]
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.adunit</span>
+<span class="dox_type">String</span>
+<span>Full ad unit code.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.targeting]</span>
+<span class="dox_type">Object</span>
+<span>Slot-specific targeting.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.mapping]</span>
+<span class="dox_type">Array</span>
+<span>Size mapping.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.companion]</span>
+<span class="dox_type">Boolean</span>
+<span>True if companion ad.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.group]</span>
+<span class="dox_type">String</span>
+<span>Slot group name.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.interstitial]</span>
+<span class="dox_type">Boolean</span>
+<span>True if out-of-page ad.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.enabled]</span>
+<span class="dox_type">Boolean</span>
+<span>False if ineligible to make ad calls.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.on]</span>
+<span class="dox_type">Object</span>
+<span>Dictionary of callbacks.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.one]</span>
+<span class="dox_type">Object</span>
+<span>Dictionary of single-run callbacks.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">AdSlot</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">pubads, opts</span>) </span>{
+    <span class="hljs-keyword">var</span> slot, name, cbCache,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Capture timestamp for performance metrics.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        tsCreate = global.Date.now(),
+        mapping = opts.mapping || [],
+        companion = opts.companion || <span class="hljs-literal">false</span>,
+        interstitial = opts.interstitial || <span class="hljs-literal">false</span>,
+        targeting = opts.targeting || {};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Smoke test that the slot's element id is valid in the DOM.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (!global.document.getElementById(opts.id)) {
+        <span class="hljs-keyword">throw</span> global.Error(<span class="hljs-string">'Ad slot container was not found in the DOM.'</span>);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Define which type of slot this is.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (opts.interstitial) {
+        slot = global.googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+    } <span class="hljs-keyword">else</span> {
+        slot = global.googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>Deep merge all event callbacks.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    cbCache = set.cached.callbacks(opts.name);
+    opts.on = opts.on || [];
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> opts.on) {
+        cbCache.events[name] = cbCache.events[name] || [];
+        cbCache.events[name] = [].concat(
+            cbCache.events[name],
+            opts.on[name]
+        );
+    }
+    opts.one = opts.one || [];
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> opts.one) {
+        cbCache.singles[name] = cbCache.singles[name] || [];
+        cbCache.singles[name] = [].concat(
+            cbCache.singles[name],
+            opts.one[name]
+        );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.ononeofftrigger">
+  <h2>
+    <a href="#harmony.slot-name.ononeofftrigger" name="harmony.slot-name.ononeofftrigger" class="pilcrow"></a>
+harmony.slot(name).on/one/off/trigger
+  </h2>
+</div>
+<p>Exposes event handling at the slot level.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;event-handler.js&#34;&gt;event-handler.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    BaseClass(slot).extend(
+        Eventable(cbCache)
+    );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.divid">
+  <h2>
+    <a href="#harmony.slot-name.divid" name="harmony.slot-name.divid" class="pilcrow"></a>
+harmony.slot(name).divId
+  </h2>
+</div>
+<p>Slot's containing div id.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.divId = opts.id;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.name">
+  <h2>
+    <a href="#harmony.slot-name.name" name="harmony.slot-name.name" class="pilcrow"></a>
+harmony.slot(name).name
+  </h2>
+</div>
+<p>Slot's name.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.name = opts.name;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.group">
+  <h2>
+    <a href="#harmony.slot-name.group" name="harmony.slot-name.group" class="pilcrow"></a>
+harmony.slot(name).group
+  </h2>
+</div>
+<p>This slot's group.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.group = opts.group;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.sizes">
+  <h2>
+    <a href="#harmony.slot-name.sizes" name="harmony.slot-name.sizes" class="pilcrow"></a>
+harmony.slot(name).sizes
+  </h2>
+</div>
+<p>This slot's possible sizes. Note, this is
+not the current size of the ad slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Array</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.sizes = opts.sizes;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.adunit">
+  <h2>
+    <a href="#harmony.slot-name.adunit" name="harmony.slot-name.adunit" class="pilcrow"></a>
+harmony.slot(name).adunit
+  </h2>
+</div>
+<p>Ad unit code of this ad slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.adunit = opts.adunit;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.enabled">
+  <h2>
+    <a href="#harmony.slot-name.enabled" name="harmony.slot-name.enabled" class="pilcrow"></a>
+harmony.slot(name).enabled
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.enabled = opts.enabled === <span class="hljs-literal">false</span> ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.slot-name.active">
+  <h2>
+    <a href="#harmony.slot-name.active" name="harmony.slot-name.active" class="pilcrow"></a>
+harmony.slot(name).active
+  </h2>
+</div>
+<p>True if this slot has ever had an ad call.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.active = <span class="hljs-literal">false</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<p>Set slot-specific targeting. No need to introspect
+because unused targeting is ignored by dfp.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
+        slot.setTargeting(name, targeting[name]);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<p>Load in any targeting set before this slow was defined.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    targeting = set.cached.targeting(opts.name);
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
+        slot.setTargeting(name, targeting[name]);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
+</div>
+<p>Assign size mapping for responsive ad slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.defineSizeMapping(mapping);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
+</div>
+<p>Load any provided callback into queue.
+<code>opts.callback</code> is legacy.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> opts.callback === <span class="hljs-string">'function'</span>) {
+        slot.on(<span class="hljs-string">'slotRenderEnded'</span>, opts.callback);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
+</div>
+<p>Attach a listener for the slotRenderEnded event.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">var</span> now;
+        <span class="hljs-keyword">if</span> (event.slot === slot) {
+            now = global.Date.now();
+            log(<span class="hljs-string">'metric'</span>, {
+                event: <span class="hljs-string">'DFP Call Complete'</span>,
+                slot: opts.name,
+                timeSinceCalled: now - slot.tsCalled, <span class="hljs-comment">// Can be NaN.</span>
+                timeSinceCreated: now - tsCreate
+            });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20"></a>
+</div>
+<p>Trigger any attached behaviors.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            slot.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+        }
+    });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21"></a>
+</div>
+<p>Assign companion ad service if requested.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (companion) {
+        slot.addService(
+            global.googletag.companionAds()
+        );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22"></a>
+</div>
+<p>Add the publisher service and return the new slot.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot.addService(pubads);
+    <span class="hljs-keyword">return</span> slot;
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
