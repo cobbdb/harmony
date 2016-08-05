@@ -161,8 +161,12 @@ harmony.off('myevent');
 
 <a name="logging"></a>
 #### Enable logging.
-Logging is off by default for performance, but can be turned on easily.
+Logging is off by default for performance, but can be easily enabled.
 ```javascript
+// Enable logging before page refresh.
+localStorage.lumberjack = 'on';
+
+// Enable logging without page refresh.
 harmony.log.enable();
 ```
 
@@ -203,13 +207,12 @@ Here is an example of a page setup using Harmony and DFP.
                 some: 'custom criteria'
             }
         });
-        googletag.enableServices();
         harmony.show.slot('my-ad');
     </script>
 </body>
 ```
 
 ---------
-* See: http://cobbdb.github.io/harmony/
+* See: http://cobbdb.github.io/harmony
 * See: http://github.com/cobbdb/harmony
 * License: MIT
