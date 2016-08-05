@@ -5,7 +5,8 @@
 
 var slots = require('../slot-set.js'),
     groups = require('../group-set.js'),
-    log = require('../log.js');
+    log = require('../log.js'),
+    enableServices = require('../util/enable-services.js');
 
 /**
  * ## harmony.show
@@ -28,6 +29,7 @@ module.exports = {
             group: name
         });
         try {
+            enableServices();
             for (i = 0; i < len; i += 1) {
                 slot = set[i];
                 slot.tsCalled = global.Date.now();
@@ -70,6 +72,7 @@ module.exports = {
             name: name
         });
         try {
+            enableServices();
             slot = slots.get(name);
             slot.tsCalled = global.Date.now();
 

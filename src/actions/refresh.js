@@ -5,7 +5,8 @@
  */
 
 var slots = require('../slot-set.js'),
-    groups = require('../group-set.js');
+    groups = require('../group-set.js'),
+    enableServices = require('../util/enable-services.js');
 
 /**
  * ## harmony.refresh()
@@ -28,6 +29,7 @@ module.exports = function () {
     }
 
     // Refresh the already active slots.
+    enableServices();
     global.googletag.pubads().refresh(refreshSet);
 
     // Display the dormant slots.
@@ -46,6 +48,7 @@ module.exports = function () {
  */
 module.exports.slot = function (name) {
     var slot = slots.get(name);
+    enableServices();
     if (!slot.mock && slot.enabled) {
         if (slot.active) {
             global.googletag.pubads().refresh([slot]);
@@ -79,6 +82,7 @@ module.exports.group = function (name) {
     }
 
     // Refresh the already active slots.
+    enableServices();
     global.googletag.pubads().refresh(refreshSet);
 
     // Display the dormant slots.
