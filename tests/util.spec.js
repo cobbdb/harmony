@@ -1,17 +1,10 @@
-var Util = require('../src/util.js'),
+var scrubConf = require('../src/util/scrub-conf.js'),
     slots = require('../src/slot-set.js'),
     Conf = require('./helpers/slot-options.helper.js'),
     Help = require('./helpers/construction.helper.js'),
     $ = require('jquery');
 
-describe('Util', function () {
-    it('provides a noop', function () {
-        expect(typeof Util.noop).toEqual('function');
-        expect(function () {
-            Util.noop();
-        }).not.toThrow();
-    });
-
+describe('util/scrub-conf', function () {
     describe('scrubConf', function () {
         it('throws when missing DOM element', function () {
             expect(function () {
@@ -20,7 +13,7 @@ describe('Util', function () {
                     id: 'testid',
                     group: 'testgrp'
                 });
-                Util.scrubConf(conf);
+                scrubConf(conf);
             }).toThrow();
         });
         it('alters only id when no duplicate', function () {
@@ -30,7 +23,7 @@ describe('Util', function () {
                 group: 'testgrp'
             });
             Help.createDiv(conf);
-            var out = Util.scrubConf(conf);
+            var out = scrubConf(conf);
             expect(out.name).toEqual('testname');
             expect(out.id).toEqual('h-ad-1');
         });
@@ -44,7 +37,7 @@ describe('Util', function () {
                     group: 'testgrp'
                 });
                 Help.createDiv(conf);
-                out[i] = Util.scrubConf(conf);
+                out[i] = scrubConf(conf);
                 slots.add(out[i]);
             }
 

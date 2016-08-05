@@ -1,11 +1,11 @@
 var GroupSet = require('../../src/group-set.js'),
     SlotSet = require('../../src/slot-set.js'),
     $ = require('jquery'),
-    Util = require('../../src/util.js');
+    ids = require('../../src/util/id-factory.js');
 
 afterEach(function () {
     $('.testdiv').remove();
     GroupSet.clear();
     SlotSet.clear();
-    Util.slotCount = 0;
+    ids.curr = 0;
 });

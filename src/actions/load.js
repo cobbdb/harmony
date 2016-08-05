@@ -3,7 +3,7 @@
  */
 
 var AdSlot = require('../adslot.js'),
-    Util = require('../util.js'),
+    scrubConf = require('../util/scrub-conf.js'),
     watcher = require('../breakpoint-watcher.js'),
     slots = require('../slot-set.js'),
     groups = require('../group-set.js'),
@@ -32,7 +32,7 @@ module.exports = function (opts) {
         try {
             slot = AdSlot(
                 pubads,
-                Util.scrubConf(conf)
+                scrubConf(conf)
             );
             slots.add(slot);
             groups.add(slot.group, slot);

@@ -3,7 +3,7 @@
  */
 
 var AdSlot = require('../adslot.js'),
-    Util = require('../util.js'),
+    scrubConf = require('../util/scrub-conf.js'),
     slots = require('../slot-set.js'),
     groups = require('../group-set.js'),
     log = require('../log.js');
@@ -31,7 +31,7 @@ module.exports = function (opts) {
     try {
         slot = AdSlot(
             global.googletag.pubads(),
-            Util.scrubConf(opts)
+            scrubConf(opts)
         );
         slots.add(slot);
         groups.add(opts.group, slot);

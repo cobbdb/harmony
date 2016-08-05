@@ -2,8 +2,7 @@
  * # Slot-Group Set
  */
 
-var Util = require('./util.js'),
-    groups = {};
+var groups = {};
 
 module.exports = {
     /**
