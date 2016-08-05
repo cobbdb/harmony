@@ -31,7 +31,7 @@ module.exports = BaseClass({
     },
     /**
      * ## watcher.add(set)
-     * @param {Number|Array of Numbers} [set]
+     * @param {Number|Number[]} [set]
      */
     add: function (set) {
         breakpoints = breakpoints.concat(set || []);
@@ -43,7 +43,7 @@ module.exports = BaseClass({
     },
     /**
      * ## watcher.getAll()
-     * @return {Array of Numbers}
+     * @return {Number[]}
      */
     getAll: function () {
         return breakpoints;
@@ -56,7 +56,7 @@ module.exports = BaseClass({
         breakpoints = [];
     },
     /**
-     * ## watcher.run([throttle])
+     * ## watcher.run(throttle)
      * @param {Number} [throttle]
      */
     run: function (throttle) {

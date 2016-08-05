@@ -61,14 +61,14 @@ module.exports = BaseClass({
     /**
      * ## harmony.addBreakpoints(set)
      * Add breakpoint values in pixels.
-     * @param {Number|Array of Numbers} [set] Breakpoints in pixels.
+     * @param {Number|Number[]} [set] Breakpoints in pixels.
      * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
      */
     addBreakpoints: watcher.add,
     /**
      * ## harmony.getBreakpoints()
      * Fetch the list of breakpoints already loaded into the system.
-     * @return {ArrayOfNumber}
+     * @return {Number[]}
      * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
      */
     getBreakpoints: watcher.getAll,

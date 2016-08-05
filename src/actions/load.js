@@ -13,8 +13,8 @@ var AdSlot = require('../adslot.js'),
  * ## harmony.load(opts)
  * Load a block of configuration.
  * @param {Object} [opts.targeting] System-level targeting.
- * @param {Array of Objects} [opts.slots] Set of ad slot configurations.
- * @param {Number|Array of Numbers} [opts.breakpoints] Set of breakpoints.
+ * @param {Object[]} [opts.slots] Set of ad slot configurations.
+ * @param {Number|Number[]} [opts.breakpoints] Set of breakpoints.
  * @see <a href="../adslot.js">adslot.js</a>
  */
 module.exports = function (opts) {
