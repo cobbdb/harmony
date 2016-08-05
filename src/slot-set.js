@@ -2,7 +2,7 @@
  * # Slot-Set
  */
 
-var Util = require('./util.js'),
+var stub = function () {},
     slots = {},
     cache = {
         events: {},
@@ -66,8 +66,8 @@ module.exports = {
                 cache.targ[name] = cache.targ[name] || {};
                 cache.targ[name][key] = value;
             },
-            trigger: Util.noop,
-            off: Util.noop,
+            trigger: stub,
+            off: stub,
             mock: true
         };
     },

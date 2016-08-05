@@ -21,6 +21,7 @@ log('init', 'Harmony defined.');
  */
 module.exports = BaseClass({
     _create: function () {
+        var that = this;
         /**
          * ## harmony.on('breakpoint/update', callback)
          * ```javascript
@@ -40,7 +41,6 @@ module.exports = BaseClass({
          * @param {Function} callback Called each time any ad call completes.
          * @see <a href="event-handler.js">event-handler.js</a>
          */
-        var that = this;
         googletag.cmd.push(function () {
             googletag.pubads().addEventListener('slotRenderEnded', function (event) {
                 that.trigger('slotRenderEnded', event);
