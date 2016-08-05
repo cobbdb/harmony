@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>load.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\load.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#load-action">Load Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.load-opts">harmony.load(opts)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="load-action">
+  <h1>
+    <a href="#load-action" name="load-action" class="pilcrow"></a>
+Load Action
+  </h1>
+</div>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> AdSlot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../adslot.js'</span>),
+    Util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util.js'</span>),
+    watcher = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../breakpoint-watcher.js'</span>),
+    slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../slot-set.js'</span>),
+    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../group-set.js'</span>),
+    log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../log.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.load-opts">
+  <h2>
+    <a href="#harmony.load-opts" name="harmony.load-opts" class="pilcrow"></a>
+harmony.load(opts)
+  </h2>
+</div>
+<p>Load a block of configuration.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.targeting]</span>
+<span class="dox_type">Object</span>
+<span>System-level targeting.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.slots]</span>
+<span class="dox_type">Array.&lt;Object&gt;</span>
+<span>Set of ad slot configurations.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.breakpoints]</span>
+<span class="dox_type">Number</span>
+<span class="dox_type">Array.&lt;Number&gt;</span>
+<span>Set of breakpoints.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">&lt;a href=&#34;../adslot.js&#34;&gt;adslot.js&lt;/a&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">opts</span>) </span>{
+    <span class="hljs-keyword">var</span> pubads = global.googletag.pubads();
+
+    opts = opts || {};
+    opts.slots = opts.slots || [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Generate the ad slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">var</span> i, slot, conf,
+        len = opts.slots.length;
+    log(<span class="hljs-string">'load'</span>, <span class="hljs-string">'Generating ad slots.'</span>);
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+        conf = opts.slots[i];
+        <span class="hljs-keyword">try</span> {
+            slot = AdSlot(
+                pubads,
+                Util.scrubConf(conf)
+            );
+            slots.add(slot);
+            groups.add(slot.group, slot);
+        } <span class="hljs-keyword">catch</span> (err) {
+            log(<span class="hljs-string">'error'</span>, {
+                msg: <span class="hljs-string">'Slot failed to load during call to load().'</span>,
+                conf: conf,
+                err: err
+            });
+        }
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Assign the system targeting.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">var</span> key, value,
+        targeting = opts.targeting || {};
+    log(<span class="hljs-string">'load'</span>, <span class="hljs-string">'Applying pubads targeting.'</span>);
+    <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> targeting) {
+        value = targeting[key];
+        log(<span class="hljs-string">'load'</span>, <span class="hljs-string">'- '</span> + key + <span class="hljs-string">' = '</span> + value);
+        pubads.setTargeting(key, value);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Assign the breakpoints.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    watcher.add(opts.breakpoints);
+
+    log(<span class="hljs-string">'load'</span>, <span class="hljs-string">'Harmony config loaded.'</span>);
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

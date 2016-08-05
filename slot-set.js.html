@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slot-set.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\slot-set.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#slot-set">Slot-Set</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.cached.callbacks-name">set.cached.callbacks(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.cached.targeting-name">set.cached.targeting(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.get-name">set.get(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.add-slot">set.add(slot)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.getall">set.getAll()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.has-name">set.has(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#set.clear">set.clear()</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-set">
+  <h1>
+    <a href="#slot-set" name="slot-set" class="pilcrow"></a>
+Slot-Set
+  </h1>
+</div>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> Util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./util.js'</span>),
+    slots = {},
+    cache = {
+        events: {},
+        singles: {},
+        targ: {}
+    };
+
+<span class="hljs-built_in">module</span>.exports = {
+    cached: {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.cached.callbacks-name">
+  <h2>
+    <a href="#set.cached.callbacks-name" name="set.cached.callbacks-name" class="pilcrow"></a>
+set.cached.callbacks(name)
+  </h2>
+</div>
+<p>Fetch any cached callbacks for this slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">slotname</span>
+<span class="dox_type">String</span>
+<span>Name of the ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>Dictionary of events and their callbacks as an Array.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        callbacks: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slotname</span>) </span>{
+            <span class="hljs-keyword">return</span> {
+                events: cache.events[slotname] || {},
+                singles: cache.singles[slotname] || {}
+            };
+        },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.cached.targeting-name">
+  <h2>
+    <a href="#set.cached.targeting-name" name="set.cached.targeting-name" class="pilcrow"></a>
+set.cached.targeting(name)
+  </h2>
+</div>
+<p>Fetch any cached targeting for this slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Name of the ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>Dictionary of targeting or empty object.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        targeting: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+            <span class="hljs-keyword">return</span> cache.targ[name] || {};
+        }
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.get-name">
+  <h2>
+    <a href="#set.get-name" name="set.get-name" class="pilcrow"></a>
+set.get(name)
+  </h2>
+</div>
+<p>Safely fetch an existing ad slot or a mock slot if slot was not found.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Name of the ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>The ad slot or a mock ad slot.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    get: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">return</span> slots[name] || {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Allow events to queue up before this slot
+has been defined.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            on: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">evtname, cb</span>) </span>{
+                cache.events[name] = cache.events[name] || {};
+                cache.events[name][evtname] = [].concat(
+                    cache.events[name][evtname] || [],
+                    cb
+                );
+            },
+            one: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">evtname, cb</span>) </span>{
+                cache.singles[name] = cache.singles[name] || {};
+                cache.singles[name][evtname] = [].concat(
+                    cache.singles[name][evtname] || [],
+                    cb
+                );
+            },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>Allow targeting to queue up before this
+slot has been defined.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            setTargeting: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key, value</span>) </span>{
+                cache.targ[name] = cache.targ[name] || {};
+                cache.targ[name][key] = value;
+            },
+            trigger: Util.noop,
+            off: Util.noop,
+            mock: <span class="hljs-literal">true</span>
+        };
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.add-slot">
+  <h2>
+    <a href="#set.add-slot" name="set.add-slot" class="pilcrow"></a>
+set.add(slot)
+  </h2>
+</div>
+<p>Add a new slot to the set.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">slot</span>
+<span class="dox_type">Slot</span>
+<span>Ad slot to add to the set.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array</span>
+<span>Collection of 0 or more ad slots.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    add: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+        slots[slot.name] = slot;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.getall">
+  <h2>
+    <a href="#set.getall" name="set.getall" class="pilcrow"></a>
+set.getAll()
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>Map of all slots in the system.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    getAll: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> slots;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.has-name">
+  <h2>
+    <a href="#set.has-name" name="set.has-name" class="pilcrow"></a>
+set.has(name)
+  </h2>
+</div>
+<p>Check if the set contains a slot name.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+<span>Ad slot name.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Boolean</span>
+<span>True if the set contains this name.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    has: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">return</span> name <span class="hljs-keyword">in</span> slots;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="set.clear">
+  <h2>
+    <a href="#set.clear" name="set.clear" class="pilcrow"></a>
+set.clear()
+  </h2>
+</div>
+<p>Reset the collection.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    clear: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        slots = {};
+        cache.events = {};
+        cache.singles = {};
+        cache.targ = {};
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

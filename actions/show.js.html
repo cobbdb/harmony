@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>show.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\show.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#show-action">Show Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.show">harmony.show</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.show.group-name">harmony.show.group(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#harmony.show.slot-name">harmony.show.slot(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="show-action">
+  <h1>
+    <a href="#show-action" name="show-action" class="pilcrow"></a>
+Show Action
+  </h1>
+</div>
+<p>Show a slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../slot-set.js'</span>),
+    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../group-set.js'</span>),
+    log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../log.js'</span>),
+    enableServices = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/enable-services.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.show">
+  <h2>
+    <a href="#harmony.show" name="harmony.show" class="pilcrow"></a>
+harmony.show
+  </h2>
+</div>
+<p>Showing a slot means setting style <code>display:block</code> and
+calling <code>googletag.display()</code>. Will not call
+<code>googletag.display()</code> on disabled slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.show.group-name">
+  <h3>
+    <a href="#harmony.show.group-name" name="harmony.show.group-name" class="pilcrow"></a>
+harmony.show.group(name)
+  </h3>
+</div>
+<p>Show all ads in a slot group.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> i, slot, el,
+            set = groups.get(name),
+            len = set.length;
+        log(<span class="hljs-string">'show'</span>, {
+            msg: <span class="hljs-string">'Showing ads in group'</span>,
+            group: name
+        });
+        <span class="hljs-keyword">try</span> {
+            enableServices();
+            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+                slot = set[i];
+                slot.tsCalled = global.Date.now();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Only make ad call if slot is enabled.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">                <span class="hljs-keyword">if</span> (slot.enabled) {
+                    slot.active = <span class="hljs-literal">true</span>;
+                    global.googletag.display(slot.divId);
+                }
+
+                el = <span class="hljs-built_in">document</span>.getElementById(slot.divId);
+                <span class="hljs-keyword">if</span> (el) {
+                    el.style.display = <span class="hljs-string">'block'</span>;
+                } <span class="hljs-keyword">else</span> {
+                    log(<span class="hljs-string">'error'</span>, {
+                        msg: <span class="hljs-string">'Failed to show slot for group'</span>,
+                        group: name,
+                        reason: <span class="hljs-string">'Slot was missing from the DOM'</span>,
+                        slot: slot
+                    });
+                }
+            }
+        } <span class="hljs-keyword">catch</span> (err) {
+            log(<span class="hljs-string">'error'</span>, {
+                msg: <span class="hljs-string">'Failed to show group'</span>,
+                group: name,
+                err: err
+            });
+        }
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.show.slot-name">
+  <h3>
+    <a href="#harmony.show.slot-name" name="harmony.show.slot-name" class="pilcrow"></a>
+harmony.show.slot(name)
+  </h3>
+</div>
+<p>Show a single ad slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">String</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> slot, el;
+        log(<span class="hljs-string">'show'</span>, {
+            msg: <span class="hljs-string">'Showing slot'</span>,
+            name: name
+        });
+        <span class="hljs-keyword">try</span> {
+            enableServices();
+            slot = slots.get(name);
+            slot.tsCalled = global.Date.now();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>Only make ad call if slot is enabled.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            <span class="hljs-keyword">if</span> (slot.enabled) {
+                slot.active = <span class="hljs-literal">true</span>;
+                global.googletag.display(slot.divId);
+            }
+
+            el = <span class="hljs-built_in">document</span>.getElementById(slot.divId);
+            el.style.display = <span class="hljs-string">'block'</span>;
+        } <span class="hljs-keyword">catch</span> (err) {
+            log(<span class="hljs-string">'error'</span>, {
+                msg: <span class="hljs-string">'Failed to show slot'</span>,
+                name: name,
+                err: err
+            });
+        }
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
