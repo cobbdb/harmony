@@ -17,7 +17,7 @@ module.exports = {
         var slot;
         if (group.has(conf.name)) {
             slot = group.get(conf.name);
-        } else if (cache.has.config(conf.name)) {
+        } else if (cache(conf.name).has.config()) {
             slot = AdSlot(conf);
             group.add(slot);
         } else {

@@ -56,7 +56,7 @@ module.exports = function (slot) {
              * @param {Object} opts
              */
             config: function (opts) {
-                configs[opts.name] = opts;
+                configs[slot] = opts;
             }
         },
         /**
@@ -70,7 +70,10 @@ module.exports = function (slot) {
              * @return {!function(?)[]}
              */
             event: function (name) {
-                return events[name] || [];
+                if (name) {
+                    return events[name] || [];
+                }
+                return events;
             },
             /**
              * ### cache.get.single(name)
@@ -78,7 +81,10 @@ module.exports = function (slot) {
              * @return {!function(?)[]}
              */
             single: function (name) {
-                return singles[name] || [];
+                if (name) {
+                    return singles[name] || [];
+                }
+                return singles;
             },
             /**
              * ### cache.get.targeting(name)
@@ -86,15 +92,17 @@ module.exports = function (slot) {
              * @return {!Object<string, string>}
              */
             targeting: function (name) {
-                return targeting[name] || {};
+                if (name) {
+                    return targeting[name] || {};
+                }
+                return targeting;
             },
             /**
              * ### cache.get.config(name)
-             * @param {string} name
              * @return {!Object<string, *>} Slot's configuration options.
              */
-            config: function (name) {
-                return configs[name] || {};
+            config: function () {
+                return configs[slot] || {};
             }
         },
         /**
@@ -128,11 +136,10 @@ module.exports = function (slot) {
             },
             /**
              * ### cache.has.config(name)
-             * @param {string} name
              * @return {!boolean}
              */
-            config: function (name) {
-                return name in configs;
+            config: function () {
+                return slot in configs;
             }
         }
     };

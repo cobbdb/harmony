@@ -1,7 +1,9 @@
 var log = require('./log.js'),
-    slots = require('./slot-set.js'),
+    //slots = require('./slot-set.js'),
+    cache = require('../modules/slot-cache.js'),
     BaseClass = require('baseclassjs'),
-    Eventable = require('./event-handler.js');
+    Eventable = require('./event-handler.js'),
+    googletag = require('../googletag.js');
 
 /**
  * # Ad Slot
@@ -16,46 +18,43 @@ var log = require('./log.js'),
  * @param {Object<string, string>} [opts.targeting] Slot-specific targeting.
  * @param {boolean} [opts.companion] True if companion ad.
  * @param {SizeMapping} [opts.mapping] Size mapping.
- * @param {boolean} [opts.interstitial] True if out-of-page ad.
+ * @param {boolean} [opts.outofpage] True if out-of-page ad.
  * @param {boolean} [opts.enabled] False if ineligible to make ad calls.
  * @param {Object<string, function(?)>} [opts.on] Dictionary of callbacks.
  * @param {Object<string, function(?)>} [opts.one] Dictionary of single-run callbacks.
  * @return {AdSlot}
  * @see https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder
  */
-module.exports = function (pubads, opts) {
-    var name, cbCache, slot,
+module.exports = function (opts) {
+    var cbCache, key,
+        name = opts.name,
+        slot = {},
         // Capture timestamp for performance metrics.
         tsCreate = global.Date.now(),
         mapping = opts.mapping || [],
-        companion = opts.companion || false,
-        interstitial = opts.interstitial || false,
-        targeting = opts.targeting || {};
+        targeting = opts.targeting || {},
+        pubads = googletag.pubads();
 
     // Define which type of slot this is.
-    if (opts.interstitial) {
-        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+    if (opts.outofpage) {
+        slot.gpt = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
     } else {
-        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+        slot.gpt = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
     // Deep merge all event callbacks.
-    cbCache = slots.cached.callbacks(opts.name);
+    //cbCache = slots.cached.callbacks(opts.name);
     opts.on = opts.on || [];
-    for (name in opts.on) {
-        cbCache.events[name] = cbCache.events[name] || [];
-        cbCache.events[name] = [].concat(
-            cbCache.events[name],
-            opts.on[name]
-        );
+    for (key in opts.on) {
+        cache(name).set.event(key, opts.on[key]);
+        //cbCache.events[name] = cbCache.events[name] || [];
+        //cbCache.events[name].push(opts.on[name]);
     }
     opts.one = opts.one || [];
-    for (name in opts.one) {
-        cbCache.singles[name] = cbCache.singles[name] || [];
-        cbCache.singles[name] = [].concat(
-            cbCache.singles[name],
-            opts.one[name]
-        );
+    for (key in opts.one) {
+        cache(name).set.single(key, opts.one[key]);
+        //cbCache.singles[name] = cbCache.singles[name] || [];
+        //cbCache.singles[name].push(opts.one[name]);
     }
 
     /**
@@ -149,7 +148,7 @@ module.exports = function (pubads, opts) {
     });
 
     // Assign companion ad service if requested.
-    if (companion) {
+    if (opts.companion) {
         slot.addService(
             global.googletag.companionAds()
         );
