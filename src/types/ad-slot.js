@@ -1,29 +1,30 @@
 var log = require('./log.js'),
-    set = require('./slot-set.js'),
+    slots = require('./slot-set.js'),
     BaseClass = require('baseclassjs'),
     Eventable = require('./event-handler.js');
 
 /**
  * # Ad Slot
  * Constructs a new adSlot in the page.
- * @type {BaseClass}
- * @extends {EventHandler}
- * @param {String} opts.name Slot name, ex) RP01
- * @param {String} opts.id Slot's div id, ex) ad-div-RP01
- * @param {Array} opts.sizes One or many 2D arrays, ex) [300, 250]
- * @param {String} opts.adunit Full ad unit code.
- * @param {Object} [opts.targeting] Slot-specific targeting.
- * @param {Array} [opts.mapping] Size mapping.
- * @param {Boolean} [opts.companion] True if companion ad.
- * @param {String} [opts.group] Slot group name.
- * @param {Boolean} [opts.interstitial] True if out-of-page ad.
- * @param {Boolean} [opts.enabled] False if ineligible to make ad calls.
- * @param {Object} [opts.on] Dictionary of callbacks.
- * @param {Object} [opts.one] Dictionary of single-run callbacks.
+ * @param {Object} opts
+ * @param {string} opts.name Slot name, ex) RP01
+ * @param {string} opts.id Slot's div id, ex) ad-div-RP01
+ * @param {(Array<number, number>|Array<Array<number, number>>)} opts.sizes
+ * ex) [300, 250] or [[88, 31], [300, 600]]
+ * @param {string} opts.adunit Full ad unit code.
+ * @param {string} [opts.group] Slot group name.
+ * @param {Object<string, string>} [opts.targeting] Slot-specific targeting.
+ * @param {boolean} [opts.companion] True if companion ad.
+ * @param {SizeMapping} [opts.mapping] Size mapping.
+ * @param {boolean} [opts.interstitial] True if out-of-page ad.
+ * @param {boolean} [opts.enabled] False if ineligible to make ad calls.
+ * @param {Object<string, function(?)>} [opts.on] Dictionary of callbacks.
+ * @param {Object<string, function(?)>} [opts.one] Dictionary of single-run callbacks.
  * @return {AdSlot}
+ * @see https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder
  */
 module.exports = function (pubads, opts) {
-    var slot, name, cbCache,
+    var name, cbCache, slot,
         // Capture timestamp for performance metrics.
         tsCreate = global.Date.now(),
         mapping = opts.mapping || [],
@@ -31,20 +32,15 @@ module.exports = function (pubads, opts) {
         interstitial = opts.interstitial || false,
         targeting = opts.targeting || {};
 
-    // Smoke test that the slot's element id is valid in the DOM.
-    if (!global.document.getElementById(opts.id)) {
-        throw global.Error('Ad slot container was not found in the DOM.');
-    }
-
     // Define which type of slot this is.
     if (opts.interstitial) {
-        slot = global.googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
     } else {
-        slot = global.googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
     // Deep merge all event callbacks.
-    cbCache = set.cached.callbacks(opts.name);
+    cbCache = slots.cached.callbacks(opts.name);
     opts.on = opts.on || [];
     for (name in opts.on) {
         cbCache.events[name] = cbCache.events[name] || [];
@@ -121,7 +117,7 @@ module.exports = function (pubads, opts) {
     }
 
     // Load in any targeting set before this slow was defined.
-    targeting = set.cached.targeting(opts.name);
+    targeting = slots.cached.targeting(opts.name);
     for (name in targeting) {
         slot.setTargeting(name, targeting[name]);
     }

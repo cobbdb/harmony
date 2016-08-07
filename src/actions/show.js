@@ -3,7 +3,7 @@
  * Show a slot or group of slots.
  */
 
-var slots = require('../slot-set.js'),
+var SlotFactory = require('../util/slot-factory.js'),
     groups = require('../group-set.js'),
     log = require('../log.js'),
     enableServices = require('../util/enable-services.js');
@@ -18,7 +18,7 @@ module.exports = {
     /**
      * ### harmony.show.group(name)
      * Show all ads in a slot group.
-     * @param {String} name
+     * @param {string} name
      */
     group: function (name) {
         var i, slot, el,
@@ -63,7 +63,7 @@ module.exports = {
     /**
      * ### harmony.show.slot(name)
      * Show a single ad slot.
-     * @param {String} name
+     * @param {string} name
      */
     slot: function (name) {
         var slot, el;
@@ -73,7 +73,7 @@ module.exports = {
         });
         try {
             enableServices();
-            slot = slots.get(name);
+            slot = SlotFactory(name);
             slot.tsCalled = global.Date.now();
 
             // Only make ad call if slot is enabled.

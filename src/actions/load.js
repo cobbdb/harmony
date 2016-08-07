@@ -7,7 +7,8 @@ var AdSlot = require('../adslot.js'),
     watcher = require('../breakpoint-watcher.js'),
     slots = require('../slot-set.js'),
     groups = require('../group-set.js'),
-    log = require('../log.js');
+    log = require('../log.js'),
+    googletag = require('../googletag.js');
 
 /**
  * ## harmony.load(opts)
@@ -18,7 +19,7 @@ var AdSlot = require('../adslot.js'),
  * @see <a href="../adslot.js">adslot.js</a>
  */
 module.exports = function (opts) {
-    var pubads = global.googletag.pubads();
+    var pubads = googletag.pubads();
 
     opts = opts || {};
     opts.slots = opts.slots || [];
