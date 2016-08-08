@@ -84,3 +84,11 @@ module.exports = function (slot) {
     };
     return bank[slot];
 };
+
+/**
+ * ## cache.clear()
+ * Flush all data from cache.
+ */
+module.exports.clear = function () {
+    bank = {};
+};

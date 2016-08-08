@@ -10,7 +10,8 @@
 var Slot = require('../types/slot.js'),
     MockSlot = require('../types/mock-slot.js'),
     GroupFactory = require('./group-factory.js'),
-    masterGroup = require('../modules/master-group.js');
+    masterGroup = require('../modules/master-group.js'),
+    scrubConf = require('../util/scrub-conf.js');
 
 module.exports = {
     create: function (conf) {
@@ -18,6 +19,7 @@ module.exports = {
         if (masterGroup.has(conf.name)) {
             slot = masterGroup.get(conf.name);
         } else {
+            conf = scrubConf(conf);
             slot = Slot(conf);
             masterGroup.add(slot);
             if (slot.group) {

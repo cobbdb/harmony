@@ -10,7 +10,7 @@ module.exports = {
      * ## Groups.clear()
      */
     clear: function () {
-        cache = {}
+        cache = {};
     },
     /**
      * ## Groups.create(name)

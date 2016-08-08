@@ -1,4 +1,4 @@
-var googletag = require('../../src/googletag.js');
+var googletag = require('../../src/modules/googletag.js');
 
 /**
  * Mock the DFP API and construction options.

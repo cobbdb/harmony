@@ -1,4 +1,4 @@
-var log = require('../../src/log.js');
+var log = require('../../src/modules/log.js');
 
 afterEach(function () {
     global.localStorage.removeItem('lumberjack');
