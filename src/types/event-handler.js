@@ -13,9 +13,9 @@
  * })
  * ```
  * @constructor
- * @param {Object<string, function(?)>} [opts.events] Event callbacks to fire each time
+ * @param {Object<string, (function|function[])>} [opts.events] Event callbacks to fire each time
  * the event is triggered.
- * @param {Object<string, function(?)>} [opts.singles] Event callbacks to fire only once
+ * @param {Object<string, (function|function[])>} [opts.singles] Event callbacks to fire only once
  * the next time the event is triggered.
  * @return {EventHandler}
  */

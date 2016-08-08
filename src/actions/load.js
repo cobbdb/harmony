@@ -2,62 +2,38 @@
  * # Load Action
  */
 
-var AdSlot = require('../adslot.js'),
-    scrubConf = require('../util/scrub-conf.js'),
-    watcher = require('../breakpoint-watcher.js'),
-    slots = require('../slot-set.js'),
-    groups = require('../group-set.js'),
+var watcher = require('../breakpoint-watcher.js'),
     log = require('../log.js'),
-    googletag = require('../googletag.js');
+    googletag = require('../googletag.js'),
+    SlotFactory = require('../modules/slot-factory.js');
 
-/**
- * ## harmony.load(opts)
- * Load a block of configuration.
- * @param {Object} [opts.targeting] System-level targeting.
- * @param {Object[]} [opts.slots] Set of ad slot configurations.
- * @param {Number|Number[]} [opts.breakpoints] Set of breakpoints.
- * @see <a href="../adslot.js">adslot.js</a>
- */
-module.exports = function (opts) {
-    var pubads = googletag.pubads();
-
-    opts = opts || {};
-    opts.slots = opts.slots || [];
-
-    // Generate the ad slots.
-    var i, slot, conf,
-        len = opts.slots.length;
-    log('load', 'Generating ad slots.');
-    for (i = 0; i < len; i += 1) {
-        conf = opts.slots[i];
-        try {
-            slot = AdSlot(
-                pubads,
-                scrubConf(conf)
-            );
-            slots.add(slot);
-            groups.add(slot.group, slot);
-        } catch (err) {
-            log('error', {
-                msg: 'Slot failed to load during call to load().',
-                conf: conf,
-                err: err
-            });
+module.exports = {
+    /**
+     * ## load.slots(slots)
+     * @param {Slot[]} slots
+     * @see actions/define-slot.js
+     */
+    slots: function (slots) {
+        slots = slots || [];
+        slots.forEach(SlotFactory.create);
+    },
+    /**
+     * ## load.targeting(targeting)
+     * Set system-level targeting that applies to all Slots.
+     * @param {Object<string, string>} targeting
+     */
+    targeting: function (targeting) {
+        var key, pubads = googletag.pubads();
+        targeting = targeting || {};
+        for (key in targeting) {
+            pubads.setTargeting(key, targeting[key]);
         }
+    },
+    /**
+     * ## load.breakpoints(breakpoints)
+     * @param {(number|number[])} breakpoints
+     */
+    breakpoints: function (breakpoints) {
+        watcher.add(breakpoints);
     }
-
-    // Assign the system targeting.
-    var key, value,
-        targeting = opts.targeting || {};
-    log('load', 'Applying pubads targeting.');
-    for (key in targeting) {
-        value = targeting[key];
-        log('load', '- ' + key + ' = ' + value);
-        pubads.setTargeting(key, value);
-    }
-
-    // Assign the breakpoints.
-    watcher.add(opts.breakpoints);
-
-    log('load', 'Harmony config loaded.');
 };

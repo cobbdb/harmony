@@ -12,6 +12,9 @@ is an effort to fix how Harmony behaves under Single Request Mode.
 - Slot display styles are no longer altered by Harmony.
 - Added support for ActiveView's impressionViewable event.
 - Removed `harmony.hasSlot()`.
+- Merged `harmony.show` and `harmony.refresh` into only `harmony.show`.
+- Break up `harmony.load` into `load.targeting`, `load.slots`,
+and `load.breakpoints`.
 
 ## Version 5
 #### [5.0.2]

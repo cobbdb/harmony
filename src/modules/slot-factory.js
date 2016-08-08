@@ -7,22 +7,30 @@
  * 3. No data found, return mock.
  */
 
-var AdSlot = require('../types/ad-slot.js'),
+var Slot = require('../types/slot.js'),
     MockSlot = require('../types/mock-slot.js'),
-    group = require('../modules/master-group.js'),
-    cache = require('../modules/slot-cache.js');
+    GroupFactory = require('./group-factory.js'),
+    masterGroup = require('../modules/master-group.js');
 
 module.exports = {
     create: function (conf) {
-        var slot;
-        if (group.has(conf.name)) {
-            slot = group.get(conf.name);
-        } else if (cache(conf.name).has.config()) {
-            slot = AdSlot(conf);
-            group.add(slot);
+        var slot, group;
+        if (masterGroup.has(conf.name)) {
+            slot = masterGroup.get(conf.name);
         } else {
-            slot = MockSlot(conf.name);
+            slot = Slot(conf);
+            masterGroup.add(slot);
+            if (slot.group) {
+                group = GroupFactory.create(slot.group);
+                group.add(slot);
+            }
         }
         return slot;
+    },
+    get: function (name) {
+        if (masterGroup.has(name)) {
+            return masterGroup.get(name);
+        }
+        return MockSlot(name);
     }
 };

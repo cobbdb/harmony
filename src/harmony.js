@@ -5,8 +5,8 @@
  */
 
 var log = require('./modules/log.js'),
-    slots = require('./modules/slot-factory.js'),
-    groups = require('./modules/group-factory.js'),
+    SlotFactory = require('./modules/slot-factory.js'),
+    GroupFactory = require('./modules/group-factory.js'),
     EventHandler = require('./types/event-handler.js'),
     events = EventHandler(),
     watcher = require('./modules/breakpoint-watcher.js'),
@@ -33,10 +33,6 @@ googletag.cmd.push(function () {
     });
 });
 
-/**
- * ## harmony
- * @type {Object}
- */
 module.exports = {
     /**
      * ## harmony.on(name, callback)
@@ -71,15 +67,15 @@ module.exports = {
      */
     version: require('../package.json').version,
     /**
-     * ## harmony.load(config)
-     * Load a block of configuration.
+     * ## harmony.load
+     * Load bulk configurations into the system.
      * @see actions/load.js
      */
     load: require('./actions/load.js'),
     /**
      * ## harmony.addBreakpoints(set)
      * Add breakpoint values in pixels.
-     * @param {number|number[]} set Breakpoints in pixels.
+     * @param {number[]} set Breakpoints in pixels.
      * @see BreakpointWatcher
      */
     addBreakpoints: watcher.add,
@@ -110,7 +106,7 @@ module.exports = {
      * @return {!(Slot|MockSlot)}
      * @see SlotFactory
      */
-    slot: slots.get,
+    slot: SlotFactory.get,
     /**
      * ## harmony.group(name)
      * Fetch a slot group by name.
@@ -118,13 +114,13 @@ module.exports = {
      * @return {!Group} Collection of 0 or more ad slots.
      * @see GroupFactory
      */
-    group: groups.get,
+    group: GroupFactory.create,
     /**
      * ## harmony.defineSlot(config)
      * Create a new adSlot in the page.
      * @see actions/define-slot.js
      */
-    defineSlot: require('./actions/define-slot.js'),
+    defineSlot: SlotFactory.create,
     /**
      * ## harmony.enable
      * ### harmony.enable.slot(name)
@@ -141,14 +137,6 @@ module.exports = {
      * @see actions/disable.js
      */
     disable: require('./actions/disable.js'),
-    /**
-     * ## harmony.refresh
-     * ### harmony.refresh.slot(name)
-     * ### harmony.refresh.group(name)
-     * Refresh a single slot or group of slots.
-     * @see actions/refresh.js
-     */
-    refresh: require('./actions/refresh.js'),
     /**
      * ## harmony.show
      * ### harmony.show.slot(name)

@@ -20,23 +20,28 @@
  */
 
 var log = require('../modules/log.js'),
-    cache = require('../modules/slot-cache.js'),
+    SlotCache = require('../modules/slot-cache.js'),
     EventHandler = require('./event-handler.js'),
-    googletag = require('../modules/googletag.js');
+    googletag = require('../modules/googletag.js'),
+    concatLeft = require('../util/list-concat-left.js'),
+    mergeLeft = require('../util/map-merge-left.js');
 
 module.exports = function (opts) {
-    var slot, events = EventHandler({
-            events: opts.on,
-            singles: opts.one
-        });
+    var slot,
+        cache = SlotCache(opts.name),
+        events = EventHandler({
+            events: concatLeft(opts.on, cache.get.events()),
+            singles: concatLeft(opts.one, cache.get.singles())
+        }),
+        targeting = mergeLeft(opts.targeting, cache.get.targeting());
 
     if (opts.outofpage) {
         slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
     } else {
         slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
-    for (name in opts.targeting) {
-        slot.setTargeting(name, opts.targeting[name]);
+    for (name in targeting) {
+        slot.setTargeting(name, targeting[name]);
     }
     if (opts.mapping) {
         slot.defineSizeMapping(opts.mapping);

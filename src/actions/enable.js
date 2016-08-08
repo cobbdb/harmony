@@ -10,7 +10,7 @@ module.exports = {
     /**
      * ## harmony.enable.slot(name)
      * Marks this slot as eligible to make ad calls.
-     * @param {String} name
+     * @param {string} name
      */
     slot: function (name) {
         slots.get(name).enabled = true;
@@ -18,7 +18,7 @@ module.exports = {
     /**
      * ## harmony.enable.group(name)
      * Marks each slot in this group as eligible to make ad calls.
-     * @param {String} name
+     * @param {string} name
      */
     group: function (name) {
         var i,

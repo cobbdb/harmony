@@ -6,8 +6,7 @@
 var bank = {},
     singles = {},
     events = {},
-    targeting = {},
-    configs = {};
+    targeting = {};
 
 /**
  * ## Cache(name)
@@ -50,13 +49,6 @@ module.exports = function (slot) {
             targeting: function (name, value) {
                 targeting[slot] = targeting[slot] || {};
                 targeting[slot][name] = value;
-            },
-            /**
-             * ### cache.set.config(opts)
-             * @param {Object} opts
-             */
-            config: function (opts) {
-                configs[slot] = opts;
             }
         },
         /**
@@ -69,77 +61,24 @@ module.exports = function (slot) {
              * @param {string} name
              * @return {!function(?)[]}
              */
-            event: function (name) {
-                if (name) {
-                    return events[name] || [];
-                }
-                return events;
+            events: function () {
+                return events[slot] || [];
             },
             /**
              * ### cache.get.single(name)
              * @param {string} name
              * @return {!function(?)[]}
              */
-            single: function (name) {
-                if (name) {
-                    return singles[name] || [];
-                }
-                return singles;
+            singles: function () {
+                return singles[slot] || [];
             },
             /**
              * ### cache.get.targeting(name)
              * @param {string} name
              * @return {!Object<string, string>}
              */
-            targeting: function (name) {
-                if (name) {
-                    return targeting[name] || {};
-                }
-                return targeting;
-            },
-            /**
-             * ### cache.get.config(name)
-             * @return {!Object<string, *>} Slot's configuration options.
-             */
-            config: function () {
-                return configs[slot] || {};
-            }
-        },
-        /**
-         * ## cache.has
-         * @type {Object<string, function>}
-         */
-        has: {
-            /**
-             * ### cache.has.event(name)
-             * @param {string} name
-             * @return {!boolean}
-             */
-            event: function (name) {
-                return name in events;
-            },
-            /**
-             * ### cache.has.single(name)
-             * @param {string} name
-             * @return {!boolean}
-             */
-            single: function (name) {
-                return name in singles;
-            },
-            /**
-             * ### cache.has.targeting(name)
-             * @param {string} name
-             * @return {!boolean}
-             */
-            targeting: function (name) {
-                return name in targeting;
-            },
-            /**
-             * ### cache.has.config(name)
-             * @return {!boolean}
-             */
-            config: function () {
-                return slot in configs;
+            targeting: function () {
+                return targeting[slot] || {};
             }
         }
     };

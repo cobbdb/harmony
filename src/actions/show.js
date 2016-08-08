@@ -5,27 +5,41 @@
 
 var SlotFactory = require('../modules/slot-factory.js'),
     GroupFactory = require('../modules/group-factory.js'),
+    masterGroup = require('../modules/master-group.js'),
     log = require('../modules/log.js'),
     enableServices = require('../util/enable-services.js'),
     googletag = require('../modules/googletag.js');
 
 /**
- * Record metrics, activate the slot, and make ad call.
+ * Activate the slot and make ad call. Refresh if slot is already active.
  * @private
  * @param {Slot} slot
  */
 function show(slot) {
     if (slot.enabled) {
-        slot.activate();
-        googletag.display(slot.id);
+        if (slot.active) {
+            googletag.pubads().refresh([slot.gpt]);
+        } else {
+            slot.activate();
+            googletag.display(slot.id);
+        }
     }
 }
 
 /**
  * ## harmony.show
- * Activate Slots and make their ad calls.
+ * Activate Slots and make their ad calls. If a slot has already been
+ * activated, then calls to `show` will refresh its contents.
  */
 module.exports = {
+    /**
+     * ### harmony.show.all()
+     * *Danger Zone* Show all slots in the page.
+     */
+    all: function () {
+        enableServices();
+        masterGroup.forEach(show);
+    },
     /**
      * ### harmony.show.group(name)
      * Show all ads in a group.
