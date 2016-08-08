@@ -2,9 +2,9 @@
  * # Load Action
  */
 
-var watcher = require('../breakpoint-watcher.js'),
-    log = require('../log.js'),
-    googletag = require('../googletag.js'),
+var watcher = require('../modules/breakpoint-watcher.js'),
+    log = require('../modules/log.js'),
+    googletag = require('../modules/googletag.js'),
     SlotFactory = require('../modules/slot-factory.js');
 
 module.exports = {

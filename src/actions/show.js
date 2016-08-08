@@ -56,7 +56,7 @@ module.exports = {
      * @param {string} name
      */
     slot: function (name) {
-        var slot = SlotFactory.create(name);
+        var slot = SlotFactory.get(name);
         enableServices();
         show(slot);
     }

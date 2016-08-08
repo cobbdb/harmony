@@ -27,7 +27,7 @@ var log = require('../modules/log.js'),
     mergeLeft = require('../util/map-merge-left.js');
 
 module.exports = function (opts) {
-    var slot,
+    var slot, name,
         cache = SlotCache(opts.name),
         events = EventHandler({
             events: concatLeft(opts.on, cache.get.events()),
@@ -88,7 +88,7 @@ module.exports = function (opts) {
                         events.trigger('impressionViewable', event);
                     }
                 });
-                this.gpt.addService(pubads);
+                slot.addService(pubads);
                 this.active = true;
             }
         }

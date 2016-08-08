@@ -3,8 +3,8 @@
  * Disable a single slot or group of slots.
  */
 
-var slots = require('../slot-set.js'),
-    groups = require('../group-set.js');
+var SlotFactory = require('../modules/slot-factory.js'),
+    GroupFactory = require('../modules/group-factory.js');
 
 module.exports = {
     /**
@@ -13,7 +13,7 @@ module.exports = {
      * @param {string} name
      */
     slot: function (name) {
-        slots.get(name).enabled = false;
+        SlotFactory.get(name).enabled = false;
     },
     /**
      * ## harmony.disable.group(name)
@@ -21,11 +21,9 @@ module.exports = {
      * @param {string} name
      */
     group: function (name) {
-        var i,
-            group = groups.get(name),
-            len = group.length;
-        for (i = 0; i < len; i += 1) {
-            group[i].enabled = false;
-        }
+        var group = GroupFactory.create(name);
+        group.forEach(function (slot) {
+            slot.enabled = false;
+        });
     }
 };
