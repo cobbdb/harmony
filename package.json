@@ -26,7 +26,6 @@
   "author": "Dan Cobb <cobbdb@gmail.com> (http://www.github.com/cobbdb)",
   "license": "MIT",
   "dependencies": {
-    "baseclassjs": "4.0.1",
     "lumberjackjs": "1.2.0"
   },
   "devDependencies": {
