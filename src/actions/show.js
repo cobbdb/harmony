@@ -3,62 +3,38 @@
  * Show a slot or group of slots.
  */
 
-var SlotFactory = require('../util/slot-factory.js'),
-    groups = require('../group-set.js'),
-    log = require('../log.js'),
-    enableServices = require('../util/enable-services.js');
+var SlotFactory = require('../modules/slot-factory.js'),
+    GroupFactory = require('../modules/group-factory.js'),
+    log = require('../modules/log.js'),
+    enableServices = require('../util/enable-services.js'),
+    googletag = require('../modules/googletag.js');
+
+/**
+ * Record metrics, activate the slot, and make ad call.
+ * @private
+ * @param {Slot} slot
+ */
+function show(slot) {
+    if (slot.enabled) {
+        slot.activate();
+        googletag.display(slot.id);
+    }
+}
 
 /**
  * ## harmony.show
- * Showing a slot means setting style ```display:block``` and
- * calling ```googletag.display()```. Will not call
- * ```googletag.display()``` on disabled slots.
+ * Activate Slots and make their ad calls.
  */
 module.exports = {
     /**
      * ### harmony.show.group(name)
-     * Show all ads in a slot group.
+     * Show all ads in a group.
      * @param {string} name
      */
     group: function (name) {
-        var i, slot, el,
-            set = groups.get(name),
-            len = set.length;
-        log('show', {
-            msg: 'Showing ads in group',
-            group: name
-        });
-        try {
-            enableServices();
-            for (i = 0; i < len; i += 1) {
-                slot = set[i];
-                slot.tsCalled = global.Date.now();
-
-                // Only make ad call if slot is enabled.
-                if (slot.enabled) {
-                    slot.active = true;
-                    global.googletag.display(slot.divId);
-                }
-
-                el = document.getElementById(slot.divId);
-                if (el) {
-                    el.style.display = 'block';
-                } else {
-                    log('error', {
-                        msg: 'Failed to show slot for group',
-                        group: name,
-                        reason: 'Slot was missing from the DOM',
-                        slot: slot
-                    });
-                }
-            }
-        } catch (err) {
-            log('error', {
-                msg: 'Failed to show group',
-                group: name,
-                err: err
-            });
-        }
+        var group = GroupFactory.create(name);
+        enableServices();
+        group.forEach(show);
     },
     /**
      * ### harmony.show.slot(name)
@@ -66,30 +42,8 @@ module.exports = {
      * @param {string} name
      */
     slot: function (name) {
-        var slot, el;
-        log('show', {
-            msg: 'Showing slot',
-            name: name
-        });
-        try {
-            enableServices();
-            slot = SlotFactory(name);
-            slot.tsCalled = global.Date.now();
-
-            // Only make ad call if slot is enabled.
-            if (slot.enabled) {
-                slot.active = true;
-                global.googletag.display(slot.divId);
-            }
-
-            el = document.getElementById(slot.divId);
-            el.style.display = 'block';
-        } catch (err) {
-            log('error', {
-                msg: 'Failed to show slot',
-                name: name,
-                err: err
-            });
-        }
+        var slot = SlotFactory.create(name);
+        enableServices();
+        show(slot);
     }
 };

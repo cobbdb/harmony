@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Slot option `interstitial` changed to `outofpage`.
 - Slots are no longer defined in GPT until they are displayed. This
 is an effort to fix how Harmony behaves under Single Request Mode.
+- Removed `hide.slot()` and `hide.group()` actions.
+- Slot display styles are no longer altered by Harmony.
+- Added support for ActiveView's impressionViewable event.
+- Removed `harmony.hasSlot()`.
 
 ## Version 5
 #### [5.0.2]
