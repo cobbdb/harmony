@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     grunt.config.merge({
         uglify: {
-            build: {
+            bundle: {
                 files: {
                     'dist/harmony.min.js': 'bin/harmony.js'
                 }
@@ -9,8 +9,7 @@ module.exports = function (grunt) {
             options: {
                 mangle: {
                     except: [
-                        'googletag',
-                        'Lumberjack'
+                        'googletag'
                     ]
                 }
             }

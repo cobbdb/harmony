@@ -1,4 +1,4 @@
-var AdSlot = require('../src/adslot.js'),
+var Slot = require('../src/types/slot.js'),
     Options = require('./helpers/slot-options.helper.js'),
     Help = require('./helpers/construction.helper.js');
 
@@ -21,7 +21,7 @@ describe('Ad Slot', function () {
             opts.adunit = 'test/ad/unit';
             opts.sizes = [100, 200];
             opts.interstitial = false;
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(googletag.defineSlot).toHaveBeenCalledWith(
                 'test/ad/unit',
                 [100, 200],
@@ -32,7 +32,7 @@ describe('Ad Slot', function () {
         it('can be interstitial', function () {
             opts.adunit = 'test/ad/unit';
             opts.interstitial = true;
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(googletag.defineSlot).not.toHaveBeenCalled();
             expect(googletag.defineOutOfPageSlot).toHaveBeenCalledWith(
                 'test/ad/unit',
@@ -49,7 +49,7 @@ describe('Ad Slot', function () {
                 'eting'
             ]
         };
-        var slot = AdSlot(googletag.pubads(), opts);
+        var slot = Slot(googletag.pubads(), opts);
         expect(slot.setTargeting).toHaveBeenCalledWith('single', 'target');
         expect(slot.setTargeting).toHaveBeenCalledWith('group', [
             'targ',
@@ -61,7 +61,7 @@ describe('Ad Slot', function () {
         opts.sizes = [9, 4];
         opts.adunit = 'testunit';
         opts.name = 'testname';
-        var slot = AdSlot(googletag.pubads(), opts);
+        var slot = Slot(googletag.pubads(), opts);
         expect(slot.divId).toEqual('test-id');
         expect(slot.group).toEqual('test-grp');
         expect(slot.sizes).toEqual([9, 4]);
@@ -71,24 +71,24 @@ describe('Ad Slot', function () {
 
     describe('size mapping', function () {
         it('defaults to empty array', function () {
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(slot.defineSizeMapping).toHaveBeenCalledWith([]);
         });
         it('can be applied', function () {
             opts.mapping = [12, 34];
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(slot.defineSizeMapping).toHaveBeenCalledWith([12, 34]);
         });
     });
 
     describe('events', function () {
         it('can be bound via on()', function () {
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(slot.on).toBeDefined();
         });
         it('can be of any type', function () {
             expect(function () {
-                var slot = AdSlot(googletag.pubads(), opts);
+                var slot = Slot(googletag.pubads(), opts);
                 slot.on('testEvent', 'abc123');
                 slot.on('testEvent', function () {});
             }).not.toThrowError();
@@ -104,14 +104,14 @@ describe('Ad Slot', function () {
             });
             it('can be attached during construction', function () {
                 opts.callback = jasmine.createSpy('renderSpy');
-                var slot = AdSlot(googletag.pubads(), opts);
+                var slot = Slot(googletag.pubads(), opts);
                 var spy = jasmine.createSpy('cbSpy');
                 spy.slot = slot;
                 trigger(spy);
                 expect(opts.callback).toHaveBeenCalled();
             });
             it('can be attached with on()', function () {
-                var slot = AdSlot(googletag.pubads(), opts);
+                var slot = Slot(googletag.pubads(), opts);
                 var cb = jasmine.createSpy('renderSpy');
                 slot.on('slotRenderEnded', cb);
                 var spy = jasmine.createSpy('cbSpy');
@@ -127,7 +127,7 @@ describe('Ad Slot', function () {
             opts.companion = false;
             var compSpy = jasmine.createSpy('companion');
             googletag.companionAds.and.returnValue(compSpy);
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(slot.addService.calls.count()).toEqual(1);
             expect(googletag.companionAds).not.toHaveBeenCalled();
             expect(slot.addService).toHaveBeenCalledWith(googletag.pubads());
@@ -137,7 +137,7 @@ describe('Ad Slot', function () {
             opts.companion = true;
             var compSpy = jasmine.createSpy('companion');
             googletag.companionAds.and.returnValue(compSpy);
-            var slot = AdSlot(googletag.pubads(), opts);
+            var slot = Slot(googletag.pubads(), opts);
             expect(slot.addService.calls.count()).toEqual(2);
             expect(googletag.companionAds).toHaveBeenCalled();
             expect(slot.addService).toHaveBeenCalledWith(googletag.pubads());

@@ -20,6 +20,13 @@ module.exports = function (groupName) {
          */
         name: groupName,
         /**
+         * ## group.length()
+         * @return {!number}
+         */
+        length: function () {
+            return slotList.length;
+        },
+        /**
          * ## group.add(slot)
          * Add a new slot to this group.
          * @param {Slot} slot
@@ -35,7 +42,15 @@ module.exports = function (groupName) {
          * @return {?Slot}
          */
         get: function (name) {
-            return slotMap[name];
+            return slotMap[name] || null;
+        },
+        /**
+         * ## group.getAll()
+         * *Danger Zone* Fetch all slots in this group.
+         * @return {!Slot[]}
+         */
+        getAll: function () {
+            return slotList;
         },
         /**
          * ## group.has(name)

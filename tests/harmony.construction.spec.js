@@ -1,7 +1,7 @@
 var harmony = require('../src/harmony.js');
 
 describe('construction', function () {
-    it('throws no errors', function () {
+    it('can be loaded with require()', function () {
         expect(harmony).toBeDefined();
     });
     it('returns a useable instance', function () {
@@ -9,6 +9,6 @@ describe('construction', function () {
         expect(harmony.load).toBeDefined();
         expect(harmony.log).toBeDefined();
         expect(harmony.show).toBeDefined();
-        expect(harmony.hide.slot).toBeDefined();
+        expect(harmony.show.slot).toBeDefined();
     });
 });

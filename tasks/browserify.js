@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 
     grunt.config.merge({
         browserify: {
-            global: {
+            bundle: {
                 files: {
                     'bin/harmony.js': 'src/harmony.js'
                 },
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            tests: {
+            specs: {
                 files: specSet.reduce(function (prev, cur) {
                     prev['bin/tests/' + cur] = [
                         'tests/' + cur,

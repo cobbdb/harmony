@@ -1,5 +1,5 @@
-var watcher = require('../src/breakpoint-watcher.js'),
-    screen = require('../src/screen.js');
+var watcher = require('../src/modules/breakpoint-watcher.js'),
+    screen = require('../src/modules/screen.js');
 
 describe('Breakpoint Watcher', function () {
     afterEach(function () {
