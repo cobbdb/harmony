@@ -3,7 +3,6 @@
  */
 
 var watcher = require('../modules/breakpoint-watcher.js'),
-    log = require('../modules/log.js'),
     googletag = require('../modules/googletag.js'),
     SlotFactory = require('../modules/slot-factory.js');
 

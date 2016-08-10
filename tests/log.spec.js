@@ -1,4 +1,4 @@
-var log = require('../src/log.js');
+var log = require('../src/modules/log.js');
 
 describe('Logging', function () {
     it('is disabled by default', function () {

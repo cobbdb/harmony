@@ -1,4 +1,4 @@
-var screen = require('../src/screen.js');
+var screen = require('../src/modules/screen.js');
 
 describe('Screen Util - screen.spec.js', function () {
     it('returns a positive number', function () {

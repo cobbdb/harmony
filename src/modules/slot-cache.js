@@ -3,8 +3,7 @@
  * Cache for slots that haven't been created yet.
  */
 
-var bank = {},
-    singles = {},
+var singles = {},
     events = {},
     targeting = {};
 
@@ -15,16 +14,16 @@ var bank = {},
  * @return {SlotCache}
  */
 module.exports = function (slot) {
-    bank[slot] = bank[slot] || {
+    return {
         /**
          * ## cache.set
-         * @type {Object<string, function>}
+         * @type {Object}
          */
         set: {
             /**
-             * ### cache.set.event(name, callback)
+             * ### event(name, callback)
              * @param {string} name
-             * @param {function(?)} cb
+             * @param {function} cb
              */
             event: function (name, cb) {
                 var cache = events[slot] = events[slot] || {};
@@ -32,9 +31,9 @@ module.exports = function (slot) {
                 cache[name].push(cb);
             },
             /**
-             * ### cache.set.single(name, callback)
+             * ### single(name, callback)
              * @param {string} name
-             * @param {function(?)} cb
+             * @param {function} cb
              */
             single: function (name, cb) {
                 var cache = singles[slot] = singles[slot] || {};
@@ -42,7 +41,7 @@ module.exports = function (slot) {
                 cache[name].push(cb);
             },
             /**
-             * ### cache.set.targeting(name, value)
+             * ### targeting(name, value)
              * @param {string} name
              * @param {string} value
              */
@@ -53,27 +52,27 @@ module.exports = function (slot) {
         },
         /**
          * ## cache.get
-         * @type {Object<string, function>}
+         * @type {Object}
          */
         get: {
             /**
-             * ### cache.get.event(name)
+             * ### events(name)
              * @param {string} name
-             * @return {!function(?)[]}
+             * @return {!function[]}
              */
             events: function () {
                 return events[slot] || [];
             },
             /**
-             * ### cache.get.single(name)
+             * ### singles(name)
              * @param {string} name
-             * @return {!function(?)[]}
+             * @return {!function[]}
              */
             singles: function () {
                 return singles[slot] || [];
             },
             /**
-             * ### cache.get.targeting(name)
+             * ### targeting(name)
              * @param {string} name
              * @return {!Object<string, string>}
              */
@@ -82,7 +81,6 @@ module.exports = function (slot) {
             }
         }
     };
-    return bank[slot];
 };
 
 /**
@@ -90,5 +88,7 @@ module.exports = function (slot) {
  * Flush all data from cache.
  */
 module.exports.clear = function () {
-    bank = {};
+    singles = {};
+    events = {};
+    targeting = {};
 };

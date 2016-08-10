@@ -23,5 +23,5 @@ module.exports = function (conf) {
         }
         return conf;
     }
-    throw Error('Ad slot container was not found in the DOM #' + conf.id);
+    throw Error('Ad slot ' + conf.name + ' container #' + conf.id + ' was not found!');
 };
