@@ -1,22 +1,22 @@
 [![Harmony](http://i.imgur.com/DP1OvVj.png)](https://cobbdb.github.io/harmony)
-*v5.0.2*
+*v6.0.0*
 
 [![License](https://img.shields.io/npm/l/postscribe.svg)](http://npmjs.com/package/postscribe)
-[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=5.0.2)](https://travis-ci.org/cobbdb/harmony)
+[![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=6.0.0)](https://travis-ci.org/cobbdb/harmony)
 [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
 [![NPM version](https://badge.fury.io/js/harmonyjs.svg)](http://badge.fury.io/js/harmonyjs)
 [![Dependencies](https://img.shields.io/david/dev/cobbdb/harmony.svg)](./package.json)
 
 Simplify your DFP business logic.
 
-    $ bower install harmony
-    $ npm install harmonyjs
+    $ bower i harmony
+    $ npm i harmonyjs
 
 [![NPM info](https://nodei.co/npm/harmonyjs.png?stars=true&downloads=true)](https://nodei.co/npm-dl/harmonyjs/)
 [![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
 
 -------------
-##### [Link to full autodocs](https://cobbdb.github.io/harmony/5.0.2)
+##### [Link to full autodocs](https://cobbdb.github.io/harmony/6.0.0)
 
 Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
@@ -57,7 +57,7 @@ dynamic page content around ad performance.
 There is also built-in ad logging and metrics provided via the
 [Lumberjack](https://github.com/cobbdb/lumberjack) library.
 
-[Full docs are available here](https://cobbdb.github.io/harmony/5.0.2), but
+[Full docs are available here](https://cobbdb.github.io/harmony/6.0.0), but
 let's go over some of the best parts
 of Harmony. If you don't see support for something you are trying to do,
 chances are it's in there somewhere! Just give the docs a quick scan.
@@ -85,8 +85,8 @@ global.console.log(harmony.version);
 Have your backend generate configurations based on admin settings and
 keep the components completely agnostic.
 ```javascript
-var myconf = {% load_ad_conf %};
-harmony.load(myconf);
+var myconf = {% generate_ad_slots %};
+harmony.load.slots(myconf);
 ```
 
 <a name="callbacks"></a>
@@ -107,14 +107,14 @@ Harmony exposes individual slot configuration for pain-free access.
 ```javascript
 var slot = harmony.slot('MY01'),
     possibleSizes = slot.sizes,
-    slotId = slot.divId,
+    slotId = slot.id,
     slotAdunit = slot.adunit;
 ```
 You can even directly call DFP slot methods.
 ```javascript
 var slot = harmony.slot('MY01'),
-    targeting = slot.getTargetingMap();
-slot.setTargeting('some', 'new targeting!');
+    targeting = slot.gpt.getTargetingMap();
+slot.gpt.setTargeting('some', 'new targeting!');
 ```
 
 <a name="eventing"></a>
@@ -138,11 +138,12 @@ harmony.slot('MY01').on('myevent', function () {});
 harmony.slot('MY01').one('myevent', function () {});
 ```
 
-###### slotRenderEnded is provided for you
-DFP's `slotRenderEnded` event is handled automatically for you
-on each slot.
+###### GPT events are provided for you
+GPT's `slotRenderEnded` and `impressionViewable` events are handled
+automatically for you on each slot.
 ```javascript
 harmony.slot('MY01').on('slotRenderEnded', function (event) {});
+harmony.slot('MY01').on('impressionViewable', function (event) {});
 ```
 
 ###### bind lazy events
