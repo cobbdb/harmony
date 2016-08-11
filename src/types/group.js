@@ -29,7 +29,7 @@ module.exports = function (groupName) {
         /**
          * ## group.add(slot)
          * Add a new slot to this group.
-         * @param {Slot} slot
+         * @param {!Slot} slot
          */
         add: function (slot) {
             slotList.push(slot);
@@ -71,9 +71,10 @@ module.exports = function (groupName) {
         /**
          * ## group.forEach(callback)
          * Iterate over the group of slots.
-         * @param {function(Slot)} cb
+         * @param {?function(Slot)} cb
          */
         forEach: function (cb) {
+            cb = cb || function () {};
             slotList.forEach(cb);
         }
     };

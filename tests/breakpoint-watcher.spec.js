@@ -1,20 +1,20 @@
 var watcher = require('../src/modules/breakpoint-watcher.js'),
     screen = require('../src/modules/screen.js');
 
-describe('Breakpoint Watcher', function () {
+describe('breakpointWatcher', function () {
     afterEach(function () {
         watcher.clear();
     });
-    describe('can add()', function () {
-        it('a single breakpoint', function () {
+    describe('add()', function () {
+        it('accepts a single breakpoint', function () {
             watcher.add(1234);
             expect(watcher.getAll()).toEqual([1234]);
         });
-        it('multiple breakpoints', function () {
+        it('accepts multiple breakpoints', function () {
             watcher.add([12, 34, 56]);
             expect(watcher.getAll()).toEqual([56, 34, 12]);
         });
-        it('zero breakpoints', function () {
+        it('accepts zero breakpoints', function () {
             watcher.add(1);
             watcher.add();
             watcher.add(2);

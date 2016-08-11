@@ -1,14 +1,17 @@
 /**
  * # List Concat Left
  * Concat arrays across two Objects for all keys.
- * @param {Object<string, Array>} first
- * @param {Object<string, Array>} second
- * @return {Object<string, Array>}
+ * @param {Object<string, (function|function[])>} first
+ * @param {Object<string, (function|function[])>} second
+ * @return {!Object<string, function[]>}
  */
 module.exports = function (first, second) {
     var name;
-    first = first || [];
-    second = second || [];
+    first = first || {};
+    second = second || {};
+    for (name in first) {
+        first[name] = [].concat(first[name]);
+    }
     for (name in second) {
         first[name] = [].concat(
             first[name] || [],

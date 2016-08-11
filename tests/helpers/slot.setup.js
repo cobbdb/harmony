@@ -5,6 +5,7 @@ var GroupFactory = require('../../src/modules/group-factory.js'),
     ids = require('../../src/util/id-factory.js');
 
 afterEach(function () {
+    googletag.pubadsReady = void(0);
     $('.testdiv').remove();
     GroupFactory.clear();
     masterGroup.clear();

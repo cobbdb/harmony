@@ -7,7 +7,6 @@ describe('harmony.show', function () {
     beforeEach(function () {
         Help.setupDOM();
         var conf = Help.getConf();
-        harmony.load.targeting(conf.targeting);
         harmony.load.slots(conf.slots);
     });
     describe('slot()', function () {
@@ -31,6 +30,20 @@ describe('harmony.show', function () {
             expect(googletag.display).not.toHaveBeenCalled();
             expect(googletag.defineSlot).toHaveBeenCalled();
             expect(slot.gpt.addService).not.toHaveBeenCalled();
+        });
+        it('calls refresh for already active slots', function () {
+            var slot = harmony.slot('TST00');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.slot('TST00');
+            expect(slot.active).toBe(true);
+            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.display.calls.count()).toBe(1);
+
+            harmony.show.slot('TST00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.display.calls.count()).toBe(1);
         });
     });
     describe('group()', function () {
@@ -61,6 +74,20 @@ describe('harmony.show', function () {
             expect(slot00.gpt.addService).not.toHaveBeenCalledWith(googletag.pubads());
             expect(slot01.gpt.addService).not.toHaveBeenCalledWith(googletag.pubads());
             expect(slot02.gpt.addService).toHaveBeenCalledWith(googletag.pubads());
+        });
+        it('calls refresh for already active slots', function () {
+            var slot = harmony.slot('TST02');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.group('TSTGRP00');
+            expect(slot.active).toBe(true);
+            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.display.calls.count()).toBe(2);
+
+            harmony.show.group('TSTGRP00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(2);
+            expect(googletag.display.calls.count()).toBe(2);
         });
     });
 });

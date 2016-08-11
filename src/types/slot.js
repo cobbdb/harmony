@@ -46,9 +46,6 @@ module.exports = function (opts) {
     if (opts.mapping) {
         slot.defineSizeMapping(opts.mapping);
     }
-    if (opts.companion) {
-        slot.addService(googletag.companionAds());
-    }
 
     return {
         name: opts.name,
@@ -89,6 +86,9 @@ module.exports = function (opts) {
                     }
                 });
                 slot.addService(pubads);
+                if (this.companion) {
+                    slot.addService(googletag.companionAds());
+                }
                 this.active = true;
             }
         }

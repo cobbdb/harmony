@@ -1,6 +1,6 @@
 var log = require('../src/modules/log.js');
 
-describe('Logging', function () {
+describe('log', function () {
     it('is disabled by default', function () {
         log('test', 'abc123');
         var readback = log.readback.master();
