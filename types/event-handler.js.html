@@ -3,14 +3,14 @@
 <head>
   <title>event-handler.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="doc-style.css" />
-  <script src="doc-filelist.js"></script>
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\event-handler.js";
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\types\\event-handler.js";
     var defaultSidebar = true;
   </script>
-  <script src="doc-script.js"></script>
+  <script src="../doc-script.js"></script>
 
 </head>
 <body>
@@ -27,19 +27,23 @@
       </div>
 
       <div class="heading h2">
-        <a href="#harmony.on-name-callback-lazy">harmony.on(name, callback, [lazy])</a>
+        <a href="#triggercache">triggerCache</a>
       </div>
 
       <div class="heading h2">
-        <a href="#harmony.one-name-callback-lazy">harmony.one(name, callback, [lazy])</a>
+        <a href="#handler.on-name-callback-lazy">handler.on(name, callback, [lazy])</a>
       </div>
 
       <div class="heading h2">
-        <a href="#harmony.off-name">harmony.off([name])</a>
+        <a href="#handler.one-name-callback-lazy">handler.one(name, callback, [lazy])</a>
       </div>
 
       <div class="heading h2">
-        <a href="#harmony.trigger-name-data">harmony.trigger(name, data)</a>
+        <a href="#handler.off-name">handler.off([name])</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#handler.trigger-name-data">handler.trigger(name, [data])</a>
       </div>
 
     </div>
@@ -61,16 +65,11 @@
 Eventable
   </h1>
 </div>
-<p>Class for generic event handling.
-Initial events are loaded as a generic object of <code>&lt;name&gt;:&lt;callback&gt;</code>.
-For example:</p>
-<pre><code class="javascript">Eventable({
+<p>Class for generic event handling.</p>
+<pre><code class="javascript">EventHandler({
     events: {
         eventName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{},
-        otherName: [
-            <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{},
-            <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{}
-        ]
+        otherName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{}
     },
     singles: {
         anotherName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{}
@@ -84,22 +83,20 @@ For example:</p>
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.events]</span>
-<span class="dox_type">Object</span>
+<span class="dox_type">Object.&lt;string, function|Array.&lt;function&gt;&gt;</span>
 <span>Event callbacks to fire each time the event is triggered.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.singles]</span>
-<span class="dox_type">Object</span>
+<span class="dox_type">Object.&lt;string, function|Array.&lt;function&gt;&gt;</span>
 <span>Event callbacks to fire only once the next time the event is triggered.
 </span>
 </div>
 <div class="dox_tag_title">Returns</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name"></span>
-<span class="dox_type">Object</span>
-<span>Can be used by BaseClass.extend().
-</span>
+<span class="dox_type">EventHandler</span>
 </div>
 </div>
 </div>
@@ -116,10 +113,25 @@ For example:</p>
     
       <tr>
         <td class="docs">
-          <div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2"></a>
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="triggercache">
+  <h2>
+    <a href="#triggercache" name="triggercache" class="pilcrow"></a>
+triggerCache
+  </h2>
 </div>
 <p>Cache of events that have already been triggered once.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Object.&lt;string, *&gt;</span>
+</div>
+</div>
+</div>
 
         </td>
         <td class="code highlight">
@@ -140,14 +152,10 @@ For example:</p>
         <td class="code highlight">
           <pre class="javascript">    opts = opts || {};
     <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> opts.events) {
-        events[name] = [].concat(
-            opts.events[name] || []
-        );
+        events[name] = opts.events[name];
     }
     <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> opts.singles) {
-        singles[name] = [].concat(
-            opts.singles[name] || []
-        );
+        singles[name] = opts.singles[name];
     }
 
     <span class="hljs-keyword">return</span> {
@@ -159,10 +167,10 @@ For example:</p>
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.on-name-callback-lazy">
+<div class="pilwrap" id="handler.on-name-callback-lazy">
   <h2>
-    <a href="#harmony.on-name-callback-lazy" name="harmony.on-name-callback-lazy" class="pilcrow"></a>
-harmony.on(name, callback, [lazy])
+    <a href="#handler.on-name-callback-lazy" name="handler.on-name-callback-lazy" class="pilcrow"></a>
+handler.on(name, callback, [lazy])
   </h2>
 </div>
 <p>Bind a callback to an event. Callback will run each
@@ -174,19 +182,19 @@ time the event is triggered.</p>
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Event name.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">cb</span>
-<span class="dox_type">Function</span>
+<span class="dox_type">function(?)</span>
 <span>Event callback.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[lazy]</span>
-<span class="dox_type">Boolean</span>
+<span class="dox_type">boolean</span>
 <span>True if this callback should not fire immediately if the event has already been triggered.
 </span>
 </div>
@@ -197,7 +205,7 @@ time the event is triggered.</p>
         <td class="code highlight">
           <pre class="javascript">        on: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, cb, lazy</span>) </span>{
             <span class="hljs-keyword">if</span> (!lazy &amp;&amp; name <span class="hljs-keyword">in</span> triggerCache) {
-                cb.call(<span class="hljs-keyword">this</span>, triggerCache[name].data);
+                cb(triggerCache[name]);
             }
             events[name] = events[name] || [];
             events[name].push(cb);
@@ -210,10 +218,10 @@ time the event is triggered.</p>
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.one-name-callback-lazy">
+<div class="pilwrap" id="handler.one-name-callback-lazy">
   <h2>
-    <a href="#harmony.one-name-callback-lazy" name="harmony.one-name-callback-lazy" class="pilcrow"></a>
-harmony.one(name, callback, [lazy])
+    <a href="#handler.one-name-callback-lazy" name="handler.one-name-callback-lazy" class="pilcrow"></a>
+handler.one(name, callback, [lazy])
   </h2>
 </div>
 <p>Bind a callback to an event. Callback will run only
@@ -225,19 +233,19 @@ once the next time the event is triggered.</p>
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Event name.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">cb</span>
-<span class="dox_type">Function</span>
+<span class="dox_type">function(?)</span>
 <span>Event callback.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[lazy]</span>
-<span class="dox_type">Boolean</span>
+<span class="dox_type">boolean</span>
 <span>True if this callback should not fire immediately if the event has already been triggered.
 </span>
 </div>
@@ -248,7 +256,7 @@ once the next time the event is triggered.</p>
         <td class="code highlight">
           <pre class="javascript">        one: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, cb, lazy</span>) </span>{
             <span class="hljs-keyword">if</span> (!lazy &amp;&amp; name <span class="hljs-keyword">in</span> triggerCache) {
-                cb.call(<span class="hljs-keyword">this</span>, triggerCache[name].data);
+                cb(triggerCache[name]);
             } <span class="hljs-keyword">else</span> {
                 singles[name] = singles[name] || [];
                 singles[name].push(cb);
@@ -262,10 +270,10 @@ once the next time the event is triggered.</p>
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.off-name">
+<div class="pilwrap" id="handler.off-name">
   <h2>
-    <a href="#harmony.off-name" name="harmony.off-name" class="pilcrow"></a>
-harmony.off([name])
+    <a href="#handler.off-name" name="handler.off-name" class="pilcrow"></a>
+handler.off([name])
   </h2>
 </div>
 <p>Clear all callbacks from an event.</p>
@@ -276,7 +284,7 @@ harmony.off([name])
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[name]</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Event name. Empty to clear all callbacks from the system.
 </span>
 </div>
@@ -303,10 +311,10 @@ harmony.off([name])
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.trigger-name-data">
+<div class="pilwrap" id="handler.trigger-name-data">
   <h2>
-    <a href="#harmony.trigger-name-data" name="harmony.trigger-name-data" class="pilcrow"></a>
-harmony.trigger(name, data)
+    <a href="#handler.trigger-name-data" name="handler.trigger-name-data" class="pilcrow"></a>
+handler.trigger(name, [data])
   </h2>
 </div>
 <p>Immediately trigger an event.</p>
@@ -317,13 +325,12 @@ harmony.trigger(name, data)
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Event name.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[data]</span>
-<span class="dox_type">Any</span>
 <span>Any data you wish to provide to all event callbacks.
 </span>
 </div>
@@ -333,15 +340,14 @@ harmony.trigger(name, data)
         </td>
         <td class="code highlight">
           <pre class="javascript">        trigger: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, data</span>) </span>{
-            <span class="hljs-keyword">var</span> that = <span class="hljs-keyword">this</span>;
             <span class="hljs-keyword">if</span> (name <span class="hljs-keyword">in</span> events) {
                 events[name].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cb</span>) </span>{
-                    cb.call(that, data);
+                    cb(data);
                 });
             }
             <span class="hljs-keyword">if</span> (name <span class="hljs-keyword">in</span> singles) {
                 singles[name].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cb</span>) </span>{
-                    cb.call(that, data);
+                    cb(data);
                 });
                 singles[name] = [];
             }
@@ -358,9 +364,7 @@ harmony.trigger(name, data)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">            triggerCache[name] = {
-                data: data
-            };
+          <pre class="javascript">            triggerCache[name] = data;
         }
     };
 };

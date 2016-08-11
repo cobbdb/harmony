@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>list-concat-left.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\util\\list-concat-left.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#list-concat-left">List Concat Left</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="list-concat-left">
+  <h1>
+    <a href="#list-concat-left" name="list-concat-left" class="pilcrow"></a>
+List Concat Left
+  </h1>
+</div>
+<p>Concat arrays across two Objects for all keys.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">first</span>
+<span class="dox_type">Object.&lt;string, function|Array.&lt;function&gt;&gt;</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">second</span>
+<span class="dox_type">Object.&lt;string, function|Array.&lt;function&gt;&gt;</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object.&lt;string, Array.&lt;function&gt;&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">first, second</span>) </span>{
+    <span class="hljs-keyword">var</span> name;
+    first = first || {};
+    second = second || {};
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> first) {
+        first[name] = [].concat(first[name]);
+    }
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> second) {
+        first[name] = [].concat(
+            first[name] || [],
+            second[name]
+        );
+    }
+    <span class="hljs-keyword">return</span> first;
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

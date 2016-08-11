@@ -3,14 +3,14 @@
 <head>
   <title>breakpoint-watcher.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="doc-style.css" />
-  <script src="doc-filelist.js"></script>
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\breakpoint-watcher.js";
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\modules\\breakpoint-watcher.js";
     var defaultSidebar = true;
   </script>
-  <script src="doc-script.js"></script>
+  <script src="../doc-script.js"></script>
 
 </head>
 <body>
@@ -46,10 +46,6 @@
         <a href="#watcher.run-throttle">watcher.run(throttle)</a>
       </div>
 
-      <div class="heading h2">
-        <a href="#watcher.ononeofftrigger">watcher.on/one/off/trigger</a>
-      </div>
-
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -74,8 +70,8 @@
 
         </td>
         <td class="code highlight">
-          <pre class="javascript"><span class="hljs-keyword">var</span> BaseClass = <span class="hljs-built_in">require</span>(<span class="hljs-string">'baseclassjs'</span>),
-    Eventable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>),
+          <pre class="javascript"><span class="hljs-keyword">var</span> EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/event-handler.js'</span>),
+    events = EventHandler(),
     screen = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./screen.js'</span>),
     running = <span class="hljs-literal">false</span>,
     ready = <span class="hljs-literal">true</span>,
@@ -102,14 +98,18 @@ Breakpoint Watcher
 <div class="details">
 <div class="dox_tag_title">Type</div>
 <div class="dox_tag_detail">
-<span class="dox_type">BaseClass</span>
+<span class="dox_type">BreakpointWatcher</span>
 </div>
 </div>
 </div>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = BaseClass({
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+    on: events.on,
+    one: events.one,
+    off: events.off,
+    trigger: events.trigger,
 </pre>
         </td>
       </tr>
@@ -291,7 +291,7 @@ watcher.run(throttle)
             <span class="hljs-keyword">var</span> current = <span class="hljs-built_in">module</span>.exports.current();
             <span class="hljs-keyword">if</span> (current !== last) {
                 last = current;
-                <span class="hljs-built_in">module</span>.exports.trigger(<span class="hljs-string">'update'</span>, current);
+                events.trigger(<span class="hljs-string">'update'</span>, current);
             }
         }
 
@@ -324,36 +324,7 @@ watcher.run(throttle)
         }
         checkUpdate();
     }
-}).extend(
-</pre>
-        </td>
-      </tr>
-    
-      <tr>
-        <td class="docs">
-          <div class="dox">
-<div class="summary">
-<div class="pilwrap" id="watcher.ononeofftrigger">
-  <h2>
-    <a href="#watcher.ononeofftrigger" name="watcher.ononeofftrigger" class="pilcrow"></a>
-watcher.on/one/off/trigger
-  </h2>
-</div>
-</div>
-<div class="body">
-</div>
-<div class="details">
-<div class="dox_tag_title">See</div>
-<div class="dox_tag_detail">
-<span class="dox_type">&lt;a href=&#34;event-handler.js&#34;&gt;event-handler.js&lt;/a&gt;</span>
-</div>
-</div>
-</div>
-
-        </td>
-        <td class="code highlight">
-          <pre class="javascript">    Eventable()
-);
+};
 
 </pre>
         </td>

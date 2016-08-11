@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slot-factory.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\util\\slot-factory.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#slot-factory">Slot Factory</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-factory">
+  <h1>
+    <a href="#slot-factory" name="slot-factory" class="pilcrow"></a>
+Slot Factory
+  </h1>
+</div>
+<p>Constructs a new adSlot in the page.
+Three different scenarios here:</p>
+<ol>
+<li>AdSlot exists already, return it.</li>
+<li>Slot's conf exists already, convert to AdSlot and return it.</li>
+<li>No data found, return mock.</li>
+</ol>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> AdSlot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/ad-slot.js'</span>),
+    MockSlot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/mock-slot.js'</span>),
+    Groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/group-factory.js'</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+    <span class="hljs-keyword">var</span> slot = slotset.get(name);
+    <span class="hljs-keyword">var</span> slot = Groups.master.get(name);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>Load inactive slots into DFP.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (!slot.active &amp;&amp; !slot.mock) {
+        slot = AdSlot(slot);
+        slotset.add(slot);
+    }
+    <span class="hljs-keyword">return</span> slot;
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

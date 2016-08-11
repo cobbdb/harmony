@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>adslot.js</title>
+  <title>ad-slot.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="doc-style.css" />
-  <script src="doc-filelist.js"></script>
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\adslot.js";
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\types\\ad-slot.js";
     var defaultSidebar = true;
   </script>
-  <script src="doc-script.js"></script>
+  <script src="../doc-script.js"></script>
 
 </head>
 <body>
@@ -68,7 +68,7 @@
     
       <tr>
         <td class="docs">
-          <h1>adslot.js</h1>
+          <h1>ad-slot.js</h1>
         </td>
         <td class="code highlight"></td>
       </tr>
@@ -83,7 +83,7 @@
         </td>
         <td class="code highlight">
           <pre class="javascript"><span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log.js'</span>),
-    set = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./slot-set.js'</span>),
+    slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./slot-set.js'</span>),
     BaseClass = <span class="hljs-built_in">require</span>(<span class="hljs-string">'baseclassjs'</span>),
     Eventable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>);
 
@@ -106,80 +106,81 @@ Ad Slot
 <div class="body">
 </div>
 <div class="details">
-<div class="dox_tag_title">Type</div>
-<div class="dox_tag_detail">
-<span class="dox_type">BaseClass</span>
-</div>
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
+<span class="dox_tag_name">opts</span>
+<span class="dox_type">Object</span>
+</div>
+<div class="dox_tag_detail">
 <span class="dox_tag_name">opts.name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Slot name, ex) RP01
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">opts.id</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Slot's div id, ex) ad-div-RP01
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">opts.sizes</span>
-<span class="dox_type">Array</span>
-<span>One or many 2D arrays, ex) [300, 250]
+<span class="dox_type">Array.&lt;number, number&gt;</span>
+<span class="dox_type">Array.&lt;Array.&lt;number, number&gt;&gt;</span>
+<span>ex) [300, 250] or [[88, 31], [300, 600]]
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">opts.adunit</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Full ad unit code.
 </span>
 </div>
 <div class="dox_tag_detail">
-<span class="dox_tag_name">[opts.targeting]</span>
-<span class="dox_type">Object</span>
-<span>Slot-specific targeting.
-</span>
-</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">[opts.mapping]</span>
-<span class="dox_type">Array</span>
-<span>Size mapping.
-</span>
-</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">[opts.companion]</span>
-<span class="dox_type">Boolean</span>
-<span>True if companion ad.
-</span>
-</div>
-<div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.group]</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 <span>Slot group name.
 </span>
 </div>
 <div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.targeting]</span>
+<span class="dox_type">Object.&lt;string, string&gt;</span>
+<span>Slot-specific targeting.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.companion]</span>
+<span class="dox_type">boolean</span>
+<span>True if companion ad.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.mapping]</span>
+<span class="dox_type">SizeMapping</span>
+<span>Size mapping.
+</span>
+</div>
+<div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.interstitial]</span>
-<span class="dox_type">Boolean</span>
+<span class="dox_type">boolean</span>
 <span>True if out-of-page ad.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.enabled]</span>
-<span class="dox_type">Boolean</span>
+<span class="dox_type">boolean</span>
 <span>False if ineligible to make ad calls.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.on]</span>
-<span class="dox_type">Object</span>
+<span class="dox_type">Object.&lt;string, function(?)&gt;</span>
 <span>Dictionary of callbacks.
 </span>
 </div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">[opts.one]</span>
-<span class="dox_type">Object</span>
+<span class="dox_type">Object.&lt;string, function(?)&gt;</span>
 <span>Dictionary of single-run callbacks.
 </span>
 </div>
@@ -188,13 +189,17 @@ Ad Slot
 <span class="dox_tag_name"></span>
 <span class="dox_type">AdSlot</span>
 </div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder">https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder</a>
+</div>
 </div>
 </div>
 
         </td>
         <td class="code highlight">
           <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">pubads, opts</span>) </span>{
-    <span class="hljs-keyword">var</span> slot, name, cbCache,
+    <span class="hljs-keyword">var</span> name, cbCache, slot,
 </pre>
         </td>
       </tr>
@@ -223,12 +228,14 @@ Ad Slot
           <div class="pilwrap">
   <a class="pilcrow" href="#section-4" id="section-4"></a>
 </div>
-<p>Smoke test that the slot's element id is valid in the DOM.</p>
+<p>Define which type of slot this is.</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    <span class="hljs-keyword">if</span> (!global.document.getElementById(opts.id)) {
-        <span class="hljs-keyword">throw</span> global.Error(<span class="hljs-string">'Ad slot container was not found in the DOM.'</span>);
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (opts.interstitial) {
+        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+    } <span class="hljs-keyword">else</span> {
+        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
 
 </pre>
@@ -240,30 +247,11 @@ Ad Slot
           <div class="pilwrap">
   <a class="pilcrow" href="#section-5" id="section-5"></a>
 </div>
-<p>Define which type of slot this is.</p>
-
-        </td>
-        <td class="code highlight">
-          <pre class="javascript">    <span class="hljs-keyword">if</span> (opts.interstitial) {
-        slot = global.googletag.defineOutOfPageSlot(opts.adunit, opts.id);
-    } <span class="hljs-keyword">else</span> {
-        slot = global.googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
-    }
-
-</pre>
-        </td>
-      </tr>
-    
-      <tr>
-        <td class="docs">
-          <div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6"></a>
-</div>
 <p>Deep merge all event callbacks.</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    cbCache = set.cached.callbacks(opts.name);
+          <pre class="javascript">    cbCache = slots.cached.callbacks(opts.name);
     opts.on = opts.on || [];
     <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> opts.on) {
         cbCache.events[name] = cbCache.events[name] || [];
@@ -524,7 +512,7 @@ harmony.slot(name).active
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-15" id="section-15"></a>
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
 </div>
 <p>Set slot-specific targeting. No need to introspect
 because unused targeting is ignored by dfp.</p>
@@ -542,13 +530,13 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-16" id="section-16"></a>
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
 </div>
 <p>Load in any targeting set before this slow was defined.</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    targeting = set.cached.targeting(opts.name);
+          <pre class="javascript">    targeting = slots.cached.targeting(opts.name);
     <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
         slot.setTargeting(name, targeting[name]);
     }
@@ -560,7 +548,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17"></a>
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
 </div>
 <p>Assign size mapping for responsive ad slots.</p>
 
@@ -575,7 +563,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18"></a>
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
 </div>
 <p>Load any provided callback into queue.
 <code>opts.callback</code> is legacy.</p>
@@ -593,7 +581,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-19" id="section-19"></a>
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
 </div>
 <p>Attach a listener for the slotRenderEnded event.</p>
 
@@ -617,7 +605,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20"></a>
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
 </div>
 <p>Trigger any attached behaviors.</p>
 
@@ -634,7 +622,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-21" id="section-21"></a>
+  <a class="pilcrow" href="#section-20" id="section-20"></a>
 </div>
 <p>Assign companion ad service if requested.</p>
 
@@ -653,7 +641,7 @@ because unused targeting is ignored by dfp.</p>
       <tr>
         <td class="docs">
           <div class="pilwrap">
-  <a class="pilcrow" href="#section-22" id="section-22"></a>
+  <a class="pilcrow" href="#section-21" id="section-21"></a>
 </div>
 <p>Add the publisher service and return the new slot.</p>
 

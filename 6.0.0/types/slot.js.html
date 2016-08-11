@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slot.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\types\\slot.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#ad-slot">Ad Slot</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#slot">Slot</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#name">name</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#id">id</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#sizes">sizes</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#adunit">adunit</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#group">group</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#companion">companion</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#outofpage">outofpage</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#enabled">enabled</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#on">on()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#one">one()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#off">off()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#trigger">trigger()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#active">active</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#gpt">gpt</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#activate">activate()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#slot.on-slotrenderended-callback">slot.on(&#39;slotRenderEnded&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#slot.on-impressionviewable-callback">slot.on(&#39;impressionViewable&#39;, callback)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="ad-slot">
+  <h1>
+    <a href="#ad-slot" name="ad-slot" class="pilcrow"></a>
+Ad Slot
+  </h1>
+</div>
+<p>Constructs a new adSlot in the page.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts</span>
+<span class="dox_type">Object</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.name</span>
+<span class="dox_type">string</span>
+<span>Slot name, ex) RP01
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.id</span>
+<span class="dox_type">string</span>
+<span>Slot's div id, ex) ad-div-RP01
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.sizes</span>
+<span class="dox_type">Array.&lt;number, number&gt;</span>
+<span class="dox_type">Array.&lt;Array.&lt;number, number&gt;&gt;</span>
+<span>ex) [300, 250] or [[88, 31], [300, 600]]
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">opts.adunit</span>
+<span class="dox_type">string</span>
+<span>Full ad unit code.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.group]</span>
+<span class="dox_type">string</span>
+<span>Slot group name.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.targeting]</span>
+<span class="dox_type">Object.&lt;string, string&gt;</span>
+<span>Slot-specific targeting.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.companion]</span>
+<span class="dox_type">boolean</span>
+<span>True if companion ad.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.mapping]</span>
+<span class="dox_type">SizeMapping</span>
+<span>Size mapping.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.outofpage]</span>
+<span class="dox_type">boolean</span>
+<span>True if out-of-page ad.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.enabled]</span>
+<span class="dox_type">boolean</span>
+<span>False if ineligible to make ad calls.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.on]</span>
+<span class="dox_type">Object.&lt;string, function&gt;</span>
+<span>Dictionary of callbacks.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[opts.one]</span>
+<span class="dox_type">Object.&lt;string, function&gt;</span>
+<span>Dictionary of single-run callbacks.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">AdSlot</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder">https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/log.js'</span>),
+    SlotCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/slot-cache.js'</span>),
+    EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>),
+    googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>),
+    concatLeft = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/list-concat-left.js'</span>),
+    mergeLeft = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/map-merge-left.js'</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">opts</span>) </span>{
+    <span class="hljs-keyword">var</span> slot, name,
+        cache = SlotCache(opts.name),
+        events = EventHandler({
+            events: concatLeft(opts.on, cache.get.events()),
+            singles: concatLeft(opts.one, cache.get.singles())
+        }),
+        targeting = mergeLeft(opts.targeting, cache.get.targeting());
+
+    <span class="hljs-keyword">if</span> (opts.outofpage) {
+        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+    } <span class="hljs-keyword">else</span> {
+        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+    }
+    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
+        slot.setTargeting(name, targeting[name]);
+    }
+    <span class="hljs-keyword">if</span> (opts.mapping) {
+        slot.defineSizeMapping(opts.mapping);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot">
+  <h2>
+    <a href="#slot" name="slot" class="pilcrow"></a>
+Slot
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Slot</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">return</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="name">
+  <h3>
+    <a href="#name" name="name" class="pilcrow"></a>
+name
+  </h3>
+</div>
+<p>Name of this slot in the system.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        name: opts.name,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="id">
+  <h3>
+    <a href="#id" name="id" class="pilcrow"></a>
+id
+  </h3>
+</div>
+<p>DOM element id of this slot's container.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        id: opts.id,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="sizes">
+  <h3>
+    <a href="#sizes" name="sizes" class="pilcrow"></a>
+sizes
+  </h3>
+</div>
+<p>List of <em>possible</em> sizes this slot can accept.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Array.&lt;number, number&gt;</span>
+<span class="dox_type">Array.&lt;Array.&lt;number, number&gt;&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        sizes: opts.sizes,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="adunit">
+  <h3>
+    <a href="#adunit" name="adunit" class="pilcrow"></a>
+adunit
+  </h3>
+</div>
+<p>Fully qualified adunit this slot is targeting.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        adunit: opts.adunit,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="group">
+  <h3>
+    <a href="#group" name="group" class="pilcrow"></a>
+group
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Group</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Group</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        group: opts.group || <span class="hljs-literal">null</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="companion">
+  <h3>
+    <a href="#companion" name="companion" class="pilcrow"></a>
+companion
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        companion: opts.companion || <span class="hljs-literal">false</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="outofpage">
+  <h3>
+    <a href="#outofpage" name="outofpage" class="pilcrow"></a>
+outofpage
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        outofpage: opts.outofpage || <span class="hljs-literal">false</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="enabled">
+  <h3>
+    <a href="#enabled" name="enabled" class="pilcrow"></a>
+enabled
+  </h3>
+</div>
+<p>True when this slot is eligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        enabled: opts.enabled === <span class="hljs-literal">false</span> ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="on">
+  <h3>
+    <a href="#on" name="on" class="pilcrow"></a>
+on()
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, function)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">EventHandler</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        on: events.on,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="one">
+  <h3>
+    <a href="#one" name="one" class="pilcrow"></a>
+one()
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, function)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">EventHandler</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        one: events.one,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="off">
+  <h3>
+    <a href="#off" name="off" class="pilcrow"></a>
+off()
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function()</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">EventHandler</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        off: events.off,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="trigger">
+  <h3>
+    <a href="#trigger" name="trigger" class="pilcrow"></a>
+trigger()
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, ?)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">EventHandler</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        trigger: events.trigger,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="active">
+  <h3>
+    <a href="#active" name="active" class="pilcrow"></a>
+active
+  </h3>
+</div>
+<p><em>Danger Zone</em> True when this slot has already been displayed.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        active: <span class="hljs-literal">false</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="gpt">
+  <h3>
+    <a href="#gpt" name="gpt" class="pilcrow"></a>
+gpt
+  </h3>
+</div>
+<p><em>Danger Zone</em> The registered GPT Slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">googletag.Slot</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.Slot">https://developers.google.com/doubleclick-gpt/reference#googletag.Slot</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        gpt: slot,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="activate">
+  <h3>
+    <a href="#activate" name="activate" class="pilcrow"></a>
+activate()
+  </h3>
+</div>
+<p><em>Danger Zone</em></p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        activate: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.active) {
+                <span class="hljs-keyword">var</span> pubads = googletag.pubads();
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot.on-slotrenderended-callback">
+  <h2>
+    <a href="#slot.on-slotrenderended-callback" name="slot.on-slotrenderended-callback" class="pilcrow"></a>
+slot.on('slotRenderEnded', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.SlotRenderEndedEvent)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">                pubads.addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+                    <span class="hljs-keyword">if</span> (event.slot === slot) {
+                        events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+                    }
+                });
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot.on-impressionviewable-callback">
+  <h2>
+    <a href="#slot.on-impressionviewable-callback" name="slot.on-impressionviewable-callback" class="pilcrow"></a>
+slot.on('impressionViewable', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.ImpressionViewableEvent)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">                pubads.addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+                    <span class="hljs-keyword">if</span> (event.slot === slot) {
+                        events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
+                    }
+                });
+                slot.addService(pubads);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.companion) {
+                    slot.addService(googletag.companionAds());
+                }
+                <span class="hljs-keyword">this</span>.active = <span class="hljs-literal">true</span>;
+            }
+        }
+    };
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

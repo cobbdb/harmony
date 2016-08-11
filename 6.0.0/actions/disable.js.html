@@ -27,11 +27,15 @@
       </div>
 
       <div class="heading h2">
-        <a href="#harmony.disable.slot-name">harmony.disable.slot(name)</a>
+        <a href="#harmony.disable">harmony.disable</a>
       </div>
 
-      <div class="heading h2">
-        <a href="#harmony.disable.group-name">harmony.disable.group(name)</a>
+      <div class="heading h3">
+        <a href="#slot-name">slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#group-name">group(name)</a>
       </div>
 
     </div>
@@ -62,10 +66,9 @@ Disable Action
         </td>
         <td class="code highlight">
           <pre class="javascript">
-<span class="hljs-keyword">var</span> slots = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../slot-set.js'</span>),
-    groups = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../group-set.js'</span>);
+<span class="hljs-keyword">var</span> SlotFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/slot-factory.js'</span>),
+    GroupFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/group-factory.js'</span>);
 
-<span class="hljs-built_in">module</span>.exports = {
 </pre>
         </td>
       </tr>
@@ -74,11 +77,33 @@ Disable Action
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.disable.slot-name">
+<div class="pilwrap" id="harmony.disable">
   <h2>
-    <a href="#harmony.disable.slot-name" name="harmony.disable.slot-name" class="pilcrow"></a>
-harmony.disable.slot(name)
+    <a href="#harmony.disable" name="harmony.disable" class="pilcrow"></a>
+harmony.disable
   </h2>
+</div>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-name">
+  <h3>
+    <a href="#slot-name" name="slot-name" class="pilcrow"></a>
+slot(name)
+  </h3>
 </div>
 <p>Marks this slot as ineligible to make ad calls.</p>
 </div>
@@ -88,7 +113,7 @@ harmony.disable.slot(name)
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 </div>
 </div>
 </div>
@@ -96,7 +121,7 @@ harmony.disable.slot(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        slots.get(name).enabled = <span class="hljs-literal">false</span>;
+        SlotFactory.get(name).enabled = <span class="hljs-literal">false</span>;
     },
 </pre>
         </td>
@@ -106,11 +131,11 @@ harmony.disable.slot(name)
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="harmony.disable.group-name">
-  <h2>
-    <a href="#harmony.disable.group-name" name="harmony.disable.group-name" class="pilcrow"></a>
-harmony.disable.group(name)
-  </h2>
+<div class="pilwrap" id="group-name">
+  <h3>
+    <a href="#group-name" name="group-name" class="pilcrow"></a>
+group(name)
+  </h3>
 </div>
 <p>Marks each slot in this group as ineligible to make ad calls.</p>
 </div>
@@ -120,7 +145,7 @@ harmony.disable.group(name)
 <div class="dox_tag_title">Params</div>
 <div class="dox_tag_detail">
 <span class="dox_tag_name">name</span>
-<span class="dox_type">String</span>
+<span class="dox_type">string</span>
 </div>
 </div>
 </div>
@@ -128,12 +153,10 @@ harmony.disable.group(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> i,
-            group = groups.get(name),
-            len = group.length;
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
-            group[i].enabled = <span class="hljs-literal">false</span>;
-        }
+        <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
+        group.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+            slot.enabled = <span class="hljs-literal">false</span>;
+        });
     }
 };
 

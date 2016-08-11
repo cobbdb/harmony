@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slot-cache.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\modules\\slot-cache.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#slot-cache">Slot Cache</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#cache-name">Cache(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#cache.set">cache.set</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#event-name-callback">event(name, callback)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#single-name-callback">single(name, callback)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#targeting-name-value">targeting(name, value)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#cache.get">cache.get</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#events-name">events(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#singles-name">singles(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#targeting-name">targeting(name)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#cache.clear">cache.clear()</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-cache">
+  <h1>
+    <a href="#slot-cache" name="slot-cache" class="pilcrow"></a>
+Slot Cache
+  </h1>
+</div>
+<p>Cache for slots that haven't been created yet.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> singles = {},
+    events = {},
+    targeting = {};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="cache-name">
+  <h2>
+    <a href="#cache-name" name="cache-name" class="pilcrow"></a>
+Cache(name)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+<span>Name of this group.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">SlotCache</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+    <span class="hljs-keyword">return</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="cache.set">
+  <h2>
+    <a href="#cache.set" name="cache.set" class="pilcrow"></a>
+cache.set
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Object</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        set: {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="event-name-callback">
+  <h3>
+    <a href="#event-name-callback" name="event-name-callback" class="pilcrow"></a>
+event(name, callback)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">cb</span>
+<span class="dox_type">function</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            event: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, cb</span>) </span>{
+                <span class="hljs-keyword">var</span> cache = events[slot] = events[slot] || {};
+                cache[name] = cache[name] || [];
+                cache[name].push(cb);
+            },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="single-name-callback">
+  <h3>
+    <a href="#single-name-callback" name="single-name-callback" class="pilcrow"></a>
+single(name, callback)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">cb</span>
+<span class="dox_type">function</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            single: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, cb</span>) </span>{
+                <span class="hljs-keyword">var</span> cache = singles[slot] = singles[slot] || {};
+                cache[name] = cache[name] || [];
+                cache[name].push(cb);
+            },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="targeting-name-value">
+  <h3>
+    <a href="#targeting-name-value" name="targeting-name-value" class="pilcrow"></a>
+targeting(name, value)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">value</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            targeting: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, value</span>) </span>{
+                targeting[slot] = targeting[slot] || {};
+                targeting[slot][name] = value;
+            }
+        },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="cache.get">
+  <h2>
+    <a href="#cache.get" name="cache.get" class="pilcrow"></a>
+cache.get
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Object</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        get: {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="events-name">
+  <h3>
+    <a href="#events-name" name="events-name" class="pilcrow"></a>
+events(name)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array.&lt;function&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            events: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">return</span> events[slot] || [];
+            },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="singles-name">
+  <h3>
+    <a href="#singles-name" name="singles-name" class="pilcrow"></a>
+singles(name)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array.&lt;function&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            singles: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">return</span> singles[slot] || [];
+            },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="targeting-name">
+  <h3>
+    <a href="#targeting-name" name="targeting-name" class="pilcrow"></a>
+targeting(name)
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object.&lt;string, string&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            targeting: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">return</span> targeting[slot] || {};
+            }
+        }
+    };
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="cache.clear">
+  <h2>
+    <a href="#cache.clear" name="cache.clear" class="pilcrow"></a>
+cache.clear()
+  </h2>
+</div>
+<p>Flush all data from cache.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports.clear = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    singles = {};
+    events = {};
+    targeting = {};
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

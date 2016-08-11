@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>enable-services.js</title>
+  <title>id-factory.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" media="all" href="../doc-style.css" />
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\util\\enable-services.js";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\util\\id-factory.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -23,7 +23,7 @@
     <div id="headings">
 
       <div class="heading h1">
-        <a href="#gpt-services-handler">GPT Services Handler</a>
+        <a href="#id-factory">Id Factory</a>
       </div>
 
     </div>
@@ -39,13 +39,12 @@
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="gpt-services-handler">
+<div class="pilwrap" id="id-factory">
   <h1>
-    <a href="#gpt-services-handler" name="gpt-services-handler" class="pilcrow"></a>
-GPT Services Handler
+    <a href="#id-factory" name="id-factory" class="pilcrow"></a>
+Id Factory
   </h1>
 </div>
-<p>Enables all GPT services if not already done.</p>
 </div>
 <div class="body">
 </div>
@@ -53,11 +52,11 @@ GPT Services Handler
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">
-<span class="hljs-keyword">var</span> googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>);
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">if</span> (!googletag.pubadsReady) {
-        googletag.enableServices();
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+    curr: <span class="hljs-number">0</span>,
+    next: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.curr += <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.curr;
     }
 };
 

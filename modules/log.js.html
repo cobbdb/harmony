@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>googletag.js</title>
+  <title>log.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="doc-style.css" />
-  <script src="doc-filelist.js"></script>
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\googletag.js";
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\modules\\log.js";
     var defaultSidebar = true;
   </script>
-  <script src="doc-script.js"></script>
+  <script src="../doc-script.js"></script>
 
 </head>
 <body>
@@ -23,7 +23,7 @@
     <div id="headings">
 
       <div class="heading h1">
-        <a href="#dfp-global-api-object">DFP Global API Object</a>
+        <a href="#log">log</a>
       </div>
 
     </div>
@@ -39,24 +39,20 @@
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="dfp-global-api-object">
+<div class="pilwrap" id="log">
   <h1>
-    <a href="#dfp-global-api-object" name="dfp-global-api-object" class="pilcrow"></a>
-DFP Global API Object
+    <a href="#log" name="log" class="pilcrow"></a>
+log
   </h1>
 </div>
-<p><code>googletag</code> is the global API object for GPT.</p>
+<p>Expose an instance of Lumberjack.</p>
 </div>
 <div class="body">
 </div>
 <div class="details">
-<div class="dox_tag_title">Type</div>
-<div class="dox_tag_detail">
-<span class="dox_type">Object</span>
-</div>
 <div class="dox_tag_title">See</div>
 <div class="dox_tag_detail">
-<a href="https://developers.google.com/doubleclick-gpt/reference#googletag">https://developers.google.com/doubleclick-gpt/reference#googletag</a>
+<a href="https://cobbdb.github.io/lumberjack">https://cobbdb.github.io/lumberjack</a>
 </div>
 </div>
 </div>
@@ -64,9 +60,8 @@ DFP Global API Object
         </td>
         <td class="code highlight">
           <pre class="javascript">
-<span class="hljs-keyword">var</span> googletag = global.googletag = global.googletag || {};
-googletag.cmd = googletag.cmd || [];
-<span class="hljs-built_in">module</span>.exports = googletag;
+<span class="hljs-keyword">var</span> Lumberjack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lumberjackjs'</span>);
+<span class="hljs-built_in">module</span>.exports = Lumberjack();
 
 </pre>
         </td>
