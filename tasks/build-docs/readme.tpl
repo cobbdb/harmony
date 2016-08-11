@@ -9,8 +9,8 @@
 
 Simplify your DFP business logic.
 
-    $ bower install harmony
-    $ npm install harmonyjs
+    $ bower i harmony
+    $ npm i harmonyjs
 
 [![NPM info](https://nodei.co/npm/harmonyjs.png?stars=true&downloads=true)](https://nodei.co/npm-dl/harmonyjs/)
 [![NPM downloads](https://nodei.co/npm-dl/harmonyjs.png?months=6&height=2)](https://nodei.co/npm-dl/harmonyjs/)
@@ -85,8 +85,8 @@ global.console.log(harmony.version);
 Have your backend generate configurations based on admin settings and
 keep the components completely agnostic.
 ```javascript
-var myconf = {% load_ad_conf %};
-harmony.load(myconf);
+var myconf = {% generate_ad_slots %};
+harmony.load.slots(myconf);
 ```
 
 <a name="callbacks"></a>
@@ -107,14 +107,14 @@ Harmony exposes individual slot configuration for pain-free access.
 ```javascript
 var slot = harmony.slot('MY01'),
     possibleSizes = slot.sizes,
-    slotId = slot.divId,
+    slotId = slot.id,
     slotAdunit = slot.adunit;
 ```
 You can even directly call DFP slot methods.
 ```javascript
 var slot = harmony.slot('MY01'),
-    targeting = slot.getTargetingMap();
-slot.setTargeting('some', 'new targeting!');
+    targeting = slot.gpt.getTargetingMap();
+slot.gpt.setTargeting('some', 'new targeting!');
 ```
 
 <a name="eventing"></a>
@@ -138,11 +138,12 @@ harmony.slot('MY01').on('myevent', function () {});
 harmony.slot('MY01').one('myevent', function () {});
 ```
 
-###### slotRenderEnded is provided for you
-DFP's `slotRenderEnded` event is handled automatically for you
-on each slot.
+###### GPT events are provided for you
+GPT's `slotRenderEnded` and `impressionViewable` events are handled
+automatically for you on each slot.
 ```javascript
 harmony.slot('MY01').on('slotRenderEnded', function (event) {});
+harmony.slot('MY01').on('impressionViewable', function (event) {});
 ```
 
 ###### bind lazy events
