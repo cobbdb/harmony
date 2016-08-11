@@ -1,5 +1,5 @@
-var BaseClass = require('baseclassjs'),
-    Eventable = require('./event-handler.js'),
+var EventHandler = require('../types/event-handler.js'),
+    events = EventHandler(),
     screen = require('./screen.js'),
     running = false,
     ready = true,
@@ -8,10 +8,14 @@ var BaseClass = require('baseclassjs'),
 
 /**
  * # Breakpoint Watcher
- * @type {BaseClass}
+ * @type {BreakpointWatcher}
  * @extends {EventHandler}
  */
-module.exports = BaseClass({
+module.exports = {
+    on: events.on,
+    one: events.one,
+    off: events.off,
+    trigger: events.trigger,
     /**
      * ## watcher.current()
      * @return {Number} Current breakpoint.
@@ -64,7 +68,7 @@ module.exports = BaseClass({
             var current = module.exports.current();
             if (current !== last) {
                 last = current;
-                module.exports.trigger('update', current);
+                events.trigger('update', current);
             }
         }
 
@@ -85,10 +89,4 @@ module.exports = BaseClass({
         }
         checkUpdate();
     }
-}).extend(
-    /**
-     * ## watcher.on/one/off/trigger
-     * @see <a href="event-handler.js">event-handler.js</a>
-     */
-    Eventable()
-);
+};

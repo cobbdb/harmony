@@ -1,15 +1,16 @@
-var googletag = require('../../src/googletag.js');
+var googletag = require('../../src/modules/googletag.js');
 
 /**
  * Mock the DFP API and construction options.
  */
 beforeEach(function () {
-    // Pubads service.
+    // GPT service spies.
     var pubadsSpy = jasmine.createSpyObj('pubads', [
         'setTargeting',
         'addEventListener',
         'refresh'
     ]);
+    var compAdsSpy = jasmine.createSpy('compads');
 
     // Create GPT API members.
     googletag.defineSlot = jasmine.createSpy('defineSlot');
@@ -21,7 +22,10 @@ beforeEach(function () {
 
     // API behaviors.
     googletag.pubads.and.returnValue(pubadsSpy);
-    googletag.enableServices.and.stub();
+    googletag.companionAds.and.returnValue(compAdsSpy);
+    googletag.enableServices.and.callFake(function () {
+        googletag.pubadsReady = true;
+    });
     googletag.defineOutOfPageSlot.and.callFake(function () {
         return jasmine.createSpyObj('oop-slot', [
             'setTargeting',

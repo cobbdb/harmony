@@ -9,7 +9,7 @@
  */
 
 var ids = require('./id-factory.js'),
-    slots = require('../slot-set.js');
+    masterGroup = require('../modules/master-group.js');
 
 module.exports = function (conf) {
     var el = global.document.getElementById(conf.id),
@@ -18,10 +18,10 @@ module.exports = function (conf) {
     if (el) {
         newId = ids.next();
         conf.id = el.id = 'h-ad-' + newId;
-        if (slots.has(conf.name)) {
+        if (masterGroup.has(conf.name)) {
             conf.name += '-h' + newId;
         }
         return conf;
     }
-    throw Error('Ad slot container was not found in the DOM #' + conf.id);
+    throw Error('Ad slot ' + conf.name + ' container #' + conf.id + ' was not found!');
 };

@@ -4,124 +4,129 @@
  * View this <a href="https://github.com/cobbdb/harmony">project on GitHub</a>.
  */
 
-var log = require('./log.js'),
-    slots = require('./slot-set.js'),
-    groups = require('./group-set.js'),
-    BaseClass = require('baseclassjs'),
-    Eventable = require('./event-handler.js'),
-    watcher = require('./breakpoint-watcher.js'),
-    googletag = require('./googletag.js');
-
-log('init', 'Harmony defined.');
+var log = require('./modules/log.js'),
+    SlotFactory = require('./modules/slot-factory.js'),
+    GroupFactory = require('./modules/group-factory.js'),
+    EventHandler = require('./types/event-handler.js'),
+    events = EventHandler(),
+    watcher = require('./modules/breakpoint-watcher.js'),
+    googletag = require('./modules/googletag.js');
 
 /**
- * ## harmony
- * @type {BaseClass}
- * @see BaseClass http://cobbdb.github.io/baseclass
+ * ## harmony.on('breakpoint/update', callback)
+ * @param {function(number)} callback Called on new breakpoint.
+ * @see EventHandler
  */
-module.exports = BaseClass({
-    _create: function () {
-        var that = this;
-        /**
-         * ## harmony.on('breakpoint/update', callback)
-         * ```javascript
-         * harmony.on('breakpoint/update', function (bp) {});
-         * harmony.one('breakpoint/update', function (bp) {});
-         * harmony.off('breakpoint/update', function (bp) {});
-         * ```
-         * @param {Function} callback Called on new breakpoint.
-         * @see <a href="event-handler.js">event-handler.js</a>
-         */
-        watcher.on('update', function (bp) {
-            that.trigger('breakpoint/update', bp);
-        });
+watcher.on('update', function (bp) {
+    events.trigger('breakpoint/update', bp);
+});
 
-        /**
-         * ## harmony.on('slotRenderEnded', callback)
-         * @param {Function} callback Called each time any ad call completes.
-         * @see <a href="event-handler.js">event-handler.js</a>
-         */
-        googletag.cmd.push(function () {
-            googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-                that.trigger('slotRenderEnded', event);
-            });
-        });
-    },
+/**
+ * ## harmony.on('slotRenderEnded', callback)
+ * @param {function(Object)} callback Called each time any ad call completes.
+ * @see EventHandler
+ * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
+ */
+googletag.cmd.push(function () {
+    googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+        events.trigger('slotRenderEnded', event);
+    });
+});
+
+module.exports = {
+    /**
+     * ## harmony.on(name, callback)
+     * @param {string} name Event name.
+     * @param {function(?)} callback
+     * @see EventHandler
+     */
+    on: events.on,
+    /**
+     * ## harmony.one(name, callback)
+     * @param {string} name Event name.
+     * @param {function(?)} callback
+     * @see EventHandler
+     */
+    one: events.one,
+    /**
+     * ## harmony.off([name])
+     * @param {string} [name] Event name or blank to unbind all events.
+     * @see EventHandler
+     */
+    off: events.off,
+    /**
+     * ## harmony.trigger(name, [data])
+     * @param {string} name Event name.
+     * @param {*} [callback] data Data passed to each event callback.
+     * @see EventHandler
+     */
+    trigger: events.trigger,
     /**
      * ## harmony.version
-     * @type {String}
+     * @type {string}
      */
     version: require('../package.json').version,
     /**
-     * ## harmony.load(config)
-     * Load a block of configuration.
-     * @see <a href="actions/load.js">actions/load.js</a>
+     * ## harmony.load
+     * Load bulk configurations into the system.
+     * @see actions/load.js
      */
     load: require('./actions/load.js'),
     /**
      * ## harmony.addBreakpoints(set)
      * Add breakpoint values in pixels.
-     * @param {Number|Number[]} [set] Breakpoints in pixels.
-     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
+     * @param {number[]} set Breakpoints in pixels.
+     * @see BreakpointWatcher
      */
     addBreakpoints: watcher.add,
     /**
      * ## harmony.getBreakpoints()
      * Fetch the list of breakpoints already loaded into the system.
-     * @return {Number[]}
-     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
+     * @return {?number[]}
+     * @see BreakpointWatcher
      */
     getBreakpoints: watcher.getAll,
     /**
      * ## harmony.breakpoint()
      * Fetch the current breakpoint.
-     * @return {Number}
-     * @see <a href="breakpoint-watcher.js">breakpoint-watcher.js</a>
+     * @return {?number}
+     * @see BreakpointWatcher
      */
     breakpoint: watcher.current,
     /**
      * ## harmony.log
-     * ### harmony.log.enable()
      * Instance of Lumberjack populated with Harmony's data.
-     * @see <a href="log.js">log.js</a>
+     * @see modules/log.js
      */
     log: log,
     /**
      * ## harmony.slot(name)
      * Safely fetch an existing ad slot or a mock slot if slot was not found.
-     * @param {String} name Name of the ad slot.
-     * @return {Object} The ad slot or a mock ad slot.
-     * @see <a href="slot-set.js">slot-set.js</a>
+     * @param {string} name Name of the ad slot.
+     * @return {!(Slot|MockSlot)}
+     * @see SlotFactory
      */
-    slot: slots.get,
-    /**
-     * ## harmony.hasSlot(name)
-     * Check if a slot has already been loaded into Harmony.
-     * @param {String} name Name of the ad slot.
-     * @return {Boolean} True if the slot has already been loaded.
-     * @see <a href="slot-set.js">slot-set.js</a>
-     */
-    hasSlot: slots.has,
+    slot: SlotFactory.get,
     /**
      * ## harmony.group(name)
      * Fetch a slot group by name.
-     * @param {String} name Name of the slot group.
-     * @return {Array} Collection of 0 or more ad slots.
-     * @see <a href="group-set.js">group-set.js</a>
+     * @param {string} name Name of the slot group.
+     * @return {!Group} Collection of 0 or more ad slots.
+     * @see GroupFactory
      */
-    group: groups.get,
+    group: GroupFactory.create,
     /**
      * ## harmony.defineSlot(config)
      * Create a new adSlot in the page.
-     * @see <a href="actions/define-slot.js">actions/define-slot.js</a>
+     * @see actions/define-slot.js
      */
-    defineSlot: require('./actions/define-slot.js'),
+    defineSlot: SlotFactory.create,
     /**
      * ## harmony.enable
      * ### harmony.enable.slot(name)
      * ### harmony.enable.group(name)
      * Marks slots as eligible to make ad calls.
-     * @see <a href="actions/enable.js">actions/enable.js</a>
+     * @see actions/enable.js
      */
     enable: require('./actions/enable.js'),
     /**
@@ -129,41 +134,15 @@ module.exports = BaseClass({
      * ### harmony.disable.slot(name)
      * ### harmony.disable.group(name)
      * Marks slots as ineligible to make ad calls.
-     * @see <a href="actions/disable.js">actions/disable.js</a>
+     * @see actions/disable.js
      */
     disable: require('./actions/disable.js'),
-    /**
-     * ## harmony.refresh
-     * ### harmony.refresh.slot(name)
-     * ### harmony.refresh.group(name)
-     * Refresh a single slot or group of slots.
-     * @see <a href="actions/refresh.js">actions/refresh.js</a>
-     */
-    refresh: require('./actions/refresh.js'),
     /**
      * ## harmony.show
      * ### harmony.show.slot(name)
      * ### harmony.show.group(name)
      * Show a slot or group of slots.
-     * @see <a href="actions/show.js">actions/show.js</a>
+     * @see actions/show.js
      */
-    show: require('./actions/show.js'),
-    /**
-     * ## harmony.hide
-     * ### harmony.hide.slot(name)
-     * ### harmony.hide.group(name)
-     * Hide a slot or group of slots.
-     * @see <a href="actions/hide.js">actions/hide.js</a>
-     */
-    hide: require('./actions/hide.js')
-}).extend(
-    /**
-     * ## harmony.on(name, callback)
-     * ## harmony.one(name, callback)
-     * ## harmony.off(name)
-     * ## harmony.trigger(name)
-     * Exposes event handling at the system level.
-     * @see <a href="event-handler.js">event-handler.js</a>
-     */
-    Eventable()
-);
+    show: require('./actions/show.js')
+};

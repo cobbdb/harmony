@@ -13,9 +13,10 @@ module.exports = function (grunt) {
             },
             default: {
                 src: [
-                    'src/*.js',
+                    'src/**/*.js',
                     'gruntfile.js',
-                    'tests/*.spec.js'
+                    'tests/**/*.spec.js',
+                    'tasks/**/*.js'
                 ]
             }
         }

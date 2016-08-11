@@ -8,19 +8,19 @@ module.exports = function (grunt) {
     grunt.loadTasks('tasks');
 
     grunt.registerTask('build', 'Build distributable without tests.', [
-        'browserify:global',
-        'uglify:build'
+        'browserify:bundle',
+        'uglify:bundle'
     ]);
     grunt.registerTask('default', 'Full build suite.', [
         'browserify',
-        'jasmine:modules',
+        'jasmine:specBundles',
         'jshint',
-        'uglify:build',
-        'jasmine:global'
+        'uglify:bundle',
+        'jasmine:bundle'
     ]);
     grunt.registerTask('test', 'Run tests.', [
-        'browserify:tests',
-        'jasmine:modules'
+        'browserify:specs',
+        'jasmine:specBundles'
     ]);
     grunt.registerTask('docs', 'Build and deploy autodocs.', [
         'build-readme',

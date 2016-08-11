@@ -3,7 +3,7 @@
  * Enables all GPT services if not already done.
  */
 
-var googletag = require('../googletag.js');
+var googletag = require('../modules/googletag.js');
 module.exports = function () {
     if (!googletag.pubadsReady) {
         googletag.enableServices();

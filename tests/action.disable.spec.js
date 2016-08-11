@@ -4,23 +4,11 @@ var harmony = require('../src/harmony.js'),
 describe('harmony.disable', function () {
     beforeEach(function () {
         Help.setupDOM();
-        harmony.load(Help.getConf());
+        var conf = Help.getConf();
+        harmony.load.slots(conf.slots);
         harmony.slot('TST00').enabled = true;
         harmony.slot('TST01').enabled = true;
         harmony.slot('TST02').enabled = true;
-    });
-    describe('group()', function () {
-        it('throws no errors when group does not exist', function () {
-            expect(function () {
-                harmony.disable.group('badgrp');
-            }).not.toThrowError();
-        });
-        it('disables all slots in the group', function () {
-            harmony.disable.group('TSTGRP00');
-            expect(harmony.slot('TST00').enabled).toBe(false);
-            expect(harmony.slot('TST01').enabled).toBe(true);
-            expect(harmony.slot('TST02').enabled).toBe(false);
-        });
     });
     describe('slot()', function () {
         it('throws no errors when slot does not exist', function () {
@@ -33,6 +21,19 @@ describe('harmony.disable', function () {
             expect(harmony.slot('TST00').enabled).toBe(true);
             expect(harmony.slot('TST01').enabled).toBe(false);
             expect(harmony.slot('TST02').enabled).toBe(true);
+        });
+    });
+    describe('group()', function () {
+        it('throws no errors when group does not exist', function () {
+            expect(function () {
+                harmony.disable.group('badgrp');
+            }).not.toThrowError();
+        });
+        it('disables all slots in the group', function () {
+            harmony.disable.group('TSTGRP00');
+            expect(harmony.slot('TST00').enabled).toBe(false);
+            expect(harmony.slot('TST01').enabled).toBe(true);
+            expect(harmony.slot('TST02').enabled).toBe(false);
         });
     });
 });
