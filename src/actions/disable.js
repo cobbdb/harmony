@@ -6,9 +6,12 @@
 var SlotFactory = require('../modules/slot-factory.js'),
     GroupFactory = require('../modules/group-factory.js');
 
+/**
+ * ## harmony.disable
+ */
 module.exports = {
     /**
-     * ## harmony.disable.slot(name)
+     * ### slot(name)
      * Marks this slot as ineligible to make ad calls.
      * @param {string} name
      */
@@ -16,7 +19,7 @@ module.exports = {
         SlotFactory.get(name).enabled = false;
     },
     /**
-     * ## harmony.disable.group(name)
+     * ### group(name)
      * Marks each slot in this group as ineligible to make ad calls.
      * @param {string} name
      */

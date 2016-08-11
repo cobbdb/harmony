@@ -15,28 +15,29 @@ module.exports = function (groupName) {
      */
     return {
         /**
-         * ## group.name
+         * ### name
          * @type {string}
          */
         name: groupName,
         /**
-         * ## group.length()
+         * ### length()
          * @return {!number}
          */
         length: function () {
             return slotList.length;
         },
         /**
-         * ## group.add(slot)
+         * ### add(slot)
          * Add a new slot to this group.
          * @param {!Slot} slot
+         * @see types/slot.js
          */
         add: function (slot) {
             slotList.push(slot);
             slotMap[slot.name] = slot;
         },
         /**
-         * ## group.get(name)
+         * ### get(name)
          * Fetch a slot by name.
          * @param {string} name
          * @return {?Slot}
@@ -45,7 +46,7 @@ module.exports = function (groupName) {
             return slotMap[name] || null;
         },
         /**
-         * ## group.getAll()
+         * ### getAll()
          * *Danger Zone* Fetch all slots in this group.
          * @return {!Slot[]}
          */
@@ -53,7 +54,7 @@ module.exports = function (groupName) {
             return slotList;
         },
         /**
-         * ## group.has(name)
+         * ### has(name)
          * @param {string} name
          * @return {!boolean}
          */
@@ -61,7 +62,7 @@ module.exports = function (groupName) {
             return name in slotMap;
         },
         /**
-         * ## group.clear()
+         * ### clear()
          * Remove all slots from this group.
          */
         clear: function () {
@@ -69,9 +70,10 @@ module.exports = function (groupName) {
             slotMap = {};
         },
         /**
-         * ## group.forEach(callback)
+         * ### forEach(callback)
          * Iterate over the group of slots.
          * @param {?function(Slot)} cb
+         * @see types/slot.js
          */
         forEach: function (cb) {
             cb = cb || function () {};

@@ -13,8 +13,8 @@
  * @param {SizeMapping} [opts.mapping] Size mapping.
  * @param {boolean} [opts.outofpage] True if out-of-page ad.
  * @param {boolean} [opts.enabled] False if ineligible to make ad calls.
- * @param {Object<string, function(?)>} [opts.on] Dictionary of callbacks.
- * @param {Object<string, function(?)>} [opts.one] Dictionary of single-run callbacks.
+ * @param {Object<string, function>} [opts.on] Dictionary of callbacks.
+ * @param {Object<string, function>} [opts.one] Dictionary of single-run callbacks.
  * @return {AdSlot}
  * @see https://developers.google.com/doubleclick-gpt/reference#googletag.SizeMappingBuilder
  */
@@ -47,27 +47,106 @@ module.exports = function (opts) {
         slot.defineSizeMapping(opts.mapping);
     }
 
+    /**
+     * ## Slot
+     * @type {Slot}
+     */
     return {
+        /**
+         * ### name
+         * Name of this slot in the system.
+         * @type {!string}
+         */
         name: opts.name,
+        /**
+         * ### id
+         * DOM element id of this slot's container.
+         * @type {!string}
+         */
         id: opts.id,
+        /**
+         * ### sizes
+         * List of *possible* sizes this slot can accept.
+         * @type {!(Array<number, number>|Array<Array<number, number>>)}
+         */
         sizes: opts.sizes,
+        /**
+         * ### adunit
+         * Fully qualified adunit this slot is targeting.
+         * @type {!string}
+         */
         adunit: opts.adunit,
+        /**
+         * ### group
+         * @type {?Group}
+         * @see Group
+         */
         group: opts.group || null,
+        /**
+         * ### companion
+         * @type {!boolean}
+         */
         companion: opts.companion || false,
+        /**
+         * ### outofpage
+         * @type {!boolean}
+         */
         outofpage: opts.outofpage || false,
+        /**
+         * ### enabled
+         * True when this slot is eligible to make ad calls.
+         * @type {!boolean}
+         */
         enabled: opts.enabled === false ? false : true,
+        /**
+         * ### on()
+         * @type {function(string, function)}
+         * @see EventHandler
+         */
         on: events.on,
+        /**
+         * ### one()
+         * @type {function(string, function)}
+         * @see EventHandler
+         */
         one: events.one,
+        /**
+         * ### off()
+         * @type {function()}
+         * @see EventHandler
+         */
         off: events.off,
+        /**
+         * ### trigger()
+         * @type {function(string, ?)}
+         * @see EventHandler
+         */
         trigger: events.trigger,
+        /**
+         * ### active
+         * *Danger Zone* True when this slot has already been displayed.
+         * @private
+         * @type {!boolean}
+         */
         active: false,
+        /**
+         * ### gpt
+         * *Danger Zone* The registered GPT Slot.
+         * @type {!googletag.Slot}
+         * @see https://developers.google.com/doubleclick-gpt/reference#googletag.Slot
+         */
         gpt: slot,
+        /**
+         * ### activate()
+         * *Danger Zone*
+         * @private
+         */
         activate: function () {
             if (!this.active) {
                 var pubads = googletag.pubads();
                 /**
                  * ## slot.on('slotRenderEnded', callback)
-                 * @param {function({Object})} cb
+                 * @param {!function(googletag.events.SlotRenderEndedEvent)} callback
                  * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
                  */
                 pubads.addEventListener('slotRenderEnded', function (event) {
@@ -77,7 +156,7 @@ module.exports = function (opts) {
                 });
                 /**
                  * ## slot.on('impressionViewable', callback)
-                 * @param {function({Object})} cb
+                 * @param {!function(googletag.events.ImpressionViewableEvent)} callback
                  * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent
                  */
                 pubads.addEventListener('impressionViewable', function (event) {

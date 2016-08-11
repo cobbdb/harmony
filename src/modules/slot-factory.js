@@ -1,10 +1,6 @@
 /**
  * # Slot Factory
- * Constructs a new ad slot.
- * Three different scenarios here:
- * 1. AdSlot exists already, return it.
- * 2. Slot's conf exists already, convert to AdSlot and return it.
- * 3. No data found, return mock.
+ * Construct or fetch an ad slot.
  */
 
 var Slot = require('../types/slot.js'),

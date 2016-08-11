@@ -33,7 +33,7 @@ function show(slot) {
  */
 module.exports = {
     /**
-     * ### harmony.show.all()
+     * ### all()
      * *Danger Zone* Show all slots in the page.
      */
     all: function () {
@@ -41,7 +41,7 @@ module.exports = {
         masterGroup.forEach(show);
     },
     /**
-     * ### harmony.show.group(name)
+     * ### group(name)
      * Show all ads in a group.
      * @param {string} name
      */
@@ -51,7 +51,7 @@ module.exports = {
         group.forEach(show);
     },
     /**
-     * ### harmony.show.slot(name)
+     * ### slot(name)
      * Show a single ad slot.
      * @param {string} name
      */

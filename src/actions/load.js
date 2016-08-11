@@ -10,7 +10,7 @@ module.exports = {
     /**
      * ## load.slots(slots)
      * @param {Slot[]} slots
-     * @see actions/define-slot.js
+     * @see modules/slot-factory.js
      */
     slots: function (slots) {
         slots = slots || [];

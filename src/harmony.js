@@ -15,7 +15,8 @@ var log = require('./modules/log.js'),
 /**
  * ## harmony.on('breakpoint/update', callback)
  * @param {function(number)} callback Called on new breakpoint.
- * @see EventHandler
+ * @see types/event-handler.js
+ * @see modules/breakpoint-watcher.js
  */
 watcher.on('update', function (bp) {
     events.trigger('breakpoint/update', bp);
@@ -23,8 +24,8 @@ watcher.on('update', function (bp) {
 
 /**
  * ## harmony.on('slotRenderEnded', callback)
- * @param {function(Object)} callback Called each time any ad call completes.
- * @see EventHandler
+ * @param {!function(googletag.events.SlotRenderEndedEvent)} callback Called each time any ad call completes.
+ * @see types/event-handler.js
  * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
  */
 googletag.cmd.push(function () {
@@ -33,114 +34,111 @@ googletag.cmd.push(function () {
     });
 });
 
+/**
+ * ## harmony
+ * @type {Harmony}
+ */
 module.exports = {
     /**
-     * ## harmony.on(name, callback)
-     * @param {string} name Event name.
-     * @param {function(?)} callback
-     * @see EventHandler
+     * ### on(name, callback)
+     * @see types/event-handler.js
      */
     on: events.on,
     /**
-     * ## harmony.one(name, callback)
-     * @param {string} name Event name.
-     * @param {function(?)} callback
-     * @see EventHandler
+     * ### one(name, callback)
+     * @see types/event-handler.js
      */
     one: events.one,
     /**
-     * ## harmony.off([name])
-     * @param {string} [name] Event name or blank to unbind all events.
-     * @see EventHandler
+     * ### off([name])
+     * @see types/event-handler.js
      */
     off: events.off,
     /**
-     * ## harmony.trigger(name, [data])
-     * @param {string} name Event name.
-     * @param {*} [callback] data Data passed to each event callback.
-     * @see EventHandler
+     * ### trigger(name, [data])
+     * @see types/event-handler.js
      */
     trigger: events.trigger,
     /**
-     * ## harmony.version
+     * ### version
      * @type {string}
      */
     version: require('../package.json').version,
     /**
-     * ## harmony.load
+     * ### load()
      * Load bulk configurations into the system.
      * @see actions/load.js
      */
     load: require('./actions/load.js'),
     /**
-     * ## harmony.addBreakpoints(set)
+     * ### addBreakpoints(set)
      * Add breakpoint values in pixels.
      * @param {number[]} set Breakpoints in pixels.
-     * @see BreakpointWatcher
+     * @see modules/breakpoint-watcher.js
      */
     addBreakpoints: watcher.add,
     /**
-     * ## harmony.getBreakpoints()
+     * ### getBreakpoints()
      * Fetch the list of breakpoints already loaded into the system.
      * @return {?number[]}
-     * @see BreakpointWatcher
+     * @see modules/breakpoint-watcher.js
      */
     getBreakpoints: watcher.getAll,
     /**
-     * ## harmony.breakpoint()
+     * ### breakpoint()
      * Fetch the current breakpoint.
      * @return {?number}
-     * @see BreakpointWatcher
+     * @see modules/breakpoint-watcher.js
      */
     breakpoint: watcher.current,
     /**
-     * ## harmony.log
+     * ### log
      * Instance of Lumberjack populated with Harmony's data.
      * @see modules/log.js
      */
     log: log,
     /**
-     * ## harmony.slot(name)
+     * ### slot(name)
      * Safely fetch an existing ad slot or a mock slot if slot was not found.
      * @param {string} name Name of the ad slot.
      * @return {!(Slot|MockSlot)}
-     * @see SlotFactory
+     * @see modules/slot-factory.js
      */
     slot: SlotFactory.get,
     /**
-     * ## harmony.group(name)
+     * ### group(name)
      * Fetch a slot group by name.
      * @param {string} name Name of the slot group.
      * @return {!Group} Collection of 0 or more ad slots.
-     * @see GroupFactory
+     * @see modules/group-factory.js
      */
     group: GroupFactory.create,
     /**
-     * ## harmony.defineSlot(config)
+     * ### defineSlot(config)
      * Create a new adSlot in the page.
-     * @see actions/define-slot.js
+     * @see modules/slot-factory.js
      */
     defineSlot: SlotFactory.create,
     /**
-     * ## harmony.enable
-     * ### harmony.enable.slot(name)
-     * ### harmony.enable.group(name)
+     * ### enable
+     * #### slot(name)
+     * #### group(name)
      * Marks slots as eligible to make ad calls.
      * @see actions/enable.js
      */
     enable: require('./actions/enable.js'),
     /**
-     * ## harmony.disable
-     * ### harmony.disable.slot(name)
-     * ### harmony.disable.group(name)
+     * ### disable
+     * #### slot(name)
+     * #### group(name)
      * Marks slots as ineligible to make ad calls.
      * @see actions/disable.js
      */
     disable: require('./actions/disable.js'),
     /**
-     * ## harmony.show
-     * ### harmony.show.slot(name)
-     * ### harmony.show.group(name)
+     * ### show
+     * #### slot(name)
+     * #### group(name)
      * Show a slot or group of slots.
      * @see actions/show.js
      */
