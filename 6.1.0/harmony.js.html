@@ -39,6 +39,10 @@
       </div>
 
       <div class="heading h2">
+        <a href="#harmony.on-impressionviewable-callback">harmony.on(&#39;impressionViewable&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
         <a href="#harmony-1">harmony</a>
       </div>
 
@@ -214,6 +218,7 @@ harmony.on('breakpoint/update', callback)
     events.trigger(<span class="hljs-string">'breakpoint/update'</span>, bp);
 });
 
+googletag.cmd.push(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 </pre>
         </td>
       </tr>
@@ -252,9 +257,49 @@ harmony.on('slotRenderEnded', callback)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">googletag.cmd.push(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-    googletag.pubads().addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
         events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+    });
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-impressionviewable-callback">
+  <h2>
+    <a href="#harmony.on-impressionviewable-callback" name="harmony.on-impressionviewable-callback" class="pilcrow"></a>
+harmony.on('impressionViewable', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.ImpressionViewableEvent)</span>
+<span>Called each time any slot registers a viewed impression.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
     });
 });
 

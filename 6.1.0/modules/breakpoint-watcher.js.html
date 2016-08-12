@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>breakpoint-watcher.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\modules\\breakpoint-watcher.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#breakpoint-watcher">Breakpoint Watcher</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#watcher.current">watcher.current()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#watcher.add-set">watcher.add(set)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#watcher.getall">watcher.getAll()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#watcher.clear">watcher.clear()</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#watcher.run-throttle">watcher.run(throttle)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>breakpoint-watcher.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">var</span> EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/event-handler.js'</span>),
+    events = EventHandler(),
+    screen = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./screen.js'</span>),
+    running = <span class="hljs-literal">false</span>,
+    ready = <span class="hljs-literal">true</span>,
+    breakpoints = [],
+    last;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="breakpoint-watcher">
+  <h1>
+    <a href="#breakpoint-watcher" name="breakpoint-watcher" class="pilcrow"></a>
+Breakpoint Watcher
+  </h1>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">BreakpointWatcher</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+    on: events.on,
+    one: events.one,
+    off: events.off,
+    trigger: events.trigger,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="watcher.current">
+  <h2>
+    <a href="#watcher.current" name="watcher.current" class="pilcrow"></a>
+watcher.current()
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Number</span>
+<span>Current breakpoint.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    current: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> i,
+            len = breakpoints.length,
+            width = screen.width(),
+            point = breakpoints[len - <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">if</span> (width &gt;= breakpoints[i]) {
+                point = breakpoints[i];
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> point;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="watcher.add-set">
+  <h2>
+    <a href="#watcher.add-set" name="watcher.add-set" class="pilcrow"></a>
+watcher.add(set)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[set]</span>
+<span class="dox_type">Number</span>
+<span class="dox_type">Array.&lt;Number&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    add: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">set</span>) </span>{
+        breakpoints = breakpoints.concat(set || []);
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Sort descending.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        breakpoints.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>{
+            <span class="hljs-keyword">return</span> b - a;
+        });
+        <span class="hljs-built_in">module</span>.exports.run();
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="watcher.getall">
+  <h2>
+    <a href="#watcher.getall" name="watcher.getall" class="pilcrow"></a>
+watcher.getAll()
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Array.&lt;Number&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    getAll: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> breakpoints;
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="watcher.clear">
+  <h2>
+    <a href="#watcher.clear" name="watcher.clear" class="pilcrow"></a>
+watcher.clear()
+  </h2>
+</div>
+<p>Clears all breakpoints from the system.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    clear: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        breakpoints = [];
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="watcher.run-throttle">
+  <h2>
+    <a href="#watcher.run-throttle" name="watcher.run-throttle" class="pilcrow"></a>
+watcher.run(throttle)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[throttle]</span>
+<span class="dox_type">Number</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    run: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">throttle</span>) </span>{
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkUpdate</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> current = <span class="hljs-built_in">module</span>.exports.current();
+            <span class="hljs-keyword">if</span> (current !== last) {
+                last = current;
+                events.trigger(<span class="hljs-string">'update'</span>, current);
+            }
+        }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<p>Do not run unless breakpoints are available.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        <span class="hljs-keyword">if</span> (!running &amp;&amp; breakpoints.length) {
+            running = <span class="hljs-literal">true</span>;
+            ready = <span class="hljs-literal">true</span>;
+            global.addEventListener(<span class="hljs-string">'resize'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">if</span> (ready) {
+                    ready = <span class="hljs-literal">false</span>;
+                    checkUpdate();
+
+                    global.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                        ready = <span class="hljs-literal">true</span>;
+                    }, throttle || <span class="hljs-number">250</span>);
+                }
+            });
+        }
+        checkUpdate();
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
