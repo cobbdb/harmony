@@ -46,6 +46,8 @@ module.exports = function (opts) {
     if (opts.mapping) {
         slot.defineSizeMapping(opts.mapping);
     }
+    // Attach the name of this slot to the GPT Slot object for reference during GPT events.
+    slot.name = opts.name;
 
     /**
      * ## Slot

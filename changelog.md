@@ -3,6 +3,10 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 6
+#### [6.1.0]
+- Expose system-level `impressionViewable` event.
+- Attach slot name to GPT Slot object.
+
 #### [6.0.0]
 - Expose `slot.gpt` to decouple GPT slot from Harmony slot.
 - Slot option `interstitial` changed to `outofpage`.
