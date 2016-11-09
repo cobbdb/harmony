@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\util\\scrub-conf.js";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\util\\scrub-conf.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -82,9 +82,6 @@ been made.</p>
     <span class="hljs-keyword">if</span> (el) {
         newId = ids.next();
         conf.id = el.id = <span class="hljs-string">'h-ad-'</span> + newId;
-        <span class="hljs-keyword">if</span> (masterGroup.has(conf.name)) {
-            conf.name += <span class="hljs-string">'-h'</span> + newId;
-        }
         <span class="hljs-keyword">return</span> conf;
     }
     <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Ad slot '</span> + conf.name + <span class="hljs-string">' container #'</span> + conf.id + <span class="hljs-string">' was not found!'</span>);

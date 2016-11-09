@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\types\\slot.js";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\types\\slot.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -226,8 +226,8 @@ Ad Slot
     <span class="hljs-keyword">var</span> slot, name,
         cache = SlotCache(opts.name),
         events = EventHandler({
-            events: concatLeft(opts.on, cache.get.events()),
-            singles: concatLeft(opts.one, cache.get.singles())
+            <span class="hljs-attr">events</span>: concatLeft(opts.on, cache.get.events()),
+            <span class="hljs-attr">singles</span>: concatLeft(opts.one, cache.get.singles())
         }),
         targeting = mergeLeft(opts.targeting, cache.get.targeting());
 

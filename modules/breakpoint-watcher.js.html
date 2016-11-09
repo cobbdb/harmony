@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\modules\\breakpoint-watcher.js";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\modules\\breakpoint-watcher.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -72,9 +72,8 @@
         <td class="code highlight">
           <pre class="javascript"><span class="hljs-keyword">var</span> EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/event-handler.js'</span>),
     events = EventHandler(),
-    screen = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./screen.js'</span>),
     running = <span class="hljs-literal">false</span>,
-    ready = <span class="hljs-literal">true</span>,
+    working = <span class="hljs-literal">false</span>,
     breakpoints = [],
     last;
 
@@ -106,10 +105,10 @@ Breakpoint Watcher
         </td>
         <td class="code highlight">
           <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
-    on: events.on,
-    one: events.one,
-    off: events.off,
-    trigger: events.trigger,
+    <span class="hljs-attr">on</span>: events.on,
+    <span class="hljs-attr">one</span>: events.one,
+    <span class="hljs-attr">off</span>: events.off,
+    <span class="hljs-attr">trigger</span>: events.trigger,
 </pre>
         </td>
       </tr>
@@ -132,7 +131,7 @@ watcher.current()
 <div class="dox_tag_detail">
 <span class="dox_tag_name"></span>
 <span class="dox_type">Number</span>
-<span>Current breakpoint.
+<span>Current breakpoint. Defaults to <code>1</code>.
 </span>
 </div>
 </div>
@@ -141,16 +140,13 @@ watcher.current()
         </td>
         <td class="code highlight">
           <pre class="javascript">    current: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">var</span> i,
-            len = breakpoints.length,
-            width = screen.width(),
-            point = breakpoints[len - <span class="hljs-number">1</span>];
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i += <span class="hljs-number">1</span>) {
-            <span class="hljs-keyword">if</span> (width &gt;= breakpoints[i]) {
-                point = breakpoints[i];
-                <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">var</span> point = <span class="hljs-number">1</span>,
+            width = global.innerWidth;
+        breakpoints.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{
+            <span class="hljs-keyword">if</span> (width &gt;= bp) {
+                point = bp;
             }
-        }
+        });
         <span class="hljs-keyword">return</span> point;
     },
 </pre>
@@ -193,12 +189,12 @@ watcher.add(set)
           <div class="pilwrap">
   <a class="pilcrow" href="#section-5" id="section-5"></a>
 </div>
-<p>Sort descending.</p>
+<p>Sort ascending.</p>
 
         </td>
         <td class="code highlight">
           <pre class="javascript">        breakpoints.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>{
-            <span class="hljs-keyword">return</span> b - a;
+            <span class="hljs-keyword">return</span> a - b;
         });
         <span class="hljs-built_in">module</span>.exports.run();
     },
@@ -272,21 +268,15 @@ watcher.clear()
 watcher.run(throttle)
   </h2>
 </div>
+<p>Uses RAF to monitor breakpoint changes.</p>
 </div>
 <div class="body">
-</div>
-<div class="details">
-<div class="dox_tag_title">Params</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">[throttle]</span>
-<span class="dox_type">Number</span>
-</div>
 </div>
 </div>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    run: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">throttle</span>) </span>{
+          <pre class="javascript">    run: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
         <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkUpdate</span>(<span class="hljs-params"></span>) </span>{
             <span class="hljs-keyword">var</span> current = <span class="hljs-built_in">module</span>.exports.current();
             <span class="hljs-keyword">if</span> (current !== last) {
@@ -310,15 +300,13 @@ watcher.run(throttle)
         <td class="code highlight">
           <pre class="javascript">        <span class="hljs-keyword">if</span> (!running &amp;&amp; breakpoints.length) {
             running = <span class="hljs-literal">true</span>;
-            ready = <span class="hljs-literal">true</span>;
             global.addEventListener(<span class="hljs-string">'resize'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-                <span class="hljs-keyword">if</span> (ready) {
-                    ready = <span class="hljs-literal">false</span>;
-                    checkUpdate();
-
-                    global.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-                        ready = <span class="hljs-literal">true</span>;
-                    }, throttle || <span class="hljs-number">250</span>);
+                <span class="hljs-keyword">if</span> (!working) {
+                    working = <span class="hljs-literal">true</span>;
+                    global.requestAnimationFrame(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                        checkUpdate();
+                        working = <span class="hljs-literal">false</span>;
+                    });
                 }
             });
         }
