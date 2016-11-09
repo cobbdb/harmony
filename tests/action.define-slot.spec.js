@@ -31,10 +31,8 @@ describe('harmony.defineSlot()', function () {
         harmony.defineSlot(newSlot());
         harmony.defineSlot(newSlot());
         harmony.defineSlot(newSlot());
-        expect(harmony.slot('TST22').id).toEqual('h-ad-1');
-        expect(harmony.slot('TST22-h2').id).toEqual('h-ad-2');
-        expect(harmony.slot('TST22-h3').id).toEqual('h-ad-3');
-        expect(harmony.slot('TST22-h4').id).toEqual('h-ad-4');
+        expect(harmony.slot('TST22').name).toEqual('TST22');
+        expect(harmony.slot('TST22').id).toEqual('h-ad-4');
     });
     it('logs missing dom elements', function () {
         var opts = newSlot();

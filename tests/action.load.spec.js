@@ -53,9 +53,9 @@ describe('harmony.load()', function () {
 
         harmony.load.slots(conf.slots);
         expect(harmony.slot('TST00').name).toEqual('TST00');
-        expect(harmony.slot('TST00').id).toEqual('h-ad-1');
-        expect(harmony.slot('TST00-h3').name).toEqual('TST00-h3');
-        expect(harmony.slot('TST00-h3').id).toEqual('h-ad-3');
+        expect(harmony.slot('TST00').id).toEqual('h-ad-3');
+        expect(harmony.slot('TST01').name).toEqual('TST01');
+        expect(harmony.slot('TST01').id).toEqual('h-ad-2');
         expect($('#h-ad-1, #h-ad-2, #h-ad-3').length).toEqual(3);
         expect(harmony.log.readback('error').length).toEqual(0);
     });

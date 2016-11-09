@@ -18,9 +18,6 @@ module.exports = function (conf) {
     if (el) {
         newId = ids.next();
         conf.id = el.id = 'h-ad-' + newId;
-        if (masterGroup.has(conf.name)) {
-            conf.name += '-h' + newId;
-        }
         return conf;
     }
     throw Error('Ad slot ' + conf.name + ' container #' + conf.id + ' was not found!');
