@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\show.js";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\actions\\show.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -83,43 +83,6 @@ Show Action
     
       <tr>
         <td class="docs">
-          <div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2"></a>
-</div>
-<div class="dox">
-<div class="summary">
-<p>Activate the slot and make ad call. Refresh if slot is already active.</p>
-</div>
-<div class="body">
-</div>
-<div class="details">
-<div class="dox_tag_title">Params</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">slot</span>
-<span class="dox_type">Slot</span>
-</div>
-</div>
-</div>
-
-        </td>
-        <td class="code highlight">
-          <pre class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">show</span>(<span class="hljs-params">slot</span>) </span>{
-    <span class="hljs-keyword">if</span> (slot.enabled) {
-        <span class="hljs-keyword">if</span> (slot.active) {
-            googletag.pubads().refresh([slot.gpt]);
-        } <span class="hljs-keyword">else</span> {
-            slot.activate();
-            googletag.display(slot.id);
-        }
-    }
-}
-
-</pre>
-        </td>
-      </tr>
-    
-      <tr>
-        <td class="docs">
           <div class="dox">
 <div class="summary">
 <div class="pilwrap" id="harmony.show">
@@ -161,8 +124,21 @@ all()
         </td>
         <td class="code highlight">
           <pre class="javascript">    all: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> refreshGroup = [];
         enableServices();
-        masterGroup.forEach(show);
+        masterGroup.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+            <span class="hljs-keyword">if</span> (slot.enabled) {
+                <span class="hljs-keyword">if</span> (slot.active) {
+                    refreshGroup.push(slot.gpt);
+                } <span class="hljs-keyword">else</span> {
+                    slot.activate();
+                    googletag.display(slot.id);
+                }
+            }
+        });
+        <span class="hljs-keyword">if</span> (refreshGroup.length) {
+            googletag.pubads().refresh(refreshGroup);
+        }
     },
 </pre>
         </td>
@@ -194,9 +170,22 @@ group(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
+        <span class="hljs-keyword">var</span> group = GroupFactory.create(name),
+            refreshGroup = [];
         enableServices();
-        group.forEach(show);
+        group.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+            <span class="hljs-keyword">if</span> (slot.enabled) {
+                <span class="hljs-keyword">if</span> (slot.active) {
+                    refreshGroup.push(slot.gpt);
+                } <span class="hljs-keyword">else</span> {
+                    slot.activate();
+                    googletag.display(slot.id);
+                }
+            }
+        });
+        <span class="hljs-keyword">if</span> (refreshGroup.length) {
+            googletag.pubads().refresh(refreshGroup);
+        }
     },
 </pre>
         </td>
@@ -229,8 +218,15 @@ slot(name)
         <td class="code highlight">
           <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
         <span class="hljs-keyword">var</span> slot = SlotFactory.get(name);
-        enableServices();
-        show(slot);
+        <span class="hljs-keyword">if</span> (slot.enabled) {
+            enableServices();
+            <span class="hljs-keyword">if</span> (slot.active) {
+                googletag.pubads().refresh([slot.gpt]);
+            } <span class="hljs-keyword">else</span> {
+                slot.activate();
+                googletag.display(slot.id);
+            }
+        }
     }
 };
 
