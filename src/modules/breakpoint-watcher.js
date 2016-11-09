@@ -1,8 +1,7 @@
 var EventHandler = require('../types/event-handler.js'),
     events = EventHandler(),
-    screen = require('./screen.js'),
     running = false,
-    ready = true,
+    working = false,
     breakpoints = [],
     last;
 
@@ -18,19 +17,16 @@ module.exports = {
     trigger: events.trigger,
     /**
      * ## watcher.current()
-     * @return {Number} Current breakpoint.
+     * @return {Number} Current breakpoint. Defaults to `1`.
      */
     current: function () {
-        var i,
-            len = breakpoints.length,
-            width = screen.width(),
-            point = breakpoints[len - 1];
-        for (i = 0; i < len; i += 1) {
-            if (width >= breakpoints[i]) {
-                point = breakpoints[i];
-                break;
+        var point = 1,
+            width = global.innerWidth;
+        breakpoints.forEach(function (bp) {
+            if (width >= bp) {
+                point = bp;
             }
-        }
+        });
         return point;
     },
     /**
@@ -39,9 +35,9 @@ module.exports = {
      */
     add: function (set) {
         breakpoints = breakpoints.concat(set || []);
-        // Sort descending.
+        // Sort ascending.
         breakpoints.sort(function (a, b) {
-            return b - a;
+            return a - b;
         });
         module.exports.run();
     },
@@ -61,9 +57,9 @@ module.exports = {
     },
     /**
      * ## watcher.run(throttle)
-     * @param {Number} [throttle]
+     * Uses RAF to monitor breakpoint changes.
      */
-    run: function (throttle) {
+    run: function () {
         function checkUpdate() {
             var current = module.exports.current();
             if (current !== last) {
@@ -75,15 +71,13 @@ module.exports = {
         // Do not run unless breakpoints are available.
         if (!running && breakpoints.length) {
             running = true;
-            ready = true;
             global.addEventListener('resize', function () {
-                if (ready) {
-                    ready = false;
-                    checkUpdate();
-
-                    global.setTimeout(function () {
-                        ready = true;
-                    }, throttle || 250);
+                if (!working) {
+                    working = true;
+                    global.requestAnimationFrame(function () {
+                        checkUpdate();
+                        working = false;
+                    });
                 }
             });
         }

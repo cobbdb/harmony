@@ -1,5 +1,4 @@
-var watcher = require('../src/modules/breakpoint-watcher.js'),
-    screen = require('../src/modules/screen.js');
+var watcher = require('../src/modules/breakpoint-watcher.js');
 
 describe('breakpointWatcher', function () {
     afterEach(function () {
@@ -11,29 +10,29 @@ describe('breakpointWatcher', function () {
             expect(watcher.getAll()).toEqual([1234]);
         });
         it('accepts multiple breakpoints', function () {
-            watcher.add([12, 34, 56]);
-            expect(watcher.getAll()).toEqual([56, 34, 12]);
+            watcher.add([34, 12, 56]);
+            expect(watcher.getAll()).toEqual([12, 34, 56]);
         });
         it('accepts zero breakpoints', function () {
             watcher.add(1);
             watcher.add();
             watcher.add(2);
-            expect(watcher.getAll()).toEqual([2, 1]);
+            expect(watcher.getAll()).toEqual([1, 2]);
         });
     });
     describe('current()', function () {
         it('works when size > bp', function () {
-            var width = screen.width();
+            var width = global.innerWidth;
             watcher.add(width - 1);
             expect(watcher.current()).toEqual(width - 1);
         });
-        it('works when size < bp', function () {
-            var width = screen.width();
+        it('defaults to 1', function () {
+            var width = global.innerWidth;
             watcher.add([width + 1, width + 2]);
-            expect(watcher.current()).toEqual(width + 1);
+            expect(watcher.current()).toEqual(1);
         });
         it('works with multiple breakpoints', function () {
-            var width = screen.width();
+            var width = global.innerWidth;
             watcher.add([width - 1, width + 1]);
             expect(watcher.current()).toEqual(width - 1);
         });
