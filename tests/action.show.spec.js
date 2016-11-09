@@ -75,7 +75,7 @@ describe('harmony.show', function () {
             expect(slot01.gpt.addService).not.toHaveBeenCalledWith(googletag.pubads());
             expect(slot02.gpt.addService).toHaveBeenCalledWith(googletag.pubads());
         });
-        it('calls refresh for already active slots', function () {
+        it('calls refresh once for already active slots', function () {
             var slot = harmony.slot('TST02');
             expect(slot.active).toBe(false);
             expect(googletag.display.calls.count()).toBe(0);
@@ -86,7 +86,7 @@ describe('harmony.show', function () {
             expect(googletag.display.calls.count()).toBe(2);
 
             harmony.show.group('TSTGRP00');
-            expect(googletag.pubads().refresh.calls.count()).toBe(2);
+            expect(googletag.pubads().refresh.calls.count()).toBe(1);
             expect(googletag.display.calls.count()).toBe(2);
         });
     });

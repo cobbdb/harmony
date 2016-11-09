@@ -11,22 +11,6 @@ var SlotFactory = require('../modules/slot-factory.js'),
     googletag = require('../modules/googletag.js');
 
 /**
- * Activate the slot and make ad call. Refresh if slot is already active.
- * @private
- * @param {Slot} slot
- */
-function show(slot) {
-    if (slot.enabled) {
-        if (slot.active) {
-            googletag.pubads().refresh([slot.gpt]);
-        } else {
-            slot.activate();
-            googletag.display(slot.id);
-        }
-    }
-}
-
-/**
  * ## harmony.show
  * Activate Slots and make their ad calls. If a slot has already been
  * activated, then calls to `show` will refresh its contents.
@@ -37,8 +21,21 @@ module.exports = {
      * *Danger Zone* Show all slots in the page.
      */
     all: function () {
+        var refreshGroup = [];
         enableServices();
-        masterGroup.forEach(show);
+        masterGroup.forEach(function (slot) {
+            if (slot.enabled) {
+                if (slot.active) {
+                    refreshGroup.push(slot.gpt);
+                } else {
+                    slot.activate();
+                    googletag.display(slot.id);
+                }
+            }
+        });
+        if (refreshGroup.length) {
+            googletag.pubads().refresh(refreshGroup);
+        }
     },
     /**
      * ### group(name)
@@ -46,9 +43,22 @@ module.exports = {
      * @param {string} name
      */
     group: function (name) {
-        var group = GroupFactory.create(name);
+        var group = GroupFactory.create(name),
+            refreshGroup = [];
         enableServices();
-        group.forEach(show);
+        group.forEach(function (slot) {
+            if (slot.enabled) {
+                if (slot.active) {
+                    refreshGroup.push(slot.gpt);
+                } else {
+                    slot.activate();
+                    googletag.display(slot.id);
+                }
+            }
+        });
+        if (refreshGroup.length) {
+            googletag.pubads().refresh(refreshGroup);
+        }
     },
     /**
      * ### slot(name)
@@ -57,7 +67,14 @@ module.exports = {
      */
     slot: function (name) {
         var slot = SlotFactory.get(name);
-        enableServices();
-        show(slot);
+        if (slot.enabled) {
+            enableServices();
+            if (slot.active) {
+                googletag.pubads().refresh([slot.gpt]);
+            } else {
+                slot.activate();
+                googletag.display(slot.id);
+            }
+        }
     }
 };
