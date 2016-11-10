@@ -36,6 +36,9 @@ describe('breakpointWatcher', function () {
             watcher.add([width - 1, width + 1]);
             expect(watcher.current()).toEqual(width - 1);
         });
+        it('returns undefined when no set breakpoints', function () {
+            expect(watcher.current()).toBeUndefined();
+        });
     });
     describe('run()', function () {
         var originalWidth = global.innerWidth;

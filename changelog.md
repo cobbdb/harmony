@@ -3,6 +3,10 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
+#### [7.0.2]
+- `harmony.breakpoint()` now returns `undefined` when no
+breakpoints have been set.
+
 #### [7.0.1]
 - Update breakpoint-watcher to use RequestAnimationFrame.
 - Remove screen module in favor of `window.innerWidth`. IE9+.

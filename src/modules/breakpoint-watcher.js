@@ -17,7 +17,8 @@ module.exports = {
     trigger: events.trigger,
     /**
      * ## watcher.current()
-     * @return {Number} Current breakpoint. Defaults to `1`.
+     * @return {?Number} Current breakpoint. Defaults to `1`.
+     * Returns `undefined` if no breakpoints have been set.
      */
     current: function () {
         var point = 1;
@@ -26,7 +27,7 @@ module.exports = {
                 point = bp;
             }
         });
-        return point;
+        return breakpoints.length ? point : void(0);
     },
     /**
      * ## watcher.add(set)
