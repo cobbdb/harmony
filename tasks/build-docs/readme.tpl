@@ -21,17 +21,6 @@ Simplify your DFP business logic.
 Harmony is provided as both a CommonJS module via `npm install harmonyjs`
 and as a JS global variable via `bower install harmony`.
 
-Some great sites that use Harmony:
-* [Atlanta Journal Constitution](http://www.ajc.com)
-* [Austin American-Statesman](http://www.statesman.com)
-* [Palm Beach Post](http://www.palmbeachpost.com)
-* [WSB-TV](http://www.wsbtv.com)
-* [WEDR](http://www.wedr.com)
-* [KIRO 7](http://www.kirotv.com)
-* [Austin 360](http://www.austin360.com)
-* .. and over a hundred more!
-
--------------
 ### Table of Contents
 * [Introduction](#intro)
 * [Setup Guide](#intro-setup)
