@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove screen module in favor of `window.innerWidth`. IE9+.
 - Stop mangling ad slot names. This forces developers to use
 the grouping feature appropriately.
+- Group slots together when refreshing with `show.group()`,
+instead of refreshing one at a time.
 
 ## Version 6
 #### [6.1.0]
