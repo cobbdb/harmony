@@ -131,7 +131,7 @@ watcher.current()
 <div class="dox_tag_detail">
 <span class="dox_tag_name"></span>
 <span class="dox_type">Number</span>
-<span>Current breakpoint. Defaults to <code>1</code>.
+<span>Current breakpoint. Defaults to <code>1</code>. Returns <code>undefined</code> if no breakpoints have been set.
 </span>
 </div>
 </div>
@@ -140,14 +140,13 @@ watcher.current()
         </td>
         <td class="code highlight">
           <pre class="javascript">    current: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">var</span> point = <span class="hljs-number">1</span>,
-            width = global.innerWidth;
+        <span class="hljs-keyword">var</span> point = <span class="hljs-number">1</span>;
         breakpoints.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">bp</span>) </span>{
-            <span class="hljs-keyword">if</span> (width &gt;= bp) {
+            <span class="hljs-keyword">if</span> (global.innerWidth &gt;= bp) {
                 point = bp;
             }
         });
-        <span class="hljs-keyword">return</span> point;
+        <span class="hljs-keyword">return</span> breakpoints.length ? point : <span class="hljs-keyword">void</span>(<span class="hljs-number">0</span>);
     },
 </pre>
         </td>
