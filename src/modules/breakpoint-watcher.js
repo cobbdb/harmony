@@ -20,10 +20,9 @@ module.exports = {
      * @return {Number} Current breakpoint. Defaults to `1`.
      */
     current: function () {
-        var point = 1,
-            width = global.innerWidth;
+        var point = 1;
         breakpoints.forEach(function (bp) {
-            if (width >= bp) {
+            if (global.innerWidth >= bp) {
                 point = bp;
             }
         });
