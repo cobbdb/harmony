@@ -1,4 +1,5 @@
-var group = require('../src/modules/master-group.js');
+var harmony = require('../src/harmony.js'),
+    group = require('../src/modules/master-group.js');
 
 describe('masterGroup', function () {
     it('exposes common Group members', function () {
@@ -14,5 +15,10 @@ describe('masterGroup', function () {
             group.forEach();
             group.clear();
         }).not.toThrow();
+    });
+    it('is exposed as an api feature', function () {
+        expect(harmony.slots).toBeDefined();
+        expect(harmony.slots.get).toBeDefined();
+        expect(harmony.slots.getAll).toBeDefined();
     });
 });

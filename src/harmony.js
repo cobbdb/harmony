@@ -123,6 +123,13 @@ module.exports = {
      */
     group: GroupFactory.create,
     /**
+     * ### slots
+     * Fetch the master group of all slots.
+     * @type {!Group} Collection of all slots in the system.
+     * @see modules/master-group.js
+     */
+    slots: require('./modules/master-group.js'),
+    /**
      * ### defineSlot(config)
      * Create a new adSlot in the page.
      * @see modules/slot-factory.js

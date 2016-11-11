@@ -3,6 +3,9 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
+#### [7.1.0]
+- Expose master slot group as `harmony.slots`.
+
 #### [7.0.2]
 - `harmony.breakpoint()` now returns `undefined` when no
 breakpoints have been set.
