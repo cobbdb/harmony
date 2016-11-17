@@ -3,7 +3,7 @@
  * Constructs a new adSlot in the page.
  * @param {Object} opts
  * @param {string} opts.name Slot name, ex) RP01
- * @param {string} opts.id Slot's div id, ex) ad-div-RP01
+ * @param {string} opts.id Slot's container id, ex) ad-div-RP01
  * @param {(Array<number, number>|Array<Array<number, number>>)} opts.sizes
  * ex) [300, 250] or [[88, 31], [300, 600]]
  * @param {string} opts.adunit Full ad unit code.
@@ -12,6 +12,7 @@
  * @param {boolean} [opts.companion] True if companion ad.
  * @param {SizeMapping} [opts.mapping] Size mapping.
  * @param {boolean} [opts.outofpage] True if out-of-page ad.
+ * @param {boolean} [opts.preserveId] True to never mangle the container id.
  * @param {boolean} [opts.enabled] False if ineligible to make ad calls.
  * @param {Object<string, function>} [opts.on] Dictionary of callbacks.
  * @param {Object<string, function>} [opts.one] Dictionary of single-run callbacks.

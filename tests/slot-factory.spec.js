@@ -20,6 +20,17 @@ describe('SlotFactory', function () {
             expect(masterGroup.get('TST01')).not.toBeNull();
             expect(GroupFactory.create('TSTGRP01').length()).toBe(1);
         });
+        it('mangles id by default', function () {
+            var slot = Help.setupDOM().slots[2];
+            SlotFactory.create(slot);
+            expect(slot.id).toEqual('h-ad-1');
+        });
+        it('preserves id when requested', function () {
+            var slot = Help.setupDOM().slots[2];
+            slot.preserveId = true;
+            SlotFactory.create(slot);
+            expect(slot.id).toEqual('DVID02');
+        });
     });
     describe('get()', function () {
         it('returns mock slot on bad name', function () {

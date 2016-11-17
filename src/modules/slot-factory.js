@@ -19,7 +19,9 @@ module.exports = {
     create: function (conf) {
         var slot, group;
         try {
-            conf = scrubConf(conf);
+            if (!conf.preserveId) {
+                conf = scrubConf(conf);
+            }
             slot = Slot(conf);
             masterGroup.add(slot);
             if (slot.group) {

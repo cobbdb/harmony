@@ -3,6 +3,11 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
+#### [7.2.0]
+- New slot option `preserveId`. Disables container id mangling when `true`.
+This will likely be inverted in Harmony 8 since disabling yields a
+performance improvment.
+
 #### [7.1.0]
 - Expose master slot group as `harmony.slots`.
 
