@@ -108,7 +108,9 @@ create(options)
           <pre class="javascript">    create: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
         <span class="hljs-keyword">var</span> slot, group;
         <span class="hljs-keyword">try</span> {
-            conf = scrubConf(conf);
+            <span class="hljs-keyword">if</span> (!conf.preserveId) {
+                conf = scrubConf(conf);
+            }
             slot = Slot(conf);
             masterGroup.add(slot);
             <span class="hljs-keyword">if</span> (slot.group) {
