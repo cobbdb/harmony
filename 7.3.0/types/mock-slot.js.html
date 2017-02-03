@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>mock-slot.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\types\\mock-slot.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#mock-slot">Mock Slot</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#mockslot-name">MockSlot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#gpt">gpt</a>
+      </div>
+
+      <div class="heading h4">
+        <a href="#settargeting-key-value">setTargeting(key, value)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#mock">mock</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#name">name</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#off">off()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#on">on()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#one">one()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#trigger">trigger()</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="mock-slot">
+  <h1>
+    <a href="#mock-slot" name="mock-slot" class="pilcrow"></a>
+Mock Slot
+  </h1>
+</div>
+<p>Useful for caching data until the matching Slot is defined.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/slot.js</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> SlotCache = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/slot-cache.js'</span>),
+    stub = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="mockslot-name">
+  <h2>
+    <a href="#mockslot-name" name="mockslot-name" class="pilcrow"></a>
+MockSlot(name)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">MockSlot</span>
+</div>
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+    <span class="hljs-keyword">var</span> cache = SlotCache(name);
+    <span class="hljs-keyword">return</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="gpt">
+  <h3>
+    <a href="#gpt" name="gpt" class="pilcrow"></a>
+gpt
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">Object</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        gpt: {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="settargeting-key-value">
+  <h4>
+    <a href="#settargeting-key-value" name="settargeting-key-value" class="pilcrow"></a>
+setTargeting(key, value)
+  </h4>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, string)</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.Slot_setTargeting">https://developers.google.com/doubleclick-gpt/reference#googletag.Slot_setTargeting</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">            setTargeting: cache.set.targeting
+        },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="mock">
+  <h3>
+    <a href="#mock" name="mock" class="pilcrow"></a>
+mock
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">boolean</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        mock: <span class="hljs-literal">true</span>,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="name">
+  <h3>
+    <a href="#name" name="name" class="pilcrow"></a>
+name
+  </h3>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        name: name,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="off">
+  <h3>
+    <a href="#off" name="off" class="pilcrow"></a>
+off()
+  </h3>
+</div>
+<p>Does nothing.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        off: stub,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="on">
+  <h3>
+    <a href="#on" name="on" class="pilcrow"></a>
+on()
+  </h3>
+</div>
+<p>Caches the callback for an event until the matching Slot is defined.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, function)</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        on: cache.set.event,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="one">
+  <h3>
+    <a href="#one" name="one" class="pilcrow"></a>
+one()
+  </h3>
+</div>
+<p>Caches the callback for an event until the matching Slot is defined.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function(string, function)</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        one: cache.set.single,
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="trigger">
+  <h3>
+    <a href="#trigger" name="trigger" class="pilcrow"></a>
+trigger()
+  </h3>
+</div>
+<p>Does nothing.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">function</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        trigger: stub
+    };
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
