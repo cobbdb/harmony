@@ -26,6 +26,14 @@
         <a href="#configuration-scrubber">Configuration Scrubber</a>
       </div>
 
+      <div class="heading h2">
+        <a href="#scrubconf-conf">scrubConf(conf)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#scrubconf.clear">scrubConf.clear()</a>
+      </div>
+
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -45,9 +53,34 @@
 Configuration Scrubber
   </h1>
 </div>
-<p>Ensures a slot's name and id are unique in the page. If a
-container has content, it is assumed that an ad call has already
-been made.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>),
+    cache = {};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="scrubconf-conf">
+  <h2>
+    <a href="#scrubconf-conf" name="scrubconf-conf" class="pilcrow"></a>
+scrubConf(conf)
+  </h2>
+</div>
+<p>Ensures a slot's id is unique in the page. Duplicate containers
+have their ids mutated with a <code>-N</code>, where <code>N</code> is an incrementing
+integer. Does not alter id of first or non-duplicate slots.</p>
 </div>
 <div class="body">
 </div>
@@ -71,20 +104,46 @@ been made.</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">
-<span class="hljs-keyword">var</span> ids = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./id-factory.js'</span>),
-    masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>);
-
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
     <span class="hljs-keyword">var</span> el = global.document.getElementById(conf.id),
-        newId;
+        suffix = <span class="hljs-number">0</span>;
 
     <span class="hljs-keyword">if</span> (el) {
-        newId = ids.next();
-        conf.id = el.id = <span class="hljs-string">'h-ad-'</span> + newId;
+        <span class="hljs-keyword">do</span> {
+            suffix += <span class="hljs-number">1</span>;
+            conf.id = el.id + <span class="hljs-string">'-h'</span> + suffix;
+        } <span class="hljs-keyword">while</span> (conf.id <span class="hljs-keyword">in</span> cache);
+        el.id = conf.id;
+        cache[conf.id] = <span class="hljs-literal">true</span>;
         <span class="hljs-keyword">return</span> conf;
     }
     <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Ad slot '</span> + conf.name + <span class="hljs-string">' container #'</span> + conf.id + <span class="hljs-string">' was not found!'</span>);
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="scrubconf.clear">
+  <h2>
+    <a href="#scrubconf.clear" name="scrubconf.clear" class="pilcrow"></a>
+scrubConf.clear()
+  </h2>
+</div>
+<p>Reset the slot id cache.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports.clear = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    cache = {};
 };
 
 </pre>
