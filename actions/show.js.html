@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>show.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\show.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#show-action">Show Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.show">harmony.show</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#all">all()</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#group-name">group(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#slot-name">slot(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="show-action">
+  <h1>
+    <a href="#show-action" name="show-action" class="pilcrow"></a>
+Show Action
+  </h1>
+</div>
+<p>Show a slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> SlotFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/slot-factory.js'</span>),
+    GroupFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/group-factory.js'</span>),
+    masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>),
+    log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/log.js'</span>),
+    enableServices = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/enable-services.js'</span>),
+    disable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./disable.js'</span>),
+    googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">slots</span>
+<span class="dox_type">Array.&lt;Slot&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callAdsFor</span>(<span class="hljs-params">slots</span>) </span>{
+    <span class="hljs-keyword">var</span> queue = [];
+
+    enableServices();
+    slots.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+        <span class="hljs-keyword">if</span> (slot.enabled) {
+            <span class="hljs-keyword">if</span> (slot.active) {
+                queue.push(slot.gpt);
+            } <span class="hljs-keyword">else</span> {
+                slot.activate();
+                googletag.display(slot.id);
+
+                <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
+                    queue.push(slot.gpt);
+                }
+            }
+        }
+    });
+
+    <span class="hljs-keyword">if</span> (queue.length) {
+        googletag.pubads().refresh(queue);
+    }
+}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.show">
+  <h2>
+    <a href="#harmony.show" name="harmony.show" class="pilcrow"></a>
+harmony.show
+  </h2>
+</div>
+<p>Activate Slots and make their ad calls. If a slot has already been
+activated, then calls to <code>show</code> will refresh its contents.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="all">
+  <h3>
+    <a href="#all" name="all" class="pilcrow"></a>
+all()
+  </h3>
+</div>
+<p><em>Danger Zone</em> Show all slots in the page.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    all: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        callAdsFor(masterGroup);
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="group-name">
+  <h3>
+    <a href="#group-name" name="group-name" class="pilcrow"></a>
+group(name)
+  </h3>
+</div>
+<p>Show all ads in a group.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
+        callAdsFor(group);
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-name">
+  <h3>
+    <a href="#slot-name" name="slot-name" class="pilcrow"></a>
+slot(name)
+  </h3>
+</div>
+<p>Show a single ad slot.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> slot = SlotFactory.get(name);
+        callAdsFor([slot]);
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
