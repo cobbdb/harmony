@@ -7,8 +7,7 @@
 var log = require('./modules/log.js'),
     SlotFactory = require('./modules/slot-factory.js'),
     GroupFactory = require('./modules/group-factory.js'),
-    EventHandler = require('./types/event-handler.js'),
-    events = EventHandler(),
+    events = require('./modules/master-event-handler.js'),
     watcher = require('./modules/breakpoint-watcher.js'),
     googletag = require('./modules/googletag.js');
 

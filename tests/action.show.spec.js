@@ -1,6 +1,7 @@
 var harmony = require('../src/harmony.js'),
     Help = require('./helpers/construction.helper.js'),
     Conf = require('./helpers/slot-options.helper.js'),
+    events = require('../src/modules/master-event-handler.js'),
     $ = require('jquery');
 
 describe('harmony.show', function () {
@@ -8,6 +9,7 @@ describe('harmony.show', function () {
         Help.setupDOM();
         var conf = Help.getConf();
         harmony.load.slots(conf.slots);
+        harmony.disable.initialLoadRestored = false;
     });
     describe('slot()', function () {
         it('throws no errors when slot is missing from the dom', function () {
@@ -40,6 +42,31 @@ describe('harmony.show', function () {
             expect(slot.active).toBe(true);
             expect(googletag.pubads().refresh.calls.count()).toBe(0);
             expect(googletag.display.calls.count()).toBe(1);
+
+            harmony.show.slot('TST00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.display.calls.count()).toBe(1);
+        });
+        it('shows once when not restoring initial load', function () {
+            harmony.disable.initialLoad();
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST00');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.slot('TST00');
+            expect(slot.active).toBe(true);
+            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.display.calls.count()).toBe(1);
+        });
+        it('shows twice when restoring initial load', function () {
+            harmony.disable.initialLoad(true);
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST00');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
 
             harmony.show.slot('TST00');
             expect(googletag.pubads().refresh.calls.count()).toBe(1);
@@ -87,6 +114,34 @@ describe('harmony.show', function () {
 
             harmony.show.group('TSTGRP00');
             expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.display.calls.count()).toBe(2);
+        });
+        it('shows once when not restoring initial load', function () {
+            harmony.disable.initialLoad();
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST02');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.group('TSTGRP00');
+            expect(slot.active).toBe(true);
+            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.display.calls.count()).toBe(2);
+        });
+        it('shows twice when restoring initial load', function () {
+            harmony.disable.initialLoad(true);
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST02');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.group('TSTGRP00');
+            expect(slot.active).toBe(true);
+            // Refresh is once for both slots bundled.
+            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            // Display once for each of the two slots.
             expect(googletag.display.calls.count()).toBe(2);
         });
     });

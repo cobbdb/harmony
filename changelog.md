@@ -3,6 +3,11 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
+#### [7.4.0]
+- Expose wrapper for disableInitialLoad. This allows the option to restore
+the page back to normal ad calls after the first (SRM usually) call has
+returned. Double `show` call for SRM, then single `show` call afterwards.
+
 #### [7.3.3]
 - Reduce mangling of slot ids. Mangling will now only append "-h#" instead
 of replacing the entire id.

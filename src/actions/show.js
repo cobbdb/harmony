@@ -8,7 +8,31 @@ var SlotFactory = require('../modules/slot-factory.js'),
     masterGroup = require('../modules/master-group.js'),
     log = require('../modules/log.js'),
     enableServices = require('../util/enable-services.js'),
+    disable = require('./disable.js'),
     googletag = require('../modules/googletag.js');
+
+/**
+ * @param {!Slot[]} slots
+ */
+function callAdsFor(slots) {
+    var queue = [];
+
+    enableServices();
+    slots.forEach(function (slot) {
+        if (slot.enabled) {
+            if (slot.active) {
+                queue.push(slot.gpt);
+            } else {
+                slot.activate();
+                googletag.display(slot.id);
+            }
+        }
+    });
+
+    if (queue.length) {
+        googletag.pubads().refresh(queue);
+    }
+}
 
 /**
  * ## harmony.show
@@ -21,20 +45,9 @@ module.exports = {
      * *Danger Zone* Show all slots in the page.
      */
     all: function () {
-        var refreshGroup = [];
-        enableServices();
-        masterGroup.forEach(function (slot) {
-            if (slot.enabled) {
-                if (slot.active) {
-                    refreshGroup.push(slot.gpt);
-                } else {
-                    slot.activate();
-                    googletag.display(slot.id);
-                }
-            }
-        });
-        if (refreshGroup.length) {
-            googletag.pubads().refresh(refreshGroup);
+        callAdsFor(masterGroup);
+        if (disable.initialLoadRestored) {
+            callAdsFor(masterGroup);
         }
     },
     /**
@@ -43,21 +56,10 @@ module.exports = {
      * @param {string} name
      */
     group: function (name) {
-        var group = GroupFactory.create(name),
-            refreshGroup = [];
-        enableServices();
-        group.forEach(function (slot) {
-            if (slot.enabled) {
-                if (slot.active) {
-                    refreshGroup.push(slot.gpt);
-                } else {
-                    slot.activate();
-                    googletag.display(slot.id);
-                }
-            }
-        });
-        if (refreshGroup.length) {
-            googletag.pubads().refresh(refreshGroup);
+        var group = GroupFactory.create(name);
+        callAdsFor(group);
+        if (disable.initialLoadRestored) {
+            callAdsFor(group);
         }
     },
     /**
@@ -66,15 +68,12 @@ module.exports = {
      * @param {string} name
      */
     slot: function (name) {
-        var slot = SlotFactory.get(name);
-        if (slot.enabled) {
-            enableServices();
-            if (slot.active) {
-                googletag.pubads().refresh([slot.gpt]);
-            } else {
-                slot.activate();
-                googletag.display(slot.id);
-            }
+        var slot = [
+            SlotFactory.get(name)
+        ];
+        callAdsFor(slot);
+        if (disable.initialLoadRestored) {
+            callAdsFor(slot);
         }
     }
 };

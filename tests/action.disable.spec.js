@@ -1,5 +1,6 @@
 var harmony = require('../src/harmony.js'),
-    Help = require('./helpers/construction.helper.js');
+    Help = require('./helpers/construction.helper.js'),
+    events = require('../src/modules/master-event-handler.js');
 
 describe('harmony.disable', function () {
     beforeEach(function () {
@@ -34,6 +35,37 @@ describe('harmony.disable', function () {
             expect(harmony.slot('TST00').enabled).toBe(false);
             expect(harmony.slot('TST01').enabled).toBe(true);
             expect(harmony.slot('TST02').enabled).toBe(false);
+        });
+    });
+    describe('initialLoad()', function () {
+        afterEach(function () {
+            harmony.disable.initialLoadRestored = false;
+        });
+        it('calls pubads disableInitialLoad', function () {
+            harmony.disable.initialLoad();
+            expect(googletag.pubads().disableInitialLoad).toHaveBeenCalled();
+        });
+        it('listens for the SRM call before restoring', function () {
+            spyOn(events, 'one');
+            harmony.disable.initialLoad(true);
+            expect(events.one.calls.argsFor(0)[0]).toEqual('slotRenderEnded');
+            expect(typeof events.one.calls.argsFor(0)[1]).toEqual('function');
+        });
+        it('flags to restore after SRM completes', function () {
+            expect(harmony.disable.initialLoadRestored).toBe(false);
+            harmony.disable.initialLoad(true);
+            expect(harmony.disable.initialLoadRestored).toBe(false);
+            
+            events.trigger('slotRenderEnded');
+            expect(harmony.disable.initialLoadRestored).toBe(true);
+        });
+        it('flags to restore only if requested', function () {
+            expect(harmony.disable.initialLoadRestored).toBe(false);
+            harmony.disable.initialLoad();
+            expect(harmony.disable.initialLoadRestored).toBe(false);
+            
+            events.trigger('slotRenderEnded');
+            expect(harmony.disable.initialLoadRestored).toBe(false);
         });
     });
 });

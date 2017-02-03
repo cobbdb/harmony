@@ -8,7 +8,8 @@ beforeEach(function () {
     var pubadsSpy = jasmine.createSpyObj('pubads', [
         'setTargeting',
         'addEventListener',
-        'refresh'
+        'refresh',
+        'disableInitialLoad'
     ]);
     var compAdsSpy = jasmine.createSpy('compads');
 
