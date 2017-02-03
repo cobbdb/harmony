@@ -75,7 +75,53 @@ Show Action
     masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>),
     log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/log.js'</span>),
     enableServices = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/enable-services.js'</span>),
+    disable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./disable.js'</span>),
     googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">slots</span>
+<span class="dox_type">Array.&lt;Slot&gt;</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callAdsFor</span>(<span class="hljs-params">slots</span>) </span>{
+    <span class="hljs-keyword">var</span> queue = [];
+
+    enableServices();
+    slots.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+        <span class="hljs-keyword">if</span> (slot.enabled) {
+            <span class="hljs-keyword">if</span> (slot.active) {
+                queue.push(slot.gpt);
+            } <span class="hljs-keyword">else</span> {
+                slot.activate();
+                googletag.display(slot.id);
+            }
+        }
+    });
+
+    <span class="hljs-keyword">if</span> (queue.length) {
+        googletag.pubads().refresh(queue);
+    }
+}
 
 </pre>
         </td>
@@ -124,20 +170,9 @@ all()
         </td>
         <td class="code highlight">
           <pre class="javascript">    all: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">var</span> refreshGroup = [];
-        enableServices();
-        masterGroup.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
-            <span class="hljs-keyword">if</span> (slot.enabled) {
-                <span class="hljs-keyword">if</span> (slot.active) {
-                    refreshGroup.push(slot.gpt);
-                } <span class="hljs-keyword">else</span> {
-                    slot.activate();
-                    googletag.display(slot.id);
-                }
-            }
-        });
-        <span class="hljs-keyword">if</span> (refreshGroup.length) {
-            googletag.pubads().refresh(refreshGroup);
+        callAdsFor(masterGroup);
+        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
+            callAdsFor(masterGroup);
         }
     },
 </pre>
@@ -170,21 +205,10 @@ group(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> group = GroupFactory.create(name),
-            refreshGroup = [];
-        enableServices();
-        group.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
-            <span class="hljs-keyword">if</span> (slot.enabled) {
-                <span class="hljs-keyword">if</span> (slot.active) {
-                    refreshGroup.push(slot.gpt);
-                } <span class="hljs-keyword">else</span> {
-                    slot.activate();
-                    googletag.display(slot.id);
-                }
-            }
-        });
-        <span class="hljs-keyword">if</span> (refreshGroup.length) {
-            googletag.pubads().refresh(refreshGroup);
+        <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
+        callAdsFor(group);
+        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
+            callAdsFor(group);
         }
     },
 </pre>
@@ -217,15 +241,12 @@ slot(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> slot = SlotFactory.get(name);
-        <span class="hljs-keyword">if</span> (slot.enabled) {
-            enableServices();
-            <span class="hljs-keyword">if</span> (slot.active) {
-                googletag.pubads().refresh([slot.gpt]);
-            } <span class="hljs-keyword">else</span> {
-                slot.activate();
-                googletag.display(slot.id);
-            }
+        <span class="hljs-keyword">var</span> slot = [
+            SlotFactory.get(name)
+        ];
+        callAdsFor(slot);
+        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
+            callAdsFor(slot);
         }
     }
 };

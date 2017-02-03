@@ -175,8 +175,7 @@ Harmony
 <span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/log.js'</span>),
     SlotFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/slot-factory.js'</span>),
     GroupFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/group-factory.js'</span>),
-    EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./types/event-handler.js'</span>),
-    events = EventHandler(),
+    events = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/master-event-handler.js'</span>),
     watcher = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/breakpoint-watcher.js'</span>),
     googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/googletag.js'</span>);
 
