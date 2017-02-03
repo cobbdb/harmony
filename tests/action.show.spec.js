@@ -72,6 +72,20 @@ describe('harmony.show', function () {
             expect(googletag.pubads().refresh.calls.count()).toBe(1);
             expect(googletag.display.calls.count()).toBe(1);
         });
+        it('never calls refresh twice', function () {
+            harmony.disable.initialLoad(true);
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST00');
+            expect(slot.active).toBe(false);
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.slot('TST00');
+            harmony.show.slot('TST00');
+            harmony.show.slot('TST00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(3);
+            expect(googletag.display.calls.count()).toBe(1);
+        });
     });
     describe('group()', function () {
         it('throws no errors when group does not exist', function () {
@@ -142,6 +156,21 @@ describe('harmony.show', function () {
             // Refresh is once for both slots bundled.
             expect(googletag.pubads().refresh.calls.count()).toBe(1);
             // Display once for each of the two slots.
+            expect(googletag.display.calls.count()).toBe(2);
+        });
+        it('never calls refresh twice', function () {
+            harmony.disable.initialLoad(true);
+            events.trigger('slotRenderEnded');
+
+            var slot = harmony.slot('TST02');
+            expect(googletag.display.calls.count()).toBe(0);
+
+            harmony.show.group('TSTGRP00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.display.calls.count()).toBe(2);
+
+            harmony.show.group('TSTGRP00');
+            expect(googletag.pubads().refresh.calls.count()).toBe(2);
             expect(googletag.display.calls.count()).toBe(2);
         });
     });

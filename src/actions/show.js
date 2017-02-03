@@ -25,6 +25,10 @@ function callAdsFor(slots) {
             } else {
                 slot.activate();
                 googletag.display(slot.id);
+
+                if (disable.initialLoadRestored) {
+                    queue.push(slot.gpt);
+                }
             }
         }
     });
@@ -46,9 +50,6 @@ module.exports = {
      */
     all: function () {
         callAdsFor(masterGroup);
-        if (disable.initialLoadRestored) {
-            callAdsFor(masterGroup);
-        }
     },
     /**
      * ### group(name)
@@ -58,9 +59,6 @@ module.exports = {
     group: function (name) {
         var group = GroupFactory.create(name);
         callAdsFor(group);
-        if (disable.initialLoadRestored) {
-            callAdsFor(group);
-        }
     },
     /**
      * ### slot(name)
@@ -68,12 +66,7 @@ module.exports = {
      * @param {string} name
      */
     slot: function (name) {
-        var slot = [
-            SlotFactory.get(name)
-        ];
-        callAdsFor(slot);
-        if (disable.initialLoadRestored) {
-            callAdsFor(slot);
-        }
+        var slot = SlotFactory.get(name);
+        callAdsFor([slot]);
     }
 };
