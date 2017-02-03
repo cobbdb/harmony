@@ -24,7 +24,7 @@ describe('util/scrub-conf', function () {
         Help.createDiv(conf);
         var out = scrubConf(conf);
         expect(out.name).toEqual('testname');
-        expect(out.id).toEqual('h-ad-1');
+        expect(out.id).toEqual('testid-h1');
     });
     it('increments id per duplicate', function () {
         var i, conf, out = [];
@@ -41,12 +41,12 @@ describe('util/scrub-conf', function () {
         }
 
         expect(out[0].name).toEqual('testname');
-        expect(out[0].id).toEqual('h-ad-1');
+        expect(out[0].id).toEqual('testid-h1');
         expect(out[1].name).toEqual('testname');
-        expect(out[1].id).toEqual('h-ad-2');
+        expect(out[1].id).toEqual('testid-h2');
         expect(out[2].name).toEqual('testname');
-        expect(out[2].id).toEqual('h-ad-3');
+        expect(out[2].id).toEqual('testid-h3');
         expect(out[3].name).toEqual('testname');
-        expect(out[3].id).toEqual('h-ad-4');
+        expect(out[3].id).toEqual('testid-h4');
     });
 });

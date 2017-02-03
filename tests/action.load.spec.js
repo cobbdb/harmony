@@ -12,7 +12,7 @@ describe('harmony.load()', function () {
     });
     it('creates ad slots', function () {
         harmony.load.slots(conf.slots);
-        expect(harmony.slot('TST00').id).toEqual('h-ad-1');
+        expect(harmony.slot('TST00').id).toEqual('DVID00-h1');
         expect(harmony.slot('TST01').group).toEqual('TSTGRP01');
         expect(harmony.slot('TST02').name).toEqual('TST02');
     });
@@ -34,16 +34,16 @@ describe('harmony.load()', function () {
         conf.slots[2].id = 'DVID00';
         conf.slots[2].name = 'TST00';
 
-        // Since there is no way to infer the correct container, harmony
+        // Duplicate slot container is missing, so harmony
         // should error and bail out of creating the duplicate.
         harmony.load.slots(conf.slots);
         expect(harmony.slot('TST00').name).toEqual('TST00');
-        expect(harmony.slot('TST00').id).toEqual('h-ad-1');
+        expect(harmony.slot('TST00').id).toEqual('DVID00-h1');
         expect(harmony.slot('TST01').name).toEqual('TST01');
-        expect(harmony.slot('TST01').id).toEqual('h-ad-2');
+        expect(harmony.slot('TST01').id).toEqual('DVID01-h1');
         expect(harmony.slot('TST02').id).toBeUndefined();
         expect(harmony.slot('TST00-h3').id).toBeUndefined();
-        expect($('#h-ad-1, #h-ad-2, #h-ad-3').length).toEqual(2);
+        expect($('#DVID00-h1, #DVID01-h1, #DVID00-h2').length).toEqual(2);
         expect(harmony.log.readback('error').length).toEqual(1);
     });
     it('handles duplicate slot names with no missing divs', function () {
@@ -53,10 +53,10 @@ describe('harmony.load()', function () {
 
         harmony.load.slots(conf.slots);
         expect(harmony.slot('TST00').name).toEqual('TST00');
-        expect(harmony.slot('TST00').id).toEqual('h-ad-3');
+        expect(harmony.slot('TST00').id).toEqual('DVID00-h2');
         expect(harmony.slot('TST01').name).toEqual('TST01');
-        expect(harmony.slot('TST01').id).toEqual('h-ad-2');
-        expect($('#h-ad-1, #h-ad-2, #h-ad-3').length).toEqual(3);
+        expect(harmony.slot('TST01').id).toEqual('DVID01-h1');
+        expect($('#DVID00-h1, #DVID01-h1, #DVID00-h2').length).toEqual(3);
         expect(harmony.log.readback('error').length).toEqual(0);
     });
     it('sets system targeting', function () {

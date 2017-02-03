@@ -23,7 +23,7 @@ describe('SlotFactory', function () {
         it('mangles id by default', function () {
             var slot = Help.setupDOM().slots[2];
             SlotFactory.create(slot);
-            expect(slot.id).toEqual('h-ad-1');
+            expect(slot.id).toEqual('DVID02-h1');
         });
         it('preserves id when requested', function () {
             var slot = Help.setupDOM().slots[2];

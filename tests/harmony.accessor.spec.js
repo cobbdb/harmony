@@ -13,7 +13,7 @@ describe('accessor', function () {
         it('fetches an existing ad slot', function () {
             var slot = harmony.slot('TST01');
             expect(slot.mock).toBeUndefined();
-            expect(slot.id).toEqual('h-ad-2');
+            expect(slot.id).toEqual('DVID01-h1');
         });
         it('fetches a mock slot by default', function () {
             var slot = harmony.slot('BAD01');
@@ -45,7 +45,7 @@ describe('accessor', function () {
         it('fetches an existing group', function () {
             var group = harmony.group('TSTGRP00');
             expect(group.length()).toEqual(2);
-            expect(group.get('TST02').id).toEqual('h-ad-3');
+            expect(group.get('TST02').id).toEqual('DVID02-h1');
         });
         it('fetches an empty array by default', function () {
             var group = harmony.group('BAD02');
