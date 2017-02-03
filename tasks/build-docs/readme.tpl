@@ -222,7 +222,12 @@ $ grunt
 ```
 
 ### Deploying
-*Will fail for non-owners. Windows only. Autodocs are built from* `/tasks/build-docs/readme.tpl`
+
+* Will fail for non-owners.
+* Windows only.
+* Autodocs are built from `/tasks/build-docs/readme.tpl`
+* Remember to update changelog.
+
 ```shell
 # Full build including autodocs, tag, and deploy.
 $ grunt version:<type>:"<msg>"
