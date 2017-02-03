@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "c:\\wamp64\\www\\harmony\\\\actions\\show.js";
+    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\show.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -114,6 +114,10 @@ Show Action
             } <span class="hljs-keyword">else</span> {
                 slot.activate();
                 googletag.display(slot.id);
+
+                <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
+                    queue.push(slot.gpt);
+                }
             }
         }
     });
@@ -171,9 +175,6 @@ all()
         <td class="code highlight">
           <pre class="javascript">    all: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
         callAdsFor(masterGroup);
-        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
-            callAdsFor(masterGroup);
-        }
     },
 </pre>
         </td>
@@ -207,9 +208,6 @@ group(name)
           <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
         <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
         callAdsFor(group);
-        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
-            callAdsFor(group);
-        }
     },
 </pre>
         </td>
@@ -241,13 +239,8 @@ slot(name)
         </td>
         <td class="code highlight">
           <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> slot = [
-            SlotFactory.get(name)
-        ];
-        callAdsFor(slot);
-        <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
-            callAdsFor(slot);
-        }
+        <span class="hljs-keyword">var</span> slot = SlotFactory.get(name);
+        callAdsFor([slot]);
     }
 };
 
