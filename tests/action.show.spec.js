@@ -40,11 +40,11 @@ describe('harmony.show', function () {
 
             harmony.show.slot('TST00');
             expect(slot.active).toBe(true);
-            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.pubads().refresh).not.toHaveBeenCalled();
             expect(googletag.display.calls.count()).toBe(1);
 
             harmony.show.slot('TST00');
-            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.pubads().refresh).toHaveBeenCalledWith([harmony.slot('TST00').gpt]);
             expect(googletag.display.calls.count()).toBe(1);
         });
         it('shows once when not restoring initial load', function () {
@@ -57,7 +57,7 @@ describe('harmony.show', function () {
 
             harmony.show.slot('TST00');
             expect(slot.active).toBe(true);
-            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.pubads().refresh).not.toHaveBeenCalled();
             expect(googletag.display.calls.count()).toBe(1);
         });
         it('shows twice when restoring initial load', function () {
@@ -123,11 +123,14 @@ describe('harmony.show', function () {
 
             harmony.show.group('TSTGRP00');
             expect(slot.active).toBe(true);
-            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.pubads().refresh).not.toHaveBeenCalled();
             expect(googletag.display.calls.count()).toBe(2);
 
             harmony.show.group('TSTGRP00');
-            expect(googletag.pubads().refresh.calls.count()).toBe(1);
+            expect(googletag.pubads().refresh).toHaveBeenCalledWith([
+                harmony.slot('TST00').gpt,
+                harmony.slot('TST02').gpt
+            ]);
             expect(googletag.display.calls.count()).toBe(2);
         });
         it('shows once when not restoring initial load', function () {
@@ -140,7 +143,7 @@ describe('harmony.show', function () {
 
             harmony.show.group('TSTGRP00');
             expect(slot.active).toBe(true);
-            expect(googletag.pubads().refresh.calls.count()).toBe(0);
+            expect(googletag.pubads().refresh).not.toHaveBeenCalled();
             expect(googletag.display.calls.count()).toBe(2);
         });
         it('shows twice when restoring initial load', function () {

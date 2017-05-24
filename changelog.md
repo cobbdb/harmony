@@ -3,6 +3,10 @@ All notable changes to Harmony will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
+
+#### [7.4.2]
+- Separate slot display from service enable to ensure srm bundles correctly.
+
 #### [7.4.1]
 - Ensure that repeat calls to `show` never results in double slot refresh.
 

@@ -15,26 +15,34 @@ var SlotFactory = require('../modules/slot-factory.js'),
  * @param {!Slot[]} slots
  */
 function callAdsFor(slots) {
-    var queue = [];
+    var refreshQueue = [],
+        displayQueue = [];
 
-    enableServices();
+    // Activate slots and queue for display or refresh.
     slots.forEach(function (slot) {
         if (slot.enabled) {
             if (slot.active) {
-                queue.push(slot.gpt);
+                refreshQueue.push(slot.gpt);
             } else {
                 slot.activate();
-                googletag.display(slot.id);
+                displayQueue.push(slot);
 
                 if (disable.initialLoadRestored) {
-                    queue.push(slot.gpt);
+                    refreshQueue.push(slot.gpt);
                 }
             }
         }
     });
 
-    if (queue.length) {
-        googletag.pubads().refresh(queue);
+    // Enable the GPT services.
+    enableServices();
+
+    // Display or refresh the slots.
+    displayQueue.forEach(function (slot) {
+        googletag.display(slot.id);
+    });
+    if (refreshQueue.length) {
+        googletag.pubads().refresh(refreshQueue);
     }
 }
 

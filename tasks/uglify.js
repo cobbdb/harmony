@@ -5,13 +5,6 @@ module.exports = function (grunt) {
                 files: {
                     'dist/harmony.min.js': 'bin/harmony.js'
                 }
-            },
-            options: {
-                mangle: {
-                    except: [
-                        'googletag'
-                    ]
-                }
             }
         }
     });
