@@ -6,3 +6,4 @@ git clone git@github.com:cobbdb/harmony.git docs-clone
 cd docs-clone
 git checkout gh-pages
 git fetch
+git reset --hard origin/gh-pages
