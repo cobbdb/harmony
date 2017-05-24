@@ -7,7 +7,7 @@
   <script src="../doc-filelist.js"></script>
   <script>
     var relativeDir = "../";
-    var thisFile = "C:\\wamp64\\www\\harmony\\\\actions\\show.js";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\actions\\show.js";
     var defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
@@ -104,26 +104,70 @@ Show Action
         </td>
         <td class="code highlight">
           <pre class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callAdsFor</span>(<span class="hljs-params">slots</span>) </span>{
-    <span class="hljs-keyword">var</span> queue = [];
+    <span class="hljs-keyword">var</span> refreshQueue = [],
+        displayQueue = [];
 
-    enableServices();
-    slots.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Activate slots and queue for display or refresh.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slots.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
         <span class="hljs-keyword">if</span> (slot.enabled) {
             <span class="hljs-keyword">if</span> (slot.active) {
-                queue.push(slot.gpt);
+                refreshQueue.push(slot.gpt);
             } <span class="hljs-keyword">else</span> {
                 slot.activate();
-                googletag.display(slot.id);
+                displayQueue.push(slot);
 
                 <span class="hljs-keyword">if</span> (disable.initialLoadRestored) {
-                    queue.push(slot.gpt);
+                    refreshQueue.push(slot.gpt);
                 }
             }
         }
     });
 
-    <span class="hljs-keyword">if</span> (queue.length) {
-        googletag.pubads().refresh(queue);
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Enable the GPT services.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    enableServices();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Display or refresh the slots.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    displayQueue.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+        googletag.display(slot.id);
+    });
+    <span class="hljs-keyword">if</span> (refreshQueue.length) {
+        googletag.pubads().refresh(refreshQueue);
     }
 }
 
