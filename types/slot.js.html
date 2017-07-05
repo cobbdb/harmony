@@ -27,6 +27,14 @@
       </div>
 
       <div class="heading h2">
+        <a href="#event.slot._name">event.slot._name</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#event.slot._id">event.slot._id</a>
+      </div>
+
+      <div class="heading h2">
         <a href="#slot">Slot</a>
       </div>
 
@@ -143,7 +151,7 @@ Ad Slot
 <span class="dox_tag_name">opts.sizes</span>
 <span class="dox_type">Array.&lt;number, number&gt;</span>
 <span class="dox_type">Array.&lt;Array.&lt;number, number&gt;&gt;</span>
-<span>ex) [300, 250] or [[88, 31], [300, 600]]
+<span>ex) <code>[300, 250]</code> or <code>[[88, 31], [300, 600]]</code>.
 </span>
 </div>
 <div class="dox_tag_detail">
@@ -237,17 +245,6 @@ Ad Slot
         }),
         targeting = mergeLeft(opts.targeting, cache.get.targeting());
 
-    <span class="hljs-keyword">if</span> (opts.outofpage) {
-        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
-    } <span class="hljs-keyword">else</span> {
-        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
-    }
-    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
-        slot.setTargeting(name, targeting[name]);
-    }
-    <span class="hljs-keyword">if</span> (opts.mapping) {
-        slot.defineSizeMapping(opts.mapping);
-    }
 </pre>
         </td>
       </tr>
@@ -257,11 +254,129 @@ Ad Slot
           <div class="pilwrap">
   <a class="pilcrow" href="#section-2" id="section-2"></a>
 </div>
-<p>Attach the name of this slot to the GPT Slot object for reference during GPT events.</p>
+<p>Create the GPT slot instance.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (opts.outofpage) {
+        slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
+    } <span class="hljs-keyword">else</span> {
+        slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Apply any slot-level targeting.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> targeting) {
+        slot.setTargeting(name, targeting[name]);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Apply the size mapping if set.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    <span class="hljs-keyword">if</span> (opts.mapping) {
+        slot.defineSizeMapping(opts.mapping);
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="event.slot._name">
+  <h2>
+    <a href="#event.slot._name" name="event.slot._name" class="pilcrow"></a>
+event.slot._name
+  </h2>
+</div>
+<p>Attach the name to the native googletag.Slot object for use during GPT events.</p>
+<pre>harmony.on('slotRenderEnded', function (event) {
+    var name = event.slot._name;
+});</pre>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot._name = opts.name;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p><em>Deprecated</em> Do not use <code>event.slot.name</code>. Scheduled for removal.</p>
 
         </td>
         <td class="code highlight">
           <pre class="javascript">    slot.name = opts.name;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="event.slot._id">
+  <h2>
+    <a href="#event.slot._id" name="event.slot._id" class="pilcrow"></a>
+event.slot._id
+  </h2>
+</div>
+<p>Attach the slot id to the native googletag.Slot object for use during GPT events.</p>
+<pre>harmony.on('slotRenderEnded', function (event) {
+    var id = event.slot._id;
+});</pre>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Type</div>
+<div class="dox_tag_detail">
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot._id = opts.id;
 
 </pre>
         </td>
