@@ -21,26 +21,15 @@ watcher.on('update', function (bp) {
     events.trigger('breakpoint/update', bp);
 });
 
-googletag.cmd.push(function () {
-    /**
-     * ## harmony.on('slotRenderEnded', callback)
-     * @param {!function(googletag.events.SlotRenderEndedEvent)} callback Called each time any ad call completes.
-     * @see types/event-handler.js
-     * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
-     */
-    googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-        events.trigger('slotRenderEnded', event);
-    });
-    /**
-     * ## harmony.on('impressionViewable', callback)
-     * @param {!function(googletag.events.ImpressionViewableEvent)} callback Called each time any slot registers a viewed impression.
-     * @see types/event-handler.js
-     * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent
-     */
-    googletag.pubads().addEventListener('impressionViewable', function (event) {
-        events.trigger('impressionViewable', event);
-    });
-});
+/**
+ * ## harmony.on(GPTEventName, callback)
+ * ### slotRenderEnded
+ * ### impressionViewable
+ * ### slotOnload
+ * ### slotVisibilityChanged
+ * @see util/bind-gpt-events.js
+ */
+require('./util/bind-gpt-events.js');
 
 /**
  * ## harmony

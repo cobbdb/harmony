@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
 
+#### [7.5.0]
+- Bind GPT events `slotOnload` and `slotVisibilityChanged`. `slotVisibilityChanged`
+does not currently work - added for future support.
+- Attach two new fields to GPT Slot instances `slot._name` and `slot._id` for use
+during GPT events.
+- `slot.name` is now soft deprecated. Scheduled for removal in version 8.
+
 #### [7.4.2]
 - Separate slot display from service enable to ensure srm bundles correctly.
 

@@ -5,7 +5,7 @@
  * @param {string} opts.name Slot name, ex) RP01
  * @param {string} opts.id Slot's container id, ex) ad-div-RP01
  * @param {(Array<number, number>|Array<Array<number, number>>)} opts.sizes
- * ex) [300, 250] or [[88, 31], [300, 600]]
+ * ex) `[300, 250]` or `[[88, 31], [300, 600]]`.
  * @param {string} opts.adunit Full ad unit code.
  * @param {string} [opts.group] Slot group name.
  * @param {Object<string, string>} [opts.targeting] Slot-specific targeting.
@@ -36,19 +36,44 @@ module.exports = function (opts) {
         }),
         targeting = mergeLeft(opts.targeting, cache.get.targeting());
 
+    // Create the GPT slot instance.
     if (opts.outofpage) {
         slot = googletag.defineOutOfPageSlot(opts.adunit, opts.id);
     } else {
         slot = googletag.defineSlot(opts.adunit, opts.sizes, opts.id);
     }
+
+    // Apply any slot-level targeting.
     for (name in targeting) {
         slot.setTargeting(name, targeting[name]);
     }
+
+    // Apply the size mapping if set.
     if (opts.mapping) {
         slot.defineSizeMapping(opts.mapping);
     }
-    // Attach the name of this slot to the GPT Slot object for reference during GPT events.
+
+    /**
+     * ## event.slot._name
+     * Attach the name to the native googletag.Slot object for use during GPT events.
+     * <pre>harmony.on('slotRenderEnded', function (event) {
+     *     var name = event.slot._name;
+     * });</pre>
+     * @type {!string}
+     */
+    slot._name = opts.name;
+    // *Deprecated* Do not use `event.slot.name`. Scheduled for removal.
     slot.name = opts.name;
+
+    /**
+     * ## event.slot._id
+     * Attach the slot id to the native googletag.Slot object for use during GPT events.
+     * <pre>harmony.on('slotRenderEnded', function (event) {
+     *     var id = event.slot._id;
+     * });</pre>
+     * @type {!string}
+     */
+    slot._id = opts.id;
 
     /**
      * ## Slot
