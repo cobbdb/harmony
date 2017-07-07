@@ -98,12 +98,8 @@
         <a href="#activate">activate()</a>
       </div>
 
-      <div class="heading h2">
-        <a href="#slot.on-slotrenderended-callback">slot.on(&#39;slotRenderEnded&#39;, callback)</a>
-      </div>
-
-      <div class="heading h2">
-        <a href="#slot.on-impressionviewable-callback">slot.on(&#39;impressionViewable&#39;, callback)</a>
+      <div class="heading h3">
+        <a href="#on-gpteventname-callback">on(GPTEventName, callback)</a>
       </div>
 
     </div>
@@ -234,7 +230,8 @@ Ad Slot
     EventHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./event-handler.js'</span>),
     googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>),
     concatLeft = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/list-concat-left.js'</span>),
-    mergeLeft = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/map-merge-left.js'</span>);
+    mergeLeft = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/map-merge-left.js'</span>),
+    bindGPTEvents = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/bind-gpt-events.js'</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">opts</span>) </span>{
     <span class="hljs-keyword">var</span> slot, name,
@@ -313,9 +310,10 @@ event.slot._name
   </h2>
 </div>
 <p>Attach the name to the native googletag.Slot object for use during GPT events.</p>
-<pre>harmony.on('slotRenderEnded', function (event) {
-    var name = event.slot._name;
-});</pre>
+<pre><code class="js">harmony.on(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+    <span class="hljs-keyword">var</span> name = event.slot._name;
+});
+</code></pre>
 </div>
 <div class="body">
 </div>
@@ -360,9 +358,10 @@ event.slot._id
   </h2>
 </div>
 <p>Attach the slot id to the native googletag.Slot object for use during GPT events.</p>
-<pre>harmony.on('slotRenderEnded', function (event) {
-    var id = event.slot._id;
-});</pre>
+<pre><code class="js">harmony.on(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+    <span class="hljs-keyword">var</span> id = event.slot._id;
+});
+</code></pre>
 </div>
 <div class="body">
 </div>
@@ -787,6 +786,10 @@ active
 <div class="body">
 </div>
 <div class="details">
+<div class="dox_tag_title">API</div>
+<div class="dox_tag_detail">
+<span class="dox_type">private</span>
+</div>
 <div class="dox_tag_title">Type</div>
 <div class="dox_tag_detail">
 <span class="dox_type">boolean</span>
@@ -849,6 +852,10 @@ activate()
 <div class="body">
 </div>
 <div class="details">
+<div class="dox_tag_title">API</div>
+<div class="dox_tag_detail">
+<span class="dox_type">private</span>
+</div>
 </div>
 </div>
 
@@ -856,7 +863,6 @@ activate()
         <td class="code highlight">
           <pre class="javascript">        activate: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
             <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.active) {
-                <span class="hljs-keyword">var</span> pubads = googletag.pubads();
 </pre>
         </td>
       </tr>
@@ -865,73 +871,48 @@ activate()
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="slot.on-slotrenderended-callback">
-  <h2>
-    <a href="#slot.on-slotrenderended-callback" name="slot.on-slotrenderended-callback" class="pilcrow"></a>
-slot.on('slotRenderEnded', callback)
-  </h2>
+<div class="pilwrap" id="on-gpteventname-callback">
+  <h3>
+    <a href="#on-gpteventname-callback" name="on-gpteventname-callback" class="pilcrow"></a>
+on(GPTEventName, callback)
+  </h3>
 </div>
+<p>Can be one of:</p>
+<ul>
+<li>slotRenderEnded</li>
+<li>impressionViewable</li>
+<li>slotOnload</li>
+<li>slotVisibilityChanged</li>
+</ul>
 </div>
 <div class="body">
 </div>
 <div class="details">
-<div class="dox_tag_title">Params</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">callback</span>
-<span class="dox_type">function(googletag.events.SlotRenderEndedEvent)</span>
-</div>
 <div class="dox_tag_title">See</div>
 <div class="dox_tag_detail">
-<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent</a>
+<span class="dox_type">util/bind-gpt-events.js</span>
 </div>
 </div>
 </div>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">                pubads.addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-                    <span class="hljs-keyword">if</span> (event.slot === slot) {
-                        events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
-                    }
-                });
+          <pre class="javascript">                bindGPTEvents(events, slot);
+
 </pre>
         </td>
       </tr>
     
       <tr>
         <td class="docs">
-          <div class="dox">
-<div class="summary">
-<div class="pilwrap" id="slot.on-impressionviewable-callback">
-  <h2>
-    <a href="#slot.on-impressionviewable-callback" name="slot.on-impressionviewable-callback" class="pilcrow"></a>
-slot.on('impressionViewable', callback)
-  </h2>
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25"></a>
 </div>
-</div>
-<div class="body">
-</div>
-<div class="details">
-<div class="dox_tag_title">Params</div>
-<div class="dox_tag_detail">
-<span class="dox_tag_name">callback</span>
-<span class="dox_type">function(googletag.events.ImpressionViewableEvent)</span>
-</div>
-<div class="dox_tag_title">See</div>
-<div class="dox_tag_detail">
-<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent</a>
-</div>
-</div>
-</div>
+<p>Attach GPT services and flag this slot as active.</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">                pubads.addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-                    <span class="hljs-keyword">if</span> (event.slot === slot) {
-                        events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
-                    }
-                });
-                slot.addService(pubads);
+          <pre class="javascript">                slot.addService(googletag.pubads());
                 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.companion) {
                     slot.addService(googletag.companionAds());
                 }

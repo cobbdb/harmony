@@ -23,7 +23,7 @@
     <div id="headings">
 
       <div class="heading h1">
-        <a href="#gpt-system-events">GPT System Events</a>
+        <a href="#bind-gpt-events">Bind GPT Events</a>
       </div>
 
       <div class="heading h2">
@@ -55,25 +55,49 @@
         <td class="docs">
           <div class="dox">
 <div class="summary">
-<div class="pilwrap" id="gpt-system-events">
+<div class="pilwrap" id="bind-gpt-events">
   <h1>
-    <a href="#gpt-system-events" name="gpt-system-events" class="pilcrow"></a>
-GPT System Events
+    <a href="#bind-gpt-events" name="bind-gpt-events" class="pilcrow"></a>
+Bind GPT Events
   </h1>
 </div>
 <p>Connect GPT events with the Harmony event handler.</p>
 </div>
 <div class="body">
 </div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">events</span>
+<span class="dox_type">EventHandler</span>
+<span>Event handler instance to bind GPT events to.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[slot]</span>
+<span class="dox_type">googletag.Slot</span>
+<span>Ad slot to filter events for.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.Slot">https://developers.google.com/doubleclick-gpt/reference#googletag.Slot</a>
+</div>
+</div>
 </div>
 
         </td>
         <td class="code highlight">
           <pre class="javascript">
-<span class="hljs-keyword">var</span> googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>),
-    events = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-event-handler.js'</span>);
+<span class="hljs-keyword">var</span> googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>);
 
-googletag.cmd.push(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">events, slot</span>) </span>{
+    <span class="hljs-keyword">var</span> pubads = googletag.pubads();
+
 </pre>
         </td>
       </tr>
@@ -96,7 +120,7 @@ harmony.on('slotRenderEnded', callback)
 <div class="dox_tag_detail">
 <span class="dox_tag_name">callback</span>
 <span class="dox_type">function(googletag.events.SlotRenderEndedEvent)</span>
-<span>Called each time any ad call completes.
+<span>Fired when the DFP ad call completes.
 </span>
 </div>
 <div class="dox_tag_title">See</div>
@@ -112,9 +136,12 @@ harmony.on('slotRenderEnded', callback)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-        events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+        }
     });
+
 </pre>
         </td>
       </tr>
@@ -137,7 +164,7 @@ harmony.on('impressionViewable', callback)
 <div class="dox_tag_detail">
 <span class="dox_tag_name">callback</span>
 <span class="dox_type">function(googletag.events.ImpressionViewableEvent)</span>
-<span>Called each time any slot registers a viewed impression.
+<span>Fired when an impression becomes viewable.
 </span>
 </div>
 <div class="dox_tag_title">See</div>
@@ -153,9 +180,12 @@ harmony.on('impressionViewable', callback)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-        events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
+        }
     });
+
 </pre>
         </td>
       </tr>
@@ -194,9 +224,12 @@ harmony.on('slotOnload', callback)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'slotOnload'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-        events.trigger(<span class="hljs-string">'slotOnload'</span>, event);
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotOnload'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotOnload'</span>, event);
+        }
     });
+
 </pre>
         </td>
       </tr>
@@ -235,10 +268,12 @@ harmony.on('slotVisibilityChanged', callback)
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">    googletag.pubads().addEventListener(<span class="hljs-string">'slotVisibilityChanged'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-        events.trigger(<span class="hljs-string">'slotVisibilityChanged'</span>, event);
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotVisibilityChanged'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotVisibilityChanged'</span>, event);
+        }
     });
-});
+};
 
 </pre>
         </td>
