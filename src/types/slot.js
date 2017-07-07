@@ -25,7 +25,8 @@ var log = require('../modules/log.js'),
     EventHandler = require('./event-handler.js'),
     googletag = require('../modules/googletag.js'),
     concatLeft = require('../util/list-concat-left.js'),
-    mergeLeft = require('../util/map-merge-left.js');
+    mergeLeft = require('../util/map-merge-left.js'),
+    bindGPTEvents = require('../util/bind-gpt-events.js');
 
 module.exports = function (opts) {
     var slot, name,
@@ -56,9 +57,11 @@ module.exports = function (opts) {
     /**
      * ## event.slot._name
      * Attach the name to the native googletag.Slot object for use during GPT events.
-     * <pre>harmony.on('slotRenderEnded', function (event) {
+     * ```js
+     * harmony.on('slotRenderEnded', function (event) {
      *     var name = event.slot._name;
-     * });</pre>
+     * });
+     * ```
      * @type {!string}
      */
     slot._name = opts.name;
@@ -68,9 +71,11 @@ module.exports = function (opts) {
     /**
      * ## event.slot._id
      * Attach the slot id to the native googletag.Slot object for use during GPT events.
-     * <pre>harmony.on('slotRenderEnded', function (event) {
+     * ```js
+     * harmony.on('slotRenderEnded', function (event) {
      *     var id = event.slot._id;
-     * });</pre>
+     * });
+     * ```
      * @type {!string}
      */
     slot._id = opts.id;
@@ -153,7 +158,7 @@ module.exports = function (opts) {
         /**
          * ### active
          * *Danger Zone* True when this slot has already been displayed.
-         * @private
+         * @api private
          * @type {!boolean}
          */
         active: false,
@@ -167,32 +172,23 @@ module.exports = function (opts) {
         /**
          * ### activate()
          * *Danger Zone*
-         * @private
+         * @api private
          */
         activate: function () {
             if (!this.active) {
-                var pubads = googletag.pubads();
                 /**
-                 * ## slot.on('slotRenderEnded', callback)
-                 * @param {!function(googletag.events.SlotRenderEndedEvent)} callback
-                 * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
+                 * ### on(GPTEventName, callback)
+                 * Can be one of:
+                 * * slotRenderEnded
+                 * * impressionViewable
+                 * * slotOnload
+                 * * slotVisibilityChanged
+                 * @see util/bind-gpt-events.js
                  */
-                pubads.addEventListener('slotRenderEnded', function (event) {
-                    if (event.slot === slot) {
-                        events.trigger('slotRenderEnded', event);
-                    }
-                });
-                /**
-                 * ## slot.on('impressionViewable', callback)
-                 * @param {!function(googletag.events.ImpressionViewableEvent)} callback
-                 * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent
-                 */
-                pubads.addEventListener('impressionViewable', function (event) {
-                    if (event.slot === slot) {
-                        events.trigger('impressionViewable', event);
-                    }
-                });
-                slot.addService(pubads);
+                bindGPTEvents(events, slot);
+
+                // Attach GPT services and flag this slot as active.
+                slot.addService(googletag.pubads());
                 if (this.companion) {
                     slot.addService(googletag.companionAds());
                 }

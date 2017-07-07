@@ -1,46 +1,62 @@
 /**
- * # GPT System Events
+ * # Bind GPT Events
  * Connect GPT events with the Harmony event handler.
+ * @param {!EventHandler} events Event handler instance to bind GPT events to.
+ * @param {?googletag.Slot} [slot] Ad slot to filter events for.
+ * @see types/event-handler.js
+ * @see https://developers.google.com/doubleclick-gpt/reference#googletag.Slot
  */
 
-var googletag = require('../modules/googletag.js'),
-    events = require('../modules/master-event-handler.js');
+var googletag = require('../modules/googletag.js');
 
-googletag.cmd.push(function () {
+module.exports = function (events, slot) {
+    var pubads = googletag.pubads();
+
     /**
      * ## harmony.on('slotRenderEnded', callback)
-     * @param {!function(googletag.events.SlotRenderEndedEvent)} callback Called each time any ad call completes.
+     * @param {!function(googletag.events.SlotRenderEndedEvent)} callback Fired when the DFP ad call completes.
      * @see types/event-handler.js
      * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent
      */
-    googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-        events.trigger('slotRenderEnded', event);
+    pubads.addEventListener('slotRenderEnded', function (event) {
+        if (!slot || event.slot === slot) {
+            events.trigger('slotRenderEnded', event);
+        }
     });
+
     /**
      * ## harmony.on('impressionViewable', callback)
-     * @param {!function(googletag.events.ImpressionViewableEvent)} callback Called each time any slot registers a viewed impression.
+     * @param {!function(googletag.events.ImpressionViewableEvent)} callback Fired when an impression becomes viewable.
      * @see types/event-handler.js
      * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent
      */
-    googletag.pubads().addEventListener('impressionViewable', function (event) {
-        events.trigger('impressionViewable', event);
+    pubads.addEventListener('impressionViewable', function (event) {
+        if (!slot || event.slot === slot) {
+            events.trigger('impressionViewable', event);
+        }
     });
+
     /**
      * ## harmony.on('slotOnload', callback)
      * @param {!function(googletag.events.SlotOnloadEvent)} callback Fired when the creative's iframe fires its load event.
      * @see types/event-handler.js
      * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotonloadevent
      */
-    googletag.pubads().addEventListener('slotOnload', function (event) {
-        events.trigger('slotOnload', event);
+    pubads.addEventListener('slotOnload', function (event) {
+        if (!slot || event.slot === slot) {
+            events.trigger('slotOnload', event);
+        }
     });
+
     /**
      * ## harmony.on('slotVisibilityChanged', callback)
      * @param {!function(googletag.events.slotVisibilityChangedEvent)} callback Fired whenever the on-screen percentage of an ad slot's area changes.
      * @see types/event-handler.js
      * @see https://developers.google.com/doubleclick-gpt/reference#googletageventsslotvisibilitychangedevent
      */
-    googletag.pubads().addEventListener('slotVisibilityChanged', function (event) {
-        events.trigger('slotVisibilityChanged', event);
+    pubads.addEventListener('slotVisibilityChanged', function (event) {
+        if (!slot || event.slot === slot) {
+            events.trigger('slotVisibilityChanged', event);
+        }
     });
-});
+};

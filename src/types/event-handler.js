@@ -1,7 +1,7 @@
 /**
  * # Eventable
  * Class for generic event handling.
- * ```javascript
+ * ```js
  * EventHandler({
  *     events: {
  *         eventName: function () {},

@@ -4,12 +4,12 @@
  * View this <a href="https://github.com/cobbdb/harmony">project on GitHub</a>.
  */
 
-var log = require('./modules/log.js'),
-    SlotFactory = require('./modules/slot-factory.js'),
+var SlotFactory = require('./modules/slot-factory.js'),
     GroupFactory = require('./modules/group-factory.js'),
     events = require('./modules/master-event-handler.js'),
     watcher = require('./modules/breakpoint-watcher.js'),
-    googletag = require('./modules/googletag.js');
+    googletag = require('./modules/googletag.js'),
+    bindGPTEvents = require('./util/bind-gpt-events.js');
 
 /**
  * ## harmony.on('breakpoint/update', callback)
@@ -23,13 +23,16 @@ watcher.on('update', function (bp) {
 
 /**
  * ## harmony.on(GPTEventName, callback)
- * ### slotRenderEnded
- * ### impressionViewable
- * ### slotOnload
- * ### slotVisibilityChanged
+ * Can be one of:
+ * * slotRenderEnded
+ * * impressionViewable
+ * * slotOnload
+ * * slotVisibilityChanged
  * @see util/bind-gpt-events.js
  */
-require('./util/bind-gpt-events.js');
+googletag.cmd.push(function () {
+    bindGPTEvents(events);
+});
 
 /**
  * ## harmony
@@ -93,7 +96,7 @@ module.exports = {
      * Instance of Lumberjack populated with Harmony's data.
      * @see modules/log.js
      */
-    log: log,
+    log: require('./modules/log.js'),
     /**
      * ### slot(name)
      * Safely fetch an existing ad slot or a mock slot if slot was not found.
