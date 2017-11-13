@@ -129,11 +129,12 @@ harmony.slot('MY01').one('myevent', function () {});
 ```
 
 ###### GPT events are provided for you
-GPT's `slotRenderEnded` and `impressionViewable` events are handled
+GPT's `slotRenderEnded`, `impressionViewable`, and `slotOnload` events are handled
 automatically for you on each slot.
 ```javascript
 harmony.slot('MY01').on('slotRenderEnded', function (event) {});
 harmony.slot('MY01').on('impressionViewable', function (event) {});
+harmony.slot('MY01').on('slotOnload', function (event) {});
 ```
 
 ###### bind lazy events
