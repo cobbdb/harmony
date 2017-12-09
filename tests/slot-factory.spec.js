@@ -12,13 +12,29 @@ describe('SlotFactory', function () {
             expect(masterGroup.get('TST01')).not.toBeNull();
             expect(masterGroup.get('TST01').mock).toBeUndefined();
         });
-        it('adds to assigned group', function () {
+        it('adds to a single group', function () {
             var slots = Help.setupDOM().slots;
             expect(masterGroup.get('TST01')).toBeNull();
             expect(GroupFactory.create('TSTGRP01').length()).toBe(0);
             SlotFactory.create(slots[1]);
             expect(masterGroup.get('TST01')).not.toBeNull();
             expect(GroupFactory.create('TSTGRP01').length()).toBe(1);
+            expect(typeof masterGroup.get('TST01').group).toEqual('string');
+        });
+        it('adds to multiple groups', function () {
+            var slots = Help.setupDOM().slots;
+
+            expect(masterGroup.get('TST01')).toBeNull();
+            expect(GroupFactory.create('TSTGRP01').length()).toBe(0);
+            expect(GroupFactory.create('extra-group').length()).toBe(0);
+
+            slots[1].group = [].concat(slots[1].group, 'extra-group');
+            SlotFactory.create(slots[1]);
+
+            expect(masterGroup.get('TST01')).not.toBeNull();
+            expect(GroupFactory.create('TSTGRP01').length()).toBe(1);
+            expect(GroupFactory.create('extra-group').length()).toBe(1);
+            expect(typeof masterGroup.get('TST01').group).toEqual('object');
         });
         it('mangles id by default', function () {
             var slot = Help.setupDOM().slots[2];
