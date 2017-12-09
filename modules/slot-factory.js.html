@@ -106,7 +106,7 @@ create(options)
         </td>
         <td class="code highlight">
           <pre class="javascript">    create: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
-        <span class="hljs-keyword">var</span> slot, group;
+        <span class="hljs-keyword">var</span> slot, set;
         <span class="hljs-keyword">try</span> {
             <span class="hljs-keyword">if</span> (!conf.preserveId) {
                 conf = scrubConf(conf);
@@ -114,8 +114,11 @@ create(options)
             slot = Slot(conf);
             masterGroup.add(slot);
             <span class="hljs-keyword">if</span> (slot.group) {
-                group = GroupFactory.create(slot.group);
-                group.add(slot);
+                set = [].concat(slot.group);
+                set.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">groupName</span>) </span>{
+                    <span class="hljs-keyword">var</span> group = GroupFactory.create(groupName);
+                    group.add(slot);
+                });
             }
         } <span class="hljs-keyword">catch</span> (err) {
             log(<span class="hljs-string">'error'</span>, {

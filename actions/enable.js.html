@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>enable.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\actions\\enable.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#enable-action">Enable Action</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.enable">harmony.enable</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#slot-name">slot(name)</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#group-name">group(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="enable-action">
+  <h1>
+    <a href="#enable-action" name="enable-action" class="pilcrow"></a>
+Enable Action
+  </h1>
+</div>
+<p>Enable a single slot or group of slots.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> SlotFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/slot-factory.js'</span>),
+    GroupFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/group-factory.js'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.enable">
+  <h2>
+    <a href="#harmony.enable" name="harmony.enable" class="pilcrow"></a>
+harmony.enable
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-name">
+  <h3>
+    <a href="#slot-name" name="slot-name" class="pilcrow"></a>
+slot(name)
+  </h3>
+</div>
+<p>Marks this slot as eligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    slot: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> slot = SlotFactory.get(name);
+        <span class="hljs-keyword">if</span> (!slot.mock) {
+            slot.enabled = <span class="hljs-literal">true</span>;
+        }
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="group-name">
+  <h3>
+    <a href="#group-name" name="group-name" class="pilcrow"></a>
+group(name)
+  </h3>
+</div>
+<p>Marks each slot in this group as eligible to make ad calls.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    group: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">var</span> group = GroupFactory.create(name);
+        group.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">slot</span>) </span>{
+            slot.enabled = <span class="hljs-literal">true</span>;
+        });
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
