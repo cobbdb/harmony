@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>slot-factory.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\modules\\slot-factory.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#slot-factory">Slot Factory</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#create-options">create(options)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#get-name">get(name)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="slot-factory">
+  <h1>
+    <a href="#slot-factory" name="slot-factory" class="pilcrow"></a>
+Slot Factory
+  </h1>
+</div>
+<p>Construct or fetch an ad slot.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> Slot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/slot.js'</span>),
+    MockSlot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../types/mock-slot.js'</span>),
+    GroupFactory = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./group-factory.js'</span>),
+    masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>),
+    scrubConf = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../util/scrub-conf.js'</span>),
+    log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log.js'</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="create-options">
+  <h2>
+    <a href="#create-options" name="create-options" class="pilcrow"></a>
+create(options)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">conf</span>
+<span class="dox_type">Object</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Slot</span>
+<span>Null on error.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    create: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
+        <span class="hljs-keyword">var</span> slot, set;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">if</span> (!conf.preserveId) {
+                conf = scrubConf(conf);
+            }
+            slot = Slot(conf);
+            masterGroup.add(slot);
+            <span class="hljs-keyword">if</span> (slot.group) {
+                set = [].concat(slot.group);
+                set.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">groupName</span>) </span>{
+                    <span class="hljs-keyword">var</span> group = GroupFactory.create(groupName);
+                    group.add(slot);
+                });
+            }
+        } <span class="hljs-keyword">catch</span> (err) {
+            log(<span class="hljs-string">'error'</span>, {
+                <span class="hljs-attr">conf</span>: conf,
+                <span class="hljs-attr">msg</span>: err.message
+            });
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">return</span> slot || <span class="hljs-literal">null</span>;
+        }
+    },
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="get-name">
+  <h2>
+    <a href="#get-name" name="get-name" class="pilcrow"></a>
+get(name)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">name</span>
+<span class="dox_type">string</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Slot</span>
+<span class="dox_type">MockSlot</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    get: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">if</span> (masterGroup.has(name)) {
+            <span class="hljs-keyword">return</span> masterGroup.get(name);
+        }
+        <span class="hljs-keyword">return</span> MockSlot(name);
+    }
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

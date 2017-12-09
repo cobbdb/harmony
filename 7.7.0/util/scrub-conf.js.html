@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>scrub-conf.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\util\\scrub-conf.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#configuration-scrubber">Configuration Scrubber</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#scrubconf-conf">scrubConf(conf)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#scrubconf.clear">scrubConf.clear()</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="configuration-scrubber">
+  <h1>
+    <a href="#configuration-scrubber" name="configuration-scrubber" class="pilcrow"></a>
+Configuration Scrubber
+  </h1>
+</div>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> masterGroup = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/master-group.js'</span>),
+    cache = {};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="scrubconf-conf">
+  <h2>
+    <a href="#scrubconf-conf" name="scrubconf-conf" class="pilcrow"></a>
+scrubConf(conf)
+  </h2>
+</div>
+<p>Ensures a slot's id is unique in the page. Ad containers
+have their ids mutated with the suffix <code>-h#</code>. To preserve
+an ad container's id, use the AdSlot setting <code>preserveId</code>.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">conf</span>
+<span class="dox_type">Object</span>
+<span>Configuration for a single ad slot.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span class="dox_type">Object</span>
+<span>Clean slot configuration.
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">conf</span>) </span>{
+    <span class="hljs-keyword">var</span> el = global.document.getElementById(conf.id),
+        suffix = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">if</span> (el) {
+        <span class="hljs-keyword">do</span> {
+            suffix += <span class="hljs-number">1</span>;
+            conf.id = el.id + <span class="hljs-string">'-h'</span> + suffix;
+        } <span class="hljs-keyword">while</span> (conf.id <span class="hljs-keyword">in</span> cache);
+        el.id = conf.id;
+        cache[conf.id] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span> conf;
+    }
+    <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Ad slot '</span> + conf.name + <span class="hljs-string">' container #'</span> + conf.id + <span class="hljs-string">' was not found!'</span>);
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="scrubconf.clear">
+  <h2>
+    <a href="#scrubconf.clear" name="scrubconf.clear" class="pilcrow"></a>
+scrubConf.clear()
+  </h2>
+</div>
+<p>Reset the slot id cache.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports.clear = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    cache = {};
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

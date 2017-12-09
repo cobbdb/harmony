@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bind-gpt-events.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "c:\\wamp64\\www\\harmony\\\\util\\bind-gpt-events.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#bind-gpt-events">Bind GPT Events</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-slotrenderended-callback">harmony.on(&#39;slotRenderEnded&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-impressionviewable-callback">harmony.on(&#39;impressionViewable&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-slotonload-callback">harmony.on(&#39;slotOnload&#39;, callback)</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#harmony.on-slotvisibilitychanged-callback">harmony.on(&#39;slotVisibilityChanged&#39;, callback)</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="bind-gpt-events">
+  <h1>
+    <a href="#bind-gpt-events" name="bind-gpt-events" class="pilcrow"></a>
+Bind GPT Events
+  </h1>
+</div>
+<p>Connect GPT events with the Harmony event handler.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">events</span>
+<span class="dox_type">EventHandler</span>
+<span>Event handler instance to bind GPT events to.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">[slot]</span>
+<span class="dox_type">googletag.Slot</span>
+<span>Ad slot to filter events for.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletag.Slot">https://developers.google.com/doubleclick-gpt/reference#googletag.Slot</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> googletag = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../modules/googletag.js'</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">events, slot</span>) </span>{
+    <span class="hljs-keyword">var</span> pubads = googletag.pubads();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-slotrenderended-callback">
+  <h2>
+    <a href="#harmony.on-slotrenderended-callback" name="harmony.on-slotrenderended-callback" class="pilcrow"></a>
+harmony.on('slotRenderEnded', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.SlotRenderEndedEvent)</span>
+<span>Fired when the DFP ad call completes.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotRenderEnded'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotRenderEnded'</span>, event);
+        }
+    });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-impressionviewable-callback">
+  <h2>
+    <a href="#harmony.on-impressionviewable-callback" name="harmony.on-impressionviewable-callback" class="pilcrow"></a>
+harmony.on('impressionViewable', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.ImpressionViewableEvent)</span>
+<span>Fired when an impression becomes viewable.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsimpressionviewableevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'impressionViewable'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'impressionViewable'</span>, event);
+        }
+    });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-slotonload-callback">
+  <h2>
+    <a href="#harmony.on-slotonload-callback" name="harmony.on-slotonload-callback" class="pilcrow"></a>
+harmony.on('slotOnload', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.SlotOnloadEvent)</span>
+<span>Fired when the creative's iframe fires its load event.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsslotonloadevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsslotonloadevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotOnload'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotOnload'</span>, event);
+        }
+    });
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="dox">
+<div class="summary">
+<div class="pilwrap" id="harmony.on-slotvisibilitychanged-callback">
+  <h2>
+    <a href="#harmony.on-slotvisibilitychanged-callback" name="harmony.on-slotvisibilitychanged-callback" class="pilcrow"></a>
+harmony.on('slotVisibilityChanged', callback)
+  </h2>
+</div>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">callback</span>
+<span class="dox_type">function(googletag.events.slotVisibilityChangedEvent)</span>
+<span>Fired whenever the on-screen percentage of an ad slot's area changes.
+</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<span class="dox_type">types/event-handler.js</span>
+</div>
+<div class="dox_tag_title">See</div>
+<div class="dox_tag_detail">
+<a href="https://developers.google.com/doubleclick-gpt/reference#googletageventsslotvisibilitychangedevent">https://developers.google.com/doubleclick-gpt/reference#googletageventsslotvisibilitychangedevent</a>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">    pubads.addEventListener(<span class="hljs-string">'slotVisibilityChanged'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">if</span> (!slot || event.slot === slot) {
+            events.trigger(<span class="hljs-string">'slotVisibilityChanged'</span>, event);
+        }
+    });
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
