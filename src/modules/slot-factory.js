@@ -17,7 +17,7 @@ module.exports = {
      * @return {?Slot} Null on error.
      */
     create: function (conf) {
-        var slot, group;
+        var slot, set;
         try {
             if (!conf.preserveId) {
                 conf = scrubConf(conf);
@@ -25,8 +25,11 @@ module.exports = {
             slot = Slot(conf);
             masterGroup.add(slot);
             if (slot.group) {
-                group = GroupFactory.create(slot.group);
-                group.add(slot);
+                set = [].concat(slot.group);
+                set.forEach(function (groupName) {
+                    var group = GroupFactory.create(groupName);
+                    group.add(slot);
+                });
             }
         } catch (err) {
             log('error', {

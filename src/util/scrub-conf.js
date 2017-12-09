@@ -7,9 +7,9 @@ var masterGroup = require('../modules/master-group.js'),
 
 /**
  * ## scrubConf(conf)
- * Ensures a slot's id is unique in the page. Duplicate containers
- * have their ids mutated with a `-N`, where `N` is an incrementing
- * integer. Does not alter id of first or non-duplicate slots.
+ * Ensures a slot's id is unique in the page. Ad containers
+ * have their ids mutated with the suffix `-h#`. To preserve
+ * an ad container's id, use the AdSlot setting `preserveId`.
  * @param {Object} conf Configuration for a single ad slot.
  * @return {Object} Clean slot configuration.
  * @throws When div id is not found in the DOM.

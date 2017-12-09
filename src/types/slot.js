@@ -7,8 +7,10 @@
  * @param {(Array<number, number>|Array<Array<number, number>>)} opts.sizes
  * ex) `[300, 250]` or `[[88, 31], [300, 600]]`.
  * @param {string} opts.adunit Full ad unit code.
- * @param {string} [opts.group] Slot group name.
- * @param {Object<string, string>} [opts.targeting] Slot-specific targeting.
+ * @param {Array<string>|string} [opts.group] Group name. Can be a set of
+ * names to add this slot to multiple groups.
+ * @param {Object<string, string>} [opts.targeting] Slot-specific custom
+ * critera key-value targeting.
  * @param {boolean} [opts.companion] True if companion ad.
  * @param {SizeMapping} [opts.mapping] Size mapping.
  * @param {boolean} [opts.outofpage] True if out-of-page ad.

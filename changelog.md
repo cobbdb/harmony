@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Version 7
 
+#### [7.7.0]
+- Allow AdSlots to join multiple groups by using an array of group names in the
+construction settings.
+
 #### [7.6.0]
 - Bind GPT events `slotOnload` and `slotVisibilityChanged` to slot-level event
 handlers.
