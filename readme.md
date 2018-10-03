@@ -1,6 +1,9 @@
 [![Harmony](http://i.imgur.com/DP1OvVj.png)](https://cobbdb.github.io/harmony)
 *v7.7.0*
 
+# UPDATE! This project is no longer maintained by me.
+### I will leave this repo in it's current state however, so feel free to use as a reference. There is no guarantee that this library will work with forward versions of GPT!
+
 [![License](https://img.shields.io/npm/l/harmonyjs.svg)](http://npmjs.com/package/harmonyjs)
 [![Build Status](https://travis-ci.org/cobbdb/harmony.svg?branch=7.7.0)](https://travis-ci.org/cobbdb/harmony)
 [![Bower version](https://badge.fury.io/bo/harmony.svg)](http://badge.fury.io/bo/harmony)
